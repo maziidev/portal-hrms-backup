@@ -5,19 +5,21 @@ import Admin from "../Pages/Admin/Admin.vue";
 import Main from "../Layouts/Main.vue";
 
 const router = createRouter({
-    history: createWebHistory,
+    history: createWebHistory(),
     routes: [
-        {
-            path:"/",
-            component:Main,
-            name:"HRMS-DASHBOARD",
-            children:[
+                {
+                    path:"/",
+                    component:Admin,
+                    name:'home'
+                },
 
                 // ADMIN ROUTES
                 {
-
+                    path:"/admin",
+                    component:Admin,
+                    name:"admin"
                 }
-            ]
-        }
     ]
 })
+
+export default router;

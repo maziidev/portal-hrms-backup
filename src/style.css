@@ -2,71 +2,131 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --primary: rgba(17, 27, 73, 1);
+  --pri-text: rgba(240, 240, 240, 1);
+  --pri-bg: rgba(240, 240, 240, 1);
+  --sec-text: rgba(30, 30, 30, 1);
+  --twhite: rgba(255, 255, 255, 1);
+}
+
+* {
+  list-style: none;
+  font-family: "Lufga";
+}
+
+/* utilities */
+
+.bc {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 120%;
+  letter-spacing: 0%;
+  color: var(--sec-text);
+}
+
+.pie-chart {
+  transform: rotate(-150deg);
+}
+.nstyle {
+  transform: rotateX(-180px);
+}
+.sbc {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 120%;
+  letter-spacing: 0%;
+  color: var(--sec-text);
+}
+.mbc {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 120%;
+  letter-spacing: 0%;
+  color: var(--sec-text);
+}
+.mbs {
+  font-weight: 500;
+  line-height: 120%;
+  letter-spacing: 0%;
+}
+.s16 {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 120%;
+  letter-spacing: 0%;
+  color: rgba(20, 21, 15, 1);
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0%;
+  margin: 0%;
+}
 
 @font-face {
-  font-family: 'Lufga';
-  src: url('../src/assets/fonts/LufgaRegular.ttf')format(tff);
+  font-family: "Lufga";
+  src: url("../src/assets/fonts/LufgaRegular.ttf") format(tff);
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'Lufga';
-  src: url('../src/assets/fonts/LufgaItalic.ttf')format(tff);
+  font-family: "Lufga";
+  src: url("../src/assets/fonts/LufgaItalic.ttf") format(tff);
   font-weight: 400;
   font-style: italic;
 }
 
 @font-face {
-  font-family: 'Lufga';
-  src: url('../src/assets/fonts/LufgaBold.ttf')format(tff);
+  font-family: "Lufga";
+  src: url("../src/assets/fonts/LufgaBold.ttf") format(tff);
   font-weight: 700;
   font-style: bold;
 }
 
 @font-face {
-  font-family: 'Lufga';
-  src: url('../src/assets/fonts/LufgaBlack.ttf')format(tff);
+  font-family: "Lufga";
+  src: url("../src/assets/fonts/LufgaBlack.ttf") format(tff);
   font-weight: 800;
   font-style: bold;
 }
 
 @font-face {
-  font-family: 'Lufga';
-  src: url('../src/assets/fonts/LufgaExtraBold.ttf')format(tff);
+  font-family: "Lufga";
+  src: url("../src/assets/fonts/LufgaExtraBold.ttf") format(tff);
   font-weight: 900;
   font-style: bold;
 }
 
 @font-face {
-  font-family: 'Lufga';
-  src: url('../src/assets/fonts/LufgaExtraBoldItalic.ttf')format(tff);
+  font-family: "Lufga";
+  src: url("../src/assets/fonts/LufgaExtraBoldItalic.ttf") format(tff);
   font-weight: 900;
   font-style: italic;
 }
-
 
 @theme {
   --color-orbit-bg: #111b49;
   --color-orbit-bgSec: #1c2a68;
   --color-orbit-cyan: #0efdc1;
-  --color-orbit-green: #3A974C;
+  --color-orbit-green: #3a974c;
   --color-orbit-light: #f4f7fe;
 
   --color-orbit-black: #1e1e1e;
-  --color-orbit-accent: #8DC1FF;
+  --color-orbit-accent: #8dc1ff;
   --color-orbit-blue: #2388ff;
-  --color-orbit-text: #14150F;
-  --color-orbit-ta: #2C2C2E;
+  --color-orbit-text: #14150f;
+  --color-orbit-ta: #2c2c2e;
   --color-orbit-orange: #fbbc04;
   --color-orbit-light-green: #3a97ac;
   --color-orbit-red: #ea4335;
-  --color-orbit-wa: #A3AED0;
+  --color-orbit-wa: #a3aed0;
 
   --color-orbit-modaltext: #a1a1aa;
 
-  --color-orbit-btn: #6B7280;
-  --font-sans: 'Lufga', ui-sans-serif, system-ui, sans-serif;
+  --color-orbit-btn: #6b7280;
+  --font-sans: "Lufga", ui-sans-serif, system-ui, sans-serif;
 }
 
 body {
@@ -78,7 +138,6 @@ body {
 .btn {
   padding: 10px 20px;
   border-radius: 5px;
-
 }
 
 .btn-orange-main {

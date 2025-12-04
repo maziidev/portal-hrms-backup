@@ -1,11 +1,12 @@
 <script setup>
+import { NMessageProvider } from "naive-ui";
+import { RouterView } from "vue-router";
 </script>
 
 <template>
-  <h1>Welcome to HRMS</h1>
-
+  <n-message-provider>
+    <RouterView> </RouterView>
+  </n-message-provider>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

@@ -1,19 +1,14 @@
 <template>
-  <!-- Generate Report -->
-  <div
-    id="generate_report"
-    class="generate_report fixed hidden overflow-y-auto border rounded-md lg:w-[50%] w-full md:w-[80%] p-10 bg-white md:top-[10%] lg:top-[10%] lg:left-[30%] left-[0%] md:left-[30%] top-[0%] h-[100vh] md:h-[80vh] lg:h-[80vh] z-[20000]"
+  <n-modal
+    :show="show3"
+    preset="card"
+    title="Generate Report"
+    class="!lg:w-[50%] md:w-[40%] rounded-md"
+    :mask-closable="true"
+    :closable="true"
+    @close="closeModal"
   >
-    <div class="flex justify-between items-center my-[20px]">
-      <div class="flex flex-col gap-[20px] gap-[10px]">
-        <h2
-          class="text-[rgba(24,24,27,1)] font-[700] leading-[100%] tracking-[0%] text-[20px]"
-        >
-          Generate Report
-        </h2>
-      </div>
-      <button class="text-[rgba(30,30,30,1)] close text-[20px]">x</button>
-    </div>
+    
 
     <div class="personal_information">
       <div class="">
@@ -21,55 +16,56 @@
           <div class="grid md:grid-cols-2 gap-[20px]">
             <div class="report_type flex flex-col">
               <label for="report_type"> Choose Report Type </label>
-              <select
-                class="bg-[rgba(248,248,249,1)] outline-none border-none cursor-pointer p-[15px]"
+              <n-select :border="false" :v-modal:value="form.appraisal" :options="unitOptions"
+                class=" outline-none border-none cursor-pointer "
               >
-                <option value="report_type">
-                  Performance/Appraisal Report
-                </option>
-              </select>
+                
+              </n-select>
             </div>
             <div class="unit flex flex-col">
               <label for="unit"> Department / Unit </label>
-              <input
+              <n-input :border="false" :v-modal:value="form.unit"
                 type="text"
                 placeholder="Please enter staff Department / Unit"
-                class="bg-[rgba(248,248,249,1)] p-[15px]"
+                class="bg-[rgba(248,248,249,1)] border-none"
               />
             </div>
             <div class="status flex flex-col">
               <label for="status"> Status </label>
-              <select
-                class="bg-[rgba(248,248,249,1)] outline-none border-none cursor-pointer p-[15px]"
+              <n-select :border="false" :v-modal:value="form.status" :options="unitOptions"
+                class="bg-[rgba(248,248,249,1)] outline-none border-none cursor-pointer "
               >
-                <option value="active">Active</option>
-              </select>
+              </n-select>
             </div>
 
             <div class="output_format flex flex-col">
               <label for="output_format"> Select Output Format </label>
-              <select
-                class="bg-[rgba(248,248,249,1)] outline-none border-none cursor-pointer p-[15px]"
+              <n-select :border="false" :v-modal:value="form.status" :options="unitOptions"
+                class="bg-[rgba(248,248,249,1)] outline-none border-none cursor-pointer "
               >
                 <option value="PDF">PDF</option>
-              </select>
+              </n-select>
             </div>
             <div class="date_start flex flex-col">
-              <label for="date_start"> Date Start </label>
-              <input
-                type="text"
-                placeholder="DD-MM-YYYY"
-                class="bg-[rgba(248,248,249,1)] p-[15px]"
-              />
-            </div>
-            <div class="date_finish flex flex-col">
-              <label for="date_finish"> Date Finish </label>
-              <input
-                type="text"
-                placeholder="DD-MM-YYYY"
-                class="bg-[rgba(248,248,249,1)] p-[15px]"
-              />
-            </div>
+                <label for="date_start"> Date Start </label>
+                <n-date-picker
+                  v-model:value="form.startDate"
+                  type="date"
+                  placeholder="DD-MM-YYYY"
+                  :bordered="false"
+                  class="custom-select w-full border"
+                />
+              </div>
+              <div class="date_finish flex flex-col">
+                <label for="date_finish"> Date Finish </label>
+                <n-date-picker
+                  v-model:value="form.startDate"
+                  type="date"
+                  placeholder="DD-MM-YYYY"
+                  :bordered="false"
+                  class="custom-select w-full border"
+                />
+              </div>
           </div>
         </div>
 
@@ -84,5 +80,56 @@
         </div>
       </div>
     </div>
-  </div>
+
+    
+  </n-modal>
 </template>
+
+<script setup>
+import { reactive } from "vue";
+
+/* ✅ THIS FIXES "show is not defined" */
+const { show3 } = defineProps({
+  show3: {
+    type: Boolean,
+    required: true,
+  },
+});
+
+const emit = defineEmits(["CloseModalForGenerateReport"]);
+
+const form = reactive({
+  units: [],
+  instructions: "",
+});
+
+const unitOptions = [
+  { label: "HR", value: "hr" },
+  { label: "IT", value: "it" },
+  { label: "Finance", value: "finance" },
+];
+
+function openAppraisal() {
+  console.log("Opening:", form);
+  emit("update:show", false);
+}
+function closeModal() {
+  emit("CloseModalForGenerateReport");
+  console.log("Beans");
+}
+function saveDraft() {
+  console.log("Saving Draft:", form);
+  emit("update:show", false);
+}
+</script>
+
+<style scoped>
+.custom-select .n-base-selection,
+.custom-select .n-input {
+  border: 2px solid rgba(35, 136, 255, 1);
+  border-radius: 8px;
+  background: rgba(248, 248, 249, 1);
+}
+</style>
+
+

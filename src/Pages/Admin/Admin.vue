@@ -1,14 +1,18 @@
 <template>
   <div class="relative">
-    <button @click="toggleSideBar"
+    <button
+      @click="toggleSideBar"
       class="absolute md:hidden menu-bar lg:hidden z-[2000] font-[700] text-[30px] top-[20px] right-[20px] px-[4px] py-[-2px] rounded-sm"
     >
       <i class="fa fa-bars"></i>
     </button>
     <div class="dashboard w-full min-h-screen">
-      <div class=" " >
+      <div class=" ">
         <aside
-          :class="[`{ w-[268px] sidebar z-[3000] transition-all duration-100 ease-in-out  fixed top-0 left-0 h-screen md:flex lg:flex px-[35px] flex flex-col gap-[67px] py-[45px] bg-[var(--primary)]`, !toggleState ? `hidden`:`md:flex lg:flex`]"
+          :class="[
+            `{ w-[268px] sidebar z-[3000] transition-all duration-100 ease-in-out  fixed top-0 left-0 h-screen md:flex lg:flex px-[35px] flex flex-col gap-[67px] py-[45px] bg-[var(--primary)]`,
+            !toggleState ? `hidden` : `md:flex lg:flex`,
+          ]"
         >
           <div class="">
             <li
@@ -333,6 +337,7 @@
               class="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 bg-white gap-[15px]"
             >
               <button
+                @click="OpenAddNewStaffModal"
                 class="flex items-center add_new_staff_ py-[15px] px-[40px] gap-[10px] rounded-[5px] bg-[rgba(35,136,255,1)] justify-center gap-5 text-[rgba(255,255,255,1)] font-[600] text-[14px] leading-[120%] tracking-[-2%]"
               >
                 <i class="fa fa-user-plus text-[rgba(255,255,255,1)]"></i>
@@ -340,12 +345,14 @@
                 Add New Staff
               </button>
               <button
+                @click="OpenAppriasalModal1"
                 class="flex items-center appraisal_cycle_ py-[15px] px-[40px] gap-[10px] rounded-[5px] bg-[rgba(35,136,255,1)] justify-center gap-5 text-[rgba(255,255,255,1)] font-[600] text-[14px] leading-[120%] tracking-[-2%]"
               >
                 <i class="fa fa-file-text text-[rgba(255,255,255,1)]"></i>
                 Open Appraisal
               </button>
               <button
+                @click="OpenGenerateModal"
                 class="flex generate_report_ items-center py-[15px] px-[40px] gap-[10px] rounded-[5px] bg-[rgba(35,136,255,1)] justify-center gap-5 text-[rgba(255,255,255,1)] font-[600] text-[14px] leading-[120%] tracking-[-2%]"
               >
                 <i class="fas fa-file text-[rgba(255,255,255,1)]"></i>
@@ -407,7 +414,7 @@
                   :columns="columns"
                   :data="data"
                   :loading="loading"
-                  :bordered="true"
+                  :bordered="false"
                   :scroll-x="1200"
                   :pagination="pagination"
                 />
@@ -502,15 +509,28 @@
                 </table> -->
               </div>
             </div>
-            
           </form>
         </div>
-        <form action="#" class="modals">
-          
-            <OpenAppraisal2 :show="show" />
-          
-          
-          
+        <form action="#" class="modals" @submit.prevent="">
+          <AddNewStaff
+            :show2
+            @CloseModalForAddNewStaff="CloseAddNewStaffModal"
+          />
+          <OpenAppraisal1
+            :show1
+            @CloseModalForOpenAppriasal2="CloseAppriasalModal2"
+            @CloseModalForOpenAppriasal1="CloseAppriasalModal1"
+            @OpenAppraisalModal2="OpenAppriasalModal2"
+          />
+          <OpenAppraisal2
+            :show4
+            @CloseModalForOpenAppriasal2="CloseAppriasalModal2"
+          />
+
+          <GenerateReport
+            :show3
+            @CloseModalForGenerateReport="CloseGenerateModal"
+          />
         </form>
       </main>
     </div>
@@ -523,21 +543,46 @@ import OpenAppraisal2 from "@/components/AdminComponents/OpenAppraisal2.vue";
 import GenerateReport from "@/components/AdminComponents/GenerateReport.vue";
 import AddNewStaff from "@/components/AdminComponents/AddNewStaff.vue";
 
-
 // Show Modals
-const show = ref(true);
-function CloseAppriasalModal() {
-    show.value = false;
+const show1 = ref(false);
+const show2 = ref(false);
+const show3 = ref(false);
+const show4 = ref(false);
+function CloseAppriasalModal1() {
+  show1.value = false;
+}
+function OpenAppriasalModal1() {
+  show1.value = true;
+}
+function CloseAppriasalModal2() {
+  show4.value = false;
+}
+function OpenAppriasalModal2() {
+  show4.value = true;
+  console.log(show4.value);
+}
+function CloseAddNewStaffModal() {
+  show2.value = false;
+}
+function OpenAddNewStaffModal() {
+  show2.value = true;
+}
+function CloseGenerateModal() {
+  show3.value = false;
+}
+function OpenGenerateModal() {
+  show3.value = true;
 }
 const toggleState = ref(false);
 const toggleSideBar = () => {
-    toggleState.value = !toggleState.value;
-}
+  toggleState.value = !toggleState.value;
+};
 
 const btns = ref([]);
 const btn1 = ref(null);
 const btn2 = ref(null);
 const btn3 = ref(null);
+
 btns.value[0] = btn1;
 btns.value[1] = btn2;
 btns.value[2] = btn3;
@@ -567,9 +612,9 @@ function updateChartData(event) {
           button.value.classList.remove("bg-[rgba(35,136,255,1)]");
           button.value.classList.remove("text-[rgba(247,249,250,1)]");
           console.log(button.value);
-        } 
+        }
       });
-    } 
+    }
   }
   currentDataset.value = event.target.id;
   event.target.className;

@@ -56,7 +56,7 @@
           type="date"
           placeholder="Select a date"
           :bordered="false"
-          class="custom-select w-full"
+          class="custom-select w-full border"
         />
       </div>
     </div>

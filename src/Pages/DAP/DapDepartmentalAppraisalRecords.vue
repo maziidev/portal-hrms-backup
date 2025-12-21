@@ -24,38 +24,39 @@
           <div class="flex flex-col gap-[25px]">
             <li>
               <router-link
-                to="/admin"
-                class="text-[var(--pri-text)] font-[400] flex gap-2 items-center text-[16px] tracking-[-2%] leading-[120%]"
+                to="/dap"
+                class="text-[var(--pri-text)] cursor-pointer font-[400] flex gap-2 items-center text-[16px] tracking-[-2%] leading-[120%]"
                 ><i class="fa fa-th-large"></i>Dashboard</router-link
               >
             </li>
             <li>
               <router-link
-                to="/admin/staff-managment"
-                class="text-[var(--pri-text)] font-[400] text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
-                ><i class="fa fa-user-circle"></i>Staff Management</router-link
+                to="/dap/staff-records"
+                class="text-[var(--pri-text)] cursor-pointer font-[400] text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
+                ><i class="fa fa-user-circle"></i>Staff Records</router-link
               >
             </li>
             <li>
               <router-link
-                to="/admin/appraisal"
+                to="/dap/appraisal-management"
                 class="text-[rgba(14,253,193,1)] font-[700] text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
-                ><i class="fa fa-user-circle"></i>Appraisals</router-link
-              >
-            </li>
-
-            <li>
-              <a
-                class="text-[var(--pri-text)] font-[400] text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
-                href="#"
-                ><i class="fa fa-bed"></i> Leave Management</a
-              >
+                ><i class="fa fa-file-text"></i> Appraisals Management
+              </router-link>
             </li>
             <li>
-              <a
+              <router-link
+                to="/dap/leave-analytics"
+                class="text-[var(--pri-text)] font-[400] text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
+                ><i class="fa fa-bed"></i> Leave Analytics</router-link
+              >
+            </li>
+            <li>
+              <router-link
+                to="/dap/promotion-career-progression"
                 class="text-[var(--pri-text)] font-[400] text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
                 href="#"
-                ><i class="fa fa-award"></i> Promotions & Career Progression</a
+                ><i class="fa fa-award"></i> Promotions & Career
+                Progression</router-link
               >
             </li>
             <li>
@@ -67,7 +68,7 @@
             </li>
             <li>
               <router-link
-                to="/admin/report-analysis"
+                to="/hod/report-analysis"
                 class="text-[var(--pri-text)] font-[400] text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
                 href="Report_Analysis.html"
                 ><i class="fa-solid fa-chart-column"></i>Reports &
@@ -114,11 +115,11 @@
           <header
             class="bg-[var(--pri-bg)] py-[25px] items-center px-[25px] w-[] top-0 flex justify-between"
           >
-            <div class="w-[70%]">
-              <h2 class="bc mb-[7px]">
-                Q1 Staff Appraisal – Finance Department
-              </h2>
-              <h5 class="sbc">Appraisal ID: APP-2025-001</h5>
+            <div class="flex items-center gap-[10px]">
+              <span
+                class="text-[rgba(20,21,15,1)] text-[24px] leading-[120%] tracking-[0%] font-[700]"
+                >Department Records</span
+              >
             </div>
             <div class="md:flex lg:flex items-center gap-[10px] hidden">
               <i class="fa fa-bell text-[var(--sec-text)]"></i>
@@ -131,44 +132,6 @@
         </div>
 
         <div class="main px-[25px] mt-[50px] flex flex-col gap-[40px]">
-          <div
-            class="flex justify-between gap-[20px] flex-wrap md:flex-nowrap lg:flex-nowrap"
-          >
-            <div class="left flex items-center gap-[20px]">
-              <div class="back">
-                <button
-                  @click="previousPage"
-                  class="flex items-center gap-[10px]"
-                >
-                  <i class="fa fa-chevron-left"></i> Back
-                </button>
-              </div>
-              <div class="created_by flex items-center gap-[5px]">
-                <h3 class="font-[700] text-[rgba(27,37,89,1)] text-[20px]">
-                  Created By:
-                </h3>
-                <p class="font-[500] text-[16px] text-[rgba(27,37,89,1)]">
-                  Mrs. A. Johnson (HOD Finance)
-                </p>
-              </div>
-              <div class="calender flex items-center gap-[5px]">
-                <i class="fas fa-calendar"></i
-                ><span class="text-[rgba(20,21,15,1)]">Jan–Mar 2025</span>
-              </div>
-            </div>
-            <div
-              class="right border border-[rgba(225,228,237,1)] flex items-center justify-around w-[122px] h-[51px] rounded-[6px] bg-[rgba(241,243,247,1)]"
-            >
-              <h2
-                class="rounded-full py-[8px] px-[8px] bg-[rgba(0,194,168,1)]"
-              ></h2>
-              <h2
-                class="text-[rgba(30,30,30,1)] pt-[4px] font-[600] text-[14px] leading-[120%] tracking-[0%]"
-              >
-                Active
-              </h2>
-            </div>
-          </div>
           <div
             class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[25px]"
           >
@@ -205,87 +168,65 @@
               </div>
             </button>
           </div>
-
-          <!-- Staff Appraisal -->
-          <div
-            class="quick_actions flex justify-between flex-wrap lg:flex-nowrap md:flex-nowrap items-center gap-[15px]"
-          >
+          <form class="w-full mb-5">
             <div
-              class="flex items-center gap-[20px] flex-wrap lg:flex-nowrap md:flex-nowrap"
+              class="top flex justify-between w-full items-center flex-wrap md:flex-nowrap gap-[10px]"
             >
-              <h2
-                class="text-[rgba(30,43,58,1)] font-[700] text-[20px] leading-[120%] tracking-[-2%]"
+              <div
+                class="left flex flex-wrap md:flex-nowrap lg:flex-nowrap items-center w-full md:w-[50%] lg:w-[50%] gap-[10px]"
               >
-                Staff Appraisal
-              </h2>
-            </div>
-            <div
-              class="flex items-center gap-[20px] flex-wrap lg:flex-nowrap md:flex-nowrap"
-            >
-              <button
-                @click="OpenModal"
-                class="border-[rgba(35,136,255,1)] text-[rgba(255,255,255,1)] bulk_upload_ px-[40px] py-[10px] font-[600] text-[16px] flex gap-[10px] items-center leading-[120%] tracking-[-2%] rounded-[5px] border-2 bg-[rgba(35,136,255,1)]"
-              >
-                Close Appraisal
-              </button>
-            </div>
-          </div>
-
-          <form class="all_staff_directory w-full">
-            <div
-              class="top flex flex-wrap lg:flex-nowrap md:flex-nowrap justify-between gap-[20px] items-center"
-            >
-              <div class="left flex items-center md:w-[50%] gap-[15px]">
-                <div class="relative h-[40px] w-full md:w-[400px] lg:w-[400px]">
+                <h2
+                  class="font-[700] text-[var(--sec-text)] w-[230px] text-[20px] leading-[120%] tracking-[-2%]"
+                >
+                  Departments’ appraisal
+                </h2>
+                <div class="relative w-[50%]">
                   <div class="h-full absolute left-[10px] flex items-center">
                     <i class="fa text-[rgba(107,114,128,1)] fa-search"></i>
                   </div>
                   <n-input
                     type="search"
                     name="search"
-                    placeholder="Search through apparaisals"
+                    placeholder="Search by name or  ID"
                     id="search"
                     :bordered="false"
-                    class="search outline-none w-full border rounded-[6px] border-[rgba(229,231,235,1)]"
+                    v-model:value="form.search"
+                    class="search w-full border outline-none rounded-[5px] border-[rgba(229,231,235,1)]"
                   />
                 </div>
               </div>
               <div
-                class="right grid grid-cols-1 w-[50%] items-center gap-[15px] flex-wrap lg:grid-cols-3 md:grid-cols-4"
+                class="right grid grid-cols-2 gap-[20px] md:w-[50%] w-full lg:grid-cols-2 md:grid-cols-2"
               >
                 <n-select
-                  :options="unitOptions"
+                  v-model:value="form.dateUpdated"
+                  :options="dates"
                   clearable
-                  v-model:value="data.department"
-                  name="department_unit"
-                  id="department_unit"
-                  placeholder="Department/Unit"
-                  class="cursor-pointer outline-none"
+                  :bordered="true"
+                  name="dateUpdated"
+                  id="dateUpdated"
+                  placeholder="Date Updated"
+                  class="cursor-pointer rounded-[10px] outline-none"
                 >
                 </n-select>
                 <n-select
+                  v-model:value="form.status"
+                  :options="Status"
                   clearable
-                  v-model:value="data.author"
-                  name="author"
-                  placeholder="Author"
-                  id="author"
-                  class="cursor-pointer outline-none"
+                  :bordered="true"
+                  name="status"
+                  id="status"
+                  placeholder="Status"
+                  class="cursor-pointer rounded-[10px] outline-none"
                 >
                 </n-select>
-
-                <n-date-picker
-                  v-model:value="data.date"
-                  type="date"
-                  placeholder="Date Range"
-                  :bordered="false"
-                  class="custom-select border"
-                />
               </div>
             </div>
             <div class="w-full overflow-hidden mt-3">
               <div class="overflow-x-auto">
                 <n-data-table
                   :columns="columns"
+                  :data="data"
                   :loading="loading"
                   :bordered="false"
                   :scroll-x="1200"
@@ -295,90 +236,88 @@
             </div>
           </form>
         </div>
-        <form action="#" class="modals" @submit.prevent="">
-          <Staff_Information :show @closeModal="closeModal" />
-        </form>
+        <form action="#" class="modals" @submit.prevent=""></form>
       </main>
     </div>
   </div>
 </template>
 <script setup>
-import { ref, reactive } from "vue";
-import { useRouter } from "vue-router";
-import OpenAppraisal1 from "@/components/AdminComponents/OpenAppraisal1.vue";
-import Staff_Information from "@/components/AdminComponents/Staff_Information.vue";
-import OpenAppraisal2 from "@/components/AdminComponents/OpenAppraisal2.vue";
-import GenerateReport from "@/components/AdminComponents/GenerateReport.vue";
-import AddNewStaff from "@/components/AdminComponents/AddNewStaff.vue";
+import { ref, reactive, h, computed, onMounted } from "vue";
+import { useRouter, useRoute } from "vue-router";
 import Orbit from "@/assets/imgs/Orbit.png";
 
+const route = useRoute();
+const { id } = defineProps({
+  id: {
+    type: String,
+  },
+});
 const router = useRouter();
-
-function previousPage() {
-  router.back();
-}
-
-const data = reactive({
-  department_unit: null,
-  author: null,
+const form = reactive({
   status: null,
   date: null,
   is_active: false,
+  dateUpdated: null,
+  faculty: null,
+  search: "",
 });
+let Status = reactive([
+  {
+    label: "Status One",
+    value: "Status One",
+  },
+]);
+let dates = reactive([
+  {
+    label: "Month Year Option",
+    value: "Month Year Option",
+  },
+]);
+
 const activeState = ref(null);
+
+const btns = reactive([
+  { name: "Total Appraisals", value: 24 },
+  { name: "Pending Reviews", value: 4 },
+  { name: "Approved Appraisals", value: 20 },
+  { name: "Departments Reviewed", value: 4 },
+]);
+
+onMounted(() => {
+  activeState.value = btns[0].name;
+});
 
 function isActive(id) {
   activeState.value = id;
-  console.log(id);
+  // console.log(id);
 }
-const btns = reactive([
-  { name: "Active Staff", value: 20300 },
-  { name: "On Probation", value: 20560 },
-  { name: "On Study Leave", value: 20300 },
-  { name: "Retired", value: 10300 },
-]);
-const unitOptions = [
-  { label: "HR", value: "hr" },
-  { label: "IT", value: "it" },
-  { label: "Finance", value: "finance" },
-];
 
-// Show Modal
-const show = ref(false);
-function closeModal() {
-  show.value = false;
-}
-function OpenModal() {
-  show.value = true;
-  console.log("Good...");
-}
+isActive(btns[0].name);
 
 const toggleState = ref(false);
 const toggleSideBar = () => {
   toggleState.value = !toggleState.value;
 };
 
-// Define table columns
 const columns = [
   {
-    title: "Staff ID",
-    key: "staff_id",
-    render(row) {
-      return h(
-        "a",
+    title: "Department ",
+    key: "department",
+    render: (row) => {
+      h(
+        "button",
         {
-          class: "text-blue-600 hover:underline font-semibold cursor-pointer",
-          onClick: () => router.push(`/home/edit/${row.id}`),
+          onClick: () => router.push("/dap/all-staff-records/" + id),
         },
-        row.id
+        row.department
       );
     },
   },
-  { title: "Name  ", key: "name " },
-  { title: "Faculty/Unit", key: "Faculty/Unit" },
-  { title: "Department ", key: "department " },
-  { title: "Designation ", key: "designation " },
-  { title: "Employment Date  ", key: "employment_date  " },
+  { title: "Total Staff", key: "total_staff" },
+  { title: "Submitted ", key: "submitted" },
+  { title: "Pending", key: "pending" },
+  { title: "Completed", key: "completed" },
+  { title: "Last Updated", key: "last_updated" },
   {
     title: "Status ",
     key: "status ",
@@ -386,24 +325,12 @@ const columns = [
       return h(
         "span",
         {
-          style: {
-            color: row.is_active
-              ? "text-[rgba(251,188,4,1)]"
-              : row.is_active == "Due in 12 mo"
-              ? "red"
-              : "blue",
-            fontWeight: "700",
-            backgroundColor: row.is_active
-              ? "bg-[rgba(234,67,53,0.2)]"
-              : row.is_active == "Due in 12 mo"
-              ? "bg-[rgba(251,188,4,0.2)]"
-              : "bg-[rgba(58,151,76,0.15)]",
-            fontSize: "14px",
-            padding: "10px 20px",
-            borderRadius: "22.5px",
-            lineHeight: "100%",
-            wordSpacing: "0%",
-          },
+          style:
+            row.is_active == "Completed"
+              ? "rounded-[22.5px] text-[rgba(58,151,76,1)] px font-[700] text-[14px] leading-[100%] tracking-[0%] px-[20px] py-[10px] bg-[rgba(58,151,76,0.15)] w-[120px]"
+              : row.is_active == "In Progress"
+              ? "bg-[rgba(35,136,255,0.15)] px-[20px] py-[10px] rounded-[22.5px] text-[rgba(35,136,255,1)] font-[700] text-[14px] leading-[100%] tracking-[0%]"
+              : "rounded-[22.5px] text-[rgba(234,67,53,1)] px font-[700] text-[14px] leading-[100%] tracking-[0%] px-[20px] py-[10px] bg-[rgba(234,67,53,0.2)]",
         },
         row.is_active
       );

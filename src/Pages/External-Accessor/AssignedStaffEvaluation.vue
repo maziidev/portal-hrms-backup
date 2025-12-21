@@ -24,50 +24,30 @@
           <div class="flex flex-col gap-[25px]">
             <li>
               <router-link
-                to="/admin"
-                class="text-[var(--pri-text)] font-[400] flex gap-2 items-center text-[16px] tracking-[-2%] leading-[120%]"
+                to="/external-accessor"
+                class="text-[var(--pri-text)] cursor-pointer font-[400] flex gap-2 items-center text-[16px] tracking-[-2%] leading-[120%]"
                 ><i class="fa fa-th-large"></i>Dashboard</router-link
               >
             </li>
             <li>
               <router-link
-                to="/admin/staff-managment"
-                class="text-[rgba(14,253,193,1)] font-[700] text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
-                ><i class="fa fa-user-circle"></i>Staff Management</router-link
+                to="/external-accessor/assigned-staff-evaluation"
+                class="text-[rgba(14,253,193,1)] cursor-pointer font-[700] text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
+                ><i class="fa fa-user-circle"></i>Assigned Staff
+                Evaluations</router-link
               >
             </li>
             <li>
               <router-link
-                to="/admin/appraisal"
+                to="/external-accessor/evaluation"
                 class="text-[var(--pri-text)] font-[400] text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
-                ><i class="fa fa-user-circle"></i>Appraisals</router-link
-              >
+                ><i class="fa fa-file-text"></i> Evaluation
+              </router-link>
             </li>
 
             <li>
-              <a
-                class="text-[var(--pri-text)] font-[400] text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
-                href="#"
-                ><i class="fa fa-bed"></i> Leave Management</a
-              >
-            </li>
-            <li>
-              <a
-                class="text-[var(--pri-text)] font-[400] text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
-                href="#"
-                ><i class="fa fa-award"></i> Promotions & Career Progression</a
-              >
-            </li>
-            <li>
-              <a
-                class="text-[var(--pri-text)] font-[400] text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
-                href="#"
-                ><i class="fa fa-calendar"></i> Retirement & Exit</a
-              >
-            </li>
-            <li>
               <router-link
-                to="/admin/report-analysis"
+                to="/external-accessor/evaluation"
                 class="text-[var(--pri-text)] font-[400] text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
                 href="Report_Analysis.html"
                 ><i class="fa-solid fa-chart-column"></i>Reports &
@@ -115,7 +95,7 @@
             class="bg-[var(--pri-bg)] py-[25px] items-center px-[25px] w-[] top-0 flex justify-between"
           >
             <div class="w-[70%]">
-              <h2 class="bc mb-[7px]">Staff Records</h2>
+              <h2 class="bc mb-[7px]">Assigned Evaluations</h2>
             </div>
             <div class="md:flex lg:flex items-center gap-[10px] hidden">
               <i class="fa fa-bell text-[var(--sec-text)]"></i>
@@ -128,125 +108,52 @@
         </div>
 
         <div class="main px-[25px] mt-[50px] flex flex-col gap-[40px]">
-          <div
-            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[25px]"
-          >
-            <button
-              :class="[
-                `rounded-[20px] box cursor-pointer h-[97px] shadow  flex flex-col justify-center gap-[24px] py-[20px] px-[25px]`,
-                activeState == btn.name ? `bg-[rgba(17,27,73,1)]` : `bg-white `,
-              ]"
-              v-for="btn in btns"
-              :key="btn"
-              :id="btn.name"
-              @click="isActive(btn.name)"
-            >
-              <div>
-                <div class="flex justify-between items-center gap-3 w-full">
-                  <h2
-                    :class="[
-                      `font-[500] text-[16px] text-[rgba(204,204,204,1)] leading-[120%] tracking-[-2%]`,
-                    ]"
-                  >
-                    {{ btn.name }}
-                  </h2>
-                  <h2
-                    :class="[
-                      `text-[34px] font-[700] leading-[120%] tracking-[-2%]`,
-                      activeState == btn.name
-                        ? `text-[rgba(255,255,255,1)]`
-                        : `text-[var(--sec-text)]`,
-                    ]"
-                  >
-                    {{ btn.value }}
-                  </h2>
-                </div>
-              </div>
-            </button>
-          </div>
-
           <!-- All Staff Directory -->
-          <div
-            class="quick_actions flex justify-between flex-wrap lg:flex-nowrap md:flex-nowrap items-center gap-[15px]"
-          >
-            <div
-              class="flex items-center gap-[20px] flex-wrap lg:flex-nowrap md:flex-nowrap"
-            >
-              <h2
-                class="text-[rgba(30,43,58,1)] font-[700] text-[16px] leading-[120%] tracking-[-2%]"
-              >
-                All Staff Directory
-              </h2>
-              <div class="flex items-center gap-3">
-                <span
-                  class="ml-3 ai_suggestion text-[14px] font-[500] leading-[120%] tracking-[0.2%] text-[rgba(30,30,30,1)]"
-                >
-                  Group by Department/Unit
-                </span>
-                <label class="relative inline-flex items-center cursor-pointer">
-                  <n-switch
-                    v-model:value="data.is_active"
-                    class="text-white h-full rounded-full p-2"
-                  >
-                  </n-switch>
-                </label>
-              </div>
-            </div>
-            <div
-              class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 items-center gap-[20px]"
-            >
-              <button
-                class="text-[rgba(255,255,255,1)] px-[40px] py-[10px] font-[600] text-[16px] flex gap-[10px] items-center leading-[120%] tracking-[-2%] rounded-[5px] bg-[rgba(35,136,255,1)] border-2 border-[rgba(35,136,255,1)]"
-              >
-                <i class="fas fa-user-plus"></i> Add New Staff
-              </button>
-              <button
-                href=""
-                download="download"
-                class="text-[rgba(35,136,255,1)] bulk_upload_ px-[40px] py-[10px] font-[600] text-[16px] flex gap-[10px] items-center leading-[120%] tracking-[-2%] rounded-[5px] border-2 border-[rgba(35,136,255,1)]"
-              >
-                <i class="fas fa-file-import fa-flip-horizontal"></i> import
-                staff records
-              </button>
-            </div>
-          </div>
 
           <form class="all_staff_directory w-full">
             <div
               class="top flex flex-wrap lg:flex-nowrap md:flex-nowrap justify-between gap-[20px] items-center"
             >
-              <div class="left flex items-center md:w-[50%] gap-[15px]">
-                <div class="relative h-[40px] w-full">
+              <div
+                class="left flex flex-wrap md:flex-nowrap lg:flex-nowrap items-center w-full md:w-[50%] lg:w-[50%] gap-[10px]"
+              >
+                <h2
+                  class="font-[700] text-[var(--sec-text)] w-[160px] text-[20px] leading-[120%] tracking-[-2%]"
+                >
+                  Faculty Records
+                </h2>
+                <div class="relative w-[50%]">
                   <div class="h-full absolute left-[10px] flex items-center">
                     <i class="fa text-[rgba(107,114,128,1)] fa-search"></i>
                   </div>
                   <n-input
                     type="search"
                     name="search"
-                    placeholder="by Name/Staff ID/Email/Unit"
+                    placeholder="Search for anything..."
                     id="search"
                     :bordered="false"
-                    class="search outline-none w-full lg:w-[50%] border rounded-[6px] border-[rgba(229,231,235,1)]"
+                    v-model:value="data.search"
+                    class="search w-full border outline-none rounded-[5px] border-[rgba(229,231,235,1)]"
                   />
                 </div>
               </div>
               <div
-                class="right grid grid-cols-1 w-full items-center gap-[15px] flex-wrap lg:grid-cols-4 md:grid-cols-4"
+                class="right grid grid-cols-1 w-[50%] items-center gap-[15px] flex-wrap lg:grid-cols-3 md:grid-cols-3"
               >
                 <n-select
                   :options="unitOptions"
                   clearable
-                  v-model:value="data.department"
-                  name="department_unit"
-                  id="department_unit"
+                  v-model:value="data.faculty"
+                  name="faculty"
+                  id="faculty"
                   class="cursor-pointer rounded-[10px] outline-none"
                 >
                 </n-select>
                 <n-select
                   clearable
-                  v-model:value="data.employment_type"
-                  name="employment_type"
-                  id="employment_type"
+                  v-model:value="data.rank_applied"
+                  name="rank_applied"
+                  id="rank_applied"
                   class="cursor-pointer rounded-[10px] outline-none"
                 >
                 </n-select>
@@ -259,13 +166,6 @@
                   class="cursor-pointer rounded-[10px] outline-none"
                 >
                 </n-select>
-                <n-date-picker
-                  v-model:value="data.date"
-                  type="date"
-                  placeholder="DD-MM-YYYY"
-                  :bordered="false"
-                  class="custom-select border"
-                />
               </div>
             </div>
             <div class="w-full overflow-hidden mt-3">
@@ -282,25 +182,23 @@
           </form>
         </div>
         <form action="#" class="modals" @submit.prevent="">
-          <AddNewStaff
+          <TeachingResearchAdministrativeDuties
             :show2
-            @CloseModalForAddNewStaff="CloseAddNewStaffModal"
+            @closeTeachingResearchAndAdminstrativeDutiesModal="CloseTeachingResearchAndAdministrativeDuties"
+            @OpenExternalEvaluationSubmissionModal="OpenExternalEvaluationSubmission"
           />
-          <OpenAppraisal1
-            :show1
-            @CloseModalForOpenAppriasal2="CloseAppriasalModal2"
-            @CloseModalForOpenAppriasal1="CloseAppriasalModal1"
-            @OpenAppraisalModal2="OpenAppriasalModal2"
+          <StaffInformation
+            :show
+            @closeStaffInformationModal="CloseStaffInformation"
+            @OpenTeachingResearchAndAdminstrativeDutiesModal="OpenTeachingResearchAndAdministrativeDuties"
+            
           />
-          <OpenAppraisal2
-            :show4
-            @CloseModalForOpenAppriasal2="CloseAppriasalModal2"
+          <ExternalEvaluationSubmission
+            :show3
+            @closeExternalEvaluationSubmissionModal="CloseExternalEvaluationSubmission"
           />
 
-          <GenerateReport
-            :show3
-            @CloseModalForGenerateReport="CloseGenerateModal"
-          />
+          
         </form>
       </main>
     </div>
@@ -308,18 +206,16 @@
 </template>
 <script setup>
 import { ref, reactive } from "vue";
-import OpenAppraisal1 from "@/components/AdminComponents/OpenAppraisal1.vue";
-import OpenAppraisal2 from "@/components/AdminComponents/OpenAppraisal2.vue";
-import GenerateReport from "@/components/AdminComponents/GenerateReport.vue";
-import AddNewStaff from "@/components/AdminComponents/AddNewStaff.vue";
+import ExternalEvaluationSubmission from "@/components/ExternalAccessorComponents/ExternalEvaluationSubmission.vue"
+import TeachingResearchAdministrativeDuties from "@/components/ExternalAccessorComponents/TeachingResearchAdministrativeDuties.vue"
+import StaffInformation from "@/components/ExternalAccessorComponents/StaffInformation.vue"
 import Orbit from "@/assets/imgs/Orbit.png";
 
 const data = reactive({
-  department_unit: null,
-  employment_type: null,
+  faculty: null,
+  rank_applied: null,
   status: null,
-  date: null,
-  is_active: false,
+  search: null,
 });
 const activeState = ref(null);
 
@@ -340,35 +236,29 @@ const unitOptions = [
 ];
 
 // Show Modals
-const show1 = ref(false);
+const show = ref(false);
 const show2 = ref(false);
 const show3 = ref(false);
-const show4 = ref(false);
-function CloseAppriasalModal1() {
-  show1.value = false;
+
+function CloseStaffInformation() {
+  show.value = false;
 }
-function OpenAppriasalModal1() {
-  show1.value = true;
+function OpenStaffInformation() {
+  show.value = true;
 }
-function CloseAppriasalModal2() {
-  show4.value = false;
-}
-function OpenAppriasalModal2() {
-  show4.value = true;
-  console.log(show4.value);
-}
-function CloseAddNewStaffModal() {
+function CloseTeachingResearchAndAdministrativeDuties() {
   show2.value = false;
 }
-function OpenAddNewStaffModal() {
+function OpenTeachingResearchAndAdministrativeDuties() {
   show2.value = true;
 }
-function CloseGenerateModal() {
-  show3.value = false;
-}
-function OpenGenerateModal() {
+function OpenExternalEvaluationSubmission() {
   show3.value = true;
 }
+function CloseExternalEvaluationSubmission() {
+  show3.value = false;
+}
+
 const toggleState = ref(false);
 const toggleSideBar = () => {
   toggleState.value = !toggleState.value;
@@ -377,8 +267,8 @@ const toggleSideBar = () => {
 // Define table columns
 const columns = [
   {
-    title: "Staff ID",
-    key: "staff_id",
+    title: "Name",
+    key: "name",
     render(row) {
       return h(
         "a",
@@ -390,11 +280,10 @@ const columns = [
       );
     },
   },
-  { title: "Name  ", key: "name " },
-  { title: "Faculty/Unit", key: "Faculty/Unit" },
   { title: "Department ", key: "department " },
-  { title: "Designation ", key: "designation " },
-  { title: "Employment Date  ", key: "employment_date  " },
+  { title: "Faculty ", key: "faculty " },
+  { title: "Rank Applied ", key: "rank_applied " },
+  { title: "Last Updated", key: "last_updated" },
   {
     title: "Status ",
     key: "status ",
@@ -423,6 +312,44 @@ const columns = [
         },
         row.is_active
       );
+    },
+  },
+  {
+    title: "Action ",
+    key: "action",
+    render(row) {
+      row.isActive <= 10
+        ? h(
+            "a",
+            {
+              href: row.file,
+              download: "",
+              style:
+                "rounded-[2px] text-[rgba(255,255,255,1)] font-[700] text-[14px] leading-[100%] flex gap-3 items-center justify-center tracking-[0%] px-[20px] py-[16px] bg-[rgba(35,136,255,1)]",
+            },
+            ["Continue"]
+          )
+        : row.isActive == 0
+        ? h(
+            "a",
+            {
+              href: row.file,
+              download: "",
+              style:
+                "rounded-[2px] text-[rgba(255,255,255,1)] font-[700] text-[14px] leading-[100%] flex gap-3 items-center justify-center tracking-[0%] px-[20px] py-[16px] bg-[rgba(35,136,255,1)]",
+            },
+            ["Start"]
+          )
+        : h(
+            "a",
+            {
+              href: row.file,
+              download: "",
+              style:
+                "rounded-[2px] text-[rgba(255,255,255,1)] font-[700] text-[14px] leading-[100%] flex gap-3 items-center justify-center tracking-[0%] px-[20px] py-[16px] bg-[rgba(35,136,255,1)]",
+            },
+            ["View"]
+          );
     },
   },
 ];

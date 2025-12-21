@@ -22,6 +22,7 @@
         v-model:value="form.units"
         :options="unitOptions"
         clearable
+        multiple
         :bordered="false"
         class="custom-select border rounded"
       />

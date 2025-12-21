@@ -24,22 +24,22 @@
           <div class="flex flex-col gap-[25px]">
             <li>
               <router-link
-                to="/admin"
+                to="/hod"
                 class="text-[var(--pri-text)] font-[400] flex gap-2 items-center text-[16px] tracking-[-2%] leading-[120%]"
                 ><i class="fa fa-th-large"></i>Dashboard</router-link
               >
             </li>
             <li>
               <router-link
-                to="/admin/staff-managment"
-                class="text-[var(--pri-text)] font-[400] text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
-                ><i class="fa fa-user-circle"></i>Staff Management</router-link
+                to="/hod/staff-records"
+                class="text-[rgba(14,253,193,1)] font-[700] text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
+                ><i class="fa fa-user-circle"></i>Staff Records</router-link
               >
             </li>
             <li>
               <router-link
-                to="/admin/appraisal"
-                class="text-[rgba(14,253,193,1)] font-[700] text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
+                to="/hod/appraisal"
+                class="text-[var(--pri-text)] font-[400] text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
                 ><i class="fa fa-user-circle"></i>Appraisals</router-link
               >
             </li>
@@ -67,7 +67,7 @@
             </li>
             <li>
               <router-link
-                to="/admin/report-analysis"
+                to="/hod/report-analysis"
                 class="text-[var(--pri-text)] font-[400] text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
                 href="Report_Analysis.html"
                 ><i class="fa-solid fa-chart-column"></i>Reports &
@@ -115,10 +115,7 @@
             class="bg-[var(--pri-bg)] py-[25px] items-center px-[25px] w-[] top-0 flex justify-between"
           >
             <div class="w-[70%]">
-              <h2 class="bc mb-[7px]">
-                Q1 Staff Appraisal – Finance Department
-              </h2>
-              <h5 class="sbc">Appraisal ID: APP-2025-001</h5>
+              <h2 class="bc mb-[7px]">Staff Records</h2>
             </div>
             <div class="md:flex lg:flex items-center gap-[10px] hidden">
               <i class="fa fa-bell text-[var(--sec-text)]"></i>
@@ -131,44 +128,6 @@
         </div>
 
         <div class="main px-[25px] mt-[50px] flex flex-col gap-[40px]">
-          <div
-            class="flex justify-between gap-[20px] flex-wrap md:flex-nowrap lg:flex-nowrap"
-          >
-            <div class="left flex items-center gap-[20px]">
-              <div class="back">
-                <button
-                  @click="previousPage"
-                  class="flex items-center gap-[10px]"
-                >
-                  <i class="fa fa-chevron-left"></i> Back
-                </button>
-              </div>
-              <div class="created_by flex items-center gap-[5px]">
-                <h3 class="font-[700] text-[rgba(27,37,89,1)] text-[20px]">
-                  Created By:
-                </h3>
-                <p class="font-[500] text-[16px] text-[rgba(27,37,89,1)]">
-                  Mrs. A. Johnson (HOD Finance)
-                </p>
-              </div>
-              <div class="calender flex items-center gap-[5px]">
-                <i class="fas fa-calendar"></i
-                ><span class="text-[rgba(20,21,15,1)]">Jan–Mar 2025</span>
-              </div>
-            </div>
-            <div
-              class="right border border-[rgba(225,228,237,1)] flex items-center justify-around w-[122px] h-[51px] rounded-[6px] bg-[rgba(241,243,247,1)]"
-            >
-              <h2
-                class="rounded-full py-[8px] px-[8px] bg-[rgba(0,194,168,1)]"
-              ></h2>
-              <h2
-                class="text-[rgba(30,30,30,1)] pt-[4px] font-[600] text-[14px] leading-[120%] tracking-[0%]"
-              >
-                Active
-              </h2>
-            </div>
-          </div>
           <div
             class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[25px]"
           >
@@ -206,73 +165,76 @@
             </button>
           </div>
 
-          <!-- Staff Appraisal -->
+          <!-- All Staff Directory -->
           <div
-            class="quick_actions flex justify-between flex-wrap lg:flex-nowrap md:flex-nowrap items-center gap-[15px]"
+            class="quick_actions flex flex-wrap md:flex-nowrap lg:flex-nowrap justify-between items-center gap-[15px]"
           >
-            <div
-              class="flex items-center gap-[20px] flex-wrap lg:flex-nowrap md:flex-nowrap"
+            <h2
+              class="text-[rgba(30,43,58,1)] font-[700] text-[20px] leading-[120%] tracking-[-2%]"
             >
-              <h2
-                class="text-[rgba(30,43,58,1)] font-[700] text-[20px] leading-[120%] tracking-[-2%]"
-              >
-                Staff Appraisal
-              </h2>
-            </div>
-            <div
-              class="flex items-center gap-[20px] flex-wrap lg:flex-nowrap md:flex-nowrap"
+              All Staff Directory
+            </h2>
+            <a
+              href=""
+              download="download"
+              class="text-[rgba(35,136,255,1)] px-[40px] py-[10px] font-[600] text-[16px] flex gap-[10px] items-center leading-[120%] tracking-[-2%] rounded-[5px] border-2 border-[rgba(35,136,255,1)]"
+              ><i class="fas fa-arrow-up-from-bracket"></i> Export Staff List</a
             >
-              <button
-                @click="OpenModal"
-                class="border-[rgba(35,136,255,1)] text-[rgba(255,255,255,1)] bulk_upload_ px-[40px] py-[10px] font-[600] text-[16px] flex gap-[10px] items-center leading-[120%] tracking-[-2%] rounded-[5px] border-2 bg-[rgba(35,136,255,1)]"
-              >
-                Close Appraisal
-              </button>
-            </div>
           </div>
 
           <form class="all_staff_directory w-full">
             <div
               class="top flex flex-wrap lg:flex-nowrap md:flex-nowrap justify-between gap-[20px] items-center"
             >
-              <div class="left flex items-center md:w-[50%] gap-[15px]">
-                <div class="relative h-[40px] w-full md:w-[400px] lg:w-[400px]">
+              <div class="left flex items-center md:w-[30%] lg:w-[30%] w-full gap-[15px]">
+                <div class="relative  w-full">
                   <div class="h-full absolute left-[10px] flex items-center">
                     <i class="fa text-[rgba(107,114,128,1)] fa-search"></i>
                   </div>
                   <n-input
                     type="search"
                     name="search"
-                    placeholder="Search through apparaisals"
+                    placeholder="Search by name, ID, or role"
                     id="search"
                     :bordered="false"
-                    class="search outline-none w-full border rounded-[6px] border-[rgba(229,231,235,1)]"
+                    class="search outline-none w-full md:w-[500px] lg:w-[500px] border rounded-[6px] border-[rgba(229,231,235,1)]"
                   />
                 </div>
               </div>
               <div
-                class="right grid grid-cols-1 w-[50%] items-center gap-[15px] flex-wrap lg:grid-cols-3 md:grid-cols-4"
+                class="right md:w-[50%] w-full grid grid-cols-1  items-center gap-[15px] flex-wrap lg:grid-cols-4 md:grid-cols-4"
               >
                 <n-select
                   :options="unitOptions"
                   clearable
-                  v-model:value="data.department"
-                  name="department_unit"
-                  id="department_unit"
-                  placeholder="Department/Unit"
-                  class="cursor-pointer outline-none"
+                  v-model:value="data.category"
+                  name="category"
+                  id="category"
+                  placeholder = "Category"
+                  class="cursor-pointer rounded-[10px] outline-none"
                 >
                 </n-select>
                 <n-select
                   clearable
-                  v-model:value="data.author"
-                  name="author"
-                  placeholder="Author"
-                  id="author"
-                  class="cursor-pointer outline-none"
+                  v-model:value="data.role"
+                  name="role"
+                  id="role"
+                  placeholder = "Role"
+
+                  class="cursor-pointer rounded-[10px] outline-none"
                 >
                 </n-select>
 
+                <n-select
+                  clearable
+                  v-model:value="data.status"
+                  name="status"
+                  id="status"
+                  placeholder = "Status"
+
+                  class="cursor-pointer rounded-[10px] outline-none"
+                >
+                </n-select>
                 <n-date-picker
                   v-model:value="data.date"
                   type="date"
@@ -296,36 +258,27 @@
           </form>
         </div>
         <form action="#" class="modals" @submit.prevent="">
-          <Staff_Information :show @closeModal="closeModal" />
+          
         </form>
       </main>
     </div>
   </div>
 </template>
 <script setup>
-import { ref, reactive } from "vue";
-import { useRouter } from "vue-router";
-import OpenAppraisal1 from "@/components/AdminComponents/OpenAppraisal1.vue";
-import Staff_Information from "@/components/AdminComponents/Staff_Information.vue";
-import OpenAppraisal2 from "@/components/AdminComponents/OpenAppraisal2.vue";
-import GenerateReport from "@/components/AdminComponents/GenerateReport.vue";
-import AddNewStaff from "@/components/AdminComponents/AddNewStaff.vue";
+import { ref, reactive, onMounted } from "vue";
+
 import Orbit from "@/assets/imgs/Orbit.png";
-
-const router = useRouter();
-
-function previousPage() {
-  router.back();
-}
 
 const data = reactive({
   department_unit: null,
-  author: null,
+  employment_type: null,
   status: null,
   date: null,
   is_active: false,
 });
 const activeState = ref(null);
+
+
 
 function isActive(id) {
   activeState.value = id;
@@ -342,17 +295,41 @@ const unitOptions = [
   { label: "IT", value: "it" },
   { label: "Finance", value: "finance" },
 ];
+// SET THE ACTIVE STATE TO ACTIVE STAFF 
+onMounted(()=> {
+    activeState.value = btns[0].name;
+})
 
-// Show Modal
-const show = ref(false);
-function closeModal() {
-  show.value = false;
+// Show Modals
+const show1 = ref(false);
+const show2 = ref(false);
+const show3 = ref(false);
+const show4 = ref(false);
+function CloseAppriasalModal1() {
+  show1.value = false;
 }
-function OpenModal() {
-  show.value = true;
-  console.log("Good...");
+function OpenAppriasalModal1() {
+  show1.value = true;
 }
-
+function CloseAppriasalModal2() {
+  show4.value = false;
+}
+function OpenAppriasalModal2() {
+  show4.value = true;
+  console.log(show4.value);
+}
+function CloseAddNewStaffModal() {
+  show2.value = false;
+}
+function OpenAddNewStaffModal() {
+  show2.value = true;
+}
+function CloseGenerateModal() {
+  show3.value = false;
+}
+function OpenGenerateModal() {
+  show3.value = true;
+}
 const toggleState = ref(false);
 const toggleSideBar = () => {
   toggleState.value = !toggleState.value;
@@ -375,40 +352,12 @@ const columns = [
     },
   },
   { title: "Name  ", key: "name " },
-  { title: "Faculty/Unit", key: "Faculty/Unit" },
-  { title: "Department ", key: "department " },
-  { title: "Designation ", key: "designation " },
+  { title: "Position", key: "position" },
+  { title: "Rank  ", key: "rank" },
+  { title: "Role", key: "role" },
+  { title: "Employment Type  ", key: "employment_type  " },
   { title: "Employment Date  ", key: "employment_date  " },
-  {
-    title: "Status ",
-    key: "status ",
-    render(row) {
-      return h(
-        "span",
-        {
-          style: {
-            color: row.is_active
-              ? "text-[rgba(251,188,4,1)]"
-              : row.is_active == "Due in 12 mo"
-              ? "red"
-              : "blue",
-            fontWeight: "700",
-            backgroundColor: row.is_active
-              ? "bg-[rgba(234,67,53,0.2)]"
-              : row.is_active == "Due in 12 mo"
-              ? "bg-[rgba(251,188,4,0.2)]"
-              : "bg-[rgba(58,151,76,0.15)]",
-            fontSize: "14px",
-            padding: "10px 20px",
-            borderRadius: "22.5px",
-            lineHeight: "100%",
-            wordSpacing: "0%",
-          },
-        },
-        row.is_active
-      );
-    },
-  },
+  
 ];
 const pagination = {
   // pageSize:10,

@@ -24,49 +24,30 @@
           <div class="flex flex-col gap-[25px]">
             <li>
               <router-link
-                to="/admin"
+                to="/external-accessor"
                 class="text-[rgba(14,253,193,1)] cursor-pointer font-[700] flex gap-2 items-center text-[16px] tracking-[-2%] leading-[120%]"
                 ><i class="fa fa-th-large"></i>Dashboard</router-link
               >
             </li>
             <li>
               <router-link
-                to="/admin/staff-managment"
+                to="/external-accessor/assigned-staff-evaluation"
                 class="text-[var(--pri-text)] cursor-pointer font-[400] text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
-                ><i class="fa fa-user-circle"></i>Staff Management</router-link
+                ><i class="fa fa-user-circle"></i>Assigned Staff
+                Evaluations</router-link
               >
             </li>
             <li>
               <router-link
-                to="/admin/appraisal"
+                to="/external-accessor/assigned-staff-evaluation"
                 class="text-[var(--pri-text)] font-[400] text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
-                ><i class="fa fa-file-text"></i> Appraisals
+                ><i class="fa fa-file-text"></i> Evaluation
               </router-link>
             </li>
-            <li>
-              <a
-                class="text-[var(--pri-text)] font-[400] text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
-                href="#"
-                ><i class="fa fa-bed"></i> Leave Management</a
-              >
-            </li>
-            <li>
-              <a
-                class="text-[var(--pri-text)] font-[400] text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
-                href="#"
-                ><i class="fa fa-award"></i> Promotions & Career Progression</a
-              >
-            </li>
-            <li>
-              <a
-                class="text-[var(--pri-text)] font-[400] text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
-                href="#"
-                ><i class="fa fa-calendar"></i> Retirement & Exit</a
-              >
-            </li>
+
             <li>
               <router-link
-                to="/admin/report-analysis"
+                to="/external-accessor/evaluation"
                 class="text-[var(--pri-text)] font-[400] text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
                 href="Report_Analysis.html"
                 ><i class="fa-solid fa-chart-column"></i>Reports &
@@ -114,10 +95,8 @@
             class="bg-[var(--pri-bg)] py-[25px] items-center px-[25px] w-[] top-0 flex justify-between"
           >
             <div class="w-[70%]">
-              <h2 class="bc mb-[7px]">Dashboard</h2>
-              <h5 class="sbc">
-                Your central hub for managing the staff cycle from entry to exit
-              </h5>
+              <h2 class="bc mb-[7px]">Welcome Back, Prof. John Adewale</h2>
+              <h5 class="sbc">External Assessor – University of Ghana</h5>
             </div>
             <div class="md:flex lg:flex items-center gap-[10px] hidden">
               <i class="fa fa-bell text-[var(--sec-text)]"></i>
@@ -167,199 +146,177 @@
           </div>
 
           <div
-            class="grid grid-cols-1 md:grid-cols-[1fr_2fr] lg:grid-cols-[1fr_2fr] gap-[25px]"
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[25px]"
           >
             <div
-              class="bg-[var(--twhite)] p-[12px] shadow-sm border border-slate-100 rounded-[20px] gap-[10px] flex flex-col justify-between"
+              class="bg-[var(--twhite)] p-[12px] shadow-sm border border-slate-100 rounded-[20px] gap-[10px] flex flex-col gap-[30px]"
             >
               <div
-                class="rounded-[40px] shadow bg-[rgba(17,27,73,1)] flex flex-col gap-[10px] py-[20px] px-[40px]"
+                class="rounded-[17px] shadow bg-[rgba(17,27,73,1)] flex flex-col gap-[20px] py-[20px] px-[20px]"
               >
                 <h4 class="text-[rgba(141,193,255,1)] mbs">
-                  Total Department Staff
+                  Pending Evaluations
                 </h4>
-                <div class="flex justify-between items-center gap-3">
+                <div class="flex justify-between items-center gap-[10px]">
                   <div class="balance">
                     <h2
-                      class="text-[rgba(255,255,255,1)] text-[34px] font-[700] leading-[120%] tracking-[-2%]"
+                      class="text-[rgba(255,255,255,1)] text-[14px] font-[500] leading-[120%] tracking-[-2%]"
                     >
-                      23,458
-                    </h2>
-                  </div>
-                  <div class="flex gap-3 items-center">
-                    <i class="fa fa-caret-up text-[rgba(14,253,193,1)]"></i>
-                    <span class="text-[rgba(14,253,193,1)]">+12</span>
-                  </div>
-                </div>
-              </div>
-              <div class="flex flex-col gap-[40px]">
-                <div class="flex justify-between items-center gap-[10px]">
-                  <div class="flex justify-between flex-col gap-2">
-                    <h2
-                      class="text-[var(--primary)] font-[600] text-[14px] leading-[120%] tracking-[-2%]"
-                    >
-                      Active Staffs
-                    </h2>
-                    <p
-                      class="text-[rgba(152,159,176,1)] font-[500] text-[10px] leading-[120%] tracking-[-2%]"
-                    >
-                      96.6%
-                    </p>
-                  </div>
-                  <div class="price">
-                    <h2
-                      class="text-[var(--primary)] font-[600] text-[14px] leading-[120%] tracking-[-2%]"
-                    >
-                      21,228
-                    </h2>
-                  </div>
-                </div>
-                <div class="flex justify-between items-center gap-[10px]">
-                  <div class="flex justify-between flex-col gap-2">
-                    <h2
-                      class="text-[var(--primary)] font-[600] text-[14px] leading-[120%] tracking-[-2%]"
-                    >
-                      Retired
-                    </h2>
-                    <p
-                      class="text-[rgba(152,159,176,1)] font-[500] text-[10px] leading-[120%] tracking-[-2%]"
-                    >
-                      3.4%
-                    </p>
-                  </div>
-                  <div class="price">
-                    <h2
-                      class="text-[var(--primary)] font-[600] text-[14px] leading-[120%] tracking-[-2%]"
-                    >
-                      2,220
-                    </h2>
-                  </div>
-                </div>
-                <div class="flex justify-between items-center gap-[10px]">
-                  <div class="flex justify-between flex-col gap-2">
-                    <h2
-                      class="text-[var(--primary)] font-[600] text-[14px] leading-[120%] tracking-[-2%]"
-                    >
-                      Academic Staffs
-                    </h2>
-                    <p
-                      class="text-[rgba(152,159,176,1)] font-[500] text-[10px] leading-[120%] tracking-[-2%]"
-                    >
-                      65.4%
-                    </p>
-                  </div>
-                  <div class="price">
-                    <h2
-                      class="text-[var(--primary)] font-[600] text-[14px] leading-[120%] tracking-[-2%]"
-                    >
-                      16,930
-                    </h2>
-                  </div>
-                </div>
-                <div class="flex justify-between items-center gap-[10px]">
-                  <div class="flex justify-between flex-col gap-2">
-                    <h2
-                      class="text-[var(--primary)] font-[600] text-[14px] leading-[120%] tracking-[-2%]"
-                    >
-                      Non-Academic
-                    </h2>
-                    <p
-                      class="text-[rgba(152,159,176,1)] font-[500] text-[10px] leading-[120%] tracking-[-2%]"
-                    >
-                      34.6%
-                    </p>
-                  </div>
-                  <div class="price">
-                    <h2
-                      class="text-[var(--primary)] font-[600] text-[14px] leading-[120%] tracking-[-2%]"
-                    >
-                      7,228
+                      5
                     </h2>
                   </div>
                 </div>
               </div>
-            </div>
-            <div
-              class="leave_category_distribution flex flex-col justify-between border bg-[rgba(255,255,255,1)] rounded-[20px]"
-            >
-              <div
-                class="top flex flex justify-between p-[20px] w-full gap-[10px] items-center"
-              >
-                <h2
-                  class="text-[rgba(27,37,89,1)] text-[20px] tracking-[-2%] leading-[120%] font-[700]"
-                >
-                  Appraisal Progress Overview
-                </h2>
+              <div class="flex flex-col justify-between gap-[30px] h-full">
                 <div
-                  class="flex leave_category_distribution switch_bar > border rounded-[6px] bg-[rgba(241,243,247,1)] px-[4px] py-[4px] gap-[6px] items-center"
+                  class="flex justify-between items-center justify-self-start"
                 >
-                  <button
-                    id="week"
-                    @click="updateChartData($event)"
-                    ref="btn1"
-                    class="active rounded-[4px] text-[rgba(30,30,30,1)] font-[400] text-[14px] px-[8px] py-[10px] leading-[20px] tracking-[0%]"
-                  >
-                    Week
-                  </button>
-                  <button
-                    id="month"
-                    @click="updateChartData($event)"
-                    ref="btn2"
-                    class="active rounded-[4px] text-[rgba(30,30,30,1)] font-[400] text-[14px] px-[8px] py-[10px] leading-[20px] tracking-[0%]"
-                  >
-                    Month
-                  </button>
-                  <button
-                    id="year"
-                    @click="updateChartData($event)"
-                    ref="btn3"
-                    class="active rounded-[4px] text-[rgba(30,30,30,1)] font-[400] text-[14px] px-[8px] py-[10px] leading-[20px] tracking-[0%]"
-                  >
-                    Year
-                  </button>
+                  <div class="flex justify-between flex-col gap-2">
+                    <h2
+                      class="text-[var(--primary)] font-[600] text-[14px] leading-[120%] tracking-[-2%]"
+                    >
+                      In Progress
+                    </h2>
+                    <p
+                      class="text-[rgba(152,159,176,1)] font-[500] text-[10px] leading-[120%] tracking-[-2%]"
+                    >
+                      You’ve opened these profiles but haven’t submitted yet.
+                    </p>
+                  </div>
+                  <div class="price">
+                    <h2
+                      class="text-[rgba(141,193,255,1)] font-[600] text-[12px] leading-[120%] tracking-[-2%]"
+                    >
+                      2
+                    </h2>
+                  </div>
+                </div>
+                <div class="flex justify-between items-center justify-self-end">
+                  <div class="flex justify-between flex-col gap-2">
+                    <h2
+                      class="text-[var(--primary)] font-[600] text-[14px] leading-[120%] tracking-[-2%]"
+                    >
+                      Completed Evaluations
+                    </h2>
+                    <p
+                      class="text-[rgba(152,159,176,1)] font-[500] text-[10px] leading-[120%] tracking-[-2%]"
+                    >
+                      You’ve submitted final assessments successfully.
+                    </p>
+                  </div>
+                  <div class="price">
+                    <h2
+                      class="text-[rgba(141,193,255,1)] font-[600] text-[12px] leading-[120%] tracking-[-2%]"
+                    >
+                      12
+                    </h2>
+                  </div>
                 </div>
               </div>
-              <apexchart
-                type="bar"
-                height="350"
-                :options="chartOptions"
-                :series="series"
-              />
             </div>
-          </div>
-
-          <!-- Quick Actions -->
-          <div class="quick_actions flex flex-col gap-[15px]">
-            <h2
-              class="text-[rgba(30,43,58,1)] font-[700] text-[16px] leading-[120%] tracking-[-2%]"
-            >
-              Quick Actions
-            </h2>
             <div
-              class="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 bg-white gap-[15px]"
+              class="bg-[var(--twhite)] p-[20px] shadow-sm border border-slate-100 rounded-[20px] gap-[10px] flex flex-col justify-between"
             >
-              <button
-                @click="OpenAddNewStaffModal"
-                class="flex items-center add_new_staff_ py-[15px] px-[40px] gap-[10px] rounded-[5px] bg-[rgba(35,136,255,1)] justify-center gap-5 text-[rgba(255,255,255,1)] font-[600] text-[14px] leading-[120%] tracking-[-2%]"
-              >
-                <i class="fa fa-user-plus text-[rgba(255,255,255,1)]"></i>
+              <div class="">
+                <h2
+                  class="text-[var(--primary)] font-[600] text-[20px] leading-[120%] tracking-[-2%]"
+                >
+                  Evaluations per Status
+                </h2>
+              </div>
+              <div id="chart" class="items-center flex flex-col">
+                <apexchart
+                  type="donut"
+                  height="250"
+                  :options="pieChartOptions"
+                  :series="pieSeries"
+                />
+              </div>
 
-                Add New Staff
-              </button>
-              <button
-                @click="OpenAppriasalModal1"
-                class="flex items-center appraisal_cycle_ py-[15px] px-[40px] gap-[10px] rounded-[5px] bg-[rgba(35,136,255,1)] justify-center gap-5 text-[rgba(255,255,255,1)] font-[600] text-[14px] leading-[120%] tracking-[-2%]"
-              >
-                <i class="fa fa-file-text text-[rgba(255,255,255,1)]"></i>
-                Open Appraisal
-              </button>
-              <button
-                @click="OpenGenerateModal"
-                class="flex generate_report_ items-center py-[15px] px-[40px] gap-[10px] rounded-[5px] bg-[rgba(35,136,255,1)] justify-center gap-5 text-[rgba(255,255,255,1)] font-[600] text-[14px] leading-[120%] tracking-[-2%]"
-              >
-                <i class="fas fa-file text-[rgba(255,255,255,1)]"></i>
-                Generate Report
-              </button>
+              <div class="flex flex-col gap-[10px]">
+                <div class="flex justify-between items-center gap-[10px]">
+                  <div
+                    class="flex justify-between gap-[10px] items-center w-full"
+                  >
+                    <div class="flex gap-4 items-center">
+                      <span
+                        class="w-[15px] block bg-[rgba(43,77,237,1)] h-[15px] rounded-full"
+                      ></span>
+                      <h2
+                        class="text-[rgba(35,136,255,1)] font-[500] text-[14px] leading-[100%] tracking-[-2%]"
+                      >
+                        Completed
+                      </h2>
+                    </div>
+                    <p
+                      class="text-[rgba(24,24,27,1)] font-[600] text-[16px] leading-[120%] tracking-[-2%]"
+                    >
+                      8
+                    </p>
+                  </div>
+                </div>
+                <div class="flex justify-between items-center gap-[10px]">
+                  <div
+                    class="flex justify-between gap-[10px] items-center w-full"
+                  >
+                    <div class="flex gap-4 items-center">
+                      <span
+                        class="w-[15px] block bg-[rgba(35,136,255,1)] h-[15px] rounded-full"
+                      ></span>
+                      <h2
+                        class="text-[rgba(35,136,255,1)] font-[500] text-[14px] leading-[100%] tracking-[-2%]"
+                      >
+                        Pending
+                      </h2>
+                    </div>
+                    <p
+                      class="text-[rgba(24,24,27,1)] font-[600] text-[16px] leading-[120%] tracking-[-2%]"
+                    >
+                      2
+                    </p>
+                  </div>
+                </div>
+                <div class="flex justify-between items-center gap-[10px]">
+                  <div
+                    class="flex justify-between gap-[10px] items-center w-full"
+                  >
+                    <div class="flex gap-4 items-center">
+                      <span
+                        class="w-[15px] block bg-[rgba(35,136,255,1)] h-[15px] rounded-full"
+                      ></span>
+                      <h2
+                        class="text-[rgba(35,136,255,1)] font-[500] text-[14px] leading-[100%] tracking-[-2%]"
+                      >
+                        In Progress
+                      </h2>
+                    </div>
+                    <p
+                      class="text-[rgba(24,24,27,1)] font-[600] text-[16px] leading-[120%] tracking-[-2%]"
+                    >
+                      3
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="bg-[var(--twhite)] p-[20px] shadow-sm border border-slate-100 rounded-[20px] gap-[10px] flex flex-col"
+            >
+              <div class="">
+                <h2
+                  class="text-[rgba(27,37,89,1)] mb-[10px] font-[700] text-[20px] leading-[120%] tracking-[-2%]"
+                >
+                  Faculty Distribution
+                </h2>
+              </div>
+              <div class="overview_metrics">
+                <apexchart
+                  type="bar"
+                  height="350"
+                  :options="verticalChartOptions"
+                  :series="series_1"
+                />
+              </div>
             </div>
           </div>
 
@@ -374,7 +331,7 @@
                 <h2
                   class="font-[700] text-[var(--sec-text)] w-[250px] text-[20px] leading-[120%] tracking-[-2%]"
                 >
-                  Upcoming Retirements
+                  Evaluation Summary
                 </h2>
                 <div class="relative w-[50%]">
                   <div class="h-full absolute left-[10px] flex items-center">
@@ -391,32 +348,6 @@
                   />
                 </div>
               </div>
-              <div
-                class="right flex items-center gap-[1px] w-[50%] flex-wrap lg:flex-nowrap md:flex-nowrap"
-              >
-                <n-select
-                  name="date"
-                  id="date"
-                  v-model:value="form.units"
-                  :options="dates"
-                  clearable
-                  :bordered="true"
-                  placeholder="Date"
-                  class="cursor-pointer rounded-[10px] outline-none py-[11px]"
-                >
-                </n-select>
-                <n-select
-                  v-model:value="form.units"
-                  :options="years_of_services"
-                  clearable
-                  :bordered="true"
-                  name="years_of_service"
-                  id="years_of_service"
-                  placeholder="Year of service"
-                  class="cursor-pointer rounded-[10px] outline-none py-[11px]"
-                >
-                </n-select>
-              </div>
             </div>
             <div class="w-full overflow-hidden mt-3">
               <div class="overflow-x-auto">
@@ -431,84 +362,106 @@
             </div>
           </form>
         </div>
-        <form action="#" class="modals" @submit.prevent="">
-          <AddNewStaff
-            :show2
-            @CloseModalForAddNewStaff="CloseAddNewStaffModal"
-          />
-          <OpenAppraisal1
-            :show1
-            @CloseModalForOpenAppriasal2="CloseAppriasalModal2"
-            @CloseModalForOpenAppriasal1="CloseAppriasalModal1"
-            @OpenAppraisalModal2="OpenAppriasalModal2"
-          />
-          <OpenAppraisal2
-            :show4
-            @CloseModalForOpenAppriasal2="CloseAppriasalModal2"
-          />
-
-          <GenerateReport
-            :show3
-            @CloseModalForGenerateReport="CloseGenerateModal"
-          />
-        </form>
+        <form action="#" class="modals" @submit.prevent=""></form>
       </main>
     </div>
   </div>
 </template>
 <script setup>
-import { ref, reactive, onMounted } from "vue";
-import OpenAppraisal1 from "@/components/AdminComponents/OpenAppraisal1.vue";
-import OpenAppraisal2 from "@/components/AdminComponents/OpenAppraisal2.vue";
-import GenerateReport from "@/components/AdminComponents/GenerateReport.vue";
-import AddNewStaff from "@/components/AdminComponents/AddNewStaff.vue";
-import Orbit from "@/assets/imgs/Orbit.png";
+import { ref, reactive, computed } from "vue";
 
 const form = reactive({
   date: null,
+  search: null,
   year_of_services: null,
 });
+// Pie Chart
+const pieSeries = ref([65, 58, 90]);
+const labels = ref(["Completed", "Pending", "In Progress"]);
+const colors = ["rgba(43,7,237,1)", "rgba(35,136,255,1)", "rgba(6,108,229,1)"];
 
-const years_of_services = reactive([
-  { label: "0-5 years", value: "0-5 years" },
-  { label: "5-7 years", value: "5-7 years" },
-  { label: "0-5 years", value: "0-5 years" },
+const pieChartOptions = computed(() => ({
+  chart: {
+    type: "donut",
+    toolbar: { show: true },
+    animations: { enabled: true },
+    events: {
+      // Example: click on a slice
+      dataPointSelection: (event, chartContext, config) => {
+        const idx = config.dataPointIndex;
+        const label = labels.value[idx];
+        const value = pieSeries.value[idx];
+        // You can emit or handle this event as needed
+        // console.log('Slice clicked:', { label, value })
+      },
+    },
+  },
+  labels: labels.value,
+  colors,
+  legend: { show: false },
+  responsive: [
+    {
+      breakpoint: 768,
+      options: {
+        chart: { width: "100%" },
+        legend: { position: "bottom" },
+      },
+    },
+    {
+      breakpoint: 1024,
+      options: {
+        chart: { width: 380 },
+      },
+    },
+  ],
+  tooltip: {
+    y: {
+      formatter: (val) => `${val}`, // format value text
+    },
+  },
+  plotOptions: {
+    pie: {
+      expandOnClick: true,
+      donut: {
+        size: "58%",
+        labels: {
+          show: false,
+        },
+      },
+    },
+  },
+}));
+const series_1 = ref([
+  {
+    name: "Average Years-in-Rank",
+    data: [64, 64, 76, 78, 70, 70, 50, 55],
+  },
 ]);
-const dates = reactive([
-  { label: "22-02-2024", value: "22-02-2024" },
-  { label: "22-02-2024", value: "22-02-2024" },
-  { label: "22-02-2024", value: "22-02-2024" },
-]);
-// Show Modals
-const show1 = ref(false);
-const show2 = ref(false);
-const show3 = ref(false);
-const show4 = ref(false);
-function CloseAppriasalModal1() {
-  show1.value = false;
-}
-function OpenAppriasalModal1() {
-  show1.value = true;
-}
-function CloseAppriasalModal2() {
-  show4.value = false;
-}
-function OpenAppriasalModal2() {
-  show4.value = true;
-  console.log(show4.value);
-}
-function CloseAddNewStaffModal() {
-  show2.value = false;
-}
-function OpenAddNewStaffModal() {
-  show2.value = true;
-}
-function CloseGenerateModal() {
-  show3.value = false;
-}
-function OpenGenerateModal() {
-  show3.value = true;
-}
+
+const verticalChartOptions = ref({
+  chart: {
+    id: "vue-chart",
+  },
+  xaxis: {
+    categories: [
+      "Arts",
+      "Agriculture",
+      "Biosciences",
+      "Bus. Admin",
+      "Education",
+      "Engineering",
+      "Env. Science",
+      "Phy. Science",
+    ],
+  },
+  colors: ["#2388ff"],
+  plotOptions: {
+    bar: {
+      horizontal: true,
+    },
+  },
+});
+
 const toggleState = ref(false);
 const toggleSideBar = () => {
   toggleState.value = !toggleState.value;
@@ -534,12 +487,6 @@ const DataSets = reactive({
   month: [45, 55, 65, 40, 60, 20, 40, 65],
   year: [25, 35, 50, 20, 40, 65, 40, 60],
 });
-onMounted(() => {
-  btns.value[0].value.classList.add("bg-[rgba(35,136,255,1)]");
-  btns.value[0].value.classList.add("text-[rgba(247,249,250,1)]");
-  btns.value[0].value.classList.remove("text-[rgba(30,30,30,1)]");
-  series.value[0].data = DataSets["week"];
-});
 const currentDataset = ref("week");
 function updateChartData(event) {
   console.log(event.target.id);
@@ -549,13 +496,10 @@ function updateChartData(event) {
       series.value[0].data = DataSets[x];
       event.target.classList.add("bg-[rgba(35,136,255,1)]");
       event.target.classList.add("text-[rgba(247,249,250,1)]");
-      event.target.classList.remove("text-[rgba(30,30,30,1)]");
       btns.value.forEach((button) => {
         if (button.value.id !== event.target.id) {
           button.value.classList.remove("bg-[rgba(35,136,255,1)]");
           button.value.classList.remove("text-[rgba(247,249,250,1)]");
-          button.value.classList.add("text-[rgba(30,30,30,1)]");
-
           console.log(button.value);
         }
       });
@@ -584,11 +528,13 @@ const chartOptions = ref({
   colors: ["#2388ff"],
 });
 
+import Orbit from "@/assets/imgs/Orbit.png";
+
 // Define table columns
 const columns = [
   {
-    title: "Name",
-    key: "name",
+    title: "Staff",
+    key: "staff",
     render(row) {
       return h(
         "a",
@@ -601,8 +547,8 @@ const columns = [
     },
   },
   { title: "Department ", key: "department " },
-  { title: "Years of Service ", key: "years_of_service " },
-  { title: "Retirement Date", key: "retirement_date" },
+  { title: "Rank Applied ", key: "rank_applied " },
+  { title: "Last Updated", key: "last_updated" },
   {
     title: "Status ",
     key: "status ",

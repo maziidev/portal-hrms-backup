@@ -16,7 +16,7 @@
         >
           <div class="">
             <li
-              class="text-[rgba(14,253,193,1)] font-[700] text-[20px] flex gap-2 items-center text-[16px] tracking-[-2%] leading-[120%]"
+              class="text-[rgba(14,253,193,1)] font-[700] text-[20px] flex gap-2 items-center tracking-[-2%] leading-[120%]"
             >
               Orbit <img :src="Orbit" />
             </li>
@@ -24,38 +24,39 @@
           <div class="flex flex-col gap-[25px]">
             <li>
               <router-link
-                to="/admin"
-                class="text-[var(--pri-text)] font-[400] flex gap-2 items-center text-[16px] tracking-[-2%] leading-[120%]"
+                to="/dap"
+                class="text-[var(--pri-text)] cursor-pointer font-[400] flex gap-2 items-center text-[16px] tracking-[-2%] leading-[120%]"
                 ><i class="fa fa-th-large"></i>Dashboard</router-link
               >
             </li>
             <li>
               <router-link
-                to="/admin/staff-managment"
-                class="text-[rgba(14,253,193,1)] font-[700] text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
-                ><i class="fa fa-user-circle"></i>Staff Management</router-link
+                to="/dap/staff-records"
+                class="text-[var(--pri-text)] cursor-pointer font-[400] text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
+                ><i class="fa fa-user-circle"></i>Staff Records</router-link
               >
             </li>
             <li>
               <router-link
-                to="/admin/appraisal"
+                to="/dap/appraisal-management"
                 class="text-[var(--pri-text)] font-[400] text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
-                ><i class="fa fa-user-circle"></i>Appraisals</router-link
-              >
-            </li>
-
-            <li>
-              <a
-                class="text-[var(--pri-text)] font-[400] text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
-                href="#"
-                ><i class="fa fa-bed"></i> Leave Management</a
-              >
+                ><i class="fa fa-file-text"></i> Appraisals Management
+              </router-link>
             </li>
             <li>
-              <a
+              <router-link
+                to="/dap/leave-analytics"
+                class="text-[rgba(14,253,193,1)] font-[700] text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
+                ><i class="fa fa-bed"></i> Leave Analytics</router-link
+              >
+            </li>
+            <li>
+              <router-link
+                to="/dap/promotion-career-progression"
                 class="text-[var(--pri-text)] font-[400] text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
                 href="#"
-                ><i class="fa fa-award"></i> Promotions & Career Progression</a
+                ><i class="fa fa-award"></i> Promotions & Career
+                Progression</router-link
               >
             </li>
             <li>
@@ -67,9 +68,8 @@
             </li>
             <li>
               <router-link
-                to="/admin/report-analysis"
+                to="/hod/report-analysis"
                 class="text-[var(--pri-text)] font-[400] text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
-                href="Report_Analysis.html"
                 ><i class="fa-solid fa-chart-column"></i>Reports &
                 Analytics</router-link
               >
@@ -114,8 +114,11 @@
           <header
             class="bg-[var(--pri-bg)] py-[25px] items-center px-[25px] w-[] top-0 flex justify-between"
           >
-            <div class="w-[70%]">
-              <h2 class="bc mb-[7px]">Staff Records</h2>
+            <div class="flex items-center gap-[10px]">
+              <span
+                class="text-[rgba(20,21,15,1)] text-[24px] leading-[120%] tracking-[0%] font-[700]"
+                >Leave Analysis</span
+              >
             </div>
             <div class="md:flex lg:flex items-center gap-[10px] hidden">
               <i class="fa fa-bell text-[var(--sec-text)]"></i>
@@ -164,114 +167,76 @@
               </div>
             </button>
           </div>
-
-          <!-- All Staff Directory -->
-          <div
-            class="quick_actions flex justify-between flex-wrap lg:flex-nowrap md:flex-nowrap items-center gap-[15px]"
-          >
+          <form class="w-full mb-5">
             <div
-              class="flex items-center gap-[20px] flex-wrap lg:flex-nowrap md:flex-nowrap"
+              class="top flex justify-between w-full items-center flex-wrap md:flex-nowrap gap-[10px]"
             >
-              <h2
-                class="text-[rgba(30,43,58,1)] font-[700] text-[16px] leading-[120%] tracking-[-2%]"
+              <div
+                class="left flex flex-wrap md:flex-nowrap lg:flex-nowrap items-center w-full md:w-[50%] lg:w-[50%] gap-[10px]"
               >
-                All Staff Directory
-              </h2>
-              <div class="flex items-center gap-3">
-                <span
-                  class="ml-3 ai_suggestion text-[14px] font-[500] leading-[120%] tracking-[0.2%] text-[rgba(30,30,30,1)]"
+                <h2
+                  class="font-[700] text-[var(--sec-text)] w-[170px] text-[20px] leading-[120%] tracking-[-2%]"
                 >
-                  Group by Department/Unit
-                </span>
-                <label class="relative inline-flex items-center cursor-pointer">
-                  <n-switch
-                    v-model:value="data.is_active"
-                    class="text-white h-full rounded-full p-2"
-                  >
-                  </n-switch>
-                </label>
-              </div>
-            </div>
-            <div
-              class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 items-center gap-[20px]"
-            >
-              <button
-                class="text-[rgba(255,255,255,1)] px-[40px] py-[10px] font-[600] text-[16px] flex gap-[10px] items-center leading-[120%] tracking-[-2%] rounded-[5px] bg-[rgba(35,136,255,1)] border-2 border-[rgba(35,136,255,1)]"
-              >
-                <i class="fas fa-user-plus"></i> Add New Staff
-              </button>
-              <button
-                href=""
-                download="download"
-                class="text-[rgba(35,136,255,1)] bulk_upload_ px-[40px] py-[10px] font-[600] text-[16px] flex gap-[10px] items-center leading-[120%] tracking-[-2%] rounded-[5px] border-2 border-[rgba(35,136,255,1)]"
-              >
-                <i class="fas fa-file-import fa-flip-horizontal"></i> import
-                staff records
-              </button>
-            </div>
-          </div>
-
-          <form class="all_staff_directory w-full">
-            <div
-              class="top flex flex-wrap lg:flex-nowrap md:flex-nowrap justify-between gap-[20px] items-center"
-            >
-              <div class="left flex items-center md:w-[50%] gap-[15px]">
-                <div class="relative h-[40px] w-full">
+                  Leave Requests
+                </h2>
+                <div class="relative w-[50%]">
                   <div class="h-full absolute left-[10px] flex items-center">
                     <i class="fa text-[rgba(107,114,128,1)] fa-search"></i>
                   </div>
                   <n-input
                     type="search"
                     name="search"
-                    placeholder="by Name/Staff ID/Email/Unit"
+                    placeholder="Search by name or  ID"
                     id="search"
                     :bordered="false"
-                    class="search outline-none w-full lg:w-[50%] border rounded-[6px] border-[rgba(229,231,235,1)]"
+                    v-model:value="form.search"
+                    class="search w-full border outline-none rounded-[5px] border-[rgba(229,231,235,1)]"
                   />
                 </div>
               </div>
               <div
-                class="right grid grid-cols-1 w-full items-center gap-[15px] flex-wrap lg:grid-cols-4 md:grid-cols-4"
+                class="right grid grid-cols-3 gap-[20px] md:w-[50%] w-full lg:grid-cols-3 md:grid-cols-3"
               >
                 <n-select
-                  :options="unitOptions"
+                  name="leave_type"
+                  id="leave_type"
+                  v-model:value="form.leave_type"
+                  :options="leaveTypes"
                   clearable
-                  v-model:value="data.department"
-                  name="department_unit"
-                  id="department_unit"
+                  :bordered="true"
+                  placeholder="Leave Type"
                   class="cursor-pointer rounded-[10px] outline-none"
                 >
                 </n-select>
                 <n-select
+                  v-model:value="form.month_year"
+                  :options="monthYearOptions"
                   clearable
-                  v-model:value="data.employment_type"
-                  name="employment_type"
-                  id="employment_type"
-                  class="cursor-pointer rounded-[10px] outline-none"
-                >
-                </n-select>
-
-                <n-select
-                  clearable
-                  v-model:value="data.status"
+                  :bordered="true"
                   name="status"
                   id="status"
+                  placeholder="Month / Year"
                   class="cursor-pointer rounded-[10px] outline-none"
                 >
                 </n-select>
-                <n-date-picker
-                  v-model:value="data.date"
-                  type="date"
-                  placeholder="DD-MM-YYYY"
-                  :bordered="false"
-                  class="custom-select border"
-                />
+                <n-select
+                  v-model:value="form.status"
+                  :options="Status"
+                  clearable
+                  :bordered="true"
+                  name="status"
+                  id="status"
+                  placeholder="Status"
+                  class="cursor-pointer rounded-[10px] outline-none"
+                >
+                </n-select>
               </div>
             </div>
             <div class="w-full overflow-hidden mt-3">
               <div class="overflow-x-auto">
                 <n-data-table
                   :columns="columns"
+                  :data="data"
                   :loading="loading"
                   :bordered="false"
                   :scroll-x="1200"
@@ -281,120 +246,86 @@
             </div>
           </form>
         </div>
-        <form action="#" class="modals" @submit.prevent="">
-          <AddNewStaff
-            :show2
-            @CloseModalForAddNewStaff="CloseAddNewStaffModal"
-          />
-          <OpenAppraisal1
-            :show1
-            @CloseModalForOpenAppriasal2="CloseAppriasalModal2"
-            @CloseModalForOpenAppriasal1="CloseAppriasalModal1"
-            @OpenAppraisalModal2="OpenAppriasalModal2"
-          />
-          <OpenAppraisal2
-            :show4
-            @CloseModalForOpenAppriasal2="CloseAppriasalModal2"
-          />
-
-          <GenerateReport
-            :show3
-            @CloseModalForGenerateReport="CloseGenerateModal"
-          />
-        </form>
+        <form action="#" class="modals" @submit.prevent=""></form>
       </main>
     </div>
   </div>
 </template>
 <script setup>
-import { ref, reactive } from "vue";
-import OpenAppraisal1 from "@/components/AdminComponents/OpenAppraisal1.vue";
-import OpenAppraisal2 from "@/components/AdminComponents/OpenAppraisal2.vue";
-import GenerateReport from "@/components/AdminComponents/GenerateReport.vue";
-import AddNewStaff from "@/components/AdminComponents/AddNewStaff.vue";
+import { ref, reactive, h, computed, onMounted } from "vue";
+import { useRouter, useRoute } from "vue-router";
 import Orbit from "@/assets/imgs/Orbit.png";
 
-const data = reactive({
-  department_unit: null,
-  employment_type: null,
+const route = useRoute();
+const { id } = defineProps({
+  id: {
+    type: String,
+  },
+});
+const router = useRouter();
+const form = reactive({
   status: null,
   date: null,
   is_active: false,
+  leaveType: null,
+  faculty: null,
+  search: "",
 });
+let Status = reactive([
+  {
+    label: "Status One",
+    value: "Status One",
+  },
+]);
+let leaveTypes = reactive([
+  {
+    label: "Annual leave",
+    value: "Annual leave",
+  },
+]);
+let monthYearOptions = reactive([
+  {
+    label: "Month Year Option",
+    value: "Month Year Option",
+  },
+]);
 const activeState = ref(null);
+
+const btns = reactive([
+  { name: "Pending Leave Requests", value: 4 },
+  { name: "Approved This Month", value: 4 },
+  { name: "Rejected Applications", value: 24 },
+  { name: "Upcoming Leave Dates", value: 4 },
+]);
+
+onMounted(() => {
+  activeState.value = btns[0].name;
+});
 
 function isActive(id) {
   activeState.value = id;
-  console.log(id);
+  // console.log(id);
 }
-const btns = reactive([
-  { name: "Active Staff", value: 20300 },
-  { name: "On Probation", value: 20560 },
-  { name: "On Study Leave", value: 20300 },
-  { name: "Retired", value: 10300 },
-]);
-const unitOptions = [
-  { label: "HR", value: "hr" },
-  { label: "IT", value: "it" },
-  { label: "Finance", value: "finance" },
-];
 
-// Show Modals
-const show1 = ref(false);
-const show2 = ref(false);
-const show3 = ref(false);
-const show4 = ref(false);
-function CloseAppriasalModal1() {
-  show1.value = false;
-}
-function OpenAppriasalModal1() {
-  show1.value = true;
-}
-function CloseAppriasalModal2() {
-  show4.value = false;
-}
-function OpenAppriasalModal2() {
-  show4.value = true;
-  console.log(show4.value);
-}
-function CloseAddNewStaffModal() {
-  show2.value = false;
-}
-function OpenAddNewStaffModal() {
-  show2.value = true;
-}
-function CloseGenerateModal() {
-  show3.value = false;
-}
-function OpenGenerateModal() {
-  show3.value = true;
-}
+// isActive(btns[0].name);
+
 const toggleState = ref(false);
 const toggleSideBar = () => {
   toggleState.value = !toggleState.value;
 };
 
-// Define table columns
 const columns = [
   {
-    title: "Staff ID",
+    title: "Staff ID  ",
     key: "staff_id",
-    render(row) {
-      return h(
-        "a",
-        {
-          class: "text-blue-600 hover:underline font-semibold cursor-pointer",
-          onClick: () => router.push(`/home/edit/${row.id}`),
-        },
-        row.id
-      );
-    },
   },
-  { title: "Name  ", key: "name " },
-  { title: "Faculty/Unit", key: "Faculty/Unit" },
-  { title: "Department ", key: "department " },
-  { title: "Designation ", key: "designation " },
-  { title: "Employment Date  ", key: "employment_date  " },
+  { title: "Name", key: "name" },
+  { title: "Department", key: "department" },
+  { title: "Leave Type ", key: "leave_type" },
+  { title: "Start Date", key: "start_date" },
+  { title: "End Date", key: "end_date" },
+  { title: "Duration ", key: "duration " },
+
   {
     title: "Status ",
     key: "status ",
@@ -402,24 +333,12 @@ const columns = [
       return h(
         "span",
         {
-          style: {
-            color: row.is_active
-              ? "text-[rgba(251,188,4,1)]"
-              : row.is_active == "Due in 12 mo"
-              ? "red"
-              : "blue",
-            fontWeight: "700",
-            backgroundColor: row.is_active
-              ? "bg-[rgba(234,67,53,0.2)]"
-              : row.is_active == "Due in 12 mo"
-              ? "bg-[rgba(251,188,4,0.2)]"
-              : "bg-[rgba(58,151,76,0.15)]",
-            fontSize: "14px",
-            padding: "10px 20px",
-            borderRadius: "22.5px",
-            lineHeight: "100%",
-            wordSpacing: "0%",
-          },
+          style:
+            row.is_active == "Approved"
+              ? "rounded-[22.5px] text-[rgba(58,151,76,1)] px font-[700] text-[14px] leading-[100%] tracking-[0%] px-[20px] py-[10px] bg-[rgba(58,151,76,0.15)] w-[120px]"
+              : row.is_active == "Active"
+              ? "rounded-[22.5px] text-[rgba(35,136,255,1)] px font-[700] text-[14px] leading-[100%] tracking-[0%] px-[20px] py-[10px] bg-[rgba(78,159,255,0.2)] w-[120px]"
+              : "rounded-[22.5px] text-[rgba(251,188,4,1)] px font-[700] text-[14px] leading-[100%] tracking-[0%] px-[20px] py-[10px] bg-[rgba(251,188,4,0.25)]",
         },
         row.is_active
       );

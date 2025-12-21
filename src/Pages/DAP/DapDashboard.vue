@@ -40,7 +40,7 @@
               <router-link
                 to="/dap/appraisal-management"
                 class="text-[var(--pri-text)] font-[400] text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
-                ><i class="fa fa-file-text"></i> Appraisals
+                ><i class="fa fa-file-text"></i> Appraisals Management
               </router-link>
             </li>
             <li>

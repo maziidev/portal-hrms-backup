@@ -335,7 +335,7 @@
               >Staff Records <i class="fa fa-caret-down"></i
             ></router-link>
             <router-link
-              to="/dap/appraisal"
+              to="/dap/appraisal-management"
               class="text-[rgba(30,30,30,1)] text-[16px] font-[700] leading-[100%] tracking-[0%]"
               >Appraisals</router-link
             >

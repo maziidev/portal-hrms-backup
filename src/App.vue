@@ -5,7 +5,7 @@ import { RouterView } from "vue-router";
 
 <template>
   <n-message-provider>
-    <RouterView> </RouterView>
+     <RouterView> </RouterView>
   </n-message-provider>
 </template>
 

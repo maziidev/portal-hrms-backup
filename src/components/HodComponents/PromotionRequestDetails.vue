@@ -13,7 +13,7 @@
       class="promotion_request_details"
     >
       <div class="flex justify-between items-center gap-[10px]">
-        <div class="flex flex-col gap-[10px] gap-[10px]">
+        <div class="flex flex-col gap-[10px]">
           <h2
             class="text-[rgba(24,24,27,1)] font-[700] leading-[100%] tracking-[0%] text-[20px]"
           >
@@ -77,14 +77,15 @@
         </div>
       </div>
       <div class="flex my-[40px] items-center gap-2">
-        <a href="#" class="session back  flex items-center gap-[10px]">
+        <a href="#" class="session back flex items-center gap-[10px]">
           <i class="fas fa-chevron-left"></i>
 
           <button
             @click="Previous"
             class="rgba(107,114,128,1) font-[400] text-[14px] leading-[100%] tracking-[0%]"
-            >Back</button
           >
+            Back
+          </button>
         </a>
         <span
           class="text-[rgba(20,21,15,1)] text-[20px] leading-[120%] tracking-[0%] font-[700]"

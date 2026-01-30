@@ -8,19 +8,17 @@
     </button>
     <div class="dashboard w-full min-h-screen">
       <div class=" ">
-        <aside
+        <SiderBar
           :class="[
             `{ w-[268px] sidebar z-[3000] transition-all duration-100 ease-in-out  fixed top-0 left-0 h-screen md:flex lg:flex px-[35px] flex flex-col gap-[67px] py-[45px] bg-[var(--primary)]`,
             !toggleState ? `hidden` : `md:flex lg:flex`,
           ]"
         >
-          <div class="">
-            <li
-              class="text-[rgba(14,253,193,1)] font-[700] text-[20px] flex gap-2 items-center text-[16px] tracking-[-2%] leading-[120%]"
-            >
-              Orbit <img :src="Orbit" />
-            </li>
-          </div>
+          <li
+            class="text-[rgba(14,253,193,1)] font-[700] text-[20px] flex gap-2 items-center text-[16px] tracking-[-2%] leading-[120%]"
+          >
+            Orbit <img :src="Orbit" />
+          </li>
           <div class="flex flex-col gap-[25px]">
             <li>
               <router-link
@@ -49,7 +47,6 @@
               <router-link
                 to="/external-accessor/evaluation"
                 class="text-[var(--pri-text)] font-[400] text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
-                href="Report_Analysis.html"
                 ><i class="fa-solid fa-chart-column"></i>Reports &
                 Analytics</router-link
               >
@@ -58,10 +55,10 @@
 
           <div class="flex flex-col gap-[25px]">
             <li>
-              <a
+              <router-link
                 class="text-[var(--pri-text)] flex items-center gap-2 font-[400] text-[16px] tracking-[-2%] leading-[120%]"
                 href="#"
-                ><i class="fa fa-gear"></i> Settings</a
+                ><i class="fa fa-gear"></i> Settings</router-link
               >
             </li>
             <li>
@@ -83,11 +80,11 @@
                 <i class="fa fa-user text-xl text-[var(--pri-text)]"></i>
               </div>
               <div class="user-id mbc text-[var(--pri-text)] break-words">
-                Nnamdichuzu@edu.EU.ng
+                {{ user?.name || "Nnamdichuzu@edu.EU.ng" }}
               </div>
             </li>
           </div>
-        </aside>
+        </SiderBar>
       </div>
       <main class="lg:ml-[270px] md:ml-[270px] ml-[0px] min-w-screen relative">
         <div class="header">
@@ -109,42 +106,7 @@
         </div>
 
         <div class="main px-[25px] mt-[50px] flex flex-col gap-[40px]">
-          <div class="">
-            <div
-              class="flex justify-between gap-[20px] flex-wrap md:flex-nowrap"
-            >
-              <div class="session flex items-center gap-[10px]">
-                <div class="session">
-                  <!-- Calendar with more details -->
-
-                  <i class="fas fa-calendar-alt"></i>
-                </div>
-                <div class="s16">Session</div>
-                <div class="date mbc">2024/2025</div>
-              </div>
-              <div class="semester flex items-center gap-[10px]">
-                <div class="session">
-                  <!-- Calendar with more details -->
-
-                  <i class="fas fa-calendar-alt"></i>
-                </div>
-                <div class="s16">Semester</div>
-                <div class="date mbc">First</div>
-              </div>
-              <div class="semester flex items-center gap-[10px]">
-                <div class="session">
-                  <!-- Calendar with more details -->
-
-                  <i class="fas fa-calendar-alt"></i>
-                </div>
-                <div class="s16">28th September 2025</div>
-                <div class="date mbc flex items-center gap-5">
-                  <i class="fa fa-clock"></i><span>6:45 AM</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
+          <SessionSemesterDate />
           <div
             class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[25px]"
           >
@@ -369,7 +331,12 @@
 </template>
 <script setup>
 import { ref, reactive, computed } from "vue";
+import SessionSemesterDate from "@/components/General/SessionSemesterDate.vue";
+import SiderBar from "@/components/General/SiderBar.vue";
+import { useAuthStore } from "@/store/auth.js";
 
+const store = useAuthStore();
+const user = store.user;
 const form = reactive({
   date: null,
   search: null,

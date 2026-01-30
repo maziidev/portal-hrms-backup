@@ -615,11 +615,12 @@
   </div>
 </template>
 <script setup>
-import { ref, reactive, h } from "vue";
+import { ref, reactive, h, onMounted } from "vue";
 import OpenAppraisal1 from "@/components/AdminComponents/OpenAppraisal1.vue";
 import OpenAppraisal2 from "@/components/AdminComponents/OpenAppraisal2.vue";
 import GenerateReport from "@/components/AdminComponents/GenerateReport.vue";
 import AddNewStaff from "@/components/AdminComponents/AddNewStaff.vue";
+import Orbit from "@/assets/imgs/Orbit.png";
 
 const form = reactive({
   department: null,
@@ -749,6 +750,8 @@ function updateChartData(event) {
       series.value[0].data = DataSets[x];
       event.target.classList.add("bg-[rgba(35,136,255,1)]");
       event.target.classList.add("text-[rgba(247,249,250,1)]");
+      event.target.classList.remove("text-[rgba(30,30,30,1)]");
+
       btns.value.forEach((button) => {
         if (button.value.id !== event.target.id) {
           button.value.classList.remove("bg-[rgba(35,136,255,1)]");
@@ -781,7 +784,12 @@ const chartOptions = ref({
   colors: ["#2388ff"],
 });
 
-import Orbit from "@/assets/imgs/Orbit.png";
+onMounted(() => {
+  updateChartData({ target: btn1.value });
+  btn1.value.classList.add("bg-[rgba(35,136,255,1)]");
+  btn1.value.classList.add("text-[rgba(247,249,250,1)]");
+  btn1.value.classList.remove("text-[rgba(30,30,30,1)]");
+});
 
 // Define table columns
 const draftedTableColums = [

@@ -37,31 +37,31 @@
               >
             </li>
             <li>
-              <a
+              <router-link
                 class="text-[var(--pri-text)] font-[400] text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
-                href="Appraisals.html"
+                to="/admin/appraisal"
                 ><i class="fa fa-file-text"></i> Appraisals
-              </a>
+              </router-link>
             </li>
             <li>
-              <a
+              <router-link
                 class="text-[var(--pri-text)] font-[400] text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
                 href="#"
-                ><i class="fa fa-bed"></i> Leave Management</a
+                ><i class="fa fa-bed"></i> Leave Management</router-link
               >
             </li>
             <li>
-              <a
+              <router-link to="/admin/promotion-career-progression"
                 class="text-[var(--pri-text)] font-[400] text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
                 href="#"
-                ><i class="fa fa-award"></i> Promotions & Career Progression</a
+                ><i class="fa fa-award"></i> Promotions & Career Progression</router-link
               >
             </li>
             <li>
-              <a
+              <router-link to="/admin/retirement-exit"
                 class="text-[var(--pri-text)] font-[400] text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
                 href="#"
-                ><i class="fa fa-calendar"></i> Retirement & Exit</a
+                ><i class="fa fa-calendar"></i> Retirement & Exit</router-link
               >
             </li>
             <li>
@@ -77,10 +77,10 @@
 
           <div class="flex flex-col gap-[25px]">
             <li>
-              <a
+              <router-link to="/admin/settings"
                 class="text-[var(--pri-text)] flex items-center gap-2 font-[400] text-[16px] tracking-[-2%] leading-[120%]"
                 href="#"
-                ><i class="fa fa-gear"></i> Settings</a
+                ><i class="fa fa-gear"></i> Settings</router-link
               >
             </li>
             <li>
@@ -402,7 +402,7 @@
                 </router-link>
               </div>
               <div
-                class="right flex items-center gap-[1px] w-[50%] flex-wrap lg:flex-nowrap md:flex-nowrap"
+                class="right flex items-center gap-3 w-[50%] flex-wrap lg:flex-nowrap md:flex-nowrap"
               >
                 <n-select
                   name="date"
@@ -420,7 +420,7 @@
                   type="date"
                   placeholder="Select a date"
                   :bordered="false"
-                  class="custom-select w-full border"
+                  class="custom-select w-full border cursor-pointer"
                 />
               </div>
             </div>
@@ -443,7 +443,7 @@
   </div>
 </template>
 <script setup>
-import { ref, reactive, watch, computed, h } from "vue";
+import { ref, reactive, watch, computed, h, onMounted } from "vue";
 import Orbit from "@/assets/imgs/Orbit.png";
 
 const years = reactive([
@@ -566,6 +566,7 @@ function updateChartData(event) {
       series.value[0].data = DataSets[x];
       event.target.classList.add("bg-[rgba(35,136,255,1)]");
       event.target.classList.add("text-[rgba(247,249,250,1)]");
+      event.target.classList.remove("text-[rgba(30,30,30,1)]");
       btns.value.forEach((button) => {
         if (button.value.id !== event.target.id) {
           button.value.classList.remove("bg-[rgba(35,136,255,1)]");
@@ -640,7 +641,13 @@ watch(
     series_1.value[0].data = verticalChartDataSets[newVal];
   }
 );
-function updateVerticalChartData() {}
+
+onMounted(() => {
+  updateChartData({ target: btn1.value });
+  btn1.value.classList.add("bg-[rgba(35,136,255,1)]");
+  btn1.value.classList.add("text-[rgba(247,249,250,1)]");
+  btn1.value.classList.remove("text-[rgba(30,30,30,1)]");
+});
 
 // Define table columns
 const columns = [

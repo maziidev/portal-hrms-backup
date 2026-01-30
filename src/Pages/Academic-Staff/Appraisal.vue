@@ -40,7 +40,7 @@
             <li>
               <router-link
                 to="/academic-staff/appraisal"
-                class="text-[rgba(14,253,193,1)]  font-[700] text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
+                class="text-[rgba(14,253,193,1)] font-[700] text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
                 ><i class="fa fa-file-text"></i> Appraisals
               </router-link>
             </li>
@@ -112,10 +112,8 @@
         </aside>
       </div>
       <main class="lg:ml-[270px] md:ml-[270px] ml-[0px] min-w-screen relative">
-        <div class="header">
-          <header
-            class="bg-[var(--pri-bg)] py-[25px] items-center px-[25px] w-[] top-0 flex justify-between"
-          >
+        <Header>
+          <template #left>
             <div class="w-[70%]">
               <h2 class="bc mb-[7px]">Research & Publications</h2>
               <h5 class="sbc">
@@ -123,6 +121,8 @@
                 current cycle
               </h5>
             </div>
+          </template>
+          <template #right>
             <div class="md:flex lg:flex items-center gap-[10px] hidden">
               <i class="fa fa-bell text-[var(--sec-text)]"></i>
               <div class="user">
@@ -130,8 +130,8 @@
               </div>
               <div class="user-id mbc">Nnamdichuzu@edu.EU.ng</div>
             </div>
-          </header>
-        </div>
+          </template>
+        </Header>
 
         <div class="main px-[25px] mt-[50px] flex flex-col gap-[40px]">
           <div class="">
@@ -169,7 +169,7 @@
               </div>
             </div>
           </div>
-           <div
+          <div
             class="bg-[rgba(255,255,255,1)] px-[12px] py-[15px] border border-[rgba(141,193,255,0.27)]"
           >
             <h2
@@ -239,9 +239,6 @@
               </div>
             </div>
           </div>
-          
-
-         
 
           <!-- Upcoming Retirements -->
           <form class="pending_requests w-full mb-5">
@@ -271,7 +268,6 @@
                   />
                 </div>
               </div>
-              
             </div>
             <div class="w-full overflow-hidden mt-3">
               <div class="overflow-x-auto">
@@ -287,20 +283,46 @@
           </form>
         </div>
         <form action="#" class="modals" @submit.prevent="">
-          <AddNewPublication :show
-            
-            @closeAddNewPublication="closeAddNewPublication" @openContributionAndResearchContextModal="
-              openContributionAndResearchContextModal
+          <StartAppraisal
+            :show
+            @closeAppraisal="closeAppraisal"
+            @openAppraisal="openAppraisal"
+          />
+          <Continue
+            :show1
+            @closecontinueAppraisal="closecontinueAppraisal"
+            @opencontinueAppraisal="opencontinueAppraisal"
+          />
+          <TeachingAndResearchPerformance
+            :show2
+            @openAdministrativeAndCommunityService="
+              closeAdministrativeAndCommunityService
+            "
+            @openTeachingAndResearchPerformance="
+              openTeachingAndResearchPerformance
             "
           />
-          <ContributionAndResearchContext :show1
-            @openAddNewPublication="openAddNewPublication"
-            @closeContributionAndResearchContextModal="
-              closeContributionAndResearchContextModal
+          <AdministrativeAndCommunityService
+            :show3
+            @closeAdministrativeAndCommunityService="
+              closeAdministrativeAndCommunityService
             "
-            @openContributionAndResearchContextModal="
-              openContributionAndResearchContextModal
+            @openProfessionalDevelopment="openProfessionalDevelopment"
+            @openTeachingAndResearchPerformance="
+              openTeachingAndResearchPerformance
             "
+          />
+          <ProfessionalDevelopment
+            :show4
+            @openAdministrativeAndCommunityService="
+              openAdministrativeAndCommunityService"
+            @closeProfessionalDevelopment="closeProfessionalDevelopment"
+            @openSummaryAndSubmission="openSummaryAndSubmission"
+          />
+          <SummaryAndSubmission
+            :show5
+            @closeSummaryAndSubmission="closeSummaryAndSubmission"
+            @openProfessionalDevelopment="openProfessionalDevelopment"
           />
         </form>
       </main>
@@ -309,8 +331,14 @@
 </template>
 <script setup>
 import { ref, reactive, computed } from "vue";
-import AddNewPublication from "@/components/AcademicStaffComponents/AddNewPublication.vue";
-import ContributionAndResearchContext from "@/components/AcademicStaffComponents/ContributionAndResearchContext.vue";
+// import Header from "@/Layouts/Header.vue";
+
+import StartAppraisal from "@/components/AcademicStaffComponents/StartAppraisal.vue";
+import Continue from "@/components/AcademicStaffComponents/Continue.vue";
+import TeachingAndResearchPerformance from "@/components/AcademicStaffComponents/TeachingAndResearchPerformance.vue";
+import AdministrativeAndCommunityService from "@/components/AcademicStaffComponents/AdministrativeAndCommunityService.vue";
+import ProfessionalDevelopment from "@/components/AcademicStaffComponents/ProfessionalDevelopment.vue";
+import SummaryAndSubmission from "@/components/AcademicStaffComponents/SummaryAndSubmission.vue";
 
 import Orbit from "@/assets/imgs/Orbit.png";
 
@@ -341,23 +369,50 @@ const btns = reactive([
   { name: "H-Index", value: 7 },
 ]);
 
-isActive(btns[0].name)
+isActive(btns[0].name);
 
 // Show Modals
 const show = ref(false);
 const show1 = ref(false);
-function closeAddNewPublication() {
+const show2 = ref(false);
+const show3 = ref(false);
+const show4 = ref(false);
+const show5 = ref(false);
+function closeAppraisal() {
   show.value = false;
 }
-function openAddNewPublication() {
+function openAppraisal() {
   show.value = true;
 }
-function closeContributionAndResearchContextModal() {
+function closecontinueAppraisal() {
   show1.value = false;
 }
-function openContributionAndResearchContextModal() {
-    console.log("Awesome")
+function opencontinueAppraisal() {
   show1.value = true;
+}
+function closeTeachingAndResearchPerformance() {
+  show2.value = false;
+}
+function openTeachingAndResearchPerformance() {
+  show2.value = true;
+}
+function closeAdministrativeAndCommunityService() {
+  show3.value = false;
+}
+function openAdministrativeAndCommunityService() {
+  show3.value = true;
+}
+function closeProfessionalDevelopment() {
+  show4.value = false;
+}
+function openProfessionalDevelopment() {
+  show4.value = true;
+}
+function closeSummaryAndSubmission() {
+  show5.value = false;
+}
+function openSummaryAndSubmission() {
+  show5.value = true;
 }
 
 const toggleState = ref(false);
@@ -377,10 +432,11 @@ const columns = [
           class: "text-blue-600 hover:underline font-semibold cursor-pointer",
           onClick: () => router.push(`/home/edit/${row.id}`),
         },
-        row.id
+        row.id,
       );
     },
-  },{
+  },
+  {
     title: "Status ",
     key: "status ",
     render(row) {
@@ -391,14 +447,14 @@ const columns = [
             color: row.is_active
               ? "text-[rgba(251,188,4,1)]"
               : row.is_active == "Due in 12 mo"
-              ? "red"
-              : "blue",
+                ? "red"
+                : "blue",
             fontWeight: "700",
             backgroundColor: row.is_active
               ? "bg-[rgba(234,67,53,0.2)]"
               : row.is_active == "Due in 12 mo"
-              ? "bg-[rgba(251,188,4,0.2)]"
-              : "bg-[rgba(58,151,76,0.15)]",
+                ? "bg-[rgba(251,188,4,0.2)]"
+                : "bg-[rgba(58,151,76,0.15)]",
             fontSize: "14px",
             padding: "10px 20px",
             borderRadius: "22.5px",
@@ -406,14 +462,51 @@ const columns = [
             wordSpacing: "0%",
           },
         },
-        row.is_active
+        row.is_active,
       );
     },
   },
   { title: "Reviewed By ", key: "reviewed_by " },
   { title: "Rating", key: "rating " },
   { title: "Remarks", key: "remarks" },
-  
+  {
+    title: "Action ",
+    key: "action",
+    render(row) {
+      row.isActive <= 10
+        ? h(
+            "a",
+            {
+              href: row.file,
+              download: "",
+              style:
+                "rounded-[2px] text-[rgba(255,255,255,1)] font-[700] text-[14px] leading-[100%] flex gap-3 items-center justify-center tracking-[0%] px-[20px] py-[16px] bg-[rgba(35,136,255,1)]",
+            },
+            ["Continue"],
+          )
+        : row.isActive == 0
+          ? h(
+              "a",
+              {
+                href: row.file,
+                download: "",
+                style:
+                  "rounded-[2px] text-[rgba(255,255,255,1)] font-[700] text-[14px] leading-[100%] flex gap-3 items-center justify-center tracking-[0%] px-[20px] py-[16px] bg-[rgba(35,136,255,1)]",
+              },
+              ["Start"],
+            )
+          : h(
+              "a",
+              {
+                href: row.file,
+                download: "",
+                style:
+                  "rounded-[2px] text-[rgba(255,255,255,1)] font-[700] text-[14px] leading-[100%] flex gap-3 items-center justify-center tracking-[0%] px-[20px] py-[16px] bg-[rgba(35,136,255,1)]",
+              },
+              ["View"],
+            );
+    },
+  },
 ];
 const pagination = {
   // pageSize:10,

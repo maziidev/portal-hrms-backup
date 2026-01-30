@@ -717,7 +717,7 @@ const columns = [
           class: "text-blue-600 hover:underline font-semibold cursor-pointer",
           onClick: () => router.push(`/home/edit/${row.id}`),
         },
-        row.id
+        row.id,
       );
     },
   },
@@ -732,10 +732,10 @@ const columns = [
             row.is_active == "Submitted"
               ? "bg-[rgba(107,114,128,0.2)] px-[20px] py-[10px] rounded-[22.5px] text-[rgba(107,114,128,1)] font-[700] text-[14px] leading-[100%] tracking-[0%]"
               : row.is_active == "In Review"
-              ? "bg-[rgba(35,136,255,0.15)] px-[20px] py-[10px] rounded-[22.5px] text-[rgba(35,136,255,1)] font-[700] text-[14px] leading-[100%] tracking-[0%]"
-              : "bg-[rgba(234,67,53,0.2)] px-[20px] py-[10px] rounded-[22.5px] text-[rgba(234,67,53,1)] font-[700] text-[14px] leading-[100%] tracking-[0%]",
+                ? "bg-[rgba(35,136,255,0.15)] px-[20px] py-[10px] rounded-[22.5px] text-[rgba(35,136,255,1)] font-[700] text-[14px] leading-[100%] tracking-[0%]"
+                : "bg-[rgba(234,67,53,0.2)] px-[20px] py-[10px] rounded-[22.5px] text-[rgba(234,67,53,1)] font-[700] text-[14px] leading-[100%] tracking-[0%]",
         },
-        row.is_active
+        row.is_active,
       );
     },
   },

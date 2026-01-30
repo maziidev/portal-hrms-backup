@@ -185,7 +185,7 @@
                 </span>
                 <label class="relative inline-flex items-center cursor-pointer">
                   <n-switch
-                    v-model:value="data.is_active"
+                    v-model:value="form.is_active"
                     class="text-white h-full rounded-full p-2"
                   >
                   </n-switch>
@@ -201,9 +201,8 @@
                 <i class="fas fa-user-plus"></i> Add New Staff
               </button>
               <button
-                href=""
-                download="download"
-                class="text-[rgba(35,136,255,1)] bulk_upload_ px-[40px] py-[10px] font-[600] text-[16px] flex gap-[10px] items-center leading-[120%] tracking-[-2%] rounded-[5px] border-2 border-[rgba(35,136,255,1)]"
+                @click="openImportStaffModal"
+                class="text-[rgba(35,136,255,1)] cursor-pointer bulk_upload_ px-[40px] py-[10px] font-[600] text-[16px] flex gap-[10px] items-center leading-[120%] tracking-[-2%] rounded-[5px] border-2 border-[rgba(35,136,255,1)]"
               >
                 <i class="fas fa-file-import fa-flip-horizontal"></i> import
                 staff records
@@ -236,31 +235,34 @@
                 <n-select
                   :options="unitOptions"
                   clearable
-                  v-model:value="data.department"
+                  v-model:value="form.dept_code"
                   name="department_unit"
                   id="department_unit"
+                  placeholder="Department / Unit"
                   class="cursor-pointer rounded-[10px] outline-none"
                 >
                 </n-select>
                 <n-select
                   clearable
-                  v-model:value="data.employment_type"
+                  v-model:value="form.employment_type"
                   name="employment_type"
                   id="employment_type"
+                  placeholder="Employment Type"
                   class="cursor-pointer rounded-[10px] outline-none"
                 >
                 </n-select>
 
                 <n-select
                   clearable
-                  v-model:value="data.status"
+                  v-model:value="form.status"
                   name="status"
                   id="status"
+                  placeholder="Status"
                   class="cursor-pointer rounded-[10px] outline-none"
                 >
                 </n-select>
                 <n-date-picker
-                  v-model:value="data.date"
+                  v-model:value="form.date"
                   type="date"
                   placeholder="DD-MM-YYYY"
                   :bordered="false"
@@ -273,55 +275,158 @@
                 <n-data-table
                   :columns="columns"
                   :loading="loading"
+                  :data="staffData"
                   :bordered="false"
                   :scroll-x="1200"
                   :pagination="pagination"
                 />
               </div>
             </div>
+
+            <!-- Modal -->
+            <n-modal
+              :show="importState"
+              preset="card"
+              title="Bulk Upload Staff"
+              class="bulk_upload !lg:w-[50%] md:w-[40%] rounded-md border p-10 bg-white top-[20%] w-full overflow-y-auto"
+              :mask-closable="true"
+              :closable="true"
+              @close="closeUploadModal"
+            >
+              <div
+                id="drop-zone"
+                class="my-3 relative w-full px-[24px] py-[14px] bg-[rgba(248,248,249,1)]"
+              >
+                <input
+                  type="file"
+                  id="file"
+                  accept=".pdf,.doc,.docx,.txt, image/* "
+                  aria-hidden="false"
+                  class="w-full absolute inset-0 opacity-0 cursor-pointer outline-none border-0 px-[12px] py-[15px] bg-[rgba(248,248,249,1)] font-[400] text-[14px] leading-[120%] tracking-[-2%] text-[rgba(161,161,170,1)]"
+                />
+                <!-- Visual content -->
+                <div
+                  class="pointer-events-none flex flex-col items-center gap-1"
+                >
+                  <div
+                    class="w-16 h-16 rounded-full bg-white/80 flex items-center justify-center text-2xl text-gray-600 shadow-sm"
+                  >
+                    <i class="fas fa-arrow-up-from-bracket"></i>
+                  </div>
+
+                  <div class="flex flex-col items-center gap-[5px]">
+                    <div class="flex items-center gap-[10px]">
+                      <span
+                        class="text-[rgba(0,149,255,1)] text-[14px] font-[500]"
+                      >
+                        Upload file
+                      </span>
+                      <p class="text-sm text-gray-500">
+                        or
+                        <span
+                          class="text-[14px] font-[500] text-[rgba(71,84,103,1)]"
+                          >or drag and drop</span
+                        ><br />
+                      </p>
+                    </div>
+                    <span
+                      class="text-[12px] leading-[18px] font-[500] text-[rgba(71,84,103,1)]"
+                    >
+                      supports only .xsl and .csv (max. 5mb)
+                    </span>
+                  </div>
+
+                  <!-- filename preview -->
+                  <div id="file-info" class="mt-3 text-sm text-gray-600"></div>
+                </div>
+              </div>
+              <div
+                class="grid grid-cols-1 mt-5 md:grid-cols-1 lg:grid-cols-1 gap-[20px]"
+              >
+                <span class="preview"></span>
+                <n-upload
+                  :max="1"
+                  accept=".csv",
+                  :before-upload="beforeUploadingFile"
+                  :custom-request="uploadFile"
+                  class="submit border-2 border-[rgba(35,136,255,1)] cursor-pointer bg-[rgba(35,136,255,1)] text-[rgba(255,255,255,1)] text-center font-[600] text-[16px] leading-[100%] tracking-[0] p-[15px]"
+                >
+                  Upload Staff
+                </n-upload>
+
+              </div>
+            </n-modal>
           </form>
         </div>
-        <form action="#" class="modals" @submit.prevent="">
-          <AddNewStaff
-            :show2
-            @CloseModalForAddNewStaff="CloseAddNewStaffModal"
-          />
-          <OpenAppraisal1
-            :show1
-            @CloseModalForOpenAppriasal2="CloseAppriasalModal2"
-            @CloseModalForOpenAppriasal1="CloseAppriasalModal1"
-            @OpenAppraisalModal2="OpenAppriasalModal2"
-          />
-          <OpenAppraisal2
-            :show4
-            @CloseModalForOpenAppriasal2="CloseAppriasalModal2"
-          />
-
-          <GenerateReport
-            :show3
-            @CloseModalForGenerateReport="CloseGenerateModal"
-          />
-        </form>
       </main>
     </div>
   </div>
 </template>
 <script setup>
-import { ref, reactive } from "vue";
-import OpenAppraisal1 from "@/components/AdminComponents/OpenAppraisal1.vue";
-import OpenAppraisal2 from "@/components/AdminComponents/OpenAppraisal2.vue";
-import GenerateReport from "@/components/AdminComponents/GenerateReport.vue";
-import AddNewStaff from "@/components/AdminComponents/AddNewStaff.vue";
+import { ref, reactive, onMounted, watch, computed } from "vue";
+import { addStaff } from "@/apis/admin.js";
+import { useMessage } from "naive-ui";
 import Orbit from "@/assets/imgs/Orbit.png";
+import { getAllStaff, getStaffById, importStaff } from "@/apis/admin.js";
 
-const data = reactive({
-  department_unit: null,
-  employment_type: null,
-  status: null,
+const message = useMessage();
+const loading = ref(false);
+
+const importState = ref(false);
+
+const staffData = ref([]);
+const form = reactive({
   date: null,
+  search: null,
+  dept_code: null,
   is_active: false,
+  employment_type: null,
+  year_of_services: null,
 });
 const activeState = ref(null);
+
+const openImportStaffModal = () => {
+  importState.value = true;
+};
+const closeUploadModal = () => {
+  importState.value = false;
+};
+
+const beforeUploadingFile = ({ file }) => {
+  // Validate CSV
+  const isCsvFile =
+    file.type === "text/csv" || file.name.toLowerCase().endsWith(".csv");
+  if (!isCsvFile) {
+    message.error("Upload CSV file");
+    return false;
+  }
+
+  return true;
+};
+
+const uploadFile = async ({ file, onFinish, onError }) => {
+  console.log(file);
+  try {
+    // await importStaff(file);
+    message.sccess("Staff data uploaded successfully");
+    onFinish();
+  } catch (error) {
+    message.error("Staff data not uploaded");
+    onError(error);
+  }
+};
+
+watch(
+  () => form,
+  async () => {
+    staffData.value = await getAllStaff({
+      dept_code: form.dept_code,
+      employment_type: form.employment_type,
+      search: form.search,
+    });
+  },
+  { deep: true },
+);
 
 function isActive(id) {
   activeState.value = id;
@@ -333,46 +438,34 @@ const btns = reactive([
   { name: "On Study Leave", value: 20300 },
   { name: "Retired", value: 10300 },
 ]);
-const unitOptions = [
+const departments = ref([
   { label: "HR", value: "hr" },
   { label: "IT", value: "it" },
   { label: "Finance", value: "finance" },
-];
+]);
 
-// Show Modals
-const show1 = ref(false);
-const show2 = ref(false);
-const show3 = ref(false);
-const show4 = ref(false);
-function CloseAppriasalModal1() {
-  show1.value = false;
-}
-function OpenAppriasalModal1() {
-  show1.value = true;
-}
-function CloseAppriasalModal2() {
-  show4.value = false;
-}
-function OpenAppriasalModal2() {
-  show4.value = true;
-  console.log(show4.value);
-}
-function CloseAddNewStaffModal() {
-  show2.value = false;
-}
-function OpenAddNewStaffModal() {
-  show2.value = true;
-}
-function CloseGenerateModal() {
-  show3.value = false;
-}
-function OpenGenerateModal() {
-  show3.value = true;
-}
 const toggleState = ref(false);
 const toggleSideBar = () => {
   toggleState.value = !toggleState.value;
 };
+
+onMounted(async () => {
+  isActive("Active Staff");
+    loading.value = true;
+
+  try {
+    staffData.value = await getAllStaff({
+      dept_code: form.dept_code,
+      employment_type: form.employment_type,
+      search: form.search,
+    });
+    loading.value = false;
+
+  } catch (error) {
+    loading.value = false;
+    message.error("Error fetching staff data");
+  }
+});
 
 // Define table columns
 const columns = [
@@ -386,7 +479,7 @@ const columns = [
           class: "text-blue-600 hover:underline font-semibold cursor-pointer",
           onClick: () => router.push(`/home/edit/${row.id}`),
         },
-        row.id
+        row.id,
       );
     },
   },
@@ -406,14 +499,14 @@ const columns = [
             color: row.is_active
               ? "text-[rgba(251,188,4,1)]"
               : row.is_active == "Due in 12 mo"
-              ? "red"
-              : "blue",
+                ? "red"
+                : "blue",
             fontWeight: "700",
             backgroundColor: row.is_active
               ? "bg-[rgba(234,67,53,0.2)]"
               : row.is_active == "Due in 12 mo"
-              ? "bg-[rgba(251,188,4,0.2)]"
-              : "bg-[rgba(58,151,76,0.15)]",
+                ? "bg-[rgba(251,188,4,0.2)]"
+                : "bg-[rgba(58,151,76,0.15)]",
             fontSize: "14px",
             padding: "10px 20px",
             borderRadius: "22.5px",
@@ -421,7 +514,7 @@ const columns = [
             wordSpacing: "0%",
           },
         },
-        row.is_active
+        row.is_active,
       );
     },
   },

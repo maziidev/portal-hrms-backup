@@ -366,7 +366,7 @@
           <!-- Upcoming Retirements -->
           <form class="pending_requests w-full mb-5">
             <div
-              class="top flex justify-between w-full items-center flex-wrap md:flex-nowrap gap-[30px]"
+              class="top flex justify-between w-full items-center flex-wrap md:flex-nowrap gap-0 md:gap-[30px]"
             >
               <div
                 class="left flex flex-wrap md:flex-nowrap lg:flex-nowrap items-center w-full md:w-[50%] lg:w-[50%] gap-[10px]"
@@ -392,7 +392,7 @@
                 </div>
               </div>
               <div
-                class="right flex items-center gap-[1px] w-[50%] flex-wrap lg:flex-nowrap md:flex-nowrap"
+                class="right flex items-center gap-5 w-[50%] flex-wrap lg:flex-nowrap md:flex-nowrap"
               >
                 <n-select
                   name="date"
@@ -413,7 +413,7 @@
                   name="years_of_service"
                   id="years_of_service"
                   placeholder="Year of service"
-                  class="cursor-pointer rounded-[10px] outline-none py-[11px]"
+                  class="cursor-pointer rounded-[10px] outline-none "
                 >
                 </n-select>
               </div>
@@ -423,6 +423,7 @@
                 <n-data-table
                   :columns="columns"
                   :loading="loading"
+                  :data="staffData"
                   :bordered="false"
                   :scroll-x="1200"
                   :pagination="pagination"
@@ -458,14 +459,22 @@
 </template>
 <script setup>
 import { ref, reactive, onMounted } from "vue";
+import { useMessage } from "naive-ui";
 import OpenAppraisal1 from "@/components/AdminComponents/OpenAppraisal1.vue";
 import OpenAppraisal2 from "@/components/AdminComponents/OpenAppraisal2.vue";
 import GenerateReport from "@/components/AdminComponents/GenerateReport.vue";
 import AddNewStaff from "@/components/AdminComponents/AddNewStaff.vue";
 import Orbit from "@/assets/imgs/Orbit.png";
+import { getAllStaff } from "@/apis/admin.js"
 
+
+
+const staffData = ref([]);
 const form = reactive({
   date: null,
+  search:null,
+  dept_code:null,
+  employment_type:null,
   year_of_services: null,
 });
 
@@ -479,6 +488,9 @@ const dates = reactive([
   { label: "22-02-2024", value: "22-02-2024" },
   { label: "22-02-2024", value: "22-02-2024" },
 ]);
+
+const loading = ref(false);
+const message = useMessage();
 // Show Modals
 const show1 = ref(false);
 const show2 = ref(false);
@@ -534,12 +546,17 @@ const DataSets = reactive({
   month: [45, 55, 65, 40, 60, 20, 40, 65],
   year: [25, 35, 50, 20, 40, 65, 40, 60],
 });
-onMounted(() => {
+onMounted( async () => {
+
   btns.value[0].value.classList.add("bg-[rgba(35,136,255,1)]");
   btns.value[0].value.classList.add("text-[rgba(247,249,250,1)]");
   btns.value[0].value.classList.remove("text-[rgba(30,30,30,1)]");
   series.value[0].data = DataSets["week"];
+
+  staffData.value = await getAllStaff({ dept_code:form.dept_code, employment_type:form.employment_type, search:form.search});
+
 });
+
 const currentDataset = ref("week");
 function updateChartData(event) {
   console.log(event.target.id);
@@ -563,6 +580,8 @@ function updateChartData(event) {
   }
   currentDataset.value = event.target.id;
   event.target.className;
+
+  
 }
 
 const chartOptions = ref({

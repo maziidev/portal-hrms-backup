@@ -16,7 +16,7 @@
         >
           <div class="">
             <li
-              class="text-[rgba(14,253,193,1)] font-[700] text-[20px] flex gap-2 items-center text-[16px] tracking-[-2%] leading-[120%]"
+              class="text-[rgba(14,253,193,1)] font-[700] text-[20px] flex gap-2 items-center  tracking-[-2%] leading-[120%]"
             >
               Orbit <img :src="Orbit" />
             </li>

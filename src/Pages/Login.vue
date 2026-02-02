@@ -1,11 +1,11 @@
 <script setup>
 import { ref, reactive } from "vue";
-import { useRouter } from "vue-router";
 import login_img from "@/assets/imgs/login_img.jpg";
 import { useAuthStore } from "@/store/auth.js";
 import { useMessage } from "naive-ui";
 import { loginStaff } from "@/apis/auth.js";
 
+const auth = useAuthStore();
 const loginImage = login_img;
 
 const message = useMessage();
@@ -23,8 +23,6 @@ const formData = reactive({
 
 const showPassword = ref(false);
 
-const auth = useAuthStore();
-const router = useRouter();
 
 const togglePassword = () => {
   showPassword.value = !showPassword.value;
@@ -32,13 +30,9 @@ const togglePassword = () => {
 
 const handleLogin = async () => {
   try {
-    const res = await loginStaff(formData);
-    if (!res.ok) {
-      message.error(res.message || "Login failed");
-      return;
-    }
+    const res = await auth.login(formData);
+    
 
-    router.push(`/${res.user.role}`);
     // router.push(`/dashboard/${res.user.role}`)
   } catch (err) {
     console.error("Login Error", err);

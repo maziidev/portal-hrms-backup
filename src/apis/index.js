@@ -6,6 +6,7 @@ const BaseUrl = import.meta.env.VITE_BASE_URL;
 
 const api = axios.create({
   baseURL: BaseUrl,
+  withCredentials: true,
 });
 export const setUpInterceptors = (pinia, router) => {
   api.interceptors.request.use(

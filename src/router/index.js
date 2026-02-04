@@ -48,9 +48,9 @@ const router = createRouter({
   routes: [
     {
       path: "/",
-      component: Admin,
-      name: "home",
+      redirect: "/login",
     },
+
     {
       path: "/login",
       component: Login,
@@ -311,6 +311,8 @@ router.beforeEach((to, from, next) => {
   const roles = to.matched
     .filter((record) => record.meta.roles)
     .flatMap((record) => record.meta.roles);
+
+  
 
   if (requiresAuth && !auth.isLoggedIn) {
     return next("/login");

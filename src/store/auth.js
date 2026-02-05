@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import router from "../router";
-import { getSession, deleteSession,loginStaff } from "../apis/auth";
+import { getSession, deleteSession, loginStaff } from "../apis/auth";
 // import { useRouter } from "vue-router";
 import { useMessage } from "naive-ui";
 
@@ -8,35 +8,22 @@ const message = useMessage();
 
 export const useAuthStore = defineStore("authstore", {
   state: () => ({
-    user: JSON.parse(localStorage.getItem("user")) || null,
+    user: localStorage.getItem("user") || null,
     loading: false,
+    token: localStorage.getItem("token") || null,
+    role: localStorage.getItem("role") || null,
   }),
   getters: {
     isLoggedIn: (state) => {
-      return !!state.user;
+      return !!state.token;
     },
-    role: (state) => state?.user.role,
-    userId: (state) => state?.user.id,
   },
   actions: {
-    async login(data) {
-      this.loading = true;
-      try {
-        const res = await loginStaff(data);
-        if (!res.ok) {
-          message.error(res.message || "Login failed");
-          return;
-        }
-        const sessionData = await getSession();
-        this.user = sessionData.data.authenticated
-          ? sessionData.data.user
-          : null;
-
-        router.push(`/${this.user.role}`);
-      } catch (error) {
-        this.loading = false;
-        throw error;
-      }
+    login() {
+      console.log(this.user);
+      localStorage.setItem("token", this.token);
+      localStorage.setItem("user", JSON.stringify(this.user));
+      localStorage.setItem("role", this.role);
     },
     async logout() {
       this.token = null;

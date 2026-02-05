@@ -1,5 +1,6 @@
 <script setup>
 import { ref, reactive } from "vue";
+import { useRouter } from "vue-router";
 import login_img from "@/assets/imgs/login_img.jpg";
 import { useAuthStore } from "@/store/auth.js";
 import { useMessage } from "naive-ui";
@@ -7,6 +8,7 @@ import { loginStaff } from "@/apis/auth.js";
 
 const auth = useAuthStore();
 const loginImage = login_img;
+const router = useRouter();
 
 const message = useMessage();
 
@@ -23,20 +25,35 @@ const formData = reactive({
 
 const showPassword = ref(false);
 
-
 const togglePassword = () => {
   showPassword.value = !showPassword.value;
 };
 
 const handleLogin = async () => {
   try {
-    const res = await auth.login(formData);
-    
+    const res = await loginStaff(formData);
+    if (!res) {
+      message.error("Login failed");
+      return;
+    }
 
-    // router.push(`/dashboard/${res.user.role}`)
-  } catch (err) {
-    console.error("Login Error", err);
-    message.error("An error occurred while logging in. Try again.");
+    auth.token = res?.access;
+    auth.user = res?.staff;
+    auth.role = res?.staff.staff_roles[0].role.toLowerCase();
+    console.log(res, auth.user);
+
+
+    auth.login();
+    // const sessionData = await getSession();
+    // this.user = sessionData.data.authenticated
+    //   ? sessionData.data.user
+    //   : null;
+
+    // console.log(this.token, this.user, this.role);
+    router.push(`/${auth.role}`);
+    return;
+  } catch (error) {
+    throw error;
   }
 };
 </script>

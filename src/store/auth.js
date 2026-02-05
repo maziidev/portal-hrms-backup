@@ -8,7 +8,7 @@ const message = useMessage();
 
 export const useAuthStore = defineStore("authstore", {
   state: () => ({
-    user: localStorage.getItem("user") || null,
+    user: JSON.parse(localStorage.getItem("user")) || null,
     loading: false,
     token: localStorage.getItem("token") || null,
     role: localStorage.getItem("role") || null,
@@ -37,11 +37,12 @@ export const useAuthStore = defineStore("authstore", {
     refreshSession() {
       const token = localStorage.getItem("token");
       const user = localStorage.getItem("user");
+      const role = localStorage.getItem("role");
 
       if (token && user) {
         this.token = token;
         this.user = JSON.parse(user);
-        this.role = this.user.role;
+        this.role = role;
       }
     },
   },

@@ -39,8 +39,8 @@ const handleLogin = async () => {
 
     auth.token = res?.access;
     auth.user = res?.staff;
-    auth.role = res?.staff.staff_roles[0].role.toLowerCase();
-    console.log(res, auth.user);
+    auth.role = res?.staff.staff_roles?.find((role) => role.is_active).role.toLowerCase();
+    console.log(auth.role);
 
 
     auth.login();

@@ -42,6 +42,7 @@ import Dap_Publications_Research_Verification from "../Pages/DAP/Dap_Publication
 import Dap_Publications_Research_Verification_Faculty from "../Pages/DAP/Dap_Publications_Research_Verification_Faculty.vue";
 import { useAuthStore } from "@/store/auth.js";
 import Login from "@/Pages/Login.vue";
+import NotFound from "../Pages/NotFound.vue";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -301,6 +302,12 @@ const router = createRouter({
         },
       ],
     },
+
+    {
+      path:"/:pathMatch(.*)*",
+      name:"NotFound",
+      component: NotFound
+    }
   ],
 });
 

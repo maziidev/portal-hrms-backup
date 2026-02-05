@@ -325,8 +325,9 @@ router.beforeEach((to, from, next) => {
     return next("/login");
   }
 
+  console.log(roles)
   if (roles.length && !roles.includes(auth.role)) {
-    return next("/unauthorized");
+    return next(`/${auth.role}`);
   }
 
   next();

@@ -11,7 +11,7 @@ const loginImage = login_img;
 const router = useRouter();
 
 const message = useMessage();
-
+const userRole = ref("");
 const altText = ref("Lady siting in front of a laptop");
 
 const overLayedText = ref(
@@ -39,8 +39,13 @@ const handleLogin = async () => {
 
     auth.token = res?.access;
     auth.user = res?.staff;
-    auth.role = res?.staff.staff_roles?.find((role) => role.is_active).role.toLowerCase();
-    console.log(auth.role);
+    // auth.role = res?.staff.staff_roles?.find((role) => role.is_active).role.toLowerCase();
+    
+    userRole.value = res?.staff.staff_roles?.find((role) => role.is_active === true );
+
+    auth.role = userRole.value.role.toLowerCase();
+
+    console.log(auth);
 
 
     auth.login();

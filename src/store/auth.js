@@ -1,49 +1,65 @@
-import { defineStore } from "pinia";
-import router from "../router";
-import { getSession, deleteSession, loginStaff } from "../apis/auth";
-// import { useRouter } from "vue-router";
 import { useMessage } from "naive-ui";
+import { defineStore } from "pinia";
+import { computed, ref } from "vue";
+import { deleteSession } from "../apis/auth";
+import router from "../router";
 
 const message = useMessage();
 
-export const useAuthStore = defineStore("authstore", {
-  state: () => ({
-    user: JSON.parse(localStorage.getItem("user")) || null,
-    loading: false,
-    token: localStorage.getItem("token") || null,
-    role: localStorage.getItem("role") || null,
-  }),
-  getters: {
-    isLoggedIn: (state) => {
-      return !!state.token;
-    },
-  },
-  actions: {
-    login() {
-      console.log(this.user);
-      localStorage.setItem("token", this.token);
-      localStorage.setItem("user", JSON.stringify(this.user));
-      localStorage.setItem("role", this.role);
-    },
-    async logout() {
-      this.token = null;
-      this.user = null;
-      localStorage.removeItem("token");
-      localStorage.removeItem("user");
+export const useAuthStore = defineStore("authstore", () => {
+    // --- State ---
+    const user = ref(JSON.parse(localStorage.getItem("user")) || null);
+    const token = ref(localStorage.getItem("token") || null);
+    const role = ref(localStorage.getItem("role") || null);
+    const loading = ref(false);
 
-      await deleteSession(this.user.id);
-      router.push({ name: "login" });
-    },
-    refreshSession() {
-      const token = localStorage.getItem("token");
-      const user = localStorage.getItem("user");
-      const role = localStorage.getItem("role");
+    // --- Getters ---
+    const isLoggedIn = computed(() => !!token.value);
 
-      if (token && user) {
-        this.token = token;
-        this.user = JSON.parse(user);
-        this.role = role;
-      }
-    },
-  },
+    // --- Actions ---
+    const login = () => {
+        console.log(user.value);
+        localStorage.setItem("token", token.value);
+        localStorage.setItem("user", JSON.stringify(user.value));
+        localStorage.setItem("role", role.value);
+    };
+
+    const logout = async () => {
+        const userId = user.value?.id; // save id before clearing
+        token.value = null;
+        user.value = null;
+        role.value = null;
+
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+        localStorage.removeItem("role");
+
+        if (userId) await deleteSession(userId);
+
+        router.push({ name: "login" });
+    };
+
+    const refreshSession = () => {
+        const storedToken = localStorage.getItem("token");
+        const storedUser = localStorage.getItem("user");
+        const storedRole = localStorage.getItem("role");
+
+        if (storedToken && storedUser) {
+            token.value = storedToken;
+            user.value = JSON.parse(storedUser);
+            role.value = storedRole;
+        }
+    };
+
+    // --- Return ---
+    return {
+        user,
+        token,
+        role,
+        loading,
+        isLoggedIn,
+        login,
+        logout,
+        refreshSession,
+    };
 });

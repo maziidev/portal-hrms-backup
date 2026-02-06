@@ -629,12 +629,12 @@ const form = reactive({
   is_active: false,
   search: "",
 });
-let statusOptions = reactive([
+let statusOptions = reactive(
   {
     label: "Status One",
-    value: "Status Two",
+   value: "Status Two",
   },
-]);
+);
 let departments = reactive([
   {
     label: "Computer science",

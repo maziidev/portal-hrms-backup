@@ -1,0 +1,3 @@
+<template>
+    Quick Actions
+</template>

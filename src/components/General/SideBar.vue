@@ -31,9 +31,8 @@
 
 <script setup>
 import Orbit from "@/assets/imgs/Orbit.png";
-import { useAuthStore } from "@/stores/auth";
+import { useAuthStore } from "@/store/auth.js";
 import { useRouter } from "vue-router";
-import { useMessage } from "naive-ui";
 
 const router = useRouter();
 const auth = useAuthStore();

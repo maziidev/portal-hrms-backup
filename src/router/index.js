@@ -45,8 +45,10 @@ import HodStaffRecords from "../Pages/HOD/HodStaffRecords.vue";
 import NotFound from "../Pages/NotFound.vue";
 
 
-// dean,
+// dean, hou
 import { deanRoutes } from './modules/dean.routes';
+import { houRoutes } from './modules/hou.routes';
+
 
 const router = createRouter({
   history: createWebHistory(),
@@ -64,6 +66,7 @@ const router = createRouter({
 
 
     deanRoutes,
+    houRoutes,
 
 
     // ADMIN ROUTES
@@ -337,7 +340,7 @@ router.beforeEach((to, from, next) => {
     return next("/login");
   }
 
-  console.log(roles)
+  console.log(roles);
   if (roles.length && !roles.includes(auth.role)) {
     return next(`/${auth.role}`);
   }

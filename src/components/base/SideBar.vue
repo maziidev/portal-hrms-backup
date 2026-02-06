@@ -1,7 +1,7 @@
 <template>
   <aside
     :class="[
-      'w-70 z-[3000] transition-all duration-200 ease-in-out fixed top-0 left-0 h-screen px-[35px] flex flex-col justify-between py-[45px] bg-orbit-bg md:translate-x-0 md:static md:block',
+      'w-70 z-3000 transition-all duration-200 ease-in-out fixed top-0 left-0 h-screen px-8.75 flex flex-col justify-between py-11.25 bg-orbit-bg md:translate-x-0 md:static md:block',
       isOpen ? 'translate-x-0' : '-translate-x-full'
     ]"
   >

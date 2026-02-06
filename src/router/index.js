@@ -43,6 +43,8 @@ import Dap_Publications_Research_Verification_Faculty from "../Pages/DAP/Dap_Pub
 import { useAuthStore } from "@/store/auth.js";
 import Login from "@/Pages/Login.vue";
 import NotFound from "../Pages/NotFound.vue";
+import AcademicStaff from "../Layout/Academic-Staff/Academic-Staff.vue";
+import AdminLayout from "../Layout/AdminLayout/Admin.vue";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -61,7 +63,7 @@ const router = createRouter({
     // ADMIN ROUTES
     {
       path: "/admin",
-      component: Admin,
+      component: AdminLayout,
       name: "admin",
       meta: {
         requiresAuth: true,
@@ -71,28 +73,28 @@ const router = createRouter({
         {
           path: "staff-managment",
           component: StaffManagment,
-          name: "admin-staff-managment",
+          name: "staff-managment",
         },
         {
           path: "appraisal",
           component: Appraisal,
-          name: "admin-appraisal",
+          name: "appraisal",
         },
         {
           path: "appraisal/:id",
           component: Appraisal_Details,
-          name: "admin-appraisal-details",
+          name: "appraisal-details",
           props: true,
         },
         {
           path: "report-analysis",
           component: ReportAnalysis,
-          name: "admin-report-analysis",
+          name: "report-analysis",
         },
         {
           path: "generate-report",
           component: GenerateReport,
-          name: "admin-generate-report",
+          name: "generate-report",
         },
       ],
     },
@@ -128,32 +130,36 @@ const router = createRouter({
     // ACADEMIC STAFF
     {
       path: "/lecturer",
-      component: AcademicStaffDashboard,
-      name: "lecturer",
+      component: AcademicStaff,
       meta: {
         requiresAuth: true,
         roles: ["lecturer"],
       },
       children: [
         {
+          path: "",
+          component: AcademicStaffDashboard,
+          name: "lecturer",
+        },
+        {
           path: "research-publication",
           component: ReasearchPublication,
-          name: "academic-staff-research-publication",
+          name: "research-publication",
         },
         {
           path: "appraisal",
           component: AcademicStaffAppraisal,
-          name: "academic-staff-appraisal",
+          name: "appraisal",
         },
         {
           path: "leave-management",
           component: LeaveManagement,
-          name: "academic-staff-leave-management",
+          name: "leave-management",
         },
         {
           path: "promotion-career-progression",
           component: AcademicStaffPromotionCareerProgression,
-          name: "academic-staff-promotion-career-progression",
+          name: "promotion-career-progression",
         },
       ],
     },
@@ -304,10 +310,10 @@ const router = createRouter({
     },
 
     {
-      path:"/:pathMatch(.*)*",
-      name:"NotFound",
-      component: NotFound
-    }
+      path: "/:pathMatch(.*)*",
+      name: "NotFound",
+      component: NotFound,
+    },
   ],
 });
 
@@ -319,13 +325,11 @@ router.beforeEach((to, from, next) => {
     .filter((record) => record.meta.roles)
     .flatMap((record) => record.meta.roles);
 
-  
-
   if (requiresAuth && !auth.isLoggedIn) {
     return next("/login");
   }
 
-  console.log(roles)
+  console.log(roles);
   if (roles.length && !roles.includes(auth.role)) {
     return next(`/${auth.role}`);
   }

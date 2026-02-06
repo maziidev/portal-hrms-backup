@@ -1,10 +1,10 @@
 <script setup>
-import { ref, reactive } from "vue";
-import { useRouter } from "vue-router";
+import { loginStaff } from "@/apis/auth.js";
 import login_img from "@/assets/imgs/login_img.jpg";
 import { useAuthStore } from "@/store/auth.js";
 import { useMessage } from "naive-ui";
-import { loginStaff } from "@/apis/auth.js";
+import { reactive, ref } from "vue";
+import { useRouter } from "vue-router";
 
 const auth = useAuthStore();
 const loginImage = login_img;
@@ -40,7 +40,7 @@ const handleLogin = async () => {
     auth.token = res?.access;
     auth.user = res?.staff;
     // auth.role = res?.staff.staff_roles?.find((role) => role.is_active).role.toLowerCase();
-    
+
     userRole.value = res?.staff.staff_roles?.find((role) => role.is_active === true );
 
     auth.role = userRole.value.role.toLowerCase();
@@ -65,7 +65,7 @@ const handleLogin = async () => {
 
 <template>
   <div class="h-screen">
-    <div class="flex flex-col md:flex-row h-full bg-blue-600">
+    <div class="flex flex-col md:flex-row h-full bg-orbit-bg">
       <!-- left section -->
       <div class="relative w-full h-64 md:w-1/2 md:h-full">
         <img
@@ -132,7 +132,7 @@ const handleLogin = async () => {
                   type="email"
                   id="email"
                   placeholder="Please enter your e-mail address"
-                  class="w-full border border-[#1a3a5f] rounded-lg py-2.5 pl-10 pr-10 text-black placeholder-gray-500 focus:outline-none focus:border-[#2a5a8f] transition-colors text-sm md:text-base"
+                  class="w-full border text-white border-[#1a3a5f] rounded-lg py-2.5 pl-10 pr-10  placeholder-gray-500 focus:outline-none focus:border-[#2a5a8f] transition-colors text-sm md:text-base"
                 />
               </div>
             </div>
@@ -170,7 +170,7 @@ const handleLogin = async () => {
                   :type="showPassword ? 'text' : 'password'"
                   id="password"
                   placeholder="Please enter your password"
-                  class="w-full border border-[#1a3a5f] rounded-lg py-2.5 pl-10 pr-10 text-black placeholder-gray-500 focus:outline-none focus:border-[#2a5a8f] transition-colors text-sm md:text-base"
+                  class="w-full border border-[#1a3a5f] rounded-lg py-2.5 pl-10 pr-10 text-white placeholder-gray-500 focus:outline-none focus:border-[#2a5a8f] transition-colors text-sm md:text-base"
                 />
 
                 <button

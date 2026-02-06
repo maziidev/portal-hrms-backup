@@ -69,28 +69,28 @@ const router = createRouter({
       },
       children: [
         {
-          path: "/admin/staff-managment",
+          path: "staff-managment",
           component: StaffManagment,
           name: "admin-staff-managment",
         },
         {
-          path: "/admin/appraisal",
+          path: "appraisal",
           component: Appraisal,
           name: "admin-appraisal",
         },
         {
-          path: "/admin/appraisal/:id",
+          path: "appraisal/:id",
           component: Appraisal_Details,
           name: "admin-appraisal-details",
           props: true,
         },
         {
-          path: "/admin/report-analysis",
+          path: "report-analysis",
           component: ReportAnalysis,
           name: "admin-report-analysis",
         },
         {
-          path: "/admin/generate-report",
+          path: "generate-report",
           component: GenerateReport,
           name: "admin-generate-report",
         },
@@ -108,17 +108,17 @@ const router = createRouter({
       },
       children: [
         {
-          path: "/external-accessor/assigned-staff-evaluation",
+          path: "assigned-staff-evaluation",
           component: AssignedStaffEvaluation,
           name: "external-accessor-assigned-staff-evaluation",
         },
         {
-          path: "/external-accessor/evaluation",
+          path: "evaluation",
           component: Evaluation,
           name: "external-accessor-evaluation",
         },
         {
-          path: "/external-accessor/evaluation_summary",
+          path: "evaluation_summary",
           component: Evaluation_Summary,
           name: "external-accessor-evaluation_summary",
         },
@@ -127,31 +127,31 @@ const router = createRouter({
 
     // ACADEMIC STAFF
     {
-      path: "/academic-staff",
+      path: "/lecturer",
       component: AcademicStaffDashboard,
-      name: "academic-staff",
+      name: "lecturer",
       meta: {
         requiresAuth: true,
-        roles: ["academic-staff"],
+        roles: ["lecturer"],
       },
       children: [
         {
-          path: "/academic-staff/research-publication",
+          path: "research-publication",
           component: ReasearchPublication,
           name: "academic-staff-research-publication",
         },
         {
-          path: "/academic-staff/appraisal",
+          path: "appraisal",
           component: AcademicStaffAppraisal,
           name: "academic-staff-appraisal",
         },
         {
-          path: "/academic-staff/leave-management",
+          path: "leave-management",
           component: LeaveManagement,
           name: "academic-staff-leave-management",
         },
         {
-          path: "/academic-staff/promotion-career-progression",
+          path: "promotion-career-progression",
           component: AcademicStaffPromotionCareerProgression,
           name: "academic-staff-promotion-career-progression",
         },
@@ -169,48 +169,48 @@ const router = createRouter({
       },
       children: [
         {
-          path: "/hod/staff-records",
+          path: "staff-records",
           component: HodStaffRecords,
           name: "hod-staff-records",
         },
         {
-          path: "/hod/staff-records/:id",
+          path: "staff-records/:id",
           component: HodStaffRecordDetails,
           name: "hod-staff-record-details",
           props: true,
         },
         {
-          path: "/hod/research-publication",
+          path: "research-publication",
           component: ReasearchPublication,
           name: "hod-research-publication",
         },
         {
-          path: "/hod/appraisal",
+          path: "appraisal",
           component: HodAppraisal,
           name: "hod-appraisal",
         },
         {
-          path: "/hod/leave-management",
+          path: "leave-management",
           component: HodLeaveManagment,
           name: "hod-leave-management",
         },
         {
-          path: "/hod/leave-management/active-leaves",
+          path: "leave-management/active-leaves",
           component: HodActiveLeaves,
           name: "hod-leave-management-active-leaves",
         },
         {
-          path: "/hod/leave-management/leave-balance-report",
+          path: "leave-management/leave-balance-report",
           component: HodLeaveBalanceReport,
           name: "hod-leave-management-leave-balance-report",
         },
         {
-          path: "/hod/promotion-career-progression",
+          path: "promotion-career-progression",
           component: HodPromotion_Career_Progression,
           name: "hod-promotion-career-progression",
         },
         {
-          path: "/hod/promotion-summary",
+          path: "promotion-summary",
           component: HodPromotionSummary,
           name: "hod-promotion-summary",
         },

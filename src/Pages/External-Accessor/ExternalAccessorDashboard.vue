@@ -8,7 +8,7 @@
     </button>
     <div class="dashboard w-full min-h-screen">
       <div class=" ">
-        <SiderBar
+        <SideBar
           :class="[
             `{ w-[268px] sidebar z-[3000] transition-all duration-100 ease-in-out  fixed top-0 left-0 h-screen md:flex lg:flex px-[35px] flex flex-col gap-[67px] py-[45px] bg-[var(--primary)]`,
             !toggleState ? `hidden` : `md:flex lg:flex`,
@@ -84,7 +84,7 @@
               </div>
             </li>
           </div>
-        </SiderBar>
+        </SideBar>
       </div>
       <main class="lg:ml-[270px] md:ml-[270px] ml-[0px] min-w-screen relative">
         <div class="header">
@@ -332,7 +332,7 @@
 <script setup>
 import { ref, reactive, computed } from "vue";
 import SessionSemesterDate from "@/components/General/SessionSemesterDate.vue";
-import SiderBar from "@/components/General/SiderBar.vue";
+import SideBar from "@/components/General/SideBar.vue";
 import { useAuthStore } from "@/store/auth.js";
 
 const store = useAuthStore();
@@ -509,7 +509,7 @@ const columns = [
           class: "text-blue-600 hover:underline font-semibold cursor-pointer",
           onClick: () => router.push(`/home/edit/${row.id}`),
         },
-        row.id
+        row.id,
       );
     },
   },
@@ -527,14 +527,14 @@ const columns = [
             color: row.is_active
               ? "text-[rgba(251,188,4,1)]"
               : row.is_active == "Due in 12 mo"
-              ? "red"
-              : "blue",
+                ? "red"
+                : "blue",
             fontWeight: "700",
             backgroundColor: row.is_active
               ? "bg-[rgba(234,67,53,0.2)]"
               : row.is_active == "Due in 12 mo"
-              ? "bg-[rgba(251,188,4,0.2)]"
-              : "bg-[rgba(58,151,76,0.15)]",
+                ? "bg-[rgba(251,188,4,0.2)]"
+                : "bg-[rgba(58,151,76,0.15)]",
             fontSize: "14px",
             padding: "10px 20px",
             borderRadius: "22.5px",
@@ -542,7 +542,7 @@ const columns = [
             wordSpacing: "0%",
           },
         },
-        row.is_active
+        row.is_active,
       );
     },
   },

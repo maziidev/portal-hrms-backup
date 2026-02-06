@@ -304,7 +304,7 @@
                     class="leading-[170%] tracking-[-2%] font-[500] text-[14px]"
                   >
                     The Department of Computer Science consists of
-                    <a href="../ACADEMIC-STAFF/index.html" class="text-blue-500"
+                    <a href="../lecturer/index.html" class="text-blue-500"
                       >18 academic</a
                     >
                     and 4
@@ -507,7 +507,7 @@ const columns = [
         {
           onClick: () => router.push("/dap/staff-details/" + id),
         },
-        row.department
+        row.department,
       );
     },
   },

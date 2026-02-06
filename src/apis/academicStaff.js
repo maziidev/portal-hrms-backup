@@ -1,48 +1,48 @@
 import { BaseUrl, api } from ".";
 
-export const createAppraisal = async (data) => {
+export const createAppraisal = async (formData) => {
   try {
-    const { response } = await api.postForm(`${BaseUrl}/hrms/appraisals`, data);
-    return response;
+    const { data } = await api.postForm(`${BaseUrl}/hrms/appraisals`, formData);
+    return data;
   } catch (error) {
     throw error;
   }
 };
 
 // SAVE ADMINSTRATIVE AND COMMUNITY SERVICE
-export const saveAdminstrativeAndCommunityService = async (data, id) => {
+export const saveAdminstrativeAndCommunityService = async (formData, id) => {
   try {
-    const { response } = await api.putForm(
+    const { data } = await api.putForm(
       `${BaseUrl}/hrms/appraisals/${id}/admin`,
-      data,
+      formData,
     );
-    return response;
+    return data;
   } catch (error) {
     throw error;
   }
 };
 
 // SAVE PROFESSIONAL DEVELOPMENT
-export const saveProfessonalDevelopment = async (data, id) => {
+export const saveProfessonalDevelopment = async (formData, id) => {
   try {
-    const { response } = await api.putForm(
+    const { data } = await api.putForm(
       `${BaseUrl}/hrms/appraisals/${id}/professional`,
-      data,
+      formData,
     );
-    return response;
+    return data;
   } catch (error) {
     throw error;
   }
 };
 
 // SUBMIT APPRAISAL
-export const submitAppraisal = async (data, id) => {
+export const submitAppraisal = async (formData, id) => {
   try {
-    const { response } = await api.putForm(
+    const { data } = await api.putForm(
       `${BaseUrl}/hrms/appraisals/${id}/submit`,
-      data,
+      formData,
     );
-    return response;
+    return data;
   } catch (error) {
     throw error;
   }
@@ -51,58 +51,58 @@ export const submitAppraisal = async (data, id) => {
 // RETRIEVE SAVE APPRAISAL SUMMARY
 export const retrieveSaveAppraisalSummary = async (id) => {
   try {
-    const { response } = await api.get(
+    const { data } = await api.get(
       `${BaseUrl}/hrms/appraisals/${id}/summary`,
     );
-    return response;
+    return data;
   } catch (error) {
     throw error;
   }
 };
 // RETRIEVE SAVE UPDATE SUMMARY
-export const updateSaveAppraisalSummary = async (data, id) => {
+export const updateSaveAppraisalSummary = async (formData, id) => {
   try {
-    const { response } = await api.putForm(
+    const { data } = await api.putForm(
       `${BaseUrl}/hrms/appraisals/${id}/summary`,
-      data,
+      formData,
     );
-    return response;
+    return data;
   } catch (error) {
     throw error;
   }
 };
 // UPDATE SAVE TEACHING AND RESEARCH PERFORMANCE SUMMARY
-export const updateTeachingAndResearchPerformance = async (data, id) => {
+export const updateTeachingAndResearchPerformance = async (formData, id) => {
   try {
-    const { response } = await api.putForm(
+    const { data } = await api.putForm(
       `${BaseUrl}/hrms/appraisals/${id}/teaching-research`,
-      data,
+      formData,
     );
-    return response;
+    return data;
   } catch (error) {
     throw error;
   }
 };
 // UPLOAD CERTIFICATION
-export const uploadCertification = async (data) => {
+export const uploadCertification = async (formData) => {
   try {
-    const { response } = await api.putForm(
+    const { data } = await api.putForm(
       `${BaseUrl}/hrms/certifications/upload/`,
-      data,
+      formData,
     );
-    return response;
+    return data;
   } catch (error) {
     throw error;
   }
 };
 // UPLOAD SUPPORTING DOCUMENT
-export const uploadSupportingDocument = async (data) => {
+export const uploadSupportingDocument = async (formData) => {
   try {
-    const { response } = await api.postForm(
+    const { data } = await api.postForm(
       `${BaseUrl}/hrms/documents/upload/`,
-      data,
+      formData,
     );
-    return response;
+    return data;
   } catch (error) {
     throw error;
   }
@@ -111,10 +111,10 @@ export const uploadSupportingDocument = async (data) => {
 // GET ACADEMIC QULIFICATIONS LIST
 export const getAcademicQualificationsList = async () => {
   try {
-    const { response } = await api.get(
+    const { data } = await api.get(
       `${BaseUrl}/hrms/academic-qualifications/`,
     );
-    return response;
+    return data;
   } catch (error) {
     throw error;
   }
@@ -122,13 +122,13 @@ export const getAcademicQualificationsList = async () => {
 
 // CREATE ACADEMIC QULIFICATIONS
 
-export const createAcademicQualifications = async (data) => {
+export const createAcademicQualifications = async (formData) => {
   try {
-    const { response } = await api.postForm(
+    const { data } = await api.postForm(
       `${BaseUrl}/hrms/academic-qualifications/`,
-      data,
+      formData,
     );
-    return response;
+    return data;
   } catch (error) {
     throw error;
   }
@@ -137,23 +137,23 @@ export const createAcademicQualifications = async (data) => {
 // RETRIEVE ACADEMIC QULIFICATIONS
 export const retrieveAcademicQualifications = async (id) => {
   try {
-    const { response } = await api.postForm(
+    const { data } = await api.get(
       `${BaseUrl}/hrms/academic-qualifications/${id}/`,
     );
-    return response;
+    return data;
   } catch (error) {
     throw error;
   }
 };
 
 // UPDATE ACADEMIC QULIFICATIONS
-export const updateAcademicQualifications = async (id, data) => {
+export const updateAcademicQualifications = async (id, formData) => {
   try {
-    const { response } = await api.putForm(
+    const { data } = await api.putForm(
       `${BaseUrl}/hrms/academic-qualifications/${id}/`,
-      data,
+      formData,
     );
-    return response;
+    return data;
   } catch (error) {
     throw error;
   }
@@ -162,10 +162,10 @@ export const updateAcademicQualifications = async (id, data) => {
 // DELETE ACADEMIC QULIFICATIONS
 export const deleteAcademicQualifications = async (id) => {
   try {
-    const { response } = await api.putForm(
+    const { data } = await api.delete(
       `${BaseUrl}/hrms/academic-qualifications/${id}/`,
     );
-    return response;
+    return data;
   } catch (error) {
     throw error;
   }
@@ -174,8 +174,8 @@ export const deleteAcademicQualifications = async (id) => {
 // RETRIEVE EMERGENCY CONTACTS
 export const retrieveEmergencyContacts = async () => {
   try {
-    const { response } = await api.get(`${BaseUrl}/hrms/emergency-contacts/`);
-    return response;
+    const { data } = await api.get(`${BaseUrl}/hrms/emergency-contacts/`);
+    return data;
   } catch (error) {
     throw error;
   }
@@ -184,34 +184,34 @@ export const retrieveEmergencyContacts = async () => {
 // RETRIEVE EMERGENCY CONTACT
 export const retrieveEmergencyContact = async (id) => {
   try {
-    const { response } = await api.get(
+    const { data } = await api.get(
       `${BaseUrl}/hrms/emergency-contacts/${id}`,
     );
-    return response;
+    return data;
   } catch (error) {
     throw error;
   }
 };
 // CREATE EMERGENCY CONTACTS
-export const createEmergencyContacts = async (data) => {
+export const createEmergencyContacts = async (formData) => {
   try {
-    const { response } = await api.postForm(
+    const { data } = await api.postForm(
       `${BaseUrl}/hrms/emergency-contacts/`,
-      data,
+      formData,
     );
-    return response;
+    return data;
   } catch (error) {
     throw error;
   }
 };
 // UPDATE EMERGENCY CONTACTS
-export const updateEmergencyContacts = async (id, data) => {
+export const updateEmergencyContacts = async (id, formData) => {
   try {
-    const { response } = await api.putForm(
+    const { data } = await api.putForm(
       `${BaseUrl}/hrms/emergency-contacts/${id}`,
-      data,
+      formData,
     );
-    return response;
+    return data;
   } catch (error) {
     throw error;
   }

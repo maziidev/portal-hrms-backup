@@ -49,6 +49,8 @@ import NotFound from "../Pages/NotFound.vue";
 import { deanRoutes } from './modules/dean.routes';
 import { houRoutes } from './modules/hou.routes';
 
+import AcademicStaff from "../Layout/Academic-Staff/Academic-Staff.vue";
+import AdminLayout from "../Layout/AdminLayout/Admin.vue";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -72,7 +74,7 @@ const router = createRouter({
     // ADMIN ROUTES
     {
       path: "/admin",
-      component: Admin,
+      component: AdminLayout,
       name: "admin",
       meta: {
         requiresAuth: true,
@@ -80,30 +82,30 @@ const router = createRouter({
       },
       children: [
         {
-          path: "/admin/staff-managment",
+          path: "staff-managment",
           component: StaffManagment,
-          name: "admin-staff-managment",
+          name: "staff-managment",
         },
         {
-          path: "/admin/appraisal",
+          path: "appraisal",
           component: Appraisal,
-          name: "admin-appraisal",
+          name: "appraisal",
         },
         {
-          path: "/admin/appraisal/:id",
+          path: "appraisal/:id",
           component: Appraisal_Details,
-          name: "admin-appraisal-details",
+          name: "appraisal-details",
           props: true,
         },
         {
-          path: "/admin/report-analysis",
+          path: "report-analysis",
           component: ReportAnalysis,
-          name: "admin-report-analysis",
+          name: "report-analysis",
         },
         {
-          path: "/admin/generate-report",
+          path: "generate-report",
           component: GenerateReport,
-          name: "admin-generate-report",
+          name: "generate-report",
         },
       ],
     },
@@ -119,17 +121,17 @@ const router = createRouter({
       },
       children: [
         {
-          path: "/external-accessor/assigned-staff-evaluation",
+          path: "assigned-staff-evaluation",
           component: AssignedStaffEvaluation,
           name: "external-accessor-assigned-staff-evaluation",
         },
         {
-          path: "/external-accessor/evaluation",
+          path: "evaluation",
           component: Evaluation,
           name: "external-accessor-evaluation",
         },
         {
-          path: "/external-accessor/evaluation_summary",
+          path: "evaluation_summary",
           component: Evaluation_Summary,
           name: "external-accessor-evaluation_summary",
         },
@@ -138,33 +140,37 @@ const router = createRouter({
 
     // ACADEMIC STAFF
     {
-      path: "/academic-staff",
-      component: AcademicStaffDashboard,
-      name: "academic-staff",
+      path: "/lecturer",
+      component: AcademicStaff,
       meta: {
         requiresAuth: true,
-        roles: ["academic-staff"],
+        roles: ["lecturer"],
       },
       children: [
         {
-          path: "/academic-staff/research-publication",
+          path: "",
+          component: AcademicStaffDashboard,
+          name: "lecturer",
+        },
+        {
+          path: "research-publication",
           component: ReasearchPublication,
-          name: "academic-staff-research-publication",
+          name: "research-publication",
         },
         {
-          path: "/academic-staff/appraisal",
+          path: "appraisal",
           component: AcademicStaffAppraisal,
-          name: "academic-staff-appraisal",
+          name: "appraisal",
         },
         {
-          path: "/academic-staff/leave-management",
+          path: "leave-management",
           component: LeaveManagement,
-          name: "academic-staff-leave-management",
+          name: "leave-management",
         },
         {
-          path: "/academic-staff/promotion-career-progression",
+          path: "promotion-career-progression",
           component: AcademicStaffPromotionCareerProgression,
-          name: "academic-staff-promotion-career-progression",
+          name: "promotion-career-progression",
         },
       ],
     },
@@ -180,48 +186,48 @@ const router = createRouter({
       },
       children: [
         {
-          path: "/hod/staff-records",
+          path: "staff-records",
           component: HodStaffRecords,
           name: "hod-staff-records",
         },
         {
-          path: "/hod/staff-records/:id",
+          path: "staff-records/:id",
           component: HodStaffRecordDetails,
           name: "hod-staff-record-details",
           props: true,
         },
         {
-          path: "/hod/research-publication",
+          path: "research-publication",
           component: ReasearchPublication,
           name: "hod-research-publication",
         },
         {
-          path: "/hod/appraisal",
+          path: "appraisal",
           component: HodAppraisal,
           name: "hod-appraisal",
         },
         {
-          path: "/hod/leave-management",
+          path: "leave-management",
           component: HodLeaveManagment,
           name: "hod-leave-management",
         },
         {
-          path: "/hod/leave-management/active-leaves",
+          path: "leave-management/active-leaves",
           component: HodActiveLeaves,
           name: "hod-leave-management-active-leaves",
         },
         {
-          path: "/hod/leave-management/leave-balance-report",
+          path: "leave-management/leave-balance-report",
           component: HodLeaveBalanceReport,
           name: "hod-leave-management-leave-balance-report",
         },
         {
-          path: "/hod/promotion-career-progression",
+          path: "promotion-career-progression",
           component: HodPromotion_Career_Progression,
           name: "hod-promotion-career-progression",
         },
         {
-          path: "/hod/promotion-summary",
+          path: "promotion-summary",
           component: HodPromotionSummary,
           name: "hod-promotion-summary",
         },
@@ -321,8 +327,8 @@ const router = createRouter({
     {
       path: "/:pathMatch(.*)*",
       name: "NotFound",
-      component: NotFound
-    }
+      component: NotFound,
+    },
   ],
 });
 
@@ -333,8 +339,6 @@ router.beforeEach((to, from, next) => {
   const roles = to.matched
     .filter((record) => record.meta.roles)
     .flatMap((record) => record.meta.roles);
-
-
 
   if (requiresAuth && !auth.isLoggedIn) {
     return next("/login");

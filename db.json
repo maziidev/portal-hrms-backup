@@ -53,7 +53,7 @@
       "id": 8,
       "username": "academic1",
       "password": "acad123",
-      "role": "academic-staff",
+      "role": "lecturer",
       "name": "Academic Staff"
     },
     {
@@ -73,26 +73,24 @@
   ],
   "external": [
     {
-      "evaluation_summary":{
-        "data":[
+      "evaluation_summary": {
+        "data": [
           {
             "id": 1,
             "name": "John Doe",
             "department": "Computer Science",
             "rank_applied": 85,
-            "last_updated":"Jan 2, 2024",
-            "status":"Pending"
+            "last_updated": "Jan 2, 2024",
+            "status": "Pending"
           },
           {
             "id": 2,
             "name": "Jane Smith",
             "department": "Mathematics",
             "rank_applied": 78,
-            "last_updated":"Feb 15, 2024",
-            "status":"Reviewed"
-            
+            "last_updated": "Feb 15, 2024",
+            "status": "Reviewed"
           }
-            
         ]
       }
     }

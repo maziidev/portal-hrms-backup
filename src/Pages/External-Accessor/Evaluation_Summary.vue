@@ -2,7 +2,7 @@
   <div class="relative">
     <button
       @click="toggleSideBar"
-      class="absolute md:hidden menu-bar lg:hidden z-[2000] font-[700] text-[30px] top-[20px] right-[20px] px-[4px] py-[-2px] rounded-sm"
+      class="absolute md:hidden menu-bar lg:hidden z-[2000] font-bold text-[30px] top-[20px] right-[20px] px-[4px] py-[-2px] rounded-sm"
     >
       <i class="fa fa-bars"></i>
     </button>
@@ -10,13 +10,13 @@
       <div class=" ">
         <aside
           :class="[
-            `{ w-[268px] sidebar z-[3000] transition-all duration-100 ease-in-out  fixed top-0 left-0 h-screen md:flex lg:flex px-[35px] flex flex-col gap-[67px] py-[45px] bg-[var(--primary)]`,
+            `{ w-67 sidebar z-3000 transition-all duration-100 ease-in-out  fixed top-0 left-0 h-screen md:flex lg:flex px-[35px] flex flex-col gap-[67px] py-[45px] bg-[var(--primary)]`,
             !toggleState ? `hidden` : `md:flex lg:flex`,
           ]"
         >
           <div class="">
             <li
-              class="text-[rgba(14,253,193,1)] font-[700] text-[20px] flex gap-2 items-center text-[16px] tracking-[-2%] leading-[120%]"
+              class="text-[rgba(14,253,193,1)] font-bold text-[20px] flex gap-2 items-center text-[16px] tracking-[-2%] leading-[120%]"
             >
               Orbit <img :src="Orbit" />
             </li>
@@ -25,14 +25,14 @@
             <li>
               <router-link
                 to="/external-accessor"
-                class="text-[var(--pri-text)] cursor-pointer font-[400] flex gap-2 items-center text-[16px] tracking-[-2%] leading-[120%]"
+                class="text-(--pri-text) cursor-pointer font-normal flex gap-2 items-center text-[16px] tracking-[-2%] leading-[120%]"
                 ><i class="fa fa-th-large"></i>Dashboard</router-link
               >
             </li>
             <li>
               <router-link
                 to="/external-accessor/assigned-staff-evaluation"
-                class="text-[var(--pri-text)] cursor-pointer font-[400] text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
+                class="text-(--pri-text) cursor-pointer font-normal text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
                 ><i class="fa fa-user-circle"></i>Assigned Staff
                 Evaluations</router-link
               >
@@ -40,7 +40,7 @@
             <li>
               <router-link
                 to="/external-accessor/evaluation"
-                class="text-[rgba(14,253,193,1)] font-[700] text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
+                class="text-[rgba(14,253,193,1)] font-bold text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
                 ><i class="fa fa-file-text"></i> Evaluation
               </router-link>
             </li>
@@ -48,7 +48,7 @@
             <li>
               <router-link
                 to="/external-accessor/evaluation"
-                class="text-[var(--pri-text)] font-[400] text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
+                class="text-(--pri-text) font-normal text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
                 href="Report_Analysis.html"
                 ><i class="fa-solid fa-chart-column"></i>Reports &
                 Analytics</router-link
@@ -59,30 +59,30 @@
           <div class="flex flex-col gap-[25px]">
             <li>
               <a
-                class="text-[var(--pri-text)] flex items-center gap-2 font-[400] text-[16px] tracking-[-2%] leading-[120%]"
+                class="text-(--pri-text) flex items-center gap-2 font-normal text-[16px] tracking-[-2%] leading-[120%]"
                 href="#"
                 ><i class="fa fa-gear"></i> Settings</a
               >
             </li>
             <li>
               <a
-                class="text-[var(--pri-text)] flex items-center gap-2 font-[400] text-[16px] tracking-[-2%] leading-[120%]"
+                class="text-(--pri-text) flex items-center gap-2 font-normal text-[16px] tracking-[-2%] leading-[120%]"
                 href="#"
                 ><i class="fa-solid fa-right-from-bracket"></i> Logout</a
               >
             </li>
             <li class="md:hidden lg:hidden items-center gap-[10px] flex">
-              <i class="fa fa-bell text-[var(--pri-text)]"></i>
+              <i class="fa fa-bell text-(--pri-text)"></i>
               <span
-                class="text-[var(--pri-text)] flex items-center gap-2 font-[400] text-[16px] tracking-[-2%] leading-[120%]"
+                class="text-(--pri-text) flex items-center gap-2 font-normal text-[16px] tracking-[-2%] leading-[120%]"
                 >Notification</span
               >
             </li>
             <li class="md:hidden lg:hidden items-center gap-[10px] flex">
               <div class="user">
-                <i class="fa fa-user text-xl text-[var(--pri-text)]"></i>
+                <i class="fa fa-user text-xl text-(--pri-text)"></i>
               </div>
-              <div class="user-id mbc text-[var(--pri-text)] break-words">
+              <div class="user-id mbc text-(--pri-text) break-words">
                 Nnamdichuzu@edu.EU.ng
               </div>
             </li>
@@ -98,7 +98,7 @@
               <h2 class="bc mb-[7px]">Staff Detail</h2>
             </div>
             <div class="md:flex lg:flex items-center gap-[10px] hidden">
-              <i class="fa fa-bell text-[var(--sec-text)]"></i>
+              <i class="fa fa-bell text-(--sec-text)"></i>
               <div class="user">
                 <i class="fa fa-user text-2xl"></i>
               </div>
@@ -120,7 +120,7 @@
                   <i class="fa fa-chevron-left"></i> Back
                 </button>
                 <span
-                  class="text-[rgba(20,21,15,1)] text-[16px] md:text-[20px] leading-[120%] tracking-[0%] font-[700]"
+                  class="text-[rgba(20,21,15,1)] text-[16px] md:text-[20px] leading-[120%] tracking-[0%] font-bold"
                   >Dr. Chinedu Okafor | Department of Mechanical Engineering |
                   UNILAG</span
                 >
@@ -130,7 +130,7 @@
                 class="flex items-center w-full md:w-[50%] justify-end gap-[10px]"
               >
                 <button
-                  class="bg-[rgba(35,136,255,1)] view_performance_history text-[rgba(255,255,255,1)] text-[14px] font-[700] px-[20px] py-[10px] flex gap-[10px] rounded-[5px] items-center"
+                  class="bg-[rgba(35,136,255,1)] view_performance_history text-[rgba(255,255,255,1)] text-[14px] font-bold px-[20px] py-[10px] flex gap-[10px] rounded-[5px] items-center"
                   href="#"
                 >
                   Evaluation Decision
@@ -153,19 +153,24 @@
               </div>
               <div class="top flex justify-between">
                 <h2
-                  class="text-[rgba(17,27,73,1)] font-[700] text-[16px] leading-[100%] tracking-[0%]"
+                  class="text-[rgba(17,27,73,1)] font-bold text-[16px] leading-[100%] tracking-[0%]"
                 >
                   ECF/ACA/0458
                 </h2>
                 <div class="flex flex-items gap-2">
-                  <button class="toggle-data" @click="toggleBasicBio" v-if="showBasicBio">
+                  <button
+                    class="toggle-data"
+                    @click="toggleBasicBio"
+                    v-if="showBasicBio"
+                  >
                     <i class="fa fa-chevron-down"></i></button
                   ><button class="toggle-data" @click="toggleBasicBio" v-else>
                     <i class="fa fa-chevron-up"></i>
                   </button>
                 </div>
               </div>
-              <div v-if="showBasicBio"
+              <div
+                v-if="showBasicBio"
                 class="flex transition-all duration-500 ease-in-out flex-col gap-[20px] border-b py-[20px] border-[rgba(240,240,240,1)]"
               >
                 <div class="name flex justify-between items-center">
@@ -263,19 +268,28 @@
             <div class="">
               <div class="top flex justify-between">
                 <h2
-                  class="text-[rgba(17,27,73,1)] font-[700] text-[16px] leading-[100%] tracking-[0%]"
+                  class="text-[rgba(17,27,73,1)] font-bold text-[16px] leading-[100%] tracking-[0%]"
                 >
                   Employment Details
                 </h2>
                 <div class="flex flex-items gap-2">
-                  <button class="toggle-data" v-if="showEmploymentDetails" @click="toggleEmploymentDetails">
+                  <button
+                    class="toggle-data"
+                    v-if="showEmploymentDetails"
+                    @click="toggleEmploymentDetails"
+                  >
                     <i class="fa fa-chevron-down"></i></button
-                  ><button class="toggle-data " @click="toggleEmploymentDetails" v-if="showEmploymentDetails == false">
+                  ><button
+                    class="toggle-data"
+                    @click="toggleEmploymentDetails"
+                    v-if="showEmploymentDetails == false"
+                  >
                     <i class="fa fa-chevron-up"></i>
                   </button>
                 </div>
               </div>
-              <div v-if="showEmploymentDetails"
+              <div
+                v-if="showEmploymentDetails"
                 class="flex transition-all duration-500 ease-in-out flex-col gap-[20px] border-b py-[20px] border-[rgba(240,240,240,1)]"
               >
                 <div class="cadre flex justify-between items-center">
@@ -374,11 +388,11 @@
             </div>
 
             <div
-              class="bg-[var(--twhite)] mt-[1px] py-[20px] gap-[10px] flex flex-col justify-between"
+              class="bg-var(--twhite) mt-[1px] py-[20px] gap-[10px] flex flex-col justify-between"
             >
               <div class="w-full overflow-hidden">
                 <h2
-                  class="text-[rgba(27,37,89,1)] mb-[-20px] font-[700] text-[16px] leading-[100%] tracking-[0%]"
+                  class="text-[rgba(27,37,89,1)] mb-[-20px] font-bold text-[16px] leading-[100%] tracking-[0%]"
                 >
                   Teaching & Research Breakdown
                 </h2>
@@ -394,11 +408,11 @@
               </div>
             </div>
             <div
-              class="bg-[var(--twhite)] mt-[1px] py-[0px] mb-[10px] gap-[10px] flex flex-col justify-between"
+              class="bg-var(--twhite) mt-[1px] py-[0px] mb-[10px] gap-[10px] flex flex-col justify-between"
             >
               <div class="w-full overflow-hidden">
                 <h2
-                  class="text-[rgba(27,37,89,1)] mb-[-20px] font-[700] text-[16px] leading-[100%] tracking-[0%]"
+                  class="text-[rgba(27,37,89,1)] mb-[-20px] font-bold text-[16px] leading-[100%] tracking-[0%]"
                 >
                   Research Contributions
                 </h2>
@@ -414,7 +428,7 @@
               </div>
               <div class="top flex justify-between">
                 <h2
-                  class="text-[rgba(17,27,73,1)] font-[700] text-[16px] leading-[100%] tracking-[0%]"
+                  class="text-[rgba(17,27,73,1)] font-bold text-[16px] leading-[100%] tracking-[0%]"
                 >
                   Administrative Duties
                 </h2>
@@ -423,15 +437,10 @@
                     v-if="adminDuties"
                     class="toggle-data"
                     @click="toggleAdminDuties"
-                    
                   >
                     <i class="fa fa-chevron-down"></i>
                   </button>
-                  <button
-                    class="toggle-data"
-                    @click="toggleAdminDuties"
-                    v-else
-                  >
+                  <button class="toggle-data" @click="toggleAdminDuties" v-else>
                     <i class="fa fa-chevron-up"></i>
                   </button>
                 </div>
@@ -473,7 +482,7 @@
                       class="h-[41px] rounded-[16px] w-[4px] bg-[rgba(35,136,255,1)]"
                     ></span>
                     <h2
-                      class="text-[rgba(27,37,89,1)] font-[700] text-[16px] leading-[120%] tracking-[-2%]"
+                      class="text-[rgba(27,37,89,1)] font-bold text-[16px] leading-[120%] tracking-[-2%]"
                     >
                       Teaching Effectiveness
                     </h2>
@@ -505,7 +514,7 @@
                   <input
                     type="text"
                     placeholder="Consistently achieves positive student feedback."
-                    class="w-full outline-none border-0 px-[12px] py-[15px] h-[47px] bg-[rgba(161,161,170,0.09)] font-[400] text-[14px] leading-[120%] tracking-[-2%] text-[rgba(161,161,170,1)]"
+                    class="w-full outline-none border-0 px-[12px] py-[15px] h-[47px] bg-[rgba(161,161,170,0.09)] font-normal text-[14px] leading-[120%] tracking-[-2%] text-[rgba(161,161,170,1)]"
                   />
                 </div>
               </div>
@@ -516,7 +525,7 @@
                       class="h-[41px] rounded-[16px] w-[4px] bg-[rgba(35,136,255,1)]"
                     ></span>
                     <h2
-                      class="text-[rgba(27,37,89,1)] font-[700] text-[16px] leading-[120%] tracking-[-2%]"
+                      class="text-[rgba(27,37,89,1)] font-bold text-[16px] leading-[120%] tracking-[-2%]"
                     >
                       Research Output
                     </h2>
@@ -548,7 +557,7 @@
                   <input
                     type="text"
                     placeholder="Published 3 peer-reviewed papers this session."
-                    class="w-full outline-none border-0 px-[12px] py-[15px] h-[47px] bg-[rgba(161,161,170,0.09)] font-[400] text-[14px] leading-[120%] tracking-[-2%] text-[rgba(161,161,170,1)]"
+                    class="w-full outline-none border-0 px-[12px] py-[15px] h-[47px] bg-[rgba(161,161,170,0.09)] font-normal text-[14px] leading-[120%] tracking-[-2%] text-[rgba(161,161,170,1)]"
                   />
                 </div>
               </div>
@@ -559,7 +568,7 @@
                       class="h-[41px] rounded-[16px] w-[4px] bg-[rgba(35,136,255,1)]"
                     ></span>
                     <h2
-                      class="text-[rgba(27,37,89,1)] font-[700] text-[16px] leading-[120%] tracking-[-2%]"
+                      class="text-[rgba(27,37,89,1)] font-bold text-[16px] leading-[120%] tracking-[-2%]"
                     >
                       Supervision
                     </h2>
@@ -591,7 +600,7 @@
                   <input
                     type="text"
                     placeholder="Adequate supervision record for final-year projects."
-                    class="w-full outline-none border-0 px-[12px] py-[15px] h-[47px] bg-[rgba(161,161,170,0.09)] font-[400] text-[14px] leading-[120%] tracking-[-2%] text-[rgba(161,161,170,1)]"
+                    class="w-full outline-none border-0 px-[12px] py-[15px] h-[47px] bg-[rgba(161,161,170,0.09)] font-normal text-[14px] leading-[120%] tracking-[-2%] text-[rgba(161,161,170,1)]"
                   />
                 </div>
               </div>
@@ -602,7 +611,7 @@
                       class="h-[41px] rounded-[16px] w-[4px] bg-[rgba(35,136,255,1)]"
                     ></span>
                     <h2
-                      class="text-[rgba(27,37,89,1)] font-[700] text-[16px] leading-[120%] tracking-[-2%]"
+                      class="text-[rgba(27,37,89,1)] font-bold text-[16px] leading-[120%] tracking-[-2%]"
                     >
                       Contribution to Department
                     </h2>
@@ -634,7 +643,7 @@
                   <input
                     type="text"
                     placeholder="Supported new curriculum design committee."
-                    class="w-full outline-none border-0 px-[12px] py-[15px] h-[47px] bg-[rgba(161,161,170,0.09)] font-[400] text-[14px] leading-[120%] tracking-[-2%] text-[rgba(161,161,170,1)]"
+                    class="w-full outline-none border-0 px-[12px] py-[15px] h-[47px] bg-[rgba(161,161,170,0.09)] font-normal text-[14px] leading-[120%] tracking-[-2%] text-[rgba(161,161,170,1)]"
                   />
                 </div>
               </div>
@@ -654,7 +663,7 @@
                 <input
                   type="text"
                   placeholder="Approved – replacement arranged, no academic disruption expected"
-                  class="w-full outline-none border-0 px-[12px] py-[15px] h-[47px] bg-[rgba(161,161,170,0.09)] font-[400] text-[14px] leading-[120%] tracking-[-2%] text-[rgba(161,161,170,1)]"
+                  class="w-full outline-none border-0 px-[12px] py-[15px] h-[47px] bg-[rgba(161,161,170,0.09)] font-normal text-[14px] leading-[120%] tracking-[-2%] text-[rgba(161,161,170,1)]"
                 />
               </div>
             </div>
@@ -663,7 +672,7 @@
             <div class="py-[7px]">
               <div class="top flex justify-between">
                 <h2
-                  class="text-[rgba(17,27,73,1)] font-[700] text-[16px] leading-[100%] tracking-[0%]"
+                  class="text-[rgba(17,27,73,1)] font-bold text-[16px] leading-[100%] tracking-[0%]"
                 >
                   FILES / DOCUMENTS
                 </h2>
@@ -674,16 +683,13 @@
                     @click="toggleShowFiles"
                   >
                     <i class="fa fa-chevron-down"></i></button
-                  ><button
-                    class="toggle-data"
-                    v-else
-                    @click="toggleShowFiles"
-                  >
+                  ><button class="toggle-data" v-else @click="toggleShowFiles">
                     <i class="fa fa-chevron-up"></i>
                   </button>
                 </div>
               </div>
-              <div v-if="showFiles"
+              <div
+                v-if="showFiles"
                 class="flex transition-all duration-500 ease-in-out flex-col gap-[20px] border-b py-[20px] border-[rgba(240,240,240,1)]"
               >
                 <div
@@ -695,10 +701,10 @@
                   >
                   <div class="flex items-center gap-[10px]">
                     <a href="#" download="download"
-                      ><i class="fa fa-download text-[var(--sec-text)]"></i
+                      ><i class="fa fa-download text-(--sec-text)"></i
                     ></a>
                     <span
-                      class="view bg-[rgba(35,136,255,1)] cursor-pointer text-[14px] font-[700] leading-[100%] tracking-[0%] text-[rgba(255,255,255,1)] py-[10px] px-[20px] rounded-[5px]"
+                      class="view bg-[rgba(35,136,255,1)] cursor-pointer text-[14px] font-bold leading-[100%] tracking-[0%] text-[rgba(255,255,255,1)] py-[10px] px-[20px] rounded-[5px]"
                       >View</span
                     >
                   </div>
@@ -712,10 +718,10 @@
                   >
                   <div class="flex items-center gap-[10px]">
                     <a href="#" download="download"
-                      ><i class="fa fa-download text-[var(--sec-text)]"></i
+                      ><i class="fa fa-download text-(--sec-text)"></i
                     ></a>
                     <span
-                      class="view bg-[rgba(35,136,255,1)] cursor-pointer text-[14px] font-[700] leading-[100%] tracking-[0%] text-[rgba(255,255,255,1)] py-[10px] px-[20px] rounded-[5px]"
+                      class="view bg-[rgba(35,136,255,1)] cursor-pointer text-[14px] font-bold leading-[100%] tracking-[0%] text-[rgba(255,255,255,1)] py-[10px] px-[20px] rounded-[5px]"
                       >View</span
                     >
                   </div>
@@ -729,10 +735,10 @@
                   >
                   <div class="flex items-center gap-[10px]">
                     <a href="#" download="download"
-                      ><i class="fa fa-download text-[var(--sec-text)]"></i
+                      ><i class="fa fa-download text-(--sec-text)"></i
                     ></a>
                     <span
-                      class="view bg-[rgba(35,136,255,1)] cursor-pointer text-[14px] font-[700] leading-[100%] tracking-[0%] text-[rgba(255,255,255,1)] py-[10px] px-[20px] rounded-[5px]"
+                      class="view bg-[rgba(35,136,255,1)] cursor-pointer text-[14px] font-bold leading-[100%] tracking-[0%] text-[rgba(255,255,255,1)] py-[10px] px-[20px] rounded-[5px]"
                       >View</span
                     >
                   </div>
@@ -746,10 +752,10 @@
                   >
                   <div class="flex items-center gap-[10px]">
                     <a href="#" download="download"
-                      ><i class="fa fa-download text-[var(--sec-text)]"></i
+                      ><i class="fa fa-download text-(--sec-text)"></i
                     ></a>
                     <span
-                      class="view bg-[rgba(35,136,255,1)] cursor-pointer text-[14px] font-[700] leading-[100%] tracking-[0%] text-[rgba(255,255,255,1)] py-[10px] px-[20px] rounded-[5px]"
+                      class="view bg-[rgba(35,136,255,1)] cursor-pointer text-[14px] font-bold leading-[100%] tracking-[0%] text-[rgba(255,255,255,1)] py-[10px] px-[20px] rounded-[5px]"
                       >View</span
                     >
                   </div>
@@ -763,10 +769,10 @@
                   >
                   <div class="flex items-center gap-[10px]">
                     <a href="#" download="download"
-                      ><i class="fa fa-download text-[var(--sec-text)]"></i
+                      ><i class="fa fa-download text-(--sec-text)"></i
                     ></a>
                     <span
-                      class="view bg-[rgba(35,136,255,1)] cursor-pointer text-[14px] font-[700] leading-[100%] tracking-[0%] text-[rgba(255,255,255,1)] py-[10px] px-[20px] rounded-[5px]"
+                      class="view bg-[rgba(35,136,255,1)] cursor-pointer text-[14px] font-bold leading-[100%] tracking-[0%] text-[rgba(255,255,255,1)] py-[10px] px-[20px] rounded-[5px]"
                       >View</span
                     >
                   </div>
@@ -781,7 +787,7 @@
           class="promotion_history hidden absolute transition-all ease-in-out duration-500 top-0 min-h-screen w-[100%] bg-white"
         >
           <div
-            class="bg-[var(--twhite)] p-[20px] shadow-sm border-b mb-[10px] border-slate-100 gap-[10px] flex flex-col justify-between"
+            class="bg-var(--twhite) p-[20px] shadow-sm border-b mb-[10px] border-slate-100 gap-[10px] flex flex-col justify-between"
           >
             <div class="flex p-[10px] gap-[20px] items-center">
               <button
@@ -790,7 +796,7 @@
                 x
               </button>
               <h2
-                class="text-[rgba(27,37,89,1)] w-full mb-[20px] text-center font-[700] text-[20px] leading-[120%] tracking-[-2%]"
+                class="text-[rgba(27,37,89,1)] w-full mb-[20px] text-center font-bold text-[20px] leading-[120%] tracking-[-2%]"
               >
                 Promotion History
               </h2>
@@ -820,27 +826,27 @@
                   <tbody>
                     <tr>
                       <td
-                        class="p-5 text-[rgba(30,30,30,1)] font-[400] text-[14px] leading-[100%] tracking-[0%]"
+                        class="p-5 text-[rgba(30,30,30,1)] font-normal text-[14px] leading-[100%] tracking-[0%]"
                       >
                         B.Eng.
                       </td>
                       <td
-                        class="p-5 text-[rgba(30,30,30,1)] font-[400] text-[14px] leading-[100%] tracking-[0%]"
+                        class="p-5 text-[rgba(30,30,30,1)] font-normal text-[14px] leading-[100%] tracking-[0%]"
                       >
                         University of Lagos
                       </td>
                       <td
-                        class="p-5 text-[rgba(30,30,30,1)] font-[400] text-[14px] leading-[100%] tracking-[0%]"
+                        class="p-5 text-[rgba(30,30,30,1)] font-normal text-[14px] leading-[100%] tracking-[0%]"
                       >
                         2024
                       </td>
                       <td
-                        class="p-5 text-[rgba(30,30,30,1)] font-[400] text-[14px] leading-[100%] tracking-[0%]"
+                        class="p-5 text-[rgba(30,30,30,1)] font-normal text-[14px] leading-[100%] tracking-[0%]"
                       >
                         Mechanical Engineering
                       </td>
                       <td
-                        class="p-5 font-[400] text-[14px] leading-[100%] tracking-[0%]"
+                        class="p-5 font-normal text-[14px] leading-[100%] tracking-[0%]"
                       >
                         <button
                           class="bg-[rgba(35,136,255,1)] view text-[rgba(255,255,255,1)] rounded-[5px] py-[10px] px-[20px] w-full"
@@ -851,27 +857,27 @@
                     </tr>
                     <tr>
                       <td
-                        class="p-5 text-[rgba(30,30,30,1)] font-[400] text-[14px] leading-[100%] tracking-[0%]"
+                        class="p-5 text-[rgba(30,30,30,1)] font-normal text-[14px] leading-[100%] tracking-[0%]"
                       >
                         B.Eng.
                       </td>
                       <td
-                        class="p-5 text-[rgba(30,30,30,1)] font-[400] text-[14px] leading-[100%] tracking-[0%]"
+                        class="p-5 text-[rgba(30,30,30,1)] font-normal text-[14px] leading-[100%] tracking-[0%]"
                       >
                         University of Lagos
                       </td>
                       <td
-                        class="p-5 text-[rgba(30,30,30,1)] font-[400] text-[14px] leading-[100%] tracking-[0%]"
+                        class="p-5 text-[rgba(30,30,30,1)] font-normal text-[14px] leading-[100%] tracking-[0%]"
                       >
                         2024
                       </td>
                       <td
-                        class="p-5 text-[rgba(30,30,30,1)] font-[400] text-[14px] leading-[100%] tracking-[0%]"
+                        class="p-5 text-[rgba(30,30,30,1)] font-normal text-[14px] leading-[100%] tracking-[0%]"
                       >
                         Mechanical Engineering
                       </td>
                       <td
-                        class="p-5 font-[400] text-[14px] leading-[100%] tracking-[0%]"
+                        class="p-5 font-normal text-[14px] leading-[100%] tracking-[0%]"
                       >
                         <button
                           class="bg-[rgba(35,136,255,1)] view text-[rgba(255,255,255,1)] rounded-[5px] py-[10px] px-[20px] w-full"
@@ -882,27 +888,27 @@
                     </tr>
                     <tr>
                       <td
-                        class="p-5 text-[rgba(30,30,30,1)] font-[400] text-[14px] leading-[100%] tracking-[0%]"
+                        class="p-5 text-[rgba(30,30,30,1)] font-normal text-[14px] leading-[100%] tracking-[0%]"
                       >
                         B.Eng.
                       </td>
                       <td
-                        class="p-5 text-[rgba(30,30,30,1)] font-[400] text-[14px] leading-[100%] tracking-[0%]"
+                        class="p-5 text-[rgba(30,30,30,1)] font-normal text-[14px] leading-[100%] tracking-[0%]"
                       >
                         University of Lagos
                       </td>
                       <td
-                        class="p-5 text-[rgba(30,30,30,1)] font-[400] text-[14px] leading-[100%] tracking-[0%]"
+                        class="p-5 text-[rgba(30,30,30,1)] font-normal text-[14px] leading-[100%] tracking-[0%]"
                       >
                         2024
                       </td>
                       <td
-                        class="p-5 text-[rgba(30,30,30,1)] font-[400] text-[14px] leading-[100%] tracking-[0%]"
+                        class="p-5 text-[rgba(30,30,30,1)] font-normal text-[14px] leading-[100%] tracking-[0%]"
                       >
                         Mechanical Engineering
                       </td>
                       <td
-                        class="p-5 font-[400] text-[14px] leading-[100%] tracking-[0%]"
+                        class="p-5 font-normal text-[14px] leading-[100%] tracking-[0%]"
                       >
                         <button
                           class="bg-[rgba(35,136,255,1)] view text-[rgba(255,255,255,1)] rounded-[5px] py-[10px] px-[20px] w-full"
@@ -925,7 +931,7 @@
                       class="w-[4px] block bg-[rgba(67,24,255,1)] h-[41px] rounded-[16px]"
                     ></span>
                     <h2
-                      class="text-[rgba(27,37,89,1)] font-[700] text-[14px] leading-[120%] tracking-[-2%]"
+                      class="text-[rgba(27,37,89,1)] font-bold text-[14px] leading-[120%] tracking-[-2%]"
                     >
                       Promotion for Lecturer I → Senior Lecturer endorsed and
                       sent to Dean
@@ -947,7 +953,7 @@
                       class="w-[4px] block bg-[rgba(67,24,255,1)] h-[41px] rounded-[16px]"
                     ></span>
                     <h2
-                      class="text-[rgba(27,37,89,1)] font-[700] text-[14px] leading-[120%] tracking-[-2%]"
+                      class="text-[rgba(27,37,89,1)] font-bold text-[14px] leading-[120%] tracking-[-2%]"
                     >
                       New promotion request from Dr. Helen Eze awaiting review
                     </h2>
@@ -968,7 +974,7 @@
                       class="w-[4px] block bg-[rgba(67,24,255,1)] h-[41px] rounded-[16px]"
                     ></span>
                     <h2
-                      class="text-[rgba(27,37,89,1)] font-[700] text-[14px] leading-[120%] tracking-[-2%]"
+                      class="text-[rgba(27,37,89,1)] font-bold text-[14px] leading-[120%] tracking-[-2%]"
                     >
                       Promotion request for Dr. Iweala Nkem returned for
                       corrections.
@@ -990,7 +996,7 @@
                       class="w-[4px] block bg-[rgba(67,24,255,1)] h-[41px] rounded-[16px]"
                     ></span>
                     <h2
-                      class="text-[rgba(27,37,89,1)] font-[700] text-[14px] leading-[120%] tracking-[-2%]"
+                      class="text-[rgba(27,37,89,1)] font-bold text-[14px] leading-[120%] tracking-[-2%]"
                     >
                       Promotion request for Dr. Iweala Nkem returned for
                       corrections.
@@ -1031,8 +1037,8 @@ const data = reactive({
 const activeState = ref(null);
 const adminDuties = ref(true);
 const showFiles = ref(true);
-const showBasicBio = ref(true); 
-const showEmploymentDetails = ref(true); 
+const showBasicBio = ref(true);
+const showEmploymentDetails = ref(true);
 
 function toggleAdminDuties() {
   adminDuties.value = !adminDuties.value;
@@ -1043,10 +1049,10 @@ function toggleShowFiles() {
   console.log("Clicked");
 }
 function toggleBasicBio() {
-    showBasicBio.value = !showBasicBio.value;
+  showBasicBio.value = !showBasicBio.value;
 }
 function toggleEmploymentDetails() {
-    showEmploymentDetails.value = !showEmploymentDetails.value;
+  showEmploymentDetails.value = !showEmploymentDetails.value;
 }
 
 function isActive(id) {
@@ -1082,7 +1088,7 @@ const Research_Contributions_columns = [
           class: "text-blue-600 hover:underline font-semibold cursor-pointer",
           onClick: () => router.push(`/home/edit/${row.id}`),
         },
-        row.id
+        row.id,
       );
     },
   },
@@ -1101,7 +1107,7 @@ const Research_Breakdown_columns = [
           class: "text-blue-600 hover:underline font-semibold cursor-pointer",
           onClick: () => router.push(`/home/edit/${row.id}`),
         },
-        row.id
+        row.id,
       );
     },
   },

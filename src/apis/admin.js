@@ -66,7 +66,7 @@ export const checkStaffImportStatus = async (task_id) => {
 export const importStaff = async (file) => {
   try {
     const formData = new FormData();
-    formData.append("file", file)
+    formData.append("file", file);
     console.log(formData, file);
     const { data } = await api.postForm(`${BaseUrl}/upload_staff_csv/`, file);
     return data;

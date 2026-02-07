@@ -11,12 +11,12 @@
       <div class="flex justify-between items-center gap-[10px]">
         <div class="flex flex-col gap-[10px]">
           <h2
-            class="text-[rgba(24,24,27,1)] font-[700] leading-[100%] tracking-[0%] text-[20px]"
+            class="text-[rgba(24,24,27,1)] font-bold leading-[100%] tracking-[0%] text-[20px]"
           >
             Leave Request
           </h2>
           <p
-            class="text-[rgba(30,30,30,1)] font-[400] leading-[120%] tracking-[0%] text-[16px]"
+            class="text-[rgba(30,30,30,1)] font-normal leading-[120%] tracking-[0%] text-[16px]"
           >
             Review & Decision
           </p>
@@ -32,7 +32,7 @@
               <i class="fa fa-check text-[rgba(30,30,30,1)]"></i>
             </div>
             <p
-              class="text-[rgba(24,24,27,1)] font-[700] leading-[120%] text-[11px] tracking-[0%]"
+              class="text-[rgba(24,24,27,1)] font-bold leading-[120%] text-[11px] tracking-[0%]"
             >
               Staff Information
             </p>
@@ -48,7 +48,7 @@
               <i class="fa fa-check text-[rgba(141,193,255,0.27)]"></i>
             </div>
             <p
-              class="text-[rgba(24,24,27,1)] font-[700] leading-[120%] text-[11px] tracking-[0%]"
+              class="text-[rgba(24,24,27,1)] font-bold leading-[120%] text-[11px] tracking-[0%]"
             >
               Leave Details
             </p>
@@ -63,7 +63,7 @@
               <i class="fa fa-check text-[rgba(141,193,255,0.27)]"></i>
             </div>
             <p
-              class="text-[rgba(24,24,27,1)] font-[700] leading-[120%] text-[11px] tracking-[0%]"
+              class="text-[rgba(24,24,27,1)] font-bold leading-[120%] text-[11px] tracking-[0%]"
             >
               Leave Balance/Approval
             </p>
@@ -73,11 +73,7 @@
       <div class="personal_information">
         <div class="">
           <div class="image my-[10px]">
-            <img
-              :src="Img"
-              class="object-contain w-[300px] h-[184px]"
-              alt=""
-            />
+            <img :src="Img" class="object-contain w-[300px] h-[184px]" alt="" />
           </div>
           <h2
             class="text-[rgba(24,24,27,1)] font-[500] text-[16px] leading-[100%] tracking-[0%] my-3 mt-[20px]"
@@ -85,7 +81,7 @@
             ECF/ACA/0458
           </h2>
           <div
-            class="flex flex-col  gap-[20px] border-b py-[20px] border-[rgba(240,240,240,1)]"
+            class="flex flex-col gap-[20px] border-b py-[20px] border-[rgba(240,240,240,1)]"
           >
             <div class="name flex justify-between items-center">
               <span
@@ -129,7 +125,8 @@
             >
               Save as Draft
             </button>
-            <button @click="Next"
+            <button
+              @click="Next"
               class="next border-2 border-[rgba(35,136,255,1)] bg-[rgba(35,136,255,1)] text-[rgba(255,255,255,1)] font-[600] text-[16px] leading-[100%] tracking-[0] p-[15px]"
             >
               Next

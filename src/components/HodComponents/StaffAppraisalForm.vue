@@ -11,12 +11,12 @@
       <div class="flex justify-between items-center gap-[10px]">
         <div class="flex flex-col gap-[10px]">
           <h2
-            class="text-[rgba(24,24,27,1)] font-[700] leading-[100%] tracking-[0%] text-[20px]"
+            class="text-[rgba(24,24,27,1)] font-bold leading-[100%] tracking-[0%] text-[20px]"
           >
             Staff Appraisal Form - Dr. Jane Okafor
           </h2>
           <p
-            class="text-[rgba(30,30,30,1)] font-[400] leading-[120%] tracking-[0%] text-[16px]"
+            class="text-[rgba(30,30,30,1)] font-normal leading-[120%] tracking-[0%] text-[16px]"
           >
             Department of Political Science | Appraisal Period: Jan–Dec 2025
           </p>
@@ -32,7 +32,7 @@
               <i class="fa fa-check text-[rgba(30,30,30,1)]"></i>
             </div>
             <p
-              class="text-[rgba(24,24,27,1)] font-[700] leading-[120%] text-[11px] tracking-[0%]"
+              class="text-[rgba(24,24,27,1)] font-bold leading-[120%] text-[11px] tracking-[0%]"
             >
               Staff Information
             </p>
@@ -48,7 +48,7 @@
               <i class="fa fa-check"></i>
             </div>
             <p
-              class="text-[rgba(24,24,27,1)] font-[700] leading-[120%] text-[11px] tracking-[0%]"
+              class="text-[rgba(24,24,27,1)] font-bold leading-[120%] text-[11px] tracking-[0%]"
             >
               Performance Evaluation
             </p>
@@ -63,7 +63,7 @@
               <i class="fa fa-check"></i>
             </div>
             <p
-              class="text-[rgba(24,24,27,1)] font-[700] leading-[120%] text-[11px] tracking-[0%]"
+              class="text-[rgba(24,24,27,1)] font-bold leading-[120%] text-[11px] tracking-[0%]"
             >
               Teaching & Research
             </p>
@@ -78,7 +78,7 @@
               <i class="fa fa-check"></i>
             </div>
             <p
-              class="text-[rgba(24,24,27,1)] font-[700] leading-[120%] text-[11px] tracking-[0%]"
+              class="text-[rgba(24,24,27,1)] font-bold leading-[120%] text-[11px] tracking-[0%]"
             >
               Conduct & Discipline
             </p>
@@ -93,7 +93,7 @@
               <i class="fa fa-check"></i>
             </div>
             <p
-              class="text-[rgba(24,24,27,1)] font-[700] leading-[120%] text-[11px] tracking-[0%]"
+              class="text-[rgba(24,24,27,1)] font-bold leading-[120%] text-[11px] tracking-[0%]"
             >
               Goals & Development
             </p>
@@ -108,7 +108,7 @@
               <i class="fa fa-check"></i>
             </div>
             <p
-              class="text-[rgba(24,24,27,1)] font-[700] leading-[120%] text-[11px] tracking-[0%]"
+              class="text-[rgba(24,24,27,1)] font-bold leading-[120%] text-[11px] tracking-[0%]"
             >
               Summary & Submission
             </p>

@@ -9,6 +9,15 @@ export const createAppraisal = async (formData) => {
   }
 };
 
+export const getAcademicAppraisals = async () => {
+  try {
+    const { data } = await api.postForm(`${BaseUrl}/hrms/academic-appraisals/`);
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
+
 // SAVE ADMINSTRATIVE AND COMMUNITY SERVICE
 export const saveAdminstrativeAndCommunityService = async (formData, id) => {
   try {

@@ -3,7 +3,7 @@
     class="bg-[rgba(255,255,255,1)] px-[12px] py-[15px] border border-[rgba(141,193,255,0.27)]"
   >
     <h2
-      class="text-[rgba(27,37,89,1)] mb-[20px] font-[700] text-[16px] leading-[120%] tracking-[-2%]"
+      class="text-[rgba(27,37,89,1)] mb-[20px] font-bold text-[16px] leading-[120%] tracking-[-2%]"
     >
       Publication Summary
     </h2>
@@ -14,7 +14,7 @@
             class="h-[41px] rounded-[16px] w-[4px] bg-[rgba(35,136,255,1)]"
           ></span>
           <h2
-            class="text-[rgba(27,37,89,1)] font-[700] text-[16px] leading-[120%] tracking-[-2%]"
+            class="text-[rgba(27,37,89,1)] font-bold text-[16px] leading-[120%] tracking-[-2%]"
           >
             Total Publications
           </h2>
@@ -32,7 +32,7 @@
             class="h-[41px] rounded-[16px] w-[4px] bg-[rgba(35,136,255,1)]"
           ></span>
           <h2
-            class="text-[rgba(27,37,89,1)] font-[700] text-[16px] leading-[120%] tracking-[-2%]"
+            class="text-[rgba(27,37,89,1)] font-bold text-[16px] leading-[120%] tracking-[-2%]"
           >
             Journal Articles
           </h2>
@@ -50,7 +50,7 @@
             class="h-[41px] rounded-[16px] w-[4px] bg-[rgba(35,136,255,1)]"
           ></span>
           <h2
-            class="text-[rgba(27,37,89,1)] font-[700] text-[16px] leading-[120%] tracking-[-2%]"
+            class="text-[rgba(27,37,89,1)] font-bold text-[16px] leading-[120%] tracking-[-2%]"
           >
             Conference Papers
           </h2>
@@ -86,10 +86,10 @@
           </h2>
           <h2
             :class="[
-              `text-[34px] font-[700] leading-[120%] tracking-[-2%]`,
+              `text-[34px] font-bold leading-[120%] tracking-[-2%]`,
               activeState == btn.name
                 ? `text-[rgba(255,255,255,1)]`
-                : `text-[var(--sec-text)]`,
+                : `text-(--sec-text)`,
             ]"
           >
             {{ btn.value }}
@@ -102,7 +102,7 @@
   <!-- Quick Actions -->
   <div class="quick_actions flex flex-col gap-[15px]">
     <h2
-      class="text-[rgba(30,43,58,1)] font-[700] text-[16px] leading-[120%] tracking-[-2%]"
+      class="text-[rgba(30,43,58,1)] font-bold text-[16px] leading-[120%] tracking-[-2%]"
     >
       Quick Actions
     </h2>
@@ -143,7 +143,7 @@
         class="left flex flex-wrap md:flex-nowrap lg:flex-nowrap items-center w-full md:w-[50%] lg:w-[50%] gap-[10px]"
       >
         <h2
-          class="font-[700] text-[var(--sec-text)] w-[120px] text-[20px] leading-[120%] tracking-[-2%]"
+          class="font-bold text-(--sec-text) w-[120px] text-[20px] leading-[120%] tracking-[-2%]"
         >
           Publications
         </h2>
@@ -320,7 +320,7 @@ const columns = [
         "a",
         {
           style:
-            "text-[rgba(35,136,255,1)] flex items-center gap-1 font-[400] text-[14px] leading-[100%] tracking-[0%]",
+            "text-[rgba(35,136,255,1)] flex items-center gap-1 font-normal text-[14px] leading-[100%] tracking-[0%]",
         },
         [h("i", { style: "fa fa-external-link-alt" }), "link.redirect"],
       );

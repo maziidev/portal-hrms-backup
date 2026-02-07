@@ -9,7 +9,7 @@
     @close="closeModal"
   >
     <p
-      class="text-[rgba(152,159,176,1)] text-[16px] font-[400] leading-[120%] tracking-[0%]"
+      class="text-[rgba(152,159,176,1)] text-[16px] font-normal leading-[120%] tracking-[0%]"
     >
       Capture essential staff details, upload appointment documents, and create
       a unique ID instantly
@@ -211,8 +211,8 @@ const AddStaff = async () => {
     message.success("Staff added successfully");
     loading.value = false;
   } catch (error) {
-    console.log(error)
-    message.error(error.message || "Staff not added")
+    console.log(error);
+    message.error(error.message || "Staff not added");
   }
 };
 
@@ -275,7 +275,6 @@ const rules = {
     },
   ],
   phone_number: [
-    
     {
       validator: (rule, value) => {
         if (!/^(\+234|0)[789][01]\d{8}$/.test(value)) {
@@ -287,7 +286,6 @@ const rules = {
     },
   ],
   startDate: [
-    
     {
       validator(rule, value) {
         if (!value) {

@@ -9,13 +9,13 @@
     @close="closeModal"
   >
     <p
-      class="text-[rgba(30,30,30,1)] font-[400] leading-[120%] tracking-[0%] text-[16px]"
+      class="text-[rgba(30,30,30,1)] font-normal leading-[120%] tracking-[0%] text-[16px]"
     >
       Submit your research work for verification and record update
     </p>
     <div class="flex my-[40px] justify-center items-center gap-2">
       <span
-        class="text-[rgba(17,27,73,1)] text-[20px] leading-[100%] tracking-[0%] font-[700]"
+        class="text-[rgba(17,27,73,1)] text-[20px] leading-[100%] tracking-[0%] font-bold"
         >Basic Publication Details</span
       >
     </div>
@@ -32,7 +32,7 @@
               :v-model:value="formData.publication_title"
               :bordered="false"
               placeholder="Enter the full title of your publication"
-              class="w-full outline-none border font-[400] text-[14px] leading-[120%] tracking-[-2%] text-[rgba(161,161,170,1)]"
+              class="w-full outline-none border font-normal text-[14px] leading-[120%] tracking-[-2%] text-[rgba(161,161,170,1)]"
             />
           </n-form-item>
         </div>
@@ -47,7 +47,7 @@
               :v-model="formData.type_of_publication"
               :bordered="false"
               placeholder="Journal Article"
-              class="w-full outline-none border font-[400] text-[14px] leading-[120%] tracking-[-2%] text-[rgba(161,161,170,1)]"
+              class="w-full outline-none border font-normal text-[14px] leading-[120%] tracking-[-2%] text-[rgba(161,161,170,1)]"
             >
             </n-select>
           </n-form-item>
@@ -63,7 +63,7 @@
               type="date"
               placeholder="DD-MM-YYYY"
               :bordered="false"
-              class="w-full outline-none border font-[400] text-[14px] leading-[120%] tracking-[-2%] text-[rgba(161,161,170,1)]"
+              class="w-full outline-none border font-normal text-[14px] leading-[120%] tracking-[-2%] text-[rgba(161,161,170,1)]"
             />
           </n-form-item>
         </div>
@@ -78,7 +78,7 @@
               :v-model="formData.publisher"
               :bordered="false"
               placeholder="E.g. Elsevier, Springer Nature, Oxford Press"
-              class="w-full outline-none border font-[400] text-[14px] leading-[120%] tracking-[-2%] text-[rgba(161,161,170,1)]"
+              class="w-full outline-none border font-normal text-[14px] leading-[120%] tracking-[-2%] text-[rgba(161,161,170,1)]"
             />
           </n-form-item>
         </div>
@@ -93,7 +93,7 @@
               :v-model="formData.issn"
               :bordered="false"
               placeholder="Enter Number"
-              class="w-full outline-none border font-[400] text-[14px] leading-[120%] tracking-[-2%] text-[rgba(161,161,170,1)]"
+              class="w-full outline-none border font-normal text-[14px] leading-[120%] tracking-[-2%] text-[rgba(161,161,170,1)]"
             />
           </n-form-item>
         </div>
@@ -104,7 +104,7 @@
               :v-model="formData.volume"
               :bordered="false"
               placeholder="E.g. Vol. 4, Issue 3, pp. 102–118"
-              class="w-full outline-none border font-[400] text-[14px] leading-[120%] tracking-[-2%] text-[rgba(161,161,170,1)]"
+              class="w-full outline-none border font-normal text-[14px] leading-[120%] tracking-[-2%] text-[rgba(161,161,170,1)]"
             />
           </n-form-item>
         </div>
@@ -115,7 +115,7 @@
               :v-model:value="formData.url"
               :bordered="false"
               placeholder="https://"
-              class="w-full outline-none border font-[400] text-[14px] leading-[120%] tracking-[-2%] text-[rgba(161,161,170,1)]"
+              class="w-full outline-none border font-normal text-[14px] leading-[120%] tracking-[-2%] text-[rgba(161,161,170,1)]"
             />
           </n-form-item>
         </div>
@@ -194,13 +194,13 @@ function saveDraft() {
 
 const save = async () => {
   try {
-  await form.value?.validate()
+    await form.value?.validate();
 
-  message.success("Saved successfully")
+    message.success("Saved successfully");
   } catch (error) {
-    message.error("Data not saved")
+    message.error("Data not saved");
   }
-}
+};
 
 const rules = {
   url: [
@@ -226,22 +226,22 @@ const rules = {
     {
       required: true,
       message: "Volume is required",
-      trigger: "blur"
-    }
+      trigger: "blur",
+    },
   ],
   issn: [
     {
       required: true,
       message: "issn is required",
-      trigger: "blur"
-    }
+      trigger: "blur",
+    },
   ],
   publisher: [
     {
       required: true,
       message: "publisher is required",
-      trigger: "blur"
-    }
+      trigger: "blur",
+    },
   ],
   date_of_publication: null,
   type_of_publication: null,
@@ -249,8 +249,8 @@ const rules = {
     {
       required: true,
       message: "Publication Title is required",
-      trigger: "blur"
-    }
+      trigger: "blur",
+    },
   ],
 };
 </script>

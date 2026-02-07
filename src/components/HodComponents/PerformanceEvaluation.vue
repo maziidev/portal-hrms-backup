@@ -7,19 +7,16 @@
     :mask-closable="true"
     class="md:w-[50%] lg:w-[60%] my-[20px] w-full"
   >
-    <div
-      id=""
-      class=""
-    >
+    <div id="" class="">
       <div class="flex justify-between items-center gap-[10px]">
         <div class="flex flex-col gap-[10px]">
           <h2
-            class="text-[rgba(24,24,27,1)] font-[700] leading-[100%] tracking-[0%] text-[20px]"
+            class="text-[rgba(24,24,27,1)] font-bold leading-[100%] tracking-[0%] text-[20px]"
           >
             Promotion Review
           </h2>
           <p
-            class="text-[rgba(30,30,30,1)] font-[400] leading-[120%] tracking-[0%] text-[16px]"
+            class="text-[rgba(30,30,30,1)] font-normal leading-[120%] tracking-[0%] text-[16px]"
           >
             ACD-015 (Dr. Helen Eze)
           </p>
@@ -36,7 +33,7 @@
               <i class="fa fa-check text-[rgba(30,30,30,1)]"></i>
             </div>
             <p
-              class="text-[rgba(24,24,27,1)] font-[700] leading-[120%] text-[11px] tracking-[0%]"
+              class="text-[rgba(24,24,27,1)] font-bold leading-[120%] text-[11px] tracking-[0%]"
             >
               Staff Information
             </p>
@@ -52,7 +49,7 @@
               <i class="fa fa-check text-[rgba(141,193,255,0.27)]"></i>
             </div>
             <p
-              class="text-[rgba(24,24,27,1)] font-[700] leading-[120%] text-[11px] tracking-[0%]"
+              class="text-[rgba(24,24,27,1)] font-bold leading-[120%] text-[11px] tracking-[0%]"
             >
               Promotion Request Details
             </p>
@@ -67,7 +64,7 @@
               <i class="fa fa-check text-[rgba(141,193,255,0.27)]"></i>
             </div>
             <p
-              class="text-[rgba(24,24,27,1)] font-[700] leading-[120%] text-[11px] tracking-[0%]"
+              class="text-[rgba(24,24,27,1)] font-bold leading-[120%] text-[11px] tracking-[0%]"
             >
               Evaluation Summary/Decision
             </p>
@@ -76,17 +73,13 @@
       </div>
       <div class="personal_information">
         <h2
-          class="text-[rgba(17,27,73,1)] font-[700] text-[20px] leading-[100%] tracking-[0%] my-[20px] mt-[30px]"
+          class="text-[rgba(17,27,73,1)] font-bold text-[20px] leading-[100%] tracking-[0%] my-[20px] mt-[30px]"
         >
           Staff Information
         </h2>
         <div class="">
           <div class="image my-[10px]">
-            <img
-              :src="Img"
-              class="object-contain w-[300px] h-[184px]"
-              alt=""
-            />
+            <img :src="Img" class="object-contain w-[300px] h-[184px]" alt="" />
           </div>
           <h2
             class="text-[rgba(24,24,27,1)] font-[500] text-[16px] leading-[100%] tracking-[0%] my-3 mt-[20px]"
@@ -160,7 +153,8 @@
             >
               Save as Draft
             </button>
-            <button @click="Next"
+            <button
+              @click="Next"
               class="next border-2 border-[rgba(35,136,255,1)] bg-[rgba(35,136,255,1)] text-[rgba(255,255,255,1)] font-[600] text-[16px] leading-[100%] tracking-[0] p-[15px]"
             >
               Next

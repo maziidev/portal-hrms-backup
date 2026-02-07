@@ -19,9 +19,9 @@
           <template #links>
             <li>
               <RouterLink
-                to="/admin"
+                to="/dap"
                 :class="
-                  currentRoute === '/admin'
+                  currentRoute === '/dap'
                     ? 'text-[rgba(14,253,193,1)] cursor-pointer font-bold flex gap-2 items-center  tracking-[-2%] leading-[120%]'
                     : 'text-(--pri-text) cursor-pointer font-normal text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2'
                 "
@@ -30,43 +30,43 @@
             </li>
             <li>
               <RouterLink
-                to="/admin/staff-managment"
+                to="/dap/staff-records"
                 :class="
-                  currentRoute === '/admin/staff-managment'
+                  currentRoute === '/dap/staff-records'
                     ? 'text-[rgba(14,253,193,1)] cursor-pointer font-bold flex gap-2 items-center  tracking-[-2%] leading-[120%]'
                     : 'text-(--pri-text) cursor-pointer font-normal text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2'
                 "
-                ><i class="fa fa-user-circle"></i>Staff Management</RouterLink
+                ><i class="fa fa-user-circle"></i>Staff Records</RouterLink
               >
             </li>
             <li>
               <RouterLink
-                to="/admin/appraisal"
+                to="/dap/appraisal-management"
                 :class="
-                  currentRoute === '/admin/appraisal'
+                  currentRoute === '/dap/appraisal-management'
                     ? 'text-[rgba(14,253,193,1)] cursor-pointer font-bold flex gap-2 items-center  tracking-[-2%] leading-[120%]'
                     : 'text-(--pri-text) cursor-pointer font-normal text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2'
                 "
-                ><i class="fa fa-file-text"></i> Appraisals
+                ><i class="fa fa-file-text"></i> Appraisals Management
               </RouterLink>
             </li>
             <li>
               <RouterLink
-                to="/admin/report-analysis"
+                to="/dap/leave-analytics"
                 :class="
-                  currentRoute === '/admin/report-analysis'
+                  currentRoute === '/dap/leave-analytics'
                     ? 'text-[rgba(14,253,193,1)] cursor-pointer font-bold flex gap-2 items-center  tracking-[-2%] leading-[120%]'
                     : 'text-(--pri-text) cursor-pointer font-normal text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2'
                 "
                 href="#"
-                ><i class="fa fa-bed"></i> Leave Management</RouterLink
+                ><i class="fa fa-bed"></i> Leave Analytics</RouterLink
               >
             </li>
             <li>
               <RouterLink
-                to="/lecturer/promotion-career-progression"
+                to="/dap/promotion-career-progression"
                 :class="
-                  currentRoute === '/lecturer/promotion-career-progression'
+                  currentRoute === '/dap/promotion-career-progression'
                     ? 'text-[rgba(14,253,193,1)] cursor-pointer font-bold flex gap-2 items-center  tracking-[-2%] leading-[120%]'
                     : 'text-(--pri-text) cursor-pointer font-normal text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2'
                 "
@@ -77,9 +77,9 @@
             </li>
             <li>
               <RouterLink
-                to="/lecturer/retirement-exit"
+                to="/dap/retirement-exit"
                 :class="
-                  currentRoute === '/lecturer/retirement-exit'
+                  currentRoute === '/dap/retirement-exit'
                     ? 'text-[rgba(14,253,193,1)] cursor-pointer font-bold flex gap-2 items-center  tracking-[-2%] leading-[120%]'
                     : 'text-(--pri-text) cursor-pointer font-normal text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2'
                 "
@@ -89,9 +89,9 @@
             <li>
               <RouterLink
                 v-slot="{ isActive }"
-                to="/lecturer/report-analysis"
+                to="/dap/report-analysis"
                 :class="
-                  currentRoute === '/lecturer/report-analysis'
+                  currentRoute === '/dap/report-analysis'
                     ? 'text-[rgba(14,253,193,1)] cursor-pointer font-bold flex gap-2 items-center  tracking-[-2%] leading-[120%]'
                     : 'text-(--pri-text) cursor-pointer font-normal text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2'
                 "
@@ -103,19 +103,23 @@
         </SideBar>
       </div>
 
-      <main class="md:ml-65 relative z-1 w-full flex-1 ml-0">
+      <main class="md:ml-[260px] relative z-1 w-full flex-1 ml-[0px]">
         <!-- Header -->
         <Header>
           <template #left>
             <div class="w-[70%]">
-              <h2 class="bc mb-1.75">Dashboard</h2>
+              <h2 class="bc mb-[7px]">Dashboard</h2>
               <h5 class="sbc">
-                Your central hub for managing the staff cycle from entry to exit
+                Welcome back, Dr.
+                {{
+                  auth.user &&
+                  auth.user.email.substr(0, auth.user.email.indexOf("@"))
+                }}
               </h5>
             </div>
           </template>
           <template #right>
-            <div class="md:flex lg:flex items-center gap-2.5 hidden">
+            <div class="md:flex lg:flex items-center gap-[10px] hidden">
               <i class="fa fa-bell text-(--sec-text)"></i>
               <div class="user">
                 <i class="fa fa-user text-2xl"></i>

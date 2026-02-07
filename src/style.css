@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+* {
+  list-style: none;
+}
 
 @font-face {
   font-family: "Lufga";

@@ -1,7 +1,7 @@
 <template>
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[25px]">
     <div
-      class="bg-[var(--twhite)] p-[12px] shadow-sm border border-slate-100 rounded-[20px] gap-[10px] flex flex-col justify-between"
+      class="bg-var(--twhite) p-[12px] shadow-sm border border-slate-100 rounded-[20px] gap-[10px] flex flex-col justify-between"
     >
       <div class="flex flex-col gap-[20px]">
         <div class="">
@@ -19,7 +19,7 @@
           <div class="flex justify-between items-center gap-3">
             <div class="balance">
               <h2
-                class="text-[rgba(255,255,255,1)] text-[25px] font-[700] leading-[120%] tracking-[-2%]"
+                class="text-[rgba(255,255,255,1)] text-[25px] font-bold leading-[120%] tracking-[-2%]"
               >
                 15 days remaining
               </h2>
@@ -81,11 +81,11 @@
     </div>
 
     <div
-      class="bg-[var(--twhite)] p-[20px] shadow-sm border border-slate-100 rounded-[20px] gap-[10px] flex flex-col"
+      class="bg-var(--twhite) p-[20px] shadow-sm border border-slate-100 rounded-[20px] gap-[10px] flex flex-col"
     >
       <div class="">
         <h2
-          class="text-[rgba(27,37,89,1)] font-[700] text-[20px] leading-[120%] tracking-[-2%]"
+          class="text-[rgba(27,37,89,1)] font-bold text-[20px] leading-[120%] tracking-[-2%]"
         >
           Number of Leave Days Taken per Quarter
         </h2>
@@ -93,7 +93,7 @@
       <div class="overview_metrics">
         <div class="top">
           <h2
-            class="text-[rgba(27,37,89,1)] text-[20px] tracking-[-2%] leading-[120%] font-[700]"
+            class="text-[rgba(27,37,89,1)] text-[20px] tracking-[-2%] leading-[120%] font-bold"
           >
             Overview Metrics
           </h2>
@@ -111,11 +111,11 @@
       </div>
     </div>
     <div
-      class="bg-[var(--twhite)] p-[20px] shadow-sm border border-slate-100 rounded-[20px] gap-[10px] flex flex-col justify-between"
+      class="bg-var(--twhite) p-[20px] shadow-sm border border-slate-100 rounded-[20px] gap-[10px] flex flex-col justify-between"
     >
       <div class="">
         <h2
-          class="text-[rgba(27,37,89,1)] font-[700] text-[20px] leading-[120%] tracking-[-2%]"
+          class="text-[rgba(27,37,89,1)] font-bold text-[20px] leading-[120%] tracking-[-2%]"
         >
           Notifications
         </h2>
@@ -128,7 +128,7 @@
                 class="w-[4px] block bg-[rgba(67,24,255,1)] h-[41px] rounded-[16px]"
               ></span>
               <h2
-                class="text-[rgba(27,37,89,1)] font-[700] text-[14px] leading-[120%] tracking-[-2%]"
+                class="text-[rgba(27,37,89,1)] font-bold text-[14px] leading-[120%] tracking-[-2%]"
               >
                 You approved Annual Leave for Dr. Helen Eze
               </h2>
@@ -147,7 +147,7 @@
                 class="w-[4px] block bg-[rgba(67,24,255,1)] h-[41px] rounded-[16px]"
               ></span>
               <h2
-                class="text-[rgba(27,37,89,1)] font-[700] text-[14px] leading-[120%] tracking-[-2%]"
+                class="text-[rgba(27,37,89,1)] font-bold text-[14px] leading-[120%] tracking-[-2%]"
               >
                 Leave request by Mr. Emeka Udo was rejected.
               </h2>
@@ -166,7 +166,7 @@
                 class="w-[4px] block bg-[rgba(67,24,255,1)] h-[41px] rounded-[16px]"
               ></span>
               <h2
-                class="text-[rgba(27,37,89,1)] font-[700] text-[14px] leading-[120%] tracking-[-2%]"
+                class="text-[rgba(27,37,89,1)] font-bold text-[14px] leading-[120%] tracking-[-2%]"
               >
                 2 staff expected to resume next week
               </h2>
@@ -185,7 +185,7 @@
                 class="w-[4px] block bg-[rgba(67,24,255,1)] h-[41px] rounded-[16px]"
               ></span>
               <h2
-                class="text-[rgba(27,37,89,1)] font-[700] text-[14px] leading-[120%] tracking-[-2%]"
+                class="text-[rgba(27,37,89,1)] font-bold text-[14px] leading-[120%] tracking-[-2%]"
               >
                 Completed appraisal for Prof. James Obi
               </h2>
@@ -210,7 +210,7 @@
         class="left flex flex-wrap md:flex-nowrap lg:flex-nowrap items-center w-full md:w-[50%] lg:w-[50%] gap-[10px]"
       >
         <h2
-          class="font-[700] text-[var(--sec-text)] text-[20px] leading-[120%] tracking-[-2%]"
+          class="font-bold text-(--sec-text) text-[20px] leading-[120%] tracking-[-2%]"
         >
           Leave Application History
         </h2>
@@ -441,7 +441,7 @@ const columns = [
         "button",
         {
           style:
-            "bg-[rgba(35,136,255,1)] view text-[rgba(255,255,255,1)] font-[700] text-[11px] w-full py-[20px] px-[20px] rounded-[5px]",
+            "bg-[rgba(35,136,255,1)] view text-[rgba(255,255,255,1)] font-bold text-[11px] w-full py-[20px] px-[20px] rounded-[5px]",
           onClick: () => openAcademicStaffApplicationTracking(),
         },
         ["View"],

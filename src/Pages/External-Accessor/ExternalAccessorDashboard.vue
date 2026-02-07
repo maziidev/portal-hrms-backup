@@ -2,7 +2,7 @@
   <div class="relative">
     <button
       @click="toggleSideBar"
-      class="absolute md:hidden menu-bar lg:hidden z-[2000] font-[700] text-[30px] top-[20px] right-[20px] px-[4px] py-[-2px] rounded-sm"
+      class="absolute md:hidden menu-bar lg:hidden z-[2000] font-bold text-[30px] top-[20px] right-[20px] px-[4px] py-[-2px] rounded-sm"
     >
       <i class="fa fa-bars"></i>
     </button>
@@ -10,12 +10,12 @@
       <div class=" ">
         <SideBar
           :class="[
-            `{ w-[268px] sidebar z-[3000] transition-all duration-100 ease-in-out  fixed top-0 left-0 h-screen md:flex lg:flex px-[35px] flex flex-col gap-[67px] py-[45px] bg-[var(--primary)]`,
+            `{ w-67 sidebar z-3000 transition-all duration-100 ease-in-out  fixed top-0 left-0 h-screen md:flex lg:flex px-[35px] flex flex-col gap-[67px] py-[45px] bg-[var(--primary)]`,
             !toggleState ? `hidden` : `md:flex lg:flex`,
           ]"
         >
           <li
-            class="text-[rgba(14,253,193,1)] font-[700] text-[20px] flex gap-2 items-center text-[16px] tracking-[-2%] leading-[120%]"
+            class="text-[rgba(14,253,193,1)] font-bold text-[20px] flex gap-2 items-center text-[16px] tracking-[-2%] leading-[120%]"
           >
             Orbit <img :src="Orbit" />
           </li>
@@ -23,14 +23,14 @@
             <li>
               <router-link
                 to="/external-accessor"
-                class="text-[rgba(14,253,193,1)] cursor-pointer font-[700] flex gap-2 items-center text-[16px] tracking-[-2%] leading-[120%]"
+                class="text-[rgba(14,253,193,1)] cursor-pointer font-bold flex gap-2 items-center text-[16px] tracking-[-2%] leading-[120%]"
                 ><i class="fa fa-th-large"></i>Dashboard</router-link
               >
             </li>
             <li>
               <router-link
                 to="/external-accessor/assigned-staff-evaluation"
-                class="text-[var(--pri-text)] cursor-pointer font-[400] text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
+                class="text-(--pri-text) cursor-pointer font-normal text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
                 ><i class="fa fa-user-circle"></i>Assigned Staff
                 Evaluations</router-link
               >
@@ -38,7 +38,7 @@
             <li>
               <router-link
                 to="/external-accessor/assigned-staff-evaluation"
-                class="text-[var(--pri-text)] font-[400] text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
+                class="text-(--pri-text) font-normal text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
                 ><i class="fa fa-file-text"></i> Evaluation
               </router-link>
             </li>
@@ -46,7 +46,7 @@
             <li>
               <router-link
                 to="/external-accessor/evaluation"
-                class="text-[var(--pri-text)] font-[400] text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
+                class="text-(--pri-text) font-normal text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
                 ><i class="fa-solid fa-chart-column"></i>Reports &
                 Analytics</router-link
               >
@@ -56,30 +56,30 @@
           <div class="flex flex-col gap-[25px]">
             <li>
               <router-link
-                class="text-[var(--pri-text)] flex items-center gap-2 font-[400] text-[16px] tracking-[-2%] leading-[120%]"
+                class="text-(--pri-text) flex items-center gap-2 font-normal text-[16px] tracking-[-2%] leading-[120%]"
                 href="#"
                 ><i class="fa fa-gear"></i> Settings</router-link
               >
             </li>
             <li>
               <a
-                class="text-[var(--pri-text)] flex items-center gap-2 font-[400] text-[16px] tracking-[-2%] leading-[120%]"
+                class="text-(--pri-text) flex items-center gap-2 font-normal text-[16px] tracking-[-2%] leading-[120%]"
                 href="#"
                 ><i class="fa-solid fa-right-from-bracket"></i> Logout</a
               >
             </li>
             <li class="md:hidden lg:hidden items-center gap-[10px] flex">
-              <i class="fa fa-bell text-[var(--pri-text)]"></i>
+              <i class="fa fa-bell text-(--pri-text)"></i>
               <span
-                class="text-[var(--pri-text)] flex items-center gap-2 font-[400] text-[16px] tracking-[-2%] leading-[120%]"
+                class="text-(--pri-text) flex items-center gap-2 font-normal text-[16px] tracking-[-2%] leading-[120%]"
                 >Notification</span
               >
             </li>
             <li class="md:hidden lg:hidden items-center gap-[10px] flex">
               <div class="user">
-                <i class="fa fa-user text-xl text-[var(--pri-text)]"></i>
+                <i class="fa fa-user text-xl text-(--pri-text)"></i>
               </div>
-              <div class="user-id mbc text-[var(--pri-text)] break-words">
+              <div class="user-id mbc text-(--pri-text) break-words">
                 {{ user?.name || "Nnamdichuzu@edu.EU.ng" }}
               </div>
             </li>
@@ -96,7 +96,7 @@
               <h5 class="sbc">External Assessor – University of Ghana</h5>
             </div>
             <div class="md:flex lg:flex items-center gap-[10px] hidden">
-              <i class="fa fa-bell text-[var(--sec-text)]"></i>
+              <i class="fa fa-bell text-(--sec-text)"></i>
               <div class="user">
                 <i class="fa fa-user text-2xl"></i>
               </div>
@@ -111,7 +111,7 @@
             class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[25px]"
           >
             <div
-              class="bg-[var(--twhite)] p-[12px] shadow-sm border border-slate-100 rounded-[20px] gap-[10px] flex flex-col gap-[30px]"
+              class="bg-var(--twhite) p-[12px] shadow-sm border border-slate-100 rounded-[20px] gap-[10px] flex flex-col gap-[30px]"
             >
               <div
                 class="rounded-[17px] shadow bg-[rgba(17,27,73,1)] flex flex-col gap-[20px] py-[20px] px-[20px]"
@@ -177,7 +177,7 @@
               </div>
             </div>
             <div
-              class="bg-[var(--twhite)] p-[20px] shadow-sm border border-slate-100 rounded-[20px] gap-[10px] flex flex-col justify-between"
+              class="bg-var(--twhite) p-[20px] shadow-sm border border-slate-100 rounded-[20px] gap-[10px] flex flex-col justify-between"
             >
               <div class="">
                 <h2
@@ -262,11 +262,11 @@
               </div>
             </div>
             <div
-              class="bg-[var(--twhite)] p-[20px] shadow-sm border border-slate-100 rounded-[20px] gap-[10px] flex flex-col"
+              class="bg-var(--twhite) p-[20px] shadow-sm border border-slate-100 rounded-[20px] gap-[10px] flex flex-col"
             >
               <div class="">
                 <h2
-                  class="text-[rgba(27,37,89,1)] mb-[10px] font-[700] text-[20px] leading-[120%] tracking-[-2%]"
+                  class="text-[rgba(27,37,89,1)] mb-[10px] font-bold text-[20px] leading-[120%] tracking-[-2%]"
                 >
                   Faculty Distribution
                 </h2>
@@ -291,7 +291,7 @@
                 class="left flex flex-wrap md:flex-nowrap lg:flex-nowrap items-center w-full md:w-[50%] lg:w-[50%] gap-[10px]"
               >
                 <h2
-                  class="font-[700] text-[var(--sec-text)] w-[250px] text-[20px] leading-[120%] tracking-[-2%]"
+                  class="font-bold text-(--sec-text) w-62.5 text-[20px] leading-[120%] tracking-[-2%]"
                 >
                   Evaluation Summary
                 </h2>

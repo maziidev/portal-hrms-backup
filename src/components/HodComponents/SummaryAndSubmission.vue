@@ -11,17 +11,16 @@
       <div class="flex justify-between items-center gap-[10px]">
         <div class="flex flex-col gap-[10px]">
           <h2
-            class="text-[rgba(24,24,27,1)] font-[700] leading-[100%] tracking-[0%] text-[20px]"
+            class="text-[rgba(24,24,27,1)] font-bold leading-[100%] tracking-[0%] text-[20px]"
           >
             Staff Appraisal Form - Dr. Jane Okafor
           </h2>
           <p
-            class="text-[rgba(30,30,30,1)] font-[400] leading-[120%] tracking-[0%] text-[16px]"
+            class="text-[rgba(30,30,30,1)] font-normal leading-[120%] tracking-[0%] text-[16px]"
           >
             Department of Political Science | Appraisal Period: Jan–Dec 2025
           </p>
         </div>
-        
       </div>
 
       <div class="progress mt-[20px]">
@@ -34,7 +33,7 @@
               <i class="fa fa-check text-[rgba(58,151,76,1)]"></i>
             </div>
             <p
-              class="text-[rgba(58,151,76,1)] font-[700] leading-[120%] text-[11px] tracking-[0%]"
+              class="text-[rgba(58,151,76,1)] font-bold leading-[120%] text-[11px] tracking-[0%]"
             >
               Staff Information
             </p>
@@ -50,7 +49,7 @@
               <i class="fa fa-check text-[rgba(58,151,76,1)]"></i>
             </div>
             <p
-              class="text-[rgba(58,151,76,1)] font-[700] leading-[120%] text-[11px] tracking-[0%]"
+              class="text-[rgba(58,151,76,1)] font-bold leading-[120%] text-[11px] tracking-[0%]"
             >
               Performance Evaluation
             </p>
@@ -65,7 +64,7 @@
               <i class="fa fa-check text-[rgba(58,151,76,1)]"></i>
             </div>
             <p
-              class="text-[rgba(58,151,76,1)] font-[700] leading-[120%] text-[11px] tracking-[0%]"
+              class="text-[rgba(58,151,76,1)] font-bold leading-[120%] text-[11px] tracking-[0%]"
             >
               Teaching & Research
             </p>
@@ -80,7 +79,7 @@
               <i class="fa fa-check text-[rgba(58,151,76,1)]"></i>
             </div>
             <p
-              class="text-[rgba(58,151,76,1)] font-[700] leading-[120%] text-[11px] tracking-[0%]"
+              class="text-[rgba(58,151,76,1)] font-bold leading-[120%] text-[11px] tracking-[0%]"
             >
               Conduct & Discipline
             </p>
@@ -95,7 +94,7 @@
               <i class="fa fa-check text-[rgba(58,151,76,1)]"></i>
             </div>
             <p
-              class="text-[rgba(58,151,76,1)] font-[700] leading-[120%] text-[11px] tracking-[0%]"
+              class="text-[rgba(58,151,76,1)] font-bold leading-[120%] text-[11px] tracking-[0%]"
             >
               Goals & Development
             </p>
@@ -110,7 +109,7 @@
               <i class="fa fa-check"></i>
             </div>
             <p
-              class="text-[rgba(24,24,27,1)] font-[700] leading-[120%] text-[11px] tracking-[0%]"
+              class="text-[rgba(24,24,27,1)] font-bold leading-[120%] text-[11px] tracking-[0%]"
             >
               Summary & Submission
             </p>
@@ -122,12 +121,12 @@
                 <i class="fas fa-chevron-left"></i>
 
                 <span
-                  class="back rgba(107,114,128,1) font-[400] text-[14px] leading-[100%] tracking-[0%]"
+                  class="back rgba(107,114,128,1) font-normal text-[14px] leading-[100%] tracking-[0%]"
                   >Back</span
                 >
               </a> -->
         <span
-          class="text-[rgba(20,21,15,1)] text-[24px] leading-[120%] tracking-[0%] font-[700]"
+          class="text-[rgba(20,21,15,1)] text-[24px] leading-[120%] tracking-[0%] font-bold"
           >Summary & Submission</span
         >
       </div>
@@ -139,7 +138,7 @@
                       class="h-[41px] rounded-[16px] w-[4px] bg-[rgba(35,136,255,1)]"
                     ></span> -->
               <h2
-                class="text-[rgba(27,37,89,1)] font-[700] text-[16px] leading-[120%] tracking-[-2%]"
+                class="text-[rgba(27,37,89,1)] font-bold text-[16px] leading-[120%] tracking-[-2%]"
               >
                 Staff Self-Appraisal Summary
               </h2>
@@ -174,7 +173,7 @@
                       class="h-[41px] rounded-[16px] w-[4px] bg-[rgba(35,136,255,1)]"
                     ></span> -->
               <h2
-                class="text-[rgba(27,37,89,1)] font-[700] text-[16px] leading-[120%] tracking-[-2%]"
+                class="text-[rgba(27,37,89,1)] font-bold text-[16px] leading-[120%] tracking-[-2%]"
               >
                 Final HOD Remarks
               </h2>
@@ -184,7 +183,7 @@
             <input
               type="text"
               placeholder="Enter your comment here"
-              class="w-full outline-none border-0 px-[12px] py-[15px] h-[47px] bg-[rgba(141,193,255,0.13)] font-[400] text-[14px] leading-[120%] tracking-[-2%] text-[rgba(161,161,170,1)]"
+              class="w-full outline-none border-0 px-[12px] py-[15px] h-[47px] bg-[rgba(141,193,255,0.13)] font-normal text-[14px] leading-[120%] tracking-[-2%] text-[rgba(161,161,170,1)]"
             />
           </div>
         </div>
@@ -195,7 +194,7 @@
                       class="h-[41px] rounded-[16px] w-[4px] bg-[rgba(35,136,255,1)]"
                     ></span> -->
               <h2
-                class="text-[rgba(27,37,89,1)] font-[700] text-[16px] leading-[120%] tracking-[-2%]"
+                class="text-[rgba(27,37,89,1)] font-bold text-[16px] leading-[120%] tracking-[-2%]"
               >
                 Next Reviewer
               </h2>
@@ -204,7 +203,7 @@
               <input
                 type="text"
                 placeholder="Dean, Faculty of Social Sciences"
-                class="w-full outline-none w-full border-0 px-[12px] py-[15px] h-[47px] bg-[rgba(161,161,170,0.09)] font-[400] text-[14px] leading-[120%] tracking-[-2%] text-[rgba(161,161,170,1)]"
+                class="w-full outline-none w-full border-0 px-[12px] py-[15px] h-[47px] bg-[rgba(161,161,170,0.09)] font-normal text-[14px] leading-[120%] tracking-[-2%] text-[rgba(161,161,170,1)]"
               />
             </div>
           </div>
@@ -216,7 +215,7 @@
                       class="h-[41px] rounded-[16px] w-[4px] bg-[rgba(35,136,255,1)]"
                     ></span> -->
               <h2
-                class="text-[rgba(27,37,89,1)] font-[700] text-[16px] leading-[120%] tracking-[-2%]"
+                class="text-[rgba(27,37,89,1)] font-bold text-[16px] leading-[120%] tracking-[-2%]"
               >
                 Promotion Recommendation
               </h2>
@@ -236,7 +235,7 @@
             <input
               type="text"
               placeholder="Enter your comment here"
-              class="w-full outline-none border-0 px-[12px] py-[15px] h-[47px] bg-[rgba(141,193,255,0.13)] font-[400] text-[14px] leading-[120%] tracking-[-2%] text-[rgba(161,161,170,1)]"
+              class="w-full outline-none border-0 px-[12px] py-[15px] h-[47px] bg-[rgba(141,193,255,0.13)] font-normal text-[14px] leading-[120%] tracking-[-2%] text-[rgba(161,161,170,1)]"
             />
           </div>
         </div>

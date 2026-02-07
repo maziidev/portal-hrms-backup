@@ -3,7 +3,7 @@
     class="grid grid-cols-1 md:grid-cols-[1fr_2fr] lg:grid-cols-[1fr_2fr] gap-[25px]"
   >
     <div
-      class="bg-[var(--twhite)] p-[12px] shadow-sm border border-slate-100 rounded-[20px] gap-[10px] flex flex-col justify-between"
+      class="bg-var(--twhite) p-[12px] shadow-sm border border-slate-100 rounded-[20px] gap-[10px] flex flex-col justify-between"
     >
       <div
         class="rounded-[40px] shadow bg-[rgba(17,27,73,1)] flex flex-col gap-[10px] py-[20px] px-[40px]"
@@ -12,7 +12,7 @@
         <div class="flex justify-between items-center gap-3">
           <div class="balance">
             <h2
-              class="text-[rgba(255,255,255,1)] text-[34px] font-[700] leading-[120%] tracking-[-2%]"
+              class="text-[rgba(255,255,255,1)] text-[34px] font-bold leading-[120%] tracking-[-2%]"
             >
               23,458
             </h2>
@@ -117,7 +117,7 @@
         class="top flex flex justify-between p-[20px] w-full gap-[10px] items-center"
       >
         <h2
-          class="text-[rgba(27,37,89,1)] text-[20px] tracking-[-2%] leading-[120%] font-[700]"
+          class="text-[rgba(27,37,89,1)] text-[20px] tracking-[-2%] leading-[120%] font-bold"
         >
           Appraisal Progress Overview
         </h2>
@@ -128,7 +128,7 @@
             id="week"
             @click="updateChartData($event)"
             ref="btn1"
-            class="active rounded-[4px] text-[rgba(30,30,30,1)] font-[400] text-[14px] px-[8px] py-[10px] leading-[20px] tracking-[0%]"
+            class="active rounded-[4px] text-[rgba(30,30,30,1)] font-normal text-[14px] px-[8px] py-[10px] leading-[20px] tracking-[0%]"
           >
             Week
           </button>
@@ -136,7 +136,7 @@
             id="month"
             @click="updateChartData($event)"
             ref="btn2"
-            class="active rounded-[4px] text-[rgba(30,30,30,1)] font-[400] text-[14px] px-[8px] py-[10px] leading-[20px] tracking-[0%]"
+            class="active rounded-[4px] text-[rgba(30,30,30,1)] font-normal text-[14px] px-[8px] py-[10px] leading-[20px] tracking-[0%]"
           >
             Month
           </button>
@@ -144,7 +144,7 @@
             id="year"
             @click="updateChartData($event)"
             ref="btn3"
-            class="active rounded-[4px] text-[rgba(30,30,30,1)] font-[400] text-[14px] px-[8px] py-[10px] leading-[20px] tracking-[0%]"
+            class="active rounded-[4px] text-[rgba(30,30,30,1)] font-normal text-[14px] px-[8px] py-[10px] leading-[20px] tracking-[0%]"
           >
             Year
           </button>
@@ -162,7 +162,7 @@
   <!-- Quick Actions -->
   <div class="quick_actions flex flex-col gap-[15px]">
     <h2
-      class="text-[rgba(30,43,58,1)] font-[700] text-[16px] leading-[120%] tracking-[-2%]"
+      class="text-[rgba(30,43,58,1)] font-bold text-[16px] leading-[120%] tracking-[-2%]"
     >
       Quick Actions
     </h2>
@@ -203,7 +203,7 @@
         class="left flex flex-wrap md:flex-nowrap lg:flex-nowrap items-center w-full md:w-[50%] lg:w-[50%] gap-[10px]"
       >
         <h2
-          class="font-[700] text-[var(--sec-text)] w-[250px] text-[20px] leading-[120%] tracking-[-2%]"
+          class="font-bold text-(--sec-text) w-62.5 text-[20px] leading-[120%] tracking-[-2%]"
         >
           Upcoming Retirements
         </h2>

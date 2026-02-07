@@ -44,13 +44,14 @@ import HodStaffRecordDetails from "../Pages/HOD/HodStaffRecordDetails.vue";
 import HodStaffRecords from "../Pages/HOD/HodStaffRecords.vue";
 import NotFound from "../Pages/NotFound.vue";
 
-
 // dean, hou
-import { deanRoutes } from './modules/dean.routes';
-import { houRoutes } from './modules/hou.routes';
+import { deanRoutes } from "./modules/dean.routes";
+import { houRoutes } from "./modules/hou.routes";
 
 import AcademicStaff from "../Layout/Academic-Staff/Academic-Staff.vue";
 import AdminLayout from "../Layout/AdminLayout/Admin.vue";
+import HodLayout from "../Layout/HodLayout/HodLayout.vue";
+import DapLayout from "../Layout/DapLayout/DapLayout.vue";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -66,21 +67,24 @@ const router = createRouter({
       name: "login",
     },
 
-
     deanRoutes,
     houRoutes,
-
 
     // ADMIN ROUTES
     {
       path: "/admin",
       component: AdminLayout,
-      name: "admin",
+      
       meta: {
         requiresAuth: true,
         roles: ["admin"],
       },
       children: [
+        {
+          path: "",
+          component: Admin,
+          name: "admin",
+        },
         {
           path: "staff-managment",
           component: StaffManagment,
@@ -178,58 +182,63 @@ const router = createRouter({
     // HOD
     {
       path: "/hod",
-      component: HodDashboard,
-      name: "hod",
+      component: HodLayout,
       meta: {
         requiresAuth: true,
         roles: ["hod"],
       },
       children: [
         {
+          path: "",
+          component: HodDashboard,
+          name: "hod",
+        },
+        {
           path: "staff-records",
           component: HodStaffRecords,
-          name: "hod-staff-records",
+          name: "staff-records",
         },
+
         {
           path: "staff-records/:id",
           component: HodStaffRecordDetails,
-          name: "hod-staff-record-details",
+          name: "staff-record-details",
           props: true,
         },
-        {
-          path: "research-publication",
-          component: ReasearchPublication,
-          name: "hod-research-publication",
-        },
+        // {
+        //   path: "research-publication",
+        //   component: ReasearchPublication,
+        //   name: "research-publication",
+        // },
         {
           path: "appraisal",
           component: HodAppraisal,
-          name: "hod-appraisal",
+          name: "appraisal",
         },
         {
           path: "leave-management",
           component: HodLeaveManagment,
-          name: "hod-leave-management",
+          name: "leave-management",
         },
         {
           path: "leave-management/active-leaves",
           component: HodActiveLeaves,
-          name: "hod-leave-management-active-leaves",
+          name: "leave-management-active-leaves",
         },
         {
           path: "leave-management/leave-balance-report",
           component: HodLeaveBalanceReport,
-          name: "hod-leave-management-leave-balance-report",
+          name: "leave-management-leave-balance-report",
         },
         {
           path: "promotion-career-progression",
           component: HodPromotion_Career_Progression,
-          name: "hod-promotion-career-progression",
+          name: "promotion-career-progression",
         },
         {
           path: "promotion-summary",
           component: HodPromotionSummary,
-          name: "hod-promotion-summary",
+          name: "promotion-summary",
         },
       ],
     },
@@ -237,13 +246,17 @@ const router = createRouter({
     // DAP
     {
       path: "/dap",
-      component: DapDashboard,
-      name: "dap",
+      component: DapLayout,
       meta: {
         requiresAuth: true,
         roles: ["dap"],
       },
       children: [
+        {
+          path: "",
+          component: DapDashboard,
+          name: "dap",
+        },
         {
           path: "/dap/staff-records",
           component: DapStaffRecords,
@@ -319,10 +332,6 @@ const router = createRouter({
         },
       ],
     },
-
-
-
-
 
     {
       path: "/:pathMatch(.*)*",

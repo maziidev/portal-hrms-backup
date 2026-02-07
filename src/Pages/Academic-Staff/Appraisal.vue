@@ -3,7 +3,7 @@
     class="bg-[rgba(255,255,255,1)] px-[12px] py-[15px] border border-[rgba(141,193,255,0.27)]"
   >
     <h2
-      class="text-[rgba(27,37,89,1)] mb-[20px] font-[700] text-[16px] leading-[120%] tracking-[-2%]"
+      class="text-[rgba(27,37,89,1)] mb-[20px] font-bold text-[16px] leading-[120%] tracking-[-2%]"
     >
       Appraisal Overview
     </h2>
@@ -14,7 +14,7 @@
             class="h-[41px] rounded-[16px] w-[4px] bg-[rgba(35,136,255,1)]"
           ></span>
           <h2
-            class="text-[rgba(27,37,89,1)] font-[700] text-[16px] leading-[120%] tracking-[-2%]"
+            class="text-[rgba(27,37,89,1)] font-bold text-[16px] leading-[120%] tracking-[-2%]"
           >
             Appraisal Status
           </h2>
@@ -35,7 +35,7 @@
             class="h-[41px] rounded-[16px] w-[4px] bg-[rgba(35,136,255,1)]"
           ></span>
           <h2
-            class="text-[rgba(27,37,89,1)] font-[700] text-[16px] leading-[120%] tracking-[-2%]"
+            class="text-[rgba(27,37,89,1)] font-bold text-[16px] leading-[120%] tracking-[-2%]"
           >
             Appraisal Status
           </h2>
@@ -53,7 +53,7 @@
             class="h-[41px] rounded-[16px] w-[4px] bg-[rgba(35,136,255,1)]"
           ></span>
           <h2
-            class="text-[rgba(27,37,89,1)] font-[700] text-[16px] leading-[120%] tracking-[-2%]"
+            class="text-[rgba(27,37,89,1)] font-bold text-[16px] leading-[120%] tracking-[-2%]"
           >
             Submission Deadline
           </h2>
@@ -77,7 +77,7 @@
         class="left flex flex-wrap md:flex-nowrap lg:flex-nowrap items-center w-full md:w-[50%] lg:w-[50%] gap-[10px]"
       >
         <h2
-          class="font-[700] text-[var(--sec-text)] w-[190px] text-[20px] leading-[120%] tracking-[-2%]"
+          class="font-bold text-(--sec-text) w-[190px] text-[20px] leading-[120%] tracking-[-2%]"
         >
           Recent Appraisals
         </h2>
@@ -103,6 +103,7 @@
           :columns="columns"
           :loading="loading"
           :bordered="false"
+          :data="appraisalData"
           :scroll-x="1200"
           :pagination="pagination"
         />
@@ -151,7 +152,7 @@
   </form>
 </template>
 <script setup>
-import { ref, reactive, computed } from "vue";
+import { ref, reactive, computed, onMounted } from "vue";
 // import Header from "@/Layouts/Header.vue";
 
 import StartAppraisal from "@/components/AcademicStaffComponents/StartAppraisal.vue";
@@ -160,9 +161,10 @@ import TeachingAndResearchPerformance from "@/components/AcademicStaffComponents
 import AdministrativeAndCommunityService from "@/components/AcademicStaffComponents/AdministrativeAndCommunityService.vue";
 import ProfessionalDevelopment from "@/components/AcademicStaffComponents/ProfessionalDevelopment.vue";
 import SummaryAndSubmission from "@/components/AcademicStaffComponents/SummaryAndSubmission.vue";
-
+import { getAcademicAppraisals } from "@/apis/academicStaff.js";
 import Orbit from "@/assets/imgs/Orbit.png";
 
+const appraisalData = ref([]);
 const form = reactive({
   year: null,
   type: null,
@@ -241,6 +243,11 @@ const toggleSideBar = () => {
   toggleState.value = !toggleState.value;
 };
 
+onMounted(async () => {
+  const res = await getAcademicAppraisals();
+  appraisalData.value = res.data;
+});
+
 // Define table columns
 const columns = [
   {
@@ -301,7 +308,7 @@ const columns = [
               href: row.file,
               download: "",
               style:
-                "rounded-[2px] text-[rgba(255,255,255,1)] font-[700] text-[14px] leading-[100%] flex gap-3 items-center justify-center tracking-[0%] px-[20px] py-[16px] bg-[rgba(35,136,255,1)]",
+                "rounded-[2px] text-[rgba(255,255,255,1)] font-bold text-[14px] leading-[100%] flex gap-3 items-center justify-center tracking-[0%] px-[20px] py-[16px] bg-[rgba(35,136,255,1)]",
             },
             ["Continue"],
           )
@@ -312,7 +319,7 @@ const columns = [
                 href: row.file,
                 download: "",
                 style:
-                  "rounded-[2px] text-[rgba(255,255,255,1)] font-[700] text-[14px] leading-[100%] flex gap-3 items-center justify-center tracking-[0%] px-[20px] py-[16px] bg-[rgba(35,136,255,1)]",
+                  "rounded-[2px] text-[rgba(255,255,255,1)] font-bold text-[14px] leading-[100%] flex gap-3 items-center justify-center tracking-[0%] px-[20px] py-[16px] bg-[rgba(35,136,255,1)]",
               },
               ["Start"],
             )
@@ -322,7 +329,7 @@ const columns = [
                 href: row.file,
                 download: "",
                 style:
-                  "rounded-[2px] text-[rgba(255,255,255,1)] font-[700] text-[14px] leading-[100%] flex gap-3 items-center justify-center tracking-[0%] px-[20px] py-[16px] bg-[rgba(35,136,255,1)]",
+                  "rounded-[2px] text-[rgba(255,255,255,1)] font-bold text-[14px] leading-[100%] flex gap-3 items-center justify-center tracking-[0%] px-[20px] py-[16px] bg-[rgba(35,136,255,1)]",
               },
               ["View"],
             );

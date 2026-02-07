@@ -9,7 +9,7 @@
     @close="closeModal"
   >
     <p
-      class="text-[rgba(152,159,176,1)] text-[16px] font-[400] leading-[120%] tracking-[0%]"
+      class="text-[rgba(152,159,176,1)] text-[16px] font-normal leading-[120%] tracking-[0%]"
     >
       Define the details of this appraisal period. Once opened, department heads
       and units will be able to start appraising their staff

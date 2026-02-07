@@ -2,16 +2,16 @@
   <div class="relative">
     <button
       @click="toggleSideBar"
-      class="absolute md:hidden menu-bar lg:hidden z-[2000] font-bold text-[30px] top-[20px] right-[20px] px-[4px] py-[-2px] cursor-pointer rounded-sm"
+      class="absolute md:hidden menu-bar lg:hidden z-2000 font-bold text-[30px] top-5 right-5 px-1 py-[-2px] cursor-pointer rounded-sm"
     >
       <i class="fa fa-bars"></i>
     </button>
     <div class="dashboard w-full min-h-screen flex">
-      <div class="fixed z-2 left-0 top-0 h-screen w-[260px]">
+      <div class="fixed z-2 left-0 top-0 h-screen w-65">
         <SideBar :toggleState="toggleState">
           <div class="">
             <li
-              class="text-[rgba(14,253,193,1)] font-bold text-[20px] flex gap-2 items-center text-[16px] tracking-[-2%] leading-[120%]"
+              class="text-[rgba(14,253,193,1)] font-bold md:text-[20px] flex gap-2 items-center text-[16px] tracking-[-2%] leading-[120%]"
             >
               Orbit <img :src="Orbit" />
             </li>
@@ -19,9 +19,9 @@
           <template #links>
             <li>
               <RouterLink
-                to="/admin"
+                to="/hod"
                 :class="
-                  currentRoute === '/admin'
+                  currentRoute === '/hod'
                     ? 'text-[rgba(14,253,193,1)] cursor-pointer font-bold flex gap-2 items-center  tracking-[-2%] leading-[120%]'
                     : 'text-(--pri-text) cursor-pointer font-normal text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2'
                 "
@@ -30,20 +30,20 @@
             </li>
             <li>
               <RouterLink
-                to="/admin/staff-managment"
+                to="/hod/staff-records"
                 :class="
-                  currentRoute === '/admin/staff-managment'
+                  currentRoute === '/hod/staff-records'
                     ? 'text-[rgba(14,253,193,1)] cursor-pointer font-bold flex gap-2 items-center  tracking-[-2%] leading-[120%]'
                     : 'text-(--pri-text) cursor-pointer font-normal text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2'
                 "
-                ><i class="fa fa-user-circle"></i>Staff Management</RouterLink
+                ><i class="fa fa-user-circle"></i>Staff Records</RouterLink
               >
             </li>
             <li>
               <RouterLink
-                to="/admin/appraisal"
+                to="/hod/appraisal"
                 :class="
-                  currentRoute === '/admin/appraisal'
+                  currentRoute === '/hod/appraisal'
                     ? 'text-[rgba(14,253,193,1)] cursor-pointer font-bold flex gap-2 items-center  tracking-[-2%] leading-[120%]'
                     : 'text-(--pri-text) cursor-pointer font-normal text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2'
                 "
@@ -52,9 +52,9 @@
             </li>
             <li>
               <RouterLink
-                to="/admin/report-analysis"
+                to="/hod/leave-management"
                 :class="
-                  currentRoute === '/admin/report-analysis'
+                  currentRoute === '/hod/leave-management'
                     ? 'text-[rgba(14,253,193,1)] cursor-pointer font-bold flex gap-2 items-center  tracking-[-2%] leading-[120%]'
                     : 'text-(--pri-text) cursor-pointer font-normal text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2'
                 "
@@ -64,9 +64,9 @@
             </li>
             <li>
               <RouterLink
-                to="/lecturer/promotion-career-progression"
+                to="/hod/promotion-career-progression"
                 :class="
-                  currentRoute === '/lecturer/promotion-career-progression'
+                  currentRoute === '/hod/promotion-career-progression'
                     ? 'text-[rgba(14,253,193,1)] cursor-pointer font-bold flex gap-2 items-center  tracking-[-2%] leading-[120%]'
                     : 'text-(--pri-text) cursor-pointer font-normal text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2'
                 "
@@ -77,9 +77,9 @@
             </li>
             <li>
               <RouterLink
-                to="/lecturer/retirement-exit"
+                to="/hod/retirement-exit"
                 :class="
-                  currentRoute === '/lecturer/retirement-exit'
+                  currentRoute === '/hod/retirement-exit'
                     ? 'text-[rgba(14,253,193,1)] cursor-pointer font-bold flex gap-2 items-center  tracking-[-2%] leading-[120%]'
                     : 'text-(--pri-text) cursor-pointer font-normal text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2'
                 "
@@ -89,9 +89,9 @@
             <li>
               <RouterLink
                 v-slot="{ isActive }"
-                to="/lecturer/report-analysis"
+                to="/hod/report-analysis"
                 :class="
-                  currentRoute === '/lecturer/report-analysis'
+                  currentRoute === '/hod/report-analysis'
                     ? 'text-[rgba(14,253,193,1)] cursor-pointer font-bold flex gap-2 items-center  tracking-[-2%] leading-[120%]'
                     : 'text-(--pri-text) cursor-pointer font-normal text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2'
                 "
@@ -103,19 +103,23 @@
         </SideBar>
       </div>
 
-      <main class="md:ml-65 relative z-1 w-full flex-1 ml-0">
+      <main class="md:ml-[260px] relative z-1 w-full flex-1 ml-[0px]">
         <!-- Header -->
         <Header>
           <template #left>
             <div class="w-[70%]">
-              <h2 class="bc mb-1.75">Dashboard</h2>
+              <h2 class="bc mb-[7px]">Dashboard</h2>
               <h5 class="sbc">
-                Your central hub for managing the staff cycle from entry to exit
+                Welcome back, Dr.
+                {{
+                  auth.user &&
+                  auth.user.email.substr(0, auth.user.email.indexOf("@"))
+                }}
               </h5>
             </div>
           </template>
           <template #right>
-            <div class="md:flex lg:flex items-center gap-2.5 hidden">
+            <div class="md:flex lg:flex items-center gap-[10px] hidden">
               <i class="fa fa-bell text-(--sec-text)"></i>
               <div class="user">
                 <i class="fa fa-user text-2xl"></i>

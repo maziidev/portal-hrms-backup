@@ -2,7 +2,7 @@
   <div class="relative">
     <button
       @click="toggleSideBar"
-      class="absolute md:hidden menu-bar lg:hidden z-[2000] font-[700] text-[30px] top-[20px] right-[20px] px-[4px] py-[-2px] rounded-sm"
+      class="absolute md:hidden menu-bar lg:hidden z-[2000] font-bold text-[30px] top-[20px] right-[20px] px-[4px] py-[-2px] rounded-sm"
     >
       <i class="fa fa-bars"></i>
     </button>
@@ -10,13 +10,13 @@
       <div class=" ">
         <aside
           :class="[
-            `{ w-[268px] sidebar z-[3000] transition-all duration-100 ease-in-out  fixed top-0 left-0 h-screen md:flex lg:flex px-[35px] flex flex-col gap-[67px] py-[45px] bg-[var(--primary)]`,
+            `{ w-67 sidebar z-3000 transition-all duration-100 ease-in-out  fixed top-0 left-0 h-screen md:flex lg:flex px-[35px] flex flex-col gap-[67px] py-[45px] bg-[var(--primary)]`,
             !toggleState ? `hidden` : `md:flex lg:flex`,
           ]"
         >
           <div class="">
             <li
-              class="text-[rgba(14,253,193,1)] font-[700] text-[20px] flex gap-2 items-center text-[16px] tracking-[-2%] leading-[120%]"
+              class="text-[rgba(14,253,193,1)] font-bold text-[20px] flex gap-2 items-center text-[16px] tracking-[-2%] leading-[120%]"
             >
               Orbit <img :src="Orbit" />
             </li>
@@ -25,35 +25,35 @@
             <li>
               <router-link
                 to="/dap"
-                class="text-[var(--pri-text)] cursor-pointer font-[400] flex gap-2 items-center text-[16px] tracking-[-2%] leading-[120%]"
+                class="text-(--pri-text) cursor-pointer font-normal flex gap-2 items-center text-[16px] tracking-[-2%] leading-[120%]"
                 ><i class="fa fa-th-large"></i>Dashboard</router-link
               >
             </li>
             <li>
               <router-link
                 to="/dap/staff-records"
-                class="text-[rgba(14,253,193,1)] font-[700] cursor-pointer text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
+                class="text-[rgba(14,253,193,1)] font-bold cursor-pointer text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
                 ><i class="fa fa-user-circle"></i>Staff Records</router-link
               >
             </li>
             <li>
               <router-link
                 to="/dap/appraisal-management"
-                class="text-[var(--pri-text)] font-[400] text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
+                class="text-(--pri-text) font-normal text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
                 ><i class="fa fa-file-text"></i> Appraisals Management
               </router-link>
             </li>
             <li>
               <router-link
                 to="/dap/leave-analytics"
-                class="text-[var(--pri-text)] font-[400] text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
+                class="text-(--pri-text) font-normal text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
                 ><i class="fa fa-bed"></i> Leave Analytics</router-link
               >
             </li>
             <li>
               <router-link
                 to="/dap/promotion-career-progression"
-                class="text-[var(--pri-text)] font-[400] text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
+                class="text-(--pri-text) font-normal text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
                 href="#"
                 ><i class="fa fa-award"></i> Promotions & Career
                 Progression</router-link
@@ -62,7 +62,7 @@
             <li>
               <router-link
                 to="/dap/report-analysis"
-                class="text-[var(--pri-text)] font-[400] text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
+                class="text-(--pri-text) font-normal text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
                 ><i class="fa-solid fa-chart-column"></i>Reports &
                 Analytics</router-link
               >
@@ -72,30 +72,30 @@
           <div class="flex flex-col gap-[25px]">
             <li>
               <a
-                class="text-[var(--pri-text)] flex items-center gap-2 font-[400] text-[16px] tracking-[-2%] leading-[120%]"
+                class="text-(--pri-text) flex items-center gap-2 font-normal text-[16px] tracking-[-2%] leading-[120%]"
                 href="#"
                 ><i class="fa fa-gear"></i> Settings</a
               >
             </li>
             <li>
               <a
-                class="text-[var(--pri-text)] flex items-center gap-2 font-[400] text-[16px] tracking-[-2%] leading-[120%]"
+                class="text-(--pri-text) flex items-center gap-2 font-normal text-[16px] tracking-[-2%] leading-[120%]"
                 href="#"
                 ><i class="fa-solid fa-right-from-bracket"></i> Logout</a
               >
             </li>
             <li class="md:hidden lg:hidden items-center gap-[10px] flex">
-              <i class="fa fa-bell text-[var(--pri-text)]"></i>
+              <i class="fa fa-bell text-(--pri-text)"></i>
               <span
-                class="text-[var(--pri-text)] flex items-center gap-2 font-[400] text-[16px] tracking-[-2%] leading-[120%]"
+                class="text-(--pri-text) flex items-center gap-2 font-normal text-[16px] tracking-[-2%] leading-[120%]"
                 >Notification</span
               >
             </li>
             <li class="md:hidden lg:hidden items-center gap-[10px] flex">
               <div class="user">
-                <i class="fa fa-user text-xl text-[var(--pri-text)]"></i>
+                <i class="fa fa-user text-xl text-(--pri-text)"></i>
               </div>
-              <div class="user-id mbc text-[var(--pri-text)] break-words">
+              <div class="user-id mbc text-(--pri-text) break-words">
                 Nnamdichuzu@edu.EU.ng
               </div>
             </li>
@@ -109,12 +109,12 @@
           >
             <div class="flex items-center gap-[10px]">
               <span
-                class="text-[rgba(20,21,15,1)] text-[24px] leading-[120%] tracking-[0%] font-[700]"
+                class="text-[rgba(20,21,15,1)] text-[24px] leading-[120%] tracking-[0%] font-bold"
                 >Staff Records</span
               >
             </div>
             <div class="md:flex lg:flex items-center gap-[10px] hidden">
-              <i class="fa fa-bell text-[var(--sec-text)]"></i>
+              <i class="fa fa-bell text-(--sec-text)"></i>
               <div class="user">
                 <i class="fa fa-user text-2xl"></i>
               </div>
@@ -127,7 +127,7 @@
           <div class="">
             <div class="top mr-0 flex justify-between">
               <h2
-                class="text-[rgba(17,27,73,1)] font-[700] text-[16px] leading-[100%] tracking-[0%]"
+                class="text-[rgba(17,27,73,1)] font-bold text-[16px] leading-[100%] tracking-[0%]"
               >
                 Department of Computer Science
               </h2>
@@ -154,7 +154,7 @@
                       </p>
                     </div>
                     <h2
-                      class="text-[rgba(27,37,89,1)] font-[700] text-[14px] leading-[120%] tracking-[-2%]"
+                      class="text-[rgba(27,37,89,1)] font-bold text-[14px] leading-[120%] tracking-[-2%]"
                     >
                       Dr. A. Okoro
                     </h2>
@@ -176,7 +176,7 @@
                       </p>
                     </div>
                     <h2
-                      class="text-[rgba(27,37,89,1)] font-[700] text-[14px] leading-[120%] tracking-[-2%]"
+                      class="text-[rgba(27,37,89,1)] font-bold text-[14px] leading-[120%] tracking-[-2%]"
                     >
                       aokoro@univ.edu.ng
                     </h2>
@@ -198,7 +198,7 @@
                       </p>
                     </div>
                     <h2
-                      class="text-[rgba(27,37,89,1)] font-[700] text-[14px] leading-[120%] tracking-[-2%]"
+                      class="text-[rgba(27,37,89,1)] font-bold text-[14px] leading-[120%] tracking-[-2%]"
                     >
                       +234 801 555 7845
                     </h2>
@@ -217,7 +217,7 @@
                           class="w-[4px] block bg-[rgba(67,24,255,1)] h-[41px] rounded-[16px]"
                         ></span> -->
                       <h2
-                        class="text-[rgba(27,37,89,1)] font-[700] text-[14px] leading-[120%] tracking-[-2%]"
+                        class="text-[rgba(27,37,89,1)] font-bold text-[14px] leading-[120%] tracking-[-2%]"
                       >
                         Total Staff
                       </h2>
@@ -238,7 +238,7 @@
                           class="w-[4px] block bg-[rgba(67,24,255,1)] h-[41px] rounded-[16px]"
                         ></span> -->
                       <h2
-                        class="text-[rgba(27,37,89,1)] font-[700] text-[14px] leading-[120%] tracking-[-2%]"
+                        class="text-[rgba(27,37,89,1)] font-bold text-[14px] leading-[120%] tracking-[-2%]"
                       >
                         Active Appraisals
                       </h2>
@@ -259,7 +259,7 @@
                           class="w-[4px] block bg-[rgba(67,24,255,1)] h-[41px] rounded-[16px]"
                         ></span> -->
                       <h2
-                        class="text-[rgba(27,37,89,1)] font-[700] text-[14px] leading-[120%] tracking-[-2%]"
+                        class="text-[rgba(27,37,89,1)] font-bold text-[14px] leading-[120%] tracking-[-2%]"
                       >
                         Promotions in Review
                       </h2>
@@ -280,7 +280,7 @@
                           class="w-[4px] block bg-[rgba(67,24,255,1)] h-[41px] rounded-[16px]"
                         ></span> -->
                       <h2
-                        class="text-[rgba(27,37,89,1)] font-[700] text-[14px] leading-[120%] tracking-[-2%]"
+                        class="text-[rgba(27,37,89,1)] font-bold text-[14px] leading-[120%] tracking-[-2%]"
                       >
                         Leave Requests
                       </h2>
@@ -295,7 +295,7 @@
               </div>
               <div class="flex p-[12px] flex-col gap-[15px] border-[1.5px]">
                 <h2
-                  class="text-[rgba(27,37,89,1)] uppercase font-[700] text-[16px] leading-[100%] tracking-[0%]"
+                  class="text-[rgba(27,37,89,1)] uppercase font-bold text-[16px] leading-[100%] tracking-[0%]"
                 >
                   Department Overview Summary
                 </h2>
@@ -331,24 +331,24 @@
           >
             <router-link
               to="/dap/staff-records"
-              class="text-[rgba(35,136,255,1)] text-[16px] font-[700] leading-[100%] tracking-[0%] flex items-centers gap-[5px]"
+              class="text-[rgba(35,136,255,1)] text-[16px] font-bold leading-[100%] tracking-[0%] flex items-centers gap-[5px]"
               >Staff Records <i class="fa fa-caret-down"></i
             ></router-link>
             <router-link
               to="/dap/appraisal-management"
-              class="text-[rgba(30,30,30,1)] text-[16px] font-[700] leading-[100%] tracking-[0%]"
+              class="text-[rgba(30,30,30,1)] text-[16px] font-bold leading-[100%] tracking-[0%]"
               >Appraisals Management</router-link
             >
             <router-link
               to="/dap/promotion_career_progression"
               href="Promotion_Career_Progression.html"
-              class="text-[rgba(30,30,30,1)] text-[16px] font-[700] leading-[100%] tracking-[0%]"
+              class="text-[rgba(30,30,30,1)] text-[16px] font-bold leading-[100%] tracking-[0%]"
               >Promotions</router-link
             >
             <router-link
               to="/dap/leave_analytics"
               href="Leave_Analytics.html"
-              class="text-[rgba(30,30,30,1)] text-[16px] font-[700] leading-[100%] tracking-[0%]"
+              class="text-[rgba(30,30,30,1)] text-[16px] font-bold leading-[100%] tracking-[0%]"
               >Leave Requests</router-link
             >
           </div>
@@ -357,7 +357,7 @@
             class="quick_actions flex justify-between items-center gap-[15px]"
           >
             <h2
-              class="text-[rgba(30,43,58,1)] font-[700] text-[16px] leading-[120%] tracking-[-2%]"
+              class="text-[rgba(30,43,58,1)] font-bold text-[16px] leading-[120%] tracking-[-2%]"
             >
               All Staff Directory
             </h2>
@@ -431,7 +431,7 @@
                   type="date"
                   placeholder="Date Range"
                   :bordered="false"
-                  class="w-full outline-none border font-[400] text-[14px] leading-[120%] tracking-[-2%] text-[rgba(161,161,170,1)]"
+                  class="w-full outline-none border font-normal text-[14px] leading-[120%] tracking-[-2%] text-[rgba(161,161,170,1)]"
                 />
               </div>
             </div>

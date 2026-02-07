@@ -1,7 +1,7 @@
 <template>
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[25px]">
     <div
-      class="bg-[var(--twhite)] p-[12px] shadow-sm border border-slate-100 rounded-[20px] gap-[10px] flex flex-col justify-between"
+      class="bg-var(--twhite) p-[12px] shadow-sm border border-slate-100 rounded-[20px] gap-[10px] flex flex-col justify-between"
     >
       <div
         class="rounded-[17px] shadow bg-[rgba(17,27,73,1)] flex flex-col gap-[10px] py-[20px] px-[40px]"
@@ -84,7 +84,7 @@
       </div>
     </div>
     <div
-      class="bg-[var(--twhite)] p-[20px] shadow-sm border border-slate-100 rounded-[20px] gap-[10px] flex flex-col"
+      class="bg-var(--twhite) p-[20px] shadow-sm border border-slate-100 rounded-[20px] gap-[10px] flex flex-col"
     >
       <div class="">
         <h2
@@ -163,11 +163,11 @@
       </div>
     </div>
     <div
-      class="bg-[var(--twhite)] p-[20px] shadow-sm border border-slate-100 rounded-[20px] gap-[10px] flex flex-col justify-between"
+      class="bg-var(--twhite) p-[20px] shadow-sm border border-slate-100 rounded-[20px] gap-[10px] flex flex-col justify-between"
     >
       <div class="">
         <h2
-          class="text-[rgba(27,37,89,1)] mb-[10px] font-[700] text-[20px] leading-[120%] tracking-[-2%]"
+          class="text-[rgba(27,37,89,1)] mb-[10px] font-bold text-[20px] leading-[120%] tracking-[-2%]"
         >
           Announcements
         </h2>
@@ -180,7 +180,7 @@
                 class="w-[4px] block bg-[rgba(67,24,255,1)] h-[41px] rounded-[16px]"
               ></span>
               <h2
-                class="text-[rgba(27,37,89,1)] font-[700] text-[14px] leading-[120%] tracking-[-2%]"
+                class="text-[rgba(27,37,89,1)] font-bold text-[14px] leading-[120%] tracking-[-2%]"
               >
                 Appraisal Period Now Open
               </h2>
@@ -199,7 +199,7 @@
                 class="w-[4px] block bg-[rgba(67,24,255,1)] h-[41px] rounded-[16px]"
               ></span>
               <h2
-                class="text-[rgba(27,37,89,1)] font-[700] text-[14px] leading-[120%] tracking-[-2%]"
+                class="text-[rgba(27,37,89,1)] font-bold text-[14px] leading-[120%] tracking-[-2%]"
               >
                 Academic Promotion Guidelines Updated
               </h2>
@@ -218,7 +218,7 @@
                 class="w-[4px] block bg-[rgba(67,24,255,1)] h-[41px] rounded-[16px]"
               ></span>
               <h2
-                class="text-[rgba(27,37,89,1)] font-[700] text-[14px] leading-[120%] tracking-[-2%]"
+                class="text-[rgba(27,37,89,1)] font-bold text-[14px] leading-[120%] tracking-[-2%]"
               >
                 New Research Grant Opportunities
               </h2>
@@ -246,7 +246,7 @@
   <!-- Quick Actions -->
   <div class="quick_actions flex flex-col gap-[15px]">
     <h2
-      class="text-[rgba(30,43,58,1)] font-[700] text-[16px] leading-[120%] tracking-[-2%]"
+      class="text-[rgba(30,43,58,1)] font-bold text-[16px] leading-[120%] tracking-[-2%]"
     >
       Quick Actions
     </h2>
@@ -286,7 +286,7 @@
         class="left flex flex-wrap md:flex-nowrap lg:flex-nowrap items-center w-full md:w-[50%] lg:w-[50%] gap-[10px]"
       >
         <h2
-          class="font-[700] text-[var(--sec-text)] w-[250px] text-[20px] leading-[120%] tracking-[-2%]"
+          class="font-bold text-(--sec-text) w-62.5 text-[20px] leading-[120%] tracking-[-2%]"
         >
           Recent Appraisals
         </h2>
@@ -536,10 +536,10 @@ const columns = [
         {
           style:
             row.is_active == "Submitted"
-              ? "bg-[rgba(107,114,128,0.2)] px-[20px] py-[10px] rounded-[22.5px] text-[rgba(107,114,128,1)] font-[700] text-[14px] leading-[100%] tracking-[0%]"
+              ? "bg-[rgba(107,114,128,0.2)] px-[20px] py-[10px] rounded-[22.5px] text-[rgba(107,114,128,1)] font-bold text-[14px] leading-[100%] tracking-[0%]"
               : row.is_active == "In Review"
-                ? "bg-[rgba(35,136,255,0.15)] px-[20px] py-[10px] rounded-[22.5px] text-[rgba(35,136,255,1)] font-[700] text-[14px] leading-[100%] tracking-[0%]"
-                : "bg-[rgba(234,67,53,0.2)] px-[20px] py-[10px] rounded-[22.5px] text-[rgba(234,67,53,1)] font-[700] text-[14px] leading-[100%] tracking-[0%]",
+                ? "bg-[rgba(35,136,255,0.15)] px-[20px] py-[10px] rounded-[22.5px] text-[rgba(35,136,255,1)] font-bold text-[14px] leading-[100%] tracking-[0%]"
+                : "bg-[rgba(234,67,53,0.2)] px-[20px] py-[10px] rounded-[22.5px] text-[rgba(234,67,53,1)] font-bold text-[14px] leading-[100%] tracking-[0%]",
         },
         row.is_active,
       );

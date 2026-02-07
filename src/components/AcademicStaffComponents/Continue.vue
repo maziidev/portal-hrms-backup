@@ -10,7 +10,7 @@
   >
     <div id="continue_appraisal">
       <p
-        class="text-[rgba(30,30,30,1)] font-[400] leading-[120%] tracking-[0%] text-[16px]"
+        class="text-[rgba(30,30,30,1)] font-normal leading-[120%] tracking-[0%] text-[16px]"
       >
         Last saved: 03 Oct 2025, 2:45 PM
       </p>
@@ -18,7 +18,7 @@
       <div class="mt-[20px]">
         <div class="">
           <h2
-            class="text-[rgba(27,37,89,1)] font-[700] text-[16px] leading-[120%] tracking-[-2%]"
+            class="text-[rgba(27,37,89,1)] font-bold text-[16px] leading-[120%] tracking-[-2%]"
           >
             Tabs completed
           </h2>
@@ -27,14 +27,14 @@
           <input
             type="text"
             placeholder="Staff Info, Performance, Teaching & Research"
-            class="w-full outline-none border-0 px-[12px] py-[15px] h-[47px] bg-[rgba(141,193,255,0.13)] font-[400] text-[14px] leading-[120%] tracking-[-2%] text-[rgba(58,151,76,1)]"
+            class="w-full outline-none border-0 px-[12px] py-[15px] h-[47px] bg-[rgba(141,193,255,0.13)] font-normal text-[14px] leading-[120%] tracking-[-2%] text-[rgba(58,151,76,1)]"
           />
         </div>
       </div>
       <div>
         <div class="">
           <h2
-            class="text-[rgba(27,37,89,1)] font-[700] text-[16px] leading-[120%] tracking-[-2%]"
+            class="text-[rgba(27,37,89,1)] font-bold text-[16px] leading-[120%] tracking-[-2%]"
           >
             Tabs remaining
           </h2>
@@ -43,7 +43,7 @@
           <input
             type="text"
             placeholder="Conduct, Goals & Development, Summary"
-            class="w-full outline-none border-0 px-[12px] py-[15px] h-[47px] bg-[rgba(141,193,255,0.13)] font-[400] text-[14px] leading-[120%] tracking-[-2%] text-[rgba(58,151,76,1)]"
+            class="w-full outline-none border-0 px-[12px] py-[15px] h-[47px] bg-[rgba(141,193,255,0.13)] font-normal text-[14px] leading-[120%] tracking-[-2%] text-[rgba(58,151,76,1)]"
           />
         </div>
       </div>

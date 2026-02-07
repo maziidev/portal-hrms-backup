@@ -1,0 +1,98 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "admin1",
+      "password": "admin123",
+      "role": "admin",
+      "name": "Admin User"
+    },
+    {
+      "id": 2,
+      "username": "assessor1",
+      "password": "assessor123",
+      "role": "external-assessor",
+      "name": "External Assessor"
+    },
+    {
+      "id": 3,
+      "username": "dap1",
+      "password": "dap123",
+      "role": "dap",
+      "name": "DAP User"
+    },
+    {
+      "id": 4,
+      "username": "hod1",
+      "password": "hod123",
+      "role": "hod",
+      "name": "Head of Department"
+    },
+    {
+      "id": 5,
+      "username": "headdivision1",
+      "password": "hodiv123",
+      "role": "head-of-division",
+      "name": "Head of Division"
+    },
+    {
+      "id": 6,
+      "username": "dean1",
+      "password": "dean123",
+      "role": "deans",
+      "name": "Dean User"
+    },
+    {
+      "id": 7,
+      "username": "headunit1",
+      "password": "unit123",
+      "role": "head-of-unit",
+      "name": "Head of Unit"
+    },
+    {
+      "id": 8,
+      "username": "academic1",
+      "password": "acad123",
+      "role": "lecturer",
+      "name": "Academic Staff"
+    },
+    {
+      "id": 9,
+      "username": "nonacademic1",
+      "password": "nonacad123",
+      "role": "non-academic",
+      "name": "Non Academic Staff"
+    },
+    {
+      "id": 10,
+      "username": "vc1",
+      "password": "vc123",
+      "role": "vc",
+      "name": "Vice Chancellor"
+    }
+  ],
+  "external": [
+    {
+      "evaluation_summary": {
+        "data": [
+          {
+            "id": 1,
+            "name": "John Doe",
+            "department": "Computer Science",
+            "rank_applied": 85,
+            "last_updated": "Jan 2, 2024",
+            "status": "Pending"
+          },
+          {
+            "id": 2,
+            "name": "Jane Smith",
+            "department": "Mathematics",
+            "rank_applied": 78,
+            "last_updated": "Feb 15, 2024",
+            "status": "Reviewed"
+          }
+        ]
+      }
+    }
+  ]
+}

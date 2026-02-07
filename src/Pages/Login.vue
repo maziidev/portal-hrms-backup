@@ -57,21 +57,23 @@ const handleLogin = async () => {
     //   ? sessionData.data.user
     //   : null;
 
-    message.success("You have logged in successfully")
+    message.success("You have logged in successfully");
     loading.value = false;
     // console.log(this.token, this.user, this.role);
     router.push(`/${auth.role}`);
     return;
   } catch (error) {
     loading.value = false;
-    throw error;
+    for ( let x in (error?.response?.data)) {
+      message.error(error?.response?.data[x][0]);
+    }
   }
 };
 </script>
 
 <template>
   <div class="h-screen relative">
-    
+    <n-spin v-if="loading" class="absolute top-[50%] left-[50%]"></n-spin>
     <div class="flex flex-col md:flex-row h-full bg-orbit-bg">
       <!-- left section -->
       <div class="relative w-full h-64 md:w-1/2 md:h-full">

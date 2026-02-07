@@ -6,7 +6,7 @@
     :closeable="true"
     :mask-closable="true"
     title="Staff Information"
-    class="md:w-[50%] lg:w-[60%] my-[20px] w-full"
+    class="md:w-[50%]! lg:w-[60%]! my-5 w-full"
   >
     <div
       class="bg-var(--twhite) p-[20px] shadow-sm border-b mb-[10px] border-slate-100 gap-[10px] flex flex-col justify-between"

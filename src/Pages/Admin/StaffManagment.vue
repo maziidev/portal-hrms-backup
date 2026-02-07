@@ -93,6 +93,7 @@
             name="search"
             placeholder="by Name/Staff ID/Email/Unit"
             id="search"
+            @update:value="fetchStaffData"
             :bordered="false"
             class="search outline-none w-full lg:w-[50%] border rounded-[6px] border-[rgba(229,231,235,1)]"
           />
@@ -102,19 +103,22 @@
         class="right grid grid-cols-1 w-full items-center gap-[15px] flex-wrap lg:grid-cols-4 md:grid-cols-4"
       >
         <n-select
-          :options="unitOptions"
+          :options="departmentCodes"
           clearable
           v-model:value="form.dept_code"
-          name="department_unit"
-          id="department_unit"
-          placeholder="Department / Unit"
+          @update:value="fetchStaffData"
+          name="dept_code"
+          id="dept_code"
+          placeholder="Department Code"
           class="cursor-pointer rounded-[10px] outline-none"
         >
         </n-select>
         <n-select
           clearable
+          :options="employmentType"
           v-model:value="form.employment_type"
           name="employment_type"
+          @update:value="fetchStaffData"
           id="employment_type"
           placeholder="Employment Type"
           class="cursor-pointer rounded-[10px] outline-none"
@@ -123,6 +127,7 @@
 
         <n-select
           clearable
+          :options="status"
           v-model:value="form.status"
           name="status"
           id="status"
@@ -157,68 +162,54 @@
       :show="importState"
       preset="card"
       title="Bulk Upload Staff"
-      class="bulk_upload lg:w-[50%]! md:w-[40%]! rounded-md  p-10 bg-white top-[20%] w-full overflow-y-auto"
+      class="bulk_upload lg:w-[50%]! relative md:w-[40%]! rounded-md p-10 bg-white top-[20%] w-full overflow-y-auto"
       :mask-closable="true"
       :closable="true"
       @close="closeUploadModal"
     >
-      <div
-        id="drop-zone"
-        class="my-3 relative w-full px-[24px] py-[14px] bg-[rgba(248,248,249,1)]"
-      >
-        <input
-          type="file"
-          id="file"
-          accept=".pdf,.doc,.docx,.txt, image/* "
-          aria-hidden="false"
-          class="w-full absolute inset-0 opacity-0 cursor-pointer outline-none border-0 px-[12px] py-[15px] bg-[rgba(248,248,249,1)] font-normal text-[14px] leading-[120%] tracking-[-2%] text-[rgba(161,161,170,1)]"
-        />
-        <!-- Visual content -->
-        <div class="pointer-events-none flex flex-col items-center gap-1">
-          <div
-            class="w-16 h-16 rounded-full bg-white/80 flex items-center justify-center text-2xl text-gray-600 shadow-sm"
-          >
-            <i class="fas fa-arrow-up-from-bracket"></i>
-          </div>
+      <n-spin
+        size="large"
+        v-if="loadingFile"
+        class="absolute top-[50%] left-[50%]"
+      ></n-spin>
 
-          <div class="flex flex-col items-center gap-[5px]">
-            <div class="flex items-center gap-[10px]">
-              <span class="text-[rgba(0,149,255,1)] text-[14px] font-[500]">
-                Upload file
-              </span>
-              <p class="text-sm text-gray-500">
-                or
-                <span class="text-[14px] font-[500] text-[rgba(71,84,103,1)]"
-                  >or drag and drop</span
-                ><br />
-              </p>
-            </div>
-            <span
-              class="text-[12px] leading-[18px] font-[500] text-[rgba(71,84,103,1)]"
-            >
-              supports only .xsl and .csv (max. 5mb)
-            </span>
-          </div>
-
-          <!-- filename preview -->
-          <div id="file-info" class="mt-3 text-sm text-gray-600"></div>
-        </div>
-      </div>
-      <div
-        class="grid grid-cols-1 mt-5 md:grid-cols-1 lg:grid-cols-1 gap-[20px]"
+      <n-upload
+        :default-upload="false"
+        directory-dnd
+        accept=".csv"
+        :max="1"
+        @change="handleCSVFileChange"
       >
-        <span class="preview"></span>
-        <n-upload
-          :max="1"
-          accept=".csv"
-          ,
-          :before-upload="beforeUploadingFile"
-          :custom-request="uploadFile"
-          class="submit border-2 border-[rgba(35,136,255,1)] cursor-pointer bg-[rgba(35,136,255,1)] text-[rgba(255,255,255,1)] text-center font-[600] text-[16px] leading-[100%] tracking-[0] p-[15px]"
+        <n-upload-dragger
+          style="border-radius: 20px; padding: 20px; text-align: center"
         >
-          Upload Staff
-        </n-upload>
-      </div>
+          <div style="margin-bottom: 12px">
+            <n-icon size="48" :depth="3">
+              <ArchiveIcon />
+            </n-icon>
+          </div>
+
+          <n-text class="text-[rgba(71,84,103,1)]" style="font-size: 16px">
+            <span class="text-[rgba(80,48,229,1)] font-[600]"
+              >Click to upload
+            </span>
+            <span class="text-[rgba(71,84,103,1)] font-[400]">
+              or drag to upload</span
+            >
+          </n-text>
+
+          <n-p depth="3" style="margin: 8px 0 0 0; font-weight: 500">
+            supports only .xsl and .csv (max. 5mb)
+          </n-p>
+        </n-upload-dragger>
+      </n-upload>
+
+      <button
+        @click="uploadFile"
+        class="border-2 border-[rgba(35,136,255,1)] cursor-pointer bg-[rgba(35,136,255,1)] text-[rgba(255,255,255,1)] text-center font-[600] text-[16px] leading-[100%] tracking-[0] p-[15px] rounded-md w-full"
+      >
+        Upload Staff
+      </button>
     </n-modal>
   </form>
 </template>
@@ -227,19 +218,39 @@ import { ref, reactive, onMounted, watch, computed } from "vue";
 import { addStaff } from "@/apis/admin.js";
 import { useMessage } from "naive-ui";
 import Orbit from "@/assets/imgs/Orbit.png";
+import { ArchiveOutline as ArchiveIcon } from "@vicons/ionicons5";
 import { getAllStaff, getStaffById, importStaff } from "@/apis/admin.js";
 
 const message = useMessage();
 const loading = ref(false);
+const loadingFile = ref(false);
+const csvFilePreview = ref(null);
 
 const importState = ref(false);
 
+const departmentCodes = ref([
+  { label: "ENG", value: "2" },
+  { label: "COM", value: "3" },
+  { label: "BUS ADMIN", value: "4" },
+]);
+const employmentType = ref([
+  { label: "Full Time", value: "full_time" },
+  { label: "Part Time", value: "part_time" },
+  { label: "Contract", value: "contract" },
+]);
+const status = ref([
+  { label: "Pending", value: "pending" },
+  { label: "Completed", value: "completed" },
+]);
+
+const csvFile = ref("");
 const staffData = ref([]);
 const form = reactive({
   date: null,
   search: null,
   dept_code: null,
   is_active: false,
+  status: null,
   employment_type: null,
   year_of_services: null,
 });
@@ -252,42 +263,44 @@ const closeUploadModal = () => {
   importState.value = false;
 };
 
-const beforeUploadingFile = ({ file }) => {
-  // Validate CSV
-  const isCsvFile =
-    file.type === "text/csv" || file.name.toLowerCase().endsWith(".csv");
-  if (!isCsvFile) {
-    message.error("Upload CSV file");
-    return false;
-  }
-
-  return true;
+const handleCSVFileChange = (options) => {
+  const file = options.file.file;
+  csvFile.value = file;
+  console.log(csvFile.value);
+  csvFilePreview.value = URL.createObjectURL(file);
 };
 
-const uploadFile = async ({ file, onFinish, onError }) => {
-  console.log(file);
+const uploadFile = async () => {
+  
+
+  loadingFile.value = true;
   try {
-    // await importStaff(file);
-    
-    message.sccess("Staff data uploaded successfully");
-    onFinish();
-  } catch (error) {
-    message.error("Staff data not uploaded");
-    onError(error);
+    const res = await importStaff({ file: csvFile.value });
+    message.success("Staff data imported successfully");
+  } catch (err) {
+    message.error("Staff data not imported");
+  } finally {
+    loadingFile.value = false;
   }
 };
 
-watch(
-  () => form,
-  async () => {
-    staffData.value = await getAllStaff({
+// Get All Staff
+const fetchStaffData = async () => {
+  try {
+    loading.value = true;
+    const { data } = await getAllStaff({
       dept_code: form.dept_code,
       employment_type: form.employment_type,
       search: form.search,
     });
-  },
-  { deep: true },
-);
+    staffData.value = data;
+  } catch (error) {
+    message.error("Staff data could not be fetched");
+    console.log(error);
+  } finally {
+    loading.value = false;
+  }
+};
 
 function isActive(id) {
   activeState.value = id;

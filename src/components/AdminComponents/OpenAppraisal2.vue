@@ -3,7 +3,7 @@
     :show="show4"
     preset="card"
     title="Open New Appraisal Cycle"
-    class="!lg:w-[50%] md:w-[40%] rounded-md"
+    class="lg:w-[50%]! md:w-[40%]! rounded-md"
     :mask-closable="true"
     :closable="true"
     @close="closeModal"

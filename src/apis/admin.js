@@ -2,7 +2,7 @@ import { BaseUrl, api } from ".";
 
 export const getAllStaff = async ({ dept_code, employment_type, search }) => {
   try {
-    const { data } = await api.get(`${BaseUrl}/list_staff`, {
+    const { data } = await api.get(`${BaseUrl}/list_staff/`, {
       params: {
         dept_code,
         employment_type,
@@ -63,12 +63,11 @@ export const checkStaffImportStatus = async (task_id) => {
     throw error;
   }
 };
-export const importStaff = async (file) => {
+export const importStaff = async ({ file }) => {
   try {
-    const formData = new FormData();
-    formData.append("file", file);
-    console.log(formData, file);
-    const { data } = await api.postForm(`${BaseUrl}/upload_staff_csv/`, file);
+    const { data } = await api.postForm(`${BaseUrl}/upload_staff_csv/`, {
+      file: file,
+    });
     return data;
   } catch (error) {
     throw error;

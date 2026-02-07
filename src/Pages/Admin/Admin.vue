@@ -217,6 +217,7 @@
             placeholder="Search for anything..."
             id="search"
             :bordered="false"
+            @update:value="fetchStaffData"
             v-model:value="form.search"
             class="search w-full border outline-none rounded-[5px] border-[rgba(229,231,235,1)]"
           />
@@ -228,8 +229,9 @@
         <n-select
           name="date"
           id="date"
-          v-model:value="form.units"
+          v-model:value="form.date"
           :options="dates"
+            @update:value="fetchStaffData"
           clearable
           :bordered="true"
           placeholder="Date"
@@ -237,10 +239,11 @@
         >
         </n-select>
         <n-select
-          v-model:value="form.units"
+          v-model:value="form.years_of_services"
           :options="years_of_services"
           clearable
           :bordered="true"
+          @update:value="fetchStaffData"
           name="years_of_service"
           id="years_of_service"
           placeholder="Year of service"
@@ -360,6 +363,23 @@ const series = ref([
   },
 ]);
 
+// Get All Staff
+const fetchStaffData = async () => {
+  try {
+    loading.value = true;
+    const { data } = await getAllStaff({
+      dept_code: form.dept_code,
+      employment_type: form.employment_type,
+      search: form.search,
+    });
+    staffData.value = data;
+  } catch (error) {
+    message.error("Staff data could not be fetched");
+    console.log(error);
+  } finally {
+    loading.value = false;
+  }
+};
 const DataSets = reactive({
   week: [30, 45, 60, 25, 50, 50, 20, 40],
   month: [45, 55, 65, 40, 60, 20, 40, 65],
@@ -370,12 +390,6 @@ onMounted(async () => {
   btns.value[0].value.classList.add("text-[rgba(247,249,250,1)]");
   btns.value[0].value.classList.remove("text-[rgba(30,30,30,1)]");
   series.value[0].data = DataSets["week"];
-
-  staffData.value = await getAllStaff({
-    dept_code: form.dept_code,
-    employment_type: form.employment_type,
-    search: form.search,
-  });
 });
 
 const currentDataset = ref("week");

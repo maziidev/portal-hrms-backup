@@ -80,6 +80,6 @@ const navigate = (item) => {
 };
 
 const logout = () => {
-  auth.logout(); // make sure your Pinia store uses the correct method name
+  auth.logout();
 };
 </script>

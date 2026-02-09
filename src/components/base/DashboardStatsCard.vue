@@ -1,9 +1,10 @@
 <script setup>
+import { getAppraisalStats } from '@/apis/services/hou/appraisal.services.js';
+import { getLeaveStats } from '@/apis/services/hou/leave.services.js';
+import { getPromotionStats } from '@/apis/services/hou/promotions.services.js';
+import { getStaffSummary } from '@/apis/services/hou/staff.services.js';
 import { onMounted, ref } from 'vue';
-import { getAppraisalStats } from '../../apis/services/hou/appraisal.service.js';
-import { getLeaveStats } from '../../apis/services/hou/leave.service.js';
-import { getPromotionStats } from '../../apis/services/hou/promotion.service.js';
-import { getStaffSummary } from '../../apis/services/hou/staff.service.js';
+
 
 // Props to customize labels and what stats to show
 const props = defineProps({
@@ -23,7 +24,7 @@ const props = defineProps({
 
 // State
 const totalStaff = ref(0);
-const activeAppraisalCycle = ref('—');
+const activeAppraisalCycle = ref(0);
 const inProgressAppraisals = ref(0);
 const pendingAppraisals = ref(0);
 const pendingRequests = ref({ leaves: 0, promotions: 0 });
@@ -32,11 +33,11 @@ const disciplinaryActions = ref(0);
 const fetchDashboardStats = async () => {
   try {
     const staff = await getStaffSummary();
-    totalStaff.value = staff.staff_stats.active_staff || 0;
-    disciplinaryActions.value = staff.staff_stats.disciplinary_actions || 0;
+    totalStaff.value = staff.active_staff || 0;
+disciplinaryActions.value = staff.disciplinary_actions || 0;
 
     const appraisal = await getAppraisalStats();
-    activeAppraisalCycle.value = appraisal.active_appraisal_cycle?.name || '—';
+    activeAppraisalCycle.value = appraisal.active_appraisal_cycle?.name || 0;
     inProgressAppraisals.value = appraisal.appraisal_in_progress || 0;
     pendingAppraisals.value = appraisal.pending_appraisal || 0;
 

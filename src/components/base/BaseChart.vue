@@ -28,7 +28,7 @@
 import { ref, watch } from "vue";
 
 const props = defineProps({
-  title: { type: String, default: "Chart" },
+  title: { type: String, default: "" },
   type: { type: String, default: "bar" },
   height: { type: Number, default: 350 },
   series: { type: Array, required: true },
@@ -68,6 +68,7 @@ watch(
   (newOptions) => {
     chartOptions.value = { ...chartOptions.value, ...newOptions };
   },
+
   { deep: true }
 );
 </script>

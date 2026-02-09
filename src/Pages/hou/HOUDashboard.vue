@@ -1,11 +1,12 @@
 <script setup>
-import { FileText, UserPlus } from 'lucide-vue-next';
 import { onMounted, ref } from "vue";
 import ActionButton from "../../components/base/ActionButton.vue";
 import ActiveSessionBar from "../../components/base/ActiveSessionBar.vue";
 import BaseChart from "../../components/base/BaseChart.vue";
 import DashboardStatsCard from "../../components/base/DashboardStatsCard.vue";
 import StaffActivityTable from "../../components/HeadOfUnit/home/StaffActivityTable.vue";
+import QuickActions from "../../components/HeadOfUnit/home/QuickActions.vue";
+
 
 
 
@@ -55,7 +56,12 @@ const chartOptions = {
 </script>
 
 <template>
-  <ActiveSessionBar />
+
+
+
+  <section class="p-6 space-y-3">
+    <ActiveSessionBar />
+  </section>
 
   <section id="stat_chart" class="p-6 grid grid-cols-1 lg:grid-cols-[700px_1fr] gap-4">
 
@@ -75,33 +81,11 @@ const chartOptions = {
 
     <!-- Quick Actions -->
 
-    <section id="quick_actions" class="p-6 space-y-4">
-        <h2 class="text-xl font-semibold">Quick Actions</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
-
-            <ActionButton
-            label="New Appraisal Review"
-            :icon="FileText"
-            />
-            <ActionButton
-            label="Approve Leave"
-            :icon="UserPlus"
-
-            />
-            <ActionButton
-            label="Generate Unit Report"
-            :icon="FileText"
-
-            />
-            <ActionButton
-            label="Send Notification"
-            :icon="FileText"
-            />
-        </div>
-
+    <section class="p-6 space-y-6">
+      <QuickActions/>
     </section>
 
-    <section class="p-6 space-y-4">
+    <section class="p-6 space-y-6">
         <StaffActivityTable/>
     </section>
 

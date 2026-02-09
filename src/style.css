@@ -159,3 +159,8 @@ body {
   color: var(--color-orbit-light);
   width: 7.5rem;
 }
+
+/*
+button {
+  cursor: pointer;
+} */

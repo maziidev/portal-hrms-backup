@@ -23,21 +23,37 @@ export const houRoutes = {
     meta: { role: 'unit_head', requiresAuth: true },
 
     children: [
-        { path: '', name: 'HOUDashboard', component: HOUDashboard },
+        {
+            path: '', name: 'HOUDashboard', component: HOUDashboard,
+            meta: { pageTitle: '', pageSubtitle: 'Overview of your unit' }
+
+        },
 
         // staffs
-        { path: 'staffs', name: 'HouStaffs', component: Staffs },
-        { path: 'staffs/:id', name: 'StaffDetais', component: StaffDetails },
+        {
+            path: 'staffs', name: 'HouStaffs', component: Staffs,
+            meta: { pageTitle: 'Department Staff Records', pageSubtitle: 'Manage your unit staff' }
+        },
+        {
+            path: 'staffs/:id', name: 'StaffDetails', component: StaffDetails,
+            meta: { pageTitle: 'Staff Details', pageSubtitle: 'View and manage staff information' }
+        },
 
         // promotion
-        { path: 'promotion', name: 'Promotion', component: Promotions },
+        {
+            path: 'promotion', name: 'Promotion', component: Promotions,
+            meta: { pageTitle: 'Promotion & Career Progression', pageSubtitle: 'Review & endorse Department Staff Promotions and Advancement requests' }
+        },
 
         // appraisals
-        { path: 'appraisals', name: 'Appraisals', component: Appraisals },
+        {
+            path: 'appraisals', name: 'Appraisals', component: Appraisals,
+            meta: { pageTitle: 'Appraisals & Performance Reviews', pageSubtitle: 'Review and endorse staff appraisals and performance reviews' }
+        },
 
         // leave
-        { path: 'leaves', name: 'Leave', component: Leave },
-        { path: 'leave-active', name: 'LeaveActive', component: LeaveActive },
-        { path: 'leave-balance', name: 'LeaveBalance', component: LeaveBalance },
+        { path: 'leaves', name: 'Leave', component: Leave, meta: { pageTitle: 'Leave Management', pageSubtitle: 'Review and manage staff leave requests' } },
+        { path: 'leave-active', name: 'LeaveActive', component: LeaveActive, meta: { pageTitle: 'Active Leaves', pageSubtitle: 'View and manage currently active leaves' } },
+        { path: 'leave-balance', name: 'LeaveBalance', component: LeaveBalance, meta: { pageTitle: 'Leave Balance', pageSubtitle: 'View and manage staff leave balances' } },
     ]
 };

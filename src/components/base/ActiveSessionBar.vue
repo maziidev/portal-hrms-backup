@@ -60,31 +60,31 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="grid grid-cols-2 gap-4 md:grid-cols-2 lg:grid-cols-4 p-6">
+  <div class="grid grid-cols-2 gap-4 md:grid-cols-2 lg:grid-cols-4 p-6  mt-5 ">
 
     <!-- Session -->
     <div class="flex items-center space-x-2">
-      <CalendarDays />
+      <CalendarDays class="text-orbit-bg font-bold "/>
       <span class="font-bold">Session:</span>
       <span>{{ activeSession?.name || '—' }}</span>
     </div>
 
     <!-- Semester -->
     <div class="flex items-center space-x-2">
-      <CalendarDays />
+      <CalendarDays class="text-orbit-bg font-bold "/>
       <span class="font-bold">Semester:</span>
       <span>{{ activeSemester?.name || '—' }}</span>
     </div>
 
     <!-- Date -->
     <div class="flex items-center space-x-2">
-      <CalendarDays />
+      <CalendarDays class="text-orbit-bg font-bold "/>
       <span class="font-medium">{{ currentDate }}</span>
     </div>
 
     <!-- Time -->
     <div class="flex items-center space-x-2">
-      <Clock4 />
+      <Clock4 class="text-orbit-bg font-bold "/>
       <span class="font-medium">{{ currentTime }}</span>
     </div>
 

@@ -1,3 +1,0 @@
-<template>
-    dean Dashboard
-</template>

@@ -1,3 +1,0 @@
-<template>
-    Staff main
-</template>

@@ -1,3 +1,0 @@
-<template>
-  stff
-</template>

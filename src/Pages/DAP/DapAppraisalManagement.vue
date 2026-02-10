@@ -9,28 +9,28 @@
         <div class="flex items-center justify-between gap-5 flex-wrap">
           <h4 class="text-[rgba(141,193,255,1)] mbs">Total Staff Appraised</h4>
           <span
-            class="text-[rgba(240,240,240,1)] font-[500] text-[14px] leading-[120%] tracking-[-2%]"
-            >3,440</span
+            class="text-[rgba(240,240,240,1)] font-medium text-[14px] leading-[120%] tracking-[-2%]"
+            >{{ dapAppraisalOverview.total_staff_appraised }}</span
           >
         </div>
         <div class="flex justify-between items-center gap-3">
           <div class="">
             <h2
-              class="text-[rgba(255,255,255,1)] text-[14px] font-[500] leading-[120%] tracking-[-2%]"
+              class="text-[rgba(255,255,255,1)] text-[14px] font-medium leading-[120%] tracking-[-2%]"
             >
-              (Q3 2025): 1,220,
+              Average Score
             </h2>
           </div>
           <div class="">
             <h2
-              class="text-[rgba(255,255,255,1)] text-[14px] font-[500] leading-[120%] tracking-[-2%]"
+              class="text-[rgba(255,255,255,1)] text-[14px] font-medium leading-[120%] tracking-[-2%]"
             >
-              (Q2 2025): 2,220
+              {{ dapAppraisalOverview.average_score }}
             </h2>
           </div>
         </div>
       </div>
-      <div class="flex flex-col gap-[20px]">
+      <div class="flex flex-col gap-5">
         <div class="flex justify-between items-center gap-[10px]">
           <div class="flex justify-between flex-col gap-2">
             <h2
@@ -43,7 +43,7 @@
             <h2
               class="text-[rgba(141,193,255,1)] font-[600] text-[12px] leading-[120%] tracking-[-2%]"
             >
-              in review
+              {{ dapAppraisalOverview.appraisals_reviewed }}
             </h2>
           </div>
         </div>
@@ -62,19 +62,19 @@
           </div>
           <div class="price">
             <h2
-              class="text-[rgba(141,193,255,1)] font-[600] text-[12px] leading-[120%] tracking-[-2%]"
+              class="text-[rgba(141,193,255,1)] font-semibold text-[12px] leading-[120%] tracking-[-2%]"
             >
-              930
+              {{ dapAppraisalOverview.pending_appraisals }}
             </h2>
           </div>
         </div>
       </div>
     </div>
     <div
-      class="bg-[rgba(255,255,255,1)] flex flex-col justify-between px-[12px] py-[15px] border border-[rgba(141,193,255,0.27)] w-full"
+      class="bg-[rgba(255,255,255,1)] flex flex-col justify-between px-3 py-3.75 border border-[rgba(141,193,255,0.27)] w-full"
     >
       <h2
-        class="text-[rgba(27,37,89,1)] mb-[20px] font-bold text-[16px] leading-[120%] tracking-[-2%]"
+        class="text-[rgba(27,37,89,1)] mb-5 font-bold text-[16px] leading-[120%] tracking-[-2%]"
       >
         Performance Rating
       </h2>
@@ -93,7 +93,7 @@
           <div class="flex items-center">
             <span
               class="text-[rgba(58,151,76,1)] font-[500] text-[14px] leading-[120%] tracking-[-2%]"
-              >82.3%
+              >80%
             </span>
           </div>
         </div>
@@ -271,7 +271,7 @@
       <div class="overflow-x-auto">
         <n-data-table
           :columns="columns"
-          :data="data"
+          :data="facultyAppraisalOverview"
           :loading="loading"
           :bordered="false"
           :scroll-x="1200"
@@ -286,7 +286,16 @@
 import { ref, reactive, h, computed, onMounted } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import Orbit from "@/assets/imgs/Orbit.png";
+import {
+  getDapAppraisalDashboardOverview,
+  getFacultyOverviewDapAppraisal,
+  getDapPerformanceTrendByFaculty,
+  getDapAppraisalCompletionRateByByFaculty,
+} from "@/apis/dap.js";
 
+console.log("Beans");
+
+const loading = ref(false);
 const router = useRouter();
 const form = reactive({
   status: null,
@@ -392,12 +401,95 @@ const verticalChartOptions = ref({
   },
   colors: ["#e9edf7"],
 });
+const dapAppraisalOverview = reactive({
+  total_staff_appraised: 0,
+  appraisals_reviewed: 0,
+  pending_appraisals: 0,
+  average_score: 0.1,
+});
+const facultyAppraisalOverview = ref([]);
+
+// FETCH APPRAISAL PERFORMANCE TREND BY FACULTY
+const fetchAppraisalPerformanceTrendByFaculty = async () => {
+  loading.value = true;
+  try {
+    const res = await getDapPerformanceTrendByFaculty();
+    console.log("performance trend", res);
+
+    // UPDATE THE VERTICAL CHART CATEGORY
+    verticalChartOptions.value.xaxis.categories = res.map((category) => {
+      return category.faculty;
+    });
+    series_1.value[0].data = res.map((category)=> {
+      return category.avg_score
+    })
+  } catch (error) {
+    console.log(error);
+  } finally {
+    loading.value = false;
+  }
+};
+// FETCH APPRAISAL COMPLETION RATE BY FACULTY
+const fetchAppraisalCompletionRateByFaculty = async () => {
+  loading.value = true;
+  try {
+    const res = await getDapAppraisalCompletionRateByByFaculty();
+    console.log("Completion rate", res);
+
+    // UPDATE THE VERTICAL CHART CATEGORY
+    horizontalChartOptions.value.xaxis.categories = res.map((category) => {
+      return category.faculty;
+    });
+    series.value[0].data = res.map((category)=> {
+      return category.avg_score
+    })
+  } catch (error) {
+    console.log(error);
+  } finally {
+    loading.value = false;
+  }
+};
+
+
+
+// GET THE FACULTY APPRAISAL OVERVIEW
+const getfacultyAppraisalOverview = async () => {
+  loading.value = true;
+  try {
+    const res = await getFacultyOverviewDapAppraisal();
+    facultyAppraisalOverview.value = res;
+
+    console.log(res);
+  } catch (error) {
+    console.log(error);
+  } finally {
+    loading.value = false;
+  }
+};
+const getDapAppraisalOverview = async () => {
+  loading.value = true;
+  try {
+    const res = await getDapAppraisalDashboardOverview();
+    Object.assign(dapAppraisalOverview, res);
+    dapAppraisalOverview.average_score =
+      Number(dapAppraisalOverview.average_score * 100) + "%";
+    console.log(res);
+  } catch (error) {
+    console.log(error);
+  } finally {
+    loading.value = false;
+  }
+};
 
 onMounted(() => {
   isActiveAppraisalPerformanceTrend.value =
     appraisal_performance_trends[0].name.toLowerCase();
   series_1.value[0].data =
     verticalChartDataSets[isActiveAppraisalPerformanceTrend.value];
+  getDapAppraisalOverview();
+  getfacultyAppraisalOverview();
+  fetchAppraisalPerformanceTrendByFaculty();
+  fetchAppraisalCompletionRateByFaculty();
 });
 
 function switchAppraisalPerformanceTrend(state) {
@@ -415,56 +507,56 @@ const columns = [
         {
           onclick: () =>
             router.push(
-              "/dap/appraisal-management/departmental-appraisal-records/" +
-                row.id,
+              "/dap/appraisal-management/department-appraisal-records/" +
+                row.faculty,
             ),
         },
         row.faculty,
       );
     },
   },
-  { title: "Department ", key: "department" },
+  { title: "Department", key: "department" },
   { title: "Total Staff", key: "total_staff" },
   { title: "Appraised", key: "appraised" },
   { title: "Pending", key: "pending" },
   { title: "Avg Score", key: "avg_score" },
   { title: "Last Updated", key: "last_updated" },
-  {
-    title: "Status",
-    key: "status",
-    render(row) {
-      return h(
-        "span",
-        {
-          style:
-            row.is_active == "Completed"
-              ? "rounded-[22.5px] text-[rgba(58,151,76,1)] px font-bold text-[14px] leading-[100%] tracking-[0%] px-[20px] py-[10px] bg-[rgba(58,151,76,0.15)] w-[120px]"
-              : row.is_active == "Pending"
-                ? "rounded-[22.5px] text-[rgba(234,67,53,1)] px font-bold text-[14px] leading-[100%] tracking-[0%] px-[20px] py-[10px] bg-[rgba(234,67,53,0.2)]"
-                : "rounded-[22.5px] text-[rgba(251,188,4,1)] px font-bold text-[14px] leading-[100%] tracking-[0%] px-[20px] py-[10px] bg-[rgba(251,188,4,0.2)]",
-        },
-        row.is_active,
-      );
-    },
-  },
-  {
-    title: "Action ",
-    key: "action",
-    render(row) {
-      h(
-        "button",
-        {
-          style: "border-none outline-none",
-          onClick: () => router.push("/dap/department-records/" + row.id),
-        },
-        [
-          h("i", {
-            class: "fa fa-ellipsis-h text-[rgba(152,159,176,1)] text-[40px]",
-          }),
-        ],
-      );
-    },
-  },
+  // {
+  //   title: "Status",
+  //   key: "status",
+  //   render(row) {
+  //     return h(
+  //       "span",
+  //       {
+  //         style:
+  //           row.is_active == "Completed"
+  //             ? "rounded-[22.5px] text-[rgba(58,151,76,1)] px font-bold text-[14px] leading-[100%] tracking-[0%] px-[20px] py-[10px] bg-[rgba(58,151,76,0.15)] w-[120px]"
+  //             : row.is_active == "Pending"
+  //               ? "rounded-[22.5px] text-[rgba(234,67,53,1)] px font-bold text-[14px] leading-[100%] tracking-[0%] px-[20px] py-[10px] bg-[rgba(234,67,53,0.2)]"
+  //               : "rounded-[22.5px] text-[rgba(251,188,4,1)] px font-bold text-[14px] leading-[100%] tracking-[0%] px-[20px] py-[10px] bg-[rgba(251,188,4,0.2)]",
+  //       },
+  //       row.is_active,
+  //     );
+  //   },
+  // },
+  // {
+  //   title: "Action ",
+  //   key: "action",
+  //   render(row) {
+  //     h(
+  //       "button",
+  //       {
+  //         style: "border-none outline-none",
+  //         onClick: () => router.push("/dap/department-records/" + row.id),
+  //       },
+  //       [
+  //         h("i", {
+  //           class: "fa fa-ellipsis-h text-[rgba(152,159,176,1)] text-[40px]",
+  //         }),
+  //       ],
+  //     );
+  //   },
+  // },
 ];
 const pagination = {
   // pageSize:10,

@@ -278,7 +278,7 @@
                   type="date"
                   placeholder="Date Range"
                   :bordered="false"
-                  class="custom-select border"
+                  class="custom-select border border-slate-200"
                 />
               </div>
             </div>

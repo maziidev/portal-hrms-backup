@@ -248,8 +248,8 @@
           v-model:value="form.date"
           type="date"
           placeholder="DD-MM-YYYY"
-          :bordered="false"
-          class="custom-select border"
+          :bordered="true"
+          class="custom-select"
         />
       </div>
     </div>

@@ -6,12 +6,12 @@ const BaseUrl = import.meta.env.VITE_BASE_URL;
 
 const api = axios.create({
   baseURL: BaseUrl,
-  withCredentials: true,
 });
 export const setUpInterceptors = (pinia, router) => {
   api.interceptors.request.use(
     (config) => {
       const { token } = useAuthStore(pinia);
+      // console.log(useAuthStore(pinia)?.token);
       if (token) {
         config.headers.Authorization = `Bearer ${token}`;
       }
@@ -34,15 +34,15 @@ export const setUpInterceptors = (pinia, router) => {
       }
       const { status } = error.response;
       const authStore = useAuthStore(pinia);
-      if (status === 401) {
-        router.push({ name: "login" });
-        authStore.logout();
-      }
+      // if (status === 401) {
+      //   router.push({ name: "login" });
+      //   authStore.logout();
+      // }
 
-      if (status === 403) {
-        router.push({ name: "login" });
-        authStore.logout();
-      }
+      // if (status === 403) {
+      //   router.push({ name: "login" });
+      //   authStore.logout();
+      // }
 
       return Promise.reject(error);
     },

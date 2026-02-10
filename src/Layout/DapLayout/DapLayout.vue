@@ -113,7 +113,7 @@
                 Welcome back, Dr.
                 {{
                   auth.user &&
-                  auth.user.email.substr(0, auth.user.email.indexOf("@"))
+                  auth?.user?.email.substr(0, auth?.user?.email.indexOf("@"))
                 }}
               </h5>
             </div>
@@ -124,7 +124,7 @@
               <div class="user">
                 <i class="fa fa-user text-2xl"></i>
               </div>
-              <div class="user-id mbc">{{ auth.user.email }}</div>
+              <div class="user-id mbc">{{ auth?.user?.email }}</div>
             </div>
           </template>
         </Header>

@@ -1,213 +1,96 @@
 <template>
-  <div class="relative">
-    <button
-      @click="toggleSideBar"
-      class="absolute md:hidden menu-bar lg:hidden z-[2000] font-bold text-[30px] top-[20px] right-[20px] px-[4px] py-[-2px] rounded-sm"
+  <form class="all_staff_directory w-full">
+    <div
+      class="top flex flex-wrap lg:flex-nowrap md:flex-nowrap justify-between gap-[20px] items-center"
     >
-      <i class="fa fa-bars"></i>
-    </button>
-    <div class="dashboard w-full min-h-screen">
-      <div class=" ">
-        <aside
-          :class="[
-            `{ w-67 sidebar z-3000 transition-all duration-100 ease-in-out  fixed top-0 left-0 h-screen md:flex lg:flex px-[35px] flex flex-col gap-[67px] py-[45px] bg-[var(--primary)]`,
-            !toggleState ? `hidden` : `md:flex lg:flex`,
-          ]"
+      <div
+        class="left flex flex-wrap md:flex-nowrap lg:flex-nowrap items-center w-full md:w-[50%] lg:w-[50%] gap-[10px]"
+      >
+        <h2
+          class="font-bold text-(--sec-text) w-[160px] text-[20px] leading-[120%] tracking-[-2%]"
         >
-          <div class="">
-            <li
-              class="text-[rgba(14,253,193,1)] font-bold text-[20px] flex gap-2 items-center text-[16px] tracking-[-2%] leading-[120%]"
-            >
-              Orbit <img :src="Orbit" />
-            </li>
+          Faculty Records
+        </h2>
+        <div class="relative w-[50%]">
+          <div class="h-full absolute left-[10px] flex items-center">
+            <i class="fa text-[rgba(107,114,128,1)] fa-search"></i>
           </div>
-          <div class="flex flex-col gap-[25px]">
-            <li>
-              <router-link
-                to="/external-accessor"
-                class="text-(--pri-text) cursor-pointer font-normal flex gap-2 items-center text-[16px] tracking-[-2%] leading-[120%]"
-                ><i class="fa fa-th-large"></i>Dashboard</router-link
-              >
-            </li>
-            <li>
-              <router-link
-                to="/external-accessor/assigned-staff-evaluation"
-                class="text-[rgba(14,253,193,1)] cursor-pointer font-bold text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
-                ><i class="fa fa-user-circle"></i>Assigned Staff
-                Evaluations</router-link
-              >
-            </li>
-            <li>
-              <router-link
-                to="/external-accessor/evaluation"
-                class="text-(--pri-text) font-normal text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
-                ><i class="fa fa-file-text"></i> Evaluation
-              </router-link>
-            </li>
-
-            <li>
-              <router-link
-                to="/external-accessor/evaluation"
-                class="text-(--pri-text) font-normal text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
-                href="Report_Analysis.html"
-                ><i class="fa-solid fa-chart-column"></i>Reports &
-                Analytics</router-link
-              >
-            </li>
-          </div>
-
-          <div class="flex flex-col gap-[25px]">
-            <li>
-              <a
-                class="text-(--pri-text) flex items-center gap-2 font-normal text-[16px] tracking-[-2%] leading-[120%]"
-                href="#"
-                ><i class="fa fa-gear"></i> Settings</a
-              >
-            </li>
-            <li>
-              <a
-                class="text-(--pri-text) flex items-center gap-2 font-normal text-[16px] tracking-[-2%] leading-[120%]"
-                href="#"
-                ><i class="fa-solid fa-right-from-bracket"></i> Logout</a
-              >
-            </li>
-            <li class="md:hidden lg:hidden items-center gap-[10px] flex">
-              <i class="fa fa-bell text-(--pri-text)"></i>
-              <span
-                class="text-(--pri-text) flex items-center gap-2 font-normal text-[16px] tracking-[-2%] leading-[120%]"
-                >Notification</span
-              >
-            </li>
-            <li class="md:hidden lg:hidden items-center gap-[10px] flex">
-              <div class="user">
-                <i class="fa fa-user text-xl text-(--pri-text)"></i>
-              </div>
-              <div class="user-id mbc text-(--pri-text) break-words">
-                Nnamdichuzu@edu.EU.ng
-              </div>
-            </li>
-          </div>
-        </aside>
+          <n-input
+            type="search"
+            name="search"
+            placeholder="Search for anything..."
+            id="search"
+            :bordered="false"
+            v-model:value="data.search"
+            class="search w-full border outline-none rounded-[5px] border-[rgba(229,231,235,1)]"
+          />
+        </div>
       </div>
-      <main class="lg:ml-[270px] md:ml-[270px] ml-[0px] min-w-screen relative">
-        <div class="header">
-          <header
-            class="bg-[var(--pri-bg)] py-[25px] items-center px-[25px] w-[] top-0 flex justify-between"
-          >
-            <div class="w-[70%]">
-              <h2 class="bc mb-[7px]">Assigned Evaluations</h2>
-            </div>
-            <div class="md:flex lg:flex items-center gap-[10px] hidden">
-              <i class="fa fa-bell text-(--sec-text)"></i>
-              <div class="user">
-                <i class="fa fa-user text-2xl"></i>
-              </div>
-              <div class="user-id mbc">Nnamdichuzu@edu.EU.ng</div>
-            </div>
-          </header>
-        </div>
+      <div
+        class="right grid grid-cols-1 w-[50%] items-center gap-[15px] flex-wrap lg:grid-cols-3 md:grid-cols-3"
+      >
+        <n-select
+          :options="unitOptions"
+          clearable
+          v-model:value="data.faculty"
+          name="faculty"
+          id="faculty"
+          class="cursor-pointer rounded-[10px] outline-none"
+        >
+        </n-select>
+        <n-select
+          clearable
+          v-model:value="data.rank_applied"
+          name="rank_applied"
+          id="rank_applied"
+          class="cursor-pointer rounded-[10px] outline-none"
+        >
+        </n-select>
 
-        <div class="main px-[25px] mt-[50px] flex flex-col gap-[40px]">
-          <!-- All Staff Directory -->
-
-          <form class="all_staff_directory w-full">
-            <div
-              class="top flex flex-wrap lg:flex-nowrap md:flex-nowrap justify-between gap-[20px] items-center"
-            >
-              <div
-                class="left flex flex-wrap md:flex-nowrap lg:flex-nowrap items-center w-full md:w-[50%] lg:w-[50%] gap-[10px]"
-              >
-                <h2
-                  class="font-bold text-(--sec-text) w-[160px] text-[20px] leading-[120%] tracking-[-2%]"
-                >
-                  Faculty Records
-                </h2>
-                <div class="relative w-[50%]">
-                  <div class="h-full absolute left-[10px] flex items-center">
-                    <i class="fa text-[rgba(107,114,128,1)] fa-search"></i>
-                  </div>
-                  <n-input
-                    type="search"
-                    name="search"
-                    placeholder="Search for anything..."
-                    id="search"
-                    :bordered="false"
-                    v-model:value="data.search"
-                    class="search w-full border outline-none rounded-[5px] border-[rgba(229,231,235,1)]"
-                  />
-                </div>
-              </div>
-              <div
-                class="right grid grid-cols-1 w-[50%] items-center gap-[15px] flex-wrap lg:grid-cols-3 md:grid-cols-3"
-              >
-                <n-select
-                  :options="unitOptions"
-                  clearable
-                  v-model:value="data.faculty"
-                  name="faculty"
-                  id="faculty"
-                  class="cursor-pointer rounded-[10px] outline-none"
-                >
-                </n-select>
-                <n-select
-                  clearable
-                  v-model:value="data.rank_applied"
-                  name="rank_applied"
-                  id="rank_applied"
-                  class="cursor-pointer rounded-[10px] outline-none"
-                >
-                </n-select>
-
-                <n-select
-                  clearable
-                  v-model:value="data.status"
-                  name="status"
-                  id="status"
-                  class="cursor-pointer rounded-[10px] outline-none"
-                >
-                </n-select>
-              </div>
-            </div>
-            <div class="w-full overflow-hidden mt-3">
-              <div class="overflow-x-auto">
-                <n-data-table
-                  :columns="columns"
-                  :loading="loading"
-                  :bordered="false"
-                  :scroll-x="1200"
-                  :pagination="pagination"
-                />
-              </div>
-            </div>
-          </form>
-        </div>
-        <form action="#" class="modals" @submit.prevent="">
-          <TeachingResearchAdministrativeDuties
-            :show2
-            @closeTeachingResearchAndAdminstrativeDutiesModal="
-              CloseTeachingResearchAndAdministrativeDuties
-            "
-            @OpenExternalEvaluationSubmissionModal="
-              OpenExternalEvaluationSubmission
-            "
-          />
-          <StaffInformation
-            :show
-            @closeStaffInformationModal="CloseStaffInformation"
-            @OpenTeachingResearchAndAdminstrativeDutiesModal="
-              OpenTeachingResearchAndAdministrativeDuties
-            "
-          />
-          <ExternalEvaluationSubmission
-            :show3
-            @closeExternalEvaluationSubmissionModal="
-              CloseExternalEvaluationSubmission
-            "
-          />
-        </form>
-      </main>
+        <n-select
+          clearable
+          v-model:value="data.status"
+          name="status"
+          id="status"
+          class="cursor-pointer rounded-[10px] outline-none"
+        >
+        </n-select>
+      </div>
     </div>
-  </div>
+    <div class="w-full overflow-hidden mt-3">
+      <div class="overflow-x-auto">
+        <n-data-table
+          :columns="columns"
+          :loading="loading"
+          :bordered="false"
+          :scroll-x="1200"
+          :pagination="pagination"
+        />
+      </div>
+    </div>
+  </form>
+  <form action="#" class="modals" @submit.prevent="">
+    <TeachingResearchAdministrativeDuties
+      :show2
+      @closeTeachingResearchAndAdminstrativeDutiesModal="
+        CloseTeachingResearchAndAdministrativeDuties
+      "
+      @OpenExternalEvaluationSubmissionModal="OpenExternalEvaluationSubmission"
+    />
+    <StaffInformation
+      :show
+      @closeStaffInformationModal="CloseStaffInformation"
+      @OpenTeachingResearchAndAdminstrativeDutiesModal="
+        OpenTeachingResearchAndAdministrativeDuties
+      "
+    />
+    <ExternalEvaluationSubmission
+      :show3
+      @closeExternalEvaluationSubmissionModal="
+        CloseExternalEvaluationSubmission
+      "
+    />
+  </form>
 </template>
 <script setup>
 import { ref, reactive } from "vue";

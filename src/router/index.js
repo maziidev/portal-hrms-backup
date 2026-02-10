@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 
 // ADMIN PAGES
-import Admin from "../Pages/Admin/Admin.vue";
+import Admin from "@/Pages/Admin/Admin.vue";
 import StaffManagment from "../Pages/Admin/StaffManagment.vue";
 // import Main from "../Layouts/Main.vue";
 import Login from "@/Pages/Login.vue";
@@ -52,6 +52,7 @@ import AcademicStaff from "../Layout/Academic-Staff/Academic-Staff.vue";
 import AdminLayout from "../Layout/AdminLayout/Admin.vue";
 import HodLayout from "../Layout/HodLayout/HodLayout.vue";
 import DapLayout from "../Layout/DapLayout/DapLayout.vue";
+import ExternalAccessorLayout from "../Layout/ExternalAccessorLayout/ExternalAccessorLayout.vue";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -74,7 +75,7 @@ const router = createRouter({
     {
       path: "/admin",
       component: AdminLayout,
-      
+
       meta: {
         requiresAuth: true,
         roles: ["admin"],
@@ -116,28 +117,32 @@ const router = createRouter({
 
     // EXTERNAL ACCESSOR ROUTES
     {
-      path: "/external-accessor",
-      component: ExternalAccessorDashboard,
-      name: "external-accessor",
+      path: "/external_accessor",
+      component: ExternalAccessorLayout,
       meta: {
         requiresAuth: true,
-        roles: ["external-accessor"],
+        roles: ["external_accessor"],
       },
       children: [
         {
+          path: "",
+          component: ExternalAccessorDashboard,
+          name: "external_accessor",
+        },
+        {
           path: "assigned-staff-evaluation",
           component: AssignedStaffEvaluation,
-          name: "external-accessor-assigned-staff-evaluation",
+          name: "assigned-staff-evaluation",
         },
         {
           path: "evaluation",
           component: Evaluation,
-          name: "external-accessor-evaluation",
+          name: "evaluation",
         },
         {
           path: "evaluation_summary",
           component: Evaluation_Summary,
-          name: "external-accessor-evaluation_summary",
+          name: "evaluation_summary",
         },
       ],
     },
@@ -286,7 +291,7 @@ const router = createRouter({
           name: "dap-appraisal-management",
         },
         {
-          path: "/dap/appraisal-management/department-appraisal-records/:id",
+          path: "/dap/appraisal-management/department-appraisal-records/:faculty_id",
           component: DapDepartmentalAppraisalRecords,
           name: "dap-appraisal-management-department-appraisal-records",
           props: true,

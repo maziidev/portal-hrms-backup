@@ -109,7 +109,7 @@
           type="date"
           placeholder="Date Range"
           :bordered="false"
-          class="custom-select border"
+          class="custom-select border border-slate-200 border-slate-200"
         />
       </div>
     </div>
@@ -119,6 +119,7 @@
           :columns="columns"
           :loading="loading"
           :bordered="false"
+          :data="staffData"
           :scroll-x="1200"
           :pagination="pagination"
         />
@@ -128,28 +129,93 @@
   <form action="#" class="modals" @submit.prevent=""></form>
 </template>
 <script setup>
-import { ref, reactive, onMounted } from "vue";
-
+import { ref, reactive, onMounted, h } from "vue";
+import { getAllStaff, getStaffById, exportStaff } from "@/apis/admin.js";
+import { getFullStaffDetails } from "@/apis/hod.js";
+import { useMessage } from "naive-ui";
+import { getStaffSummary } from "@/apis/hod.js";
 import Orbit from "@/assets/imgs/Orbit.png";
 
+const staffSummaryData = ref(null);
+const message = useMessage();
 const data = reactive({
   department_unit: null,
   employment_type: null,
   status: null,
   date: null,
+  dept_code: null,
+  employment_type: null,
+  search: null,
   is_active: false,
 });
+
+const loading = ref(false);
 const activeState = ref(null);
+const staffData = ref([]);
+
+// Get Staff Summary
+const fetchStaffSummary = async () => {
+  loading.value = false;
+
+  try {
+    const res = await getStaffSummary();
+    staffSummaryData.value = res;
+    btns[0].value = res.staff_stats.active_staff;
+    btns[1].value = res.staff_stats.on_probation;
+    btns[2].value = res.staff_stats.on_study_leave;
+    btns[3].value = res.staff_stats.retired_staff;
+    console.log(res);
+  } catch (error) {
+    message.error("Staff Summary could not be fetched");
+    console.log(error);
+  } finally {
+    loading.value = false;
+  }
+};
+
+// Get All Staff
+const fetchStaffData = async () => {
+  loading.value = true;
+
+  try {
+    const res = await getAllStaff({
+      dept_code: data.dept_code,
+      employment_type: data.employment_type,
+      search: data.search,
+    });
+    staffData.value = res;
+    console.log(res, "Beans");
+  } catch (error) {
+    message.error("Staff data could not be fetched");
+    console.log(error);
+  } finally {
+    loading.value = false;
+  }
+};
+
+// Export Staff List
+const exportStaffList = async () => {
+  try {
+    loading.value = true;
+    const res = await exportStaff({
+      dept_code: data.dept_code,
+      employment_type: data.employment_type,
+      search: data.search,
+    });
+    staffData.value = res;
+    console.log(res, "Beans");
+  } catch (error) {}
+};
 
 function isActive(id) {
   activeState.value = id;
   console.log(id);
 }
 const btns = reactive([
-  { name: "Active Staff", value: 20300 },
-  { name: "On Probation", value: 20560 },
-  { name: "On Study Leave", value: 20300 },
-  { name: "Retired", value: 10300 },
+  { name: "Active Staff", value: 0 },
+  { name: "On Probation", value: 0 },
+  { name: "On Study Leave", value: 0 },
+  { name: "Retired", value: 0 },
 ]);
 const unitOptions = [
   { label: "HR", value: "hr" },
@@ -159,6 +225,8 @@ const unitOptions = [
 // SET THE ACTIVE STATE TO ACTIVE STAFF
 onMounted(() => {
   activeState.value = btns[0].name;
+  fetchStaffData();
+  fetchStaffSummary();
 });
 
 // Show Modals
@@ -200,24 +268,27 @@ const toggleSideBar = () => {
 const columns = [
   {
     title: "Staff ID",
-    key: "staff_id",
+    key: "id",
+  },
+  { title: "Full Name", key: "full_name" },
+  { title: "Position", key: "position" },
+  { title: "Rank  ", key: "rank" },
+  {
+    title: "Role",
+    key: "role",
     render(row) {
       return h(
         "a",
         {
-          class: "text-blue-600 hover:underline font-semibold cursor-pointer",
-          onClick: () => router.push(`/home/edit/${row.id}`),
+          class: "text-blue-600 hover:underline cursor-pointer",
+          onClick: () => router.push(`/admin-users/edit/${row.id}`),
         },
-        row.id,
+        row?.staff_roles[0]?.role,
       );
     },
   },
-  { title: "Name  ", key: "name " },
-  { title: "Position", key: "position" },
-  { title: "Rank  ", key: "rank" },
-  { title: "Role", key: "role" },
-  { title: "Employment Type  ", key: "employment_type  " },
-  { title: "Employment Date  ", key: "employment_date  " },
+  { title: "Employment Type", key: "employment_type" },
+  { title: "Employment Date", key: "date_of_employment" },
 ];
 const pagination = {
   // pageSize:10,

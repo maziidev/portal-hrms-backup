@@ -32,12 +32,12 @@
           </button>
         </div>
       </div>
-      <div class="w-full overflow-hidden px-[10px]">
+      <div class="w-full overflow-hidden p-2.5">
         <div class="overflow-x-auto">
           <n-data-table
             :columns="completedAppraisalTable"
-            :data="data"
-            :loading="loading"
+            :data="completedAppraisalData"
+            :loading="loadings.loadingCompletedAppraisalData"
             :bordered="false"
             :scroll-x="1200"
             :pagination="pagination"
@@ -75,12 +75,12 @@
           </button>
         </div>
       </div>
-      <div class="w-full overflow-hidden px-[10px]">
+      <div class="w-full overflow-hidden p-2.5">
         <div class="overflow-x-auto">
           <n-data-table
             :columns="archivedAppraisalTableColumn"
-            :data="data"
-            :loading="loading"
+            :data="pastAppraisalData"
+            :loading="loadings.loadingPastAppraisalData"
             :bordered="false"
             :scroll-x="1200"
             :pagination="pagination"
@@ -149,8 +149,8 @@
           v-model:value="form.date"
           type="date"
           placeholder="Date Range"
-          :bordered="false"
-          class="custom-select border"
+          :bordered="true"
+          class="custom-select"
         />
       </div>
     </div>
@@ -159,7 +159,7 @@
         <n-data-table
           :columns="columns"
           :data="data"
-          :loading="loading"
+          :loading="loadingData"
           :bordered="false"
           :scroll-x="1200"
           :pagination="pagination"
@@ -204,7 +204,7 @@
   </form>
 </template>
 <script setup>
-import { ref, reactive, h } from "vue";
+import { ref, reactive, h, onMounted } from "vue";
 import Orbit from "@/assets/imgs/Orbit.png";
 import StaffAppraisalForm from "@/components/HodComponents/StaffAppraisalForm.vue";
 import SummaryAndSubmission from "@/components/HodComponents/SummaryAndSubmission.vue";
@@ -212,7 +212,13 @@ import GoalsDevelopment from "@/components/HodComponents/GoalsDevelopment.vue";
 import ConductDiscipline from "@/components/HodComponents/ConductDiscipline.vue";
 import TeachingResearch from "@/components/HodComponents/TeachingResearch.vue";
 import PerformanceEvaluation from "@/components/HodComponents/PerformanceEvaluation.vue";
+import {
+  getHodCompletedAppraisalStats,
+  getHodPastAppraisalStats,
+} from "@/apis/hod.js";
+import { useMessage } from "naive-ui";
 
+const message = useMessage();
 const form = reactive({
   department: null,
   status: null,
@@ -236,6 +242,59 @@ let departments = reactive([
     value: "Electrical Engineering",
   },
 ]);
+const activeAppraisalData = ref([]);
+const completedAppraisalData = ref([]);
+const pastAppraisalData = ref([]);
+const loadings = reactive({
+  loadingCompletedAppraisalData: false,
+  loadingPastAppraisalData: false,
+  loadingData: false,
+});
+
+const fetchCompletedAppraisalData = async () => {
+  loadings.loadingCompletedAppraisalData = true;
+
+  try {
+    const res = await getHodCompletedAppraisalStats();
+    completedAppraisalData.value = res;
+    console.log(res);
+    message.success("Completed Appraisal Stats fetched successfully...");
+  } catch (error) {
+    message.error(error.detail);
+  } finally {
+    loadings.loadingCompletedAppraisalData = false;
+  }
+};
+const fetchActiveAppraisalData = async () => {
+  loadings.loadingData = true;
+
+  try {
+    const res = await getHodCompletedAppraisalStats();
+    activeAppraisalData.value = res;
+    console.log(res);
+    message.success("Active Appraisal Data fetched successfully...");
+  } catch (error) {
+    message.error("Active Appraisal Data not fetched...");
+  } finally {
+    loadings.loadingData = false;
+  }
+};
+
+const fetchPastAppraisalData = async () => {
+  loadings.loadingPastAppraisalData = true;
+
+  try {
+    const res = await getHodPastAppraisalStats();
+    pastAppraisalData.value = res;
+
+    console.log(res);
+    message.success("Past Appraisal Stats fetched successfully...");
+  } catch (error) {
+    message.error(error.detail);
+  } finally {
+    loadings.loadingPastAppraisalData = false;
+  }
+};
 
 const show = ref(false);
 function openStaffAppraisalForm() {
@@ -329,6 +388,26 @@ const toggleSideBar = () => {
   toggleState.value = !toggleState.value;
 };
 
+// APPRAISAL DASHBOARD OVERVIEW
+const AppraisalDashboardOverview = async () => {
+  loading.value = true;
+  try {
+    const res = await getDapAppraisalDashboardOverview();
+    console.log(res);
+    message.success("Appraisal Overview fetched successfully");
+  } catch (error) {
+    console.log(error)
+  } finally {
+    loading.value = false;
+  }
+}
+
+onMounted(async () => {
+  fetchCompletedAppraisalData();
+  fetchPastAppraisalData();
+  fetchActiveAppraisalData();
+});
+
 // Define table columns
 const archivedAppraisalTableColumn = [
   { title: "Year", key: "year" },
@@ -384,6 +463,36 @@ const columns = [
     render(row) {
       return h(
         "span",
+        {
+          style: {
+            color: row.is_active
+              ? "text-[rgba(251,188,4,1)]"
+              : row.is_active == "Due in 12 mo"
+                ? "red"
+                : "blue",
+            fontWeight: "700",
+            backgroundColor: row.is_active
+              ? "bg-[rgba(234,67,53,0.2)]"
+              : row.is_active == "Due in 12 mo"
+                ? "bg-[rgba(251,188,4,0.2)]"
+                : "bg-[rgba(58,151,76,0.15)]",
+            fontSize: "14px",
+            padding: "10px 20px",
+            borderRadius: "22.5px",
+            lineHeight: "100%",
+            wordSpacing: "0%",
+          },
+        },
+        row.is_active,
+      );
+    },
+  },
+  {
+    title: "Action",
+    key: "action",
+    render(row) {
+      return h(
+        "button",
         {
           style: {
             color: row.is_active

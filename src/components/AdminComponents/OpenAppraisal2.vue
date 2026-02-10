@@ -24,7 +24,7 @@
         clearable
         multiple
         :bordered="false"
-        class="custom-select border rounded"
+        class="custom-select border border-slate-200 rounded"
       />
     </div>
 
@@ -36,7 +36,7 @@
         type="textarea"
         :bordered="false"
         placeholder="Your message here"
-        class="custom-select border"
+        class="custom-select border border-slate-200"
       />
     </div>
 

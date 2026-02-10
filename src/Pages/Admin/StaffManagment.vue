@@ -62,16 +62,16 @@
       </div>
     </div>
     <div
-      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 items-center gap-[20px]"
+      class="grid grid-cols-1 md:grid-cols-2 relative lg:grid-cols-2 items-center gap-[20px]"
     >
       <button
-        class="text-[rgba(255,255,255,1)] px-[40px] py-[10px] font-[600] text-[16px] flex gap-[10px] items-center leading-[120%] tracking-[-2%] rounded-[5px] bg-[rgba(35,136,255,1)] border-2 border-[rgba(35,136,255,1)]"
+        class="text-[rgba(255,255,255,1)] cursor-pointer px-10 py-2.5 font-[600] text-[16px] flex gap-[10px] items-center leading-[120%] tracking-[-2%] rounded-[5px] bg-[rgba(35,136,255,1)] border-2 border-[rgba(35,136,255,1)]"
       >
         <i class="fas fa-user-plus"></i> Add New Staff
       </button>
       <button
         @click="openImportStaffModal"
-        class="text-[rgba(35,136,255,1)] cursor-pointer bulk_upload_ px-[40px] py-[10px] font-[600] text-[16px] flex gap-[10px] items-center leading-[120%] tracking-[-2%] rounded-[5px] border-2 border-[rgba(35,136,255,1)]"
+        class="text-[rgba(35,136,255,1)] relative z-2 cursor-pointer bulk_upload_ px-[40px] py-[10px] font-[600] text-[16px] flex gap-[10px] items-center leading-[120%] tracking-[-2%] rounded-[5px] border-2 border-[rgba(35,136,255,1)]"
       >
         <i class="fas fa-file-import fa-flip-horizontal"></i> import staff
         records
@@ -139,8 +139,8 @@
           v-model:value="form.date"
           type="date"
           placeholder="DD-MM-YYYY"
-          :bordered="false"
-          class="custom-select border"
+          :bordered="true"
+          class="custom-select"
         />
       </div>
     </div>
@@ -214,7 +214,7 @@
   </form>
 </template>
 <script setup>
-import { ref, reactive, onMounted, watch, computed } from "vue";
+import { ref, reactive, onMounted, watch, computed, h } from "vue";
 import { addStaff } from "@/apis/admin.js";
 import { useMessage } from "naive-ui";
 import Orbit from "@/assets/imgs/Orbit.png";
@@ -264,18 +264,20 @@ const closeUploadModal = () => {
 };
 
 const handleCSVFileChange = (options) => {
-  const file = options.file.file;
-  csvFile.value = file;
+  csvFile.value = options.file.file;
   console.log(csvFile.value);
-  csvFilePreview.value = URL.createObjectURL(file);
+  csvFilePreview.value = URL.createObjectURL(csvFile.value);
 };
 
 const uploadFile = async () => {
-  
-
+  if (!csvFile.value) {
+    return;
+  }
+  const formData = new FormData();
+  formData.append("file", csvFile.value);
   loadingFile.value = true;
   try {
-    const res = await importStaff({ file: csvFile.value });
+    const res = await importStaff(formData);
     message.success("Staff data imported successfully");
   } catch (err) {
     message.error("Staff data not imported");
@@ -288,12 +290,13 @@ const uploadFile = async () => {
 const fetchStaffData = async () => {
   try {
     loading.value = true;
-    const { data } = await getAllStaff({
+    const res = await getAllStaff({
       dept_code: form.dept_code,
       employment_type: form.employment_type,
       search: form.search,
     });
-    staffData.value = data;
+    staffData.value = res;
+    console.log(res, "Beans");
   } catch (error) {
     message.error("Staff data could not be fetched");
     console.log(error);
@@ -325,45 +328,24 @@ const toggleSideBar = () => {
 
 onMounted(async () => {
   isActive("Active Staff");
-  loading.value = true;
-
-  try {
-    staffData.value = await getAllStaff({
-      dept_code: form.dept_code,
-      employment_type: form.employment_type,
-      search: form.search,
-    });
-    loading.value = false;
-  } catch (error) {
-    loading.value = false;
-    message.error("Error fetching staff data");
-  }
+  fetchStaffData();
 });
 
 // Define table columns
 const columns = [
   {
     title: "Staff ID",
-    key: "staff_id",
-    render(row) {
-      return h(
-        "a",
-        {
-          class: "text-blue-600 hover:underline font-semibold cursor-pointer",
-          onClick: () => router.push(`/home/edit/${row.id}`),
-        },
-        row.id,
-      );
-    },
+    key: "id",
   },
-  { title: "Name  ", key: "name " },
-  { title: "Faculty/Unit", key: "Faculty/Unit" },
-  { title: "Department ", key: "department " },
-  { title: "Designation ", key: "designation " },
-  { title: "Employment Date  ", key: "employment_date  " },
+  { title: "Full Name", key: "full_name" },
+  { title: "Employment Type", key: "employment_type" },
+  { title: "Department", key: "department" },
+  { title: "Email", key: "email" },
+  { title: "Employment Date", key: "date_of_employment" },
+
   {
     title: "Status ",
-    key: "status ",
+    key: "status",
     render(row) {
       return h(
         "span",

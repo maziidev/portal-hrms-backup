@@ -31,7 +31,7 @@ export const getLeaveAppraisalSummary = async () => {
 export const getStaffSummary = async () => {
   try {
     const { data } = await api.get(
-      `${BaseUrl}/hrms/hod/staff_summary_stats/`,
+      `${BaseUrl}hrms/hod/staff_summary_stats/`,  
     );
     return data;
   } catch (error) {
@@ -44,7 +44,7 @@ export const getStaffSummary = async () => {
 export const getStatsOfApprovedAndPendingLeaves = async () => {
   try {
     const { data } = await api.get(
-      `${BaseUrl}/hrms/hod/leave_stats/`,
+      `${BaseUrl}hrms/hod/leave_stats/`,
     );
     return data;
   } catch (error) {
@@ -56,7 +56,7 @@ export const getStatsOfApprovedAndPendingLeaves = async () => {
 export const approveStaffLeaveRequest = async (formData) => {
   try {
     const { data } = await api.postForm(
-      `${BaseUrl}/hrms/leaves/approve/`, formData
+      `${BaseUrl}hrms/leaves/approve/`, formData
     );
     return data;
   } catch (error) {
@@ -68,7 +68,7 @@ export const approveStaffLeaveRequest = async (formData) => {
 export const getLeavesAwaitingMyApproval = async () => {
   try {
     const { data } = await api.get(
-      `${BaseUrl}/hrms/list-leaves-for-approval/`
+      `${BaseUrl}hrms/list-leaves-for-approval/`
     );
     return data;
   } catch (error) {
@@ -83,7 +83,7 @@ export const getLeavesAwaitingMyApproval = async () => {
 export const getHodAppraisalConductSection = async (hod_id) => {
   try {
     const { data } = await api.get( 
-      `${BaseUrl}/hrms/hod-appraisal/${hod_id}/conduct/`,
+      `${BaseUrl}hrms/hod-appraisal/${hod_id}/conduct/`,
     );
     return data;
   } catch (error) {
@@ -95,7 +95,7 @@ export const getHodAppraisalConductSection = async (hod_id) => {
 export const updateHodAppraisalConductSection = async (hod_id, formData) => {
   try {
     const { data } = await api.putForm( 
-      `${BaseUrl}/hrms/hod-appraisal/${hod_id}/conduct/`, formData
+      `${BaseUrl}hrms/hod-appraisal/${hod_id}/conduct/`, formData
     );
     return data;
   } catch (error) {
@@ -108,7 +108,7 @@ export const updateHodAppraisalConductSection = async (hod_id, formData) => {
 export const getHodAppraisalGoalSection = async (hod_id) => {
   try {
     const { data } = await api.get( 
-      `${BaseUrl}/hrms/hod-appraisal/${hod_id}/goals/`
+      `${BaseUrl}hrms/hod-appraisal/${hod_id}/goals/`
     );
     return data;
   } catch (error) {
@@ -120,7 +120,7 @@ export const getHodAppraisalGoalSection = async (hod_id) => {
 export const updateHodAppraisalGoalSection = async (hod_id, formData) => {
   try {
     const { data } = await api.putForm( 
-      `${BaseUrl}/hrms/hod-appraisal/${hod_id}/goals/`, formData
+      `${BaseUrl}hrms/hod-appraisal/${hod_id}/goals/`, formData
     );
     return data;
   } catch (error) {
@@ -133,7 +133,7 @@ export const updateHodAppraisalGoalSection = async (hod_id, formData) => {
 export const getHodAppraisalPerformanceSection = async (hod_id) => {
   try {
     const { data } = await api.get( 
-      `${BaseUrl}/hrms/hod-appraisal/${hod_id}/performance/`
+      `${BaseUrl}hrms/hod-appraisal/${hod_id}/performance/`
     );
     return data;
   } catch (error) {
@@ -146,7 +146,7 @@ export const getHodAppraisalPerformanceSection = async (hod_id) => {
 export const updateHodAppraisalPerformanceSection = async (hod_id, formData) => {
   try {
     const { data } = await api.putForm( 
-      `${BaseUrl}/hrms/hod-appraisal/${hod_id}/performance/`, formData
+      `${BaseUrl}hrms/hod-appraisal/${hod_id}/performance/`, formData
     );
     return data;
   } catch (error) {
@@ -158,7 +158,7 @@ export const updateHodAppraisalPerformanceSection = async (hod_id, formData) => 
 export const getHodSummaryAndFinalSubmit = async (hod_id) => {
   try {
     const { data } = await api.get( 
-      `${BaseUrl}/hrms/hod-appraisal/${hod_id}/summary-submit/`
+      `${BaseUrl}hrms/hod-appraisal/${hod_id}/summary-submit/`
     );
     return data;
   } catch (error) {
@@ -170,7 +170,7 @@ export const getHodSummaryAndFinalSubmit = async (hod_id) => {
 export const updateHodSummaryAndFinalSubmit = async (hod_id, formData) => {
   try {
     const { data } = await api.putForm( 
-      `${BaseUrl}/hrms/hod-appraisal/${hod_id}/summary-submit/`, formData
+      `${BaseUrl}hrms/hod-appraisal/${hod_id}/summary-submit/`, formData
     );
     return data;
   } catch (error) {
@@ -184,7 +184,7 @@ export const updateHodSummaryAndFinalSubmit = async (hod_id, formData) => {
 export const getHodInitAppraisal = async (appraisal_id) => {
   try {
     const { data } = await api.get( 
-      `${BaseUrl}/hrms/hod-appraisal/init/${appraisal_id}/`
+      `${BaseUrl}hrms/hod-appraisal/init/${appraisal_id}/`
     );
     return data;
   } catch (error) {
@@ -196,7 +196,7 @@ export const getHodInitAppraisal = async (appraisal_id) => {
 export const updateHodInitAppraisal = async (appraisal_id, formData) => {
   try {
     const { data } = await api.postForm( 
-      `${BaseUrl}/hrms/hod-appraisal/init/${appraisal_id}/`, formData
+      `${BaseUrl}hrms/hod-appraisal/init/${appraisal_id}/`, formData
     );
     return data;
   } catch (error) {
@@ -208,7 +208,7 @@ export const updateHodInitAppraisal = async (appraisal_id, formData) => {
 export const getHodCompletedAppraisalStats = async () => {
   try {
     const { data } = await api.get( 
-      `${BaseUrl}/hrms/hod/completed-appraisal-stats/`
+      `${BaseUrl}hrms/hod/completed-appraisal-stats/`
     );
     return data;
   } catch (error) {
@@ -221,7 +221,7 @@ export const getHodCompletedAppraisalStats = async () => {
 export const getHodPastAppraisalStats = async () => {
   try {
     const { data } = await api.get( 
-      `${BaseUrl}/hrms/hod/past-appraisals-stats/`
+      `${BaseUrl}hrms/hod/past-appraisals-stats/`
     );
     return data;
   } catch (error) {

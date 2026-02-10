@@ -114,7 +114,7 @@
       class="leave_category_distribution flex flex-col justify-between border bg-[rgba(255,255,255,1)] rounded-[20px]"
     >
       <div
-        class="top flex flex justify-between p-[20px] w-full gap-[10px] items-center"
+        class="top flex  justify-between p-5 w-full gap-[10px] items-center"
       >
         <h2
           class="text-[rgba(27,37,89,1)] text-[20px] tracking-[-2%] leading-[120%] font-bold"
@@ -128,7 +128,7 @@
             id="week"
             @click="updateChartData($event)"
             ref="btn1"
-            class="active rounded-[4px] text-[rgba(30,30,30,1)] font-normal text-[14px] px-[8px] py-[10px] leading-[20px] tracking-[0%]"
+            class="active cursor-pointer rounded-sm text-[rgba(30,30,30,1)] font-normal text-[14px] px-2 py-2.5 leading-5 tracking-[0%]"
           >
             Week
           </button>
@@ -136,7 +136,7 @@
             id="month"
             @click="updateChartData($event)"
             ref="btn2"
-            class="active rounded-[4px] text-[rgba(30,30,30,1)] font-normal text-[14px] px-[8px] py-[10px] leading-[20px] tracking-[0%]"
+            class="active rounded-[4px] cursor-pointer text-[rgba(30,30,30,1)] font-normal text-[14px] px-[8px] py-[10px] leading-[20px] tracking-[0%]"
           >
             Month
           </button>
@@ -144,7 +144,7 @@
             id="year"
             @click="updateChartData($event)"
             ref="btn3"
-            class="active rounded-[4px] text-[rgba(30,30,30,1)] font-normal text-[14px] px-[8px] py-[10px] leading-[20px] tracking-[0%]"
+            class="active rounded-[4px] cursor-pointer text-[rgba(30,30,30,1)] font-normal text-[14px] px-[8px] py-[10px] leading-[20px] tracking-[0%]"
           >
             Year
           </button>
@@ -231,7 +231,7 @@
           id="date"
           v-model:value="form.date"
           :options="dates"
-            @update:value="fetchStaffData"
+          @update:value="fetchStaffData"
           clearable
           :bordered="true"
           placeholder="Date"

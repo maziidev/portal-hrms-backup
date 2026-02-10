@@ -21,7 +21,7 @@
               <RouterLink
                 to="/lecturer"
                 :class="
-                  currentRoute === '/lecturer'
+                  currentRoute === '/external_accessor'
                     ? 'text-[rgba(14,253,193,1)] cursor-pointer font-bold flex gap-2 items-center  tracking-[-2%] leading-[120%]'
                     : 'text-(--pri-text) cursor-pointer font-normal text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2'
                 "
@@ -30,74 +30,39 @@
             </li>
             <li>
               <RouterLink
-                to="/lecturer/research-publication"
+                to="/external_accessor/assigned-staff-evaluation"
                 :class="
-                  currentRoute === '/lecturer/research-publication'
+                  currentRoute ===
+                  '/external_accessor/assigned-staff-evaluation'
                     ? 'text-[rgba(14,253,193,1)] cursor-pointer font-bold flex gap-2 items-center  tracking-[-2%] leading-[120%]'
                     : 'text-(--pri-text) cursor-pointer font-normal text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2'
                 "
-                ><i class="fa fa-user-circle"></i>Research &
-                Publication</RouterLink
-              >
-            </li>
-            <li>
-              <RouterLink
-                to="/lecturer/appraisal"
-                :class="
-                  currentRoute === '/lecturer/appraisal'
-                    ? 'text-[rgba(14,253,193,1)] cursor-pointer font-bold flex gap-2 items-center  tracking-[-2%] leading-[120%]'
-                    : 'text-(--pri-text) cursor-pointer font-normal text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2'
-                "
-                ><i class="fa fa-file-text"></i> Appraisals
+                ><i class="fa fa-user-circle"></i>Assigned Staff Evaluations
               </RouterLink>
             </li>
             <li>
               <RouterLink
-                to="/lecturer/leave-management"
+                to="/external_accessor/evaluation"
                 :class="
-                  currentRoute === '/lecturer/leave-management'
+                  currentRoute === '/external_accessor/appraisal'
                     ? 'text-[rgba(14,253,193,1)] cursor-pointer font-bold flex gap-2 items-center  tracking-[-2%] leading-[120%]'
                     : 'text-(--pri-text) cursor-pointer font-normal text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2'
                 "
-                href="#"
-                ><i class="fa fa-bed"></i> Leave Management</RouterLink
-              >
+                ><i class="fa fa-file-text"></i> Evaluation Form
+              </RouterLink>
             </li>
-            <li>
-              <RouterLink
-                to="/lecturer/promotion-career-progression"
-                :class="
-                  currentRoute === '/lecturer/promotion-career-progression'
-                    ? 'text-[rgba(14,253,193,1)] cursor-pointer font-bold flex gap-2 items-center  tracking-[-2%] leading-[120%]'
-                    : 'text-(--pri-text) cursor-pointer font-normal text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2'
-                "
-                href="#"
-                ><i class="fa fa-award"></i> Promotions & Career
-                Progression</RouterLink
-              >
-            </li>
-            <li>
-              <RouterLink
-                to="/lecturer/retirement-exit"
-                :class="
-                  currentRoute === '/lecturer/retirement-exit'
-                    ? 'text-[rgba(14,253,193,1)] cursor-pointer font-bold flex gap-2 items-center  tracking-[-2%] leading-[120%]'
-                    : 'text-(--pri-text) cursor-pointer font-normal text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2'
-                "
-                ><i class="fa fa-calendar"></i> Retirement & Exit</RouterLink
-              >
-            </li>
+
             <li>
               <RouterLink
                 v-slot="{ isActive }"
-                to="/lecturer/report-analysis"
+                to="/external_accessor/report_analysis"
                 :class="
                   currentRoute === '/lecturer/report-analysis'
                     ? 'text-[rgba(14,253,193,1)] cursor-pointer font-bold flex gap-2 items-center  tracking-[-2%] leading-[120%]'
                     : 'text-(--pri-text) cursor-pointer font-normal text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2'
                 "
                 ><i class="fa-solid fa-chart-column"></i>Reports &
-                Analytics</RouterLink
+                Submissions</RouterLink
               >
             </li>
           </template>
@@ -114,7 +79,7 @@
                 Welcome back, Dr.
                 {{
                   auth.user &&
-                  auth.user.email.substr(0, auth.user.email.indexOf("@"))
+                  auth?.user?.email.substr(0, auth?.user?.email.indexOf("@"))
                 }}
               </h5>
             </div>
@@ -125,7 +90,7 @@
               <div class="user">
                 <i class="fa fa-user text-2xl"></i>
               </div>
-              <div class="user-id mbc">{{ auth.user.email }}</div>
+              <div class="user-id mbc">{{ auth?.user?.email }}</div>
             </div>
           </template>
         </Header>

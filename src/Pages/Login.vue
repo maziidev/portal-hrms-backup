@@ -51,7 +51,7 @@ const handleLogin = async () => {
 
     console.log(auth);
 
-    auth.login();
+    auth.login( userRole.value.role.toLowerCase(), res?.staff, res?.access );
     // const sessionData = await getSession();
     // this.user = sessionData.data.authenticated
     //   ? sessionData.data.user
@@ -185,7 +185,7 @@ const handleLogin = async () => {
                 <button
                   type="button"
                   @click="togglePassword"
-                  class="absolute inset-y-0 right-0 pr-3 flex items-center"
+                  class="absolute cursor-pointer inset-y-0 right-0 pr-3 flex items-center"
                 >
                   <svg
                     class="w-5 h-5 text-gray-400 hover:text-gray-300"
@@ -215,14 +215,14 @@ const handleLogin = async () => {
 
             <!-- Forgot -->
             <div class="text-right">
-              <a href="#" class="text-orbit-blue text-sm underline"
+              <a href="#" class="text-orbit-blue cursor-pointer text-sm underline"
                 >Forgot Password?</a
               >
             </div>
 
             <button
               type="submit"
-              class="w-full block btn btn-blue-main font-bold"
+              class="w-full block cursor-pointer btn btn-blue-main font-bold"
             >
               Login
             </button>

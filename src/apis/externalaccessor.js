@@ -1,17 +1,31 @@
 import { BaseUrl, api } from ".";
 
-export const getAllStaff = async () => {
-    try {
-        const { data } = await api.get(`${BaseUrl}/staffs`)
-    } catch (error) {
-        throw error;
-    }
-}
+export const actionOnAppraisal = async () => {
+  try {
+    const { data } = await api.get(`${BaseUrl}hrms/appraisal/action`);
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
 
-const getEvaluationSummary = async () => {
-    try {
-        const { data } = await api.get(`3001/external`);
-    } catch (error) {
-        throw error;
-    }
-}
+// EXAMINER DASHBOARD STATISTICS
+export const getExaminerDashboardStats = async () => {
+  try {
+    const { data } = await api.get(`${BaseUrl}hrms/examiner/stats/`);
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const getStaffAppraisalFullDetail = async (appraisal_id) => {
+  try {
+    const { data } = await api.get(
+      `${BaseUrl}hrms/staff-appraisal-full-detail/${appraisal_id}/`,
+    );
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};

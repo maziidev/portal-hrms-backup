@@ -452,8 +452,8 @@
           :v-model="form.date"
           type="date"
           placeholder="DD-MM-YYYY"
-          :bordered="false"
-          class="w-full outline-none border font-normal text-[14px] leading-[120%] tracking-[-2%] text-[rgba(161,161,170,1)]"
+          :bordered="true"
+          class="w-full outline-none  font-normal text-[14px] leading-[120%] tracking-[-2%] text-[rgba(161,161,170,1)]"
         />
       </div>
     </div>
@@ -660,7 +660,7 @@ const chartOptions = ref({
   colors: ["#2388ff"],
 });
 
-import Orbit from "@/assets/imgs/Orbit.png";
+
 
 // Define table columns
 const columns = [

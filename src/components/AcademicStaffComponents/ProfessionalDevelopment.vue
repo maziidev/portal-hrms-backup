@@ -15,12 +15,12 @@
       <div class="flex justify-between items-center gap-[10px]">
         <div class="flex flex-col gap-[10px]">
           <h2
-            class="text-[rgba(24,24,27,1)] font-bold leading-[100%] tracking-[0%] text-[20px]"
+            class="text-[rgba(24,24,27,1)] font-[700] leading-[100%] tracking-[0%] text-[20px]"
           >
             Staff Appraisal Form - Dr. Jane Okafor
           </h2>
           <p
-            class="text-[rgba(30,30,30,1)] font-normal leading-[120%] tracking-[0%] text-[16px]"
+            class="text-[rgba(30,30,30,1)] font-[400] leading-[120%] tracking-[0%] text-[16px]"
           >
             Department of Political Science | Appraisal Period: Jan–Dec 2025
           </p>
@@ -38,7 +38,7 @@
               <i class="fa fa-check text-[rgba(58,151,76,1)]"></i>
             </div>
             <p
-              class="text-[rgba(58,151,76,1)] font-bold leading-[120%] text-[11px] tracking-[0%]"
+              class="text-[rgba(58,151,76,1)] font-[700] leading-[120%] text-[11px] tracking-[0%]"
             >
               Teaching & Research Performance
             </p>
@@ -54,7 +54,7 @@
               <i class="fa fa-check text-[rgba(58,151,76,1)]"></i>
             </div>
             <p
-              class="text-[rgba(24,24,27,1)] font-bold leading-[120%] text-[11px] tracking-[0%]"
+              class="text-[rgba(24,24,27,1)] font-[700] leading-[120%] text-[11px] tracking-[0%]"
             >
               Administrative & Community Service
             </p>
@@ -69,7 +69,7 @@
               <i class="fa fa-check"></i>
             </div>
             <p
-              class="text-[rgba(24,24,27,1)] font-bold leading-[120%] text-[11px] tracking-[0%]"
+              class="text-[rgba(24,24,27,1)] font-[700] leading-[120%] text-[11px] tracking-[0%]"
             >
               Professional Development
             </p>
@@ -84,7 +84,7 @@
               <i class="fa fa-check"></i>
             </div>
             <p
-              class="text-[rgba(24,24,27,1)] font-bold leading-[120%] text-[11px] tracking-[0%]"
+              class="text-[rgba(24,24,27,1)] font-[700] leading-[120%] text-[11px] tracking-[0%]"
             >
               Summary & Submission
             </p>
@@ -102,13 +102,13 @@
           <i class="fa fa-chevron-left"></i>
           <button
             @click="Previous"
-            class="rgba(107,114,128,1) font-normal text-[14px] leading-[100%] tracking-[0%]"
+            class="rgba(107,114,128,1) font-[400] text-[14px] leading-[100%] tracking-[0%]"
           >
             Back
           </button>
         </a>
         <span
-          class="text-[rgba(17,27,73,1)] text-center w-full block text-[20px] leading-[100%] tracking-[0%] font-bold"
+          class="text-[rgba(17,27,73,1)] text-center w-full block text-[20px] leading-[100%] tracking-[0%] font-[700]"
           >Professional Development</span
         >
       </n-form>
@@ -122,7 +122,7 @@
               type="text"
               v-model:value="formData.trainings_workshops"
               placeholder="Explain in details, press enter to start input another in cases of multiple"
-              class="w-full outline-none border-0 px-[12px] py-[15px] h-[82px] bg-[rgba(141,193,255,0.13)] font-normal text-[14px] leading-[120%] tracking-[-2%] text-[rgba(161,161,170,1)]"
+              class="w-full outline-none border-0 px-[12px] py-[15px] h-[82px] bg-[rgba(141,193,255,0.13)] font-[400] text-[14px] leading-[120%] tracking-[-2%] text-[rgba(161,161,170,1)]"
             />
           </n-form-item>
         </div>
@@ -131,7 +131,7 @@
           <div class="">
             <div class="flex items-center justify-between gap-[10px]">
               <h2
-                class="text-[rgba(27,37,89,1)] font-bold text-[16px] leading-[120%] tracking-[-2%]"
+                class="text-[rgba(27,37,89,1)] font-[700] text-[16px] leading-[120%] tracking-[-2%]"
               >
                 Certifications
               </h2>
@@ -149,7 +149,7 @@
               id="file"
               accept=".pdf,.doc,.docx,.txt, image/* "
               aria-hidden="false"
-              class="w-full absolute inset-0 opacity-0 cursor-pointer outline-none border-0 px-[12px] py-[15px] bg-[rgba(248,248,249,1)] font-normal text-[14px] leading-[120%] tracking-[-2%] text-[rgba(161,161,170,1)]"
+              class="w-full absolute inset-0 opacity-0 cursor-pointer outline-none border-0 px-[12px] py-[15px] bg-[rgba(248,248,249,1)] font-[400] text-[14px] leading-[120%] tracking-[-2%] text-[rgba(161,161,170,1)]"
             />
             <!-- Visual content -->
             <div class="pointer-events-none flex flex-col items-center gap-1">
@@ -194,7 +194,7 @@
               type="text"
               v-model:value="formData.research_collaborations"
               placeholder="Explain in details, press enter to start input another in cases of multiple"
-              class="w-full outline-none border-0 px-[12px] py-[15px] h-[82px] bg-[rgba(141,193,255,0.13)] font-normal text-[14px] leading-[120%] tracking-[-2%] text-[rgba(161,161,170,1)]"
+              class="w-full outline-none border-0 px-[12px] py-[15px] h-[82px] bg-[rgba(141,193,255,0.13)] font-[400] text-[14px] leading-[120%] tracking-[-2%] text-[rgba(161,161,170,1)]"
             />
           </n-form-item>
         </div>
@@ -204,7 +204,7 @@
               type="textarea"
               v-model:value="formData.future_goals"
               placeholder="Your message here"
-              class="w-full outline-none border-0 px-[12px] py-[15px] h-[82px] bg-[rgba(141,193,255,0.13)] font-normal text-[14px] leading-[120%] tracking-[-2%] text-[rgba(161,161,170,1)]"
+              class="w-full outline-none border-0 px-[12px] py-[15px] h-[82px] bg-[rgba(141,193,255,0.13)] font-[400] text-[14px] leading-[120%] tracking-[-2%] text-[rgba(161,161,170,1)]"
             />
           </n-form-item>
         </div>

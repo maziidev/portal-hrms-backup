@@ -199,7 +199,7 @@
 </template>
 
 <script setup>
-import { reactive, ref, watch } from "vue";
+import { reactive, ref } from "vue";
 import { addStaff } from "@/apis/admin.js";
 import { useMessage } from "naive-ui";
 
@@ -220,7 +220,7 @@ const gender = ref([
 ]);
 const employmentTypes = ref([
   { label: "Full Time", value: "Full Time" },
-  { label: "Part Time", value: "Part Time" },
+  { label: "Full Time", value: "Full Time" },
 ]);
 
 const emit = defineEmits(["CloseModalForAddNewStaff"]);
@@ -275,15 +275,13 @@ const AddStaff = async () => {
     await formRef.value?.validate();
     // form.is_academic = String(form.is_academic).toUpperCase();
     const data = await addStaff(form);
-    console.log("Staff added successfully", data);
+    console.log("Staff added successfully");
     message.success("Staff added successfully");
     loading.value = false;
     emit("CloseModalForAddNewStaff");
   } catch (error) {
-    console.log(error);
-    message.error(error.message || "Staff not added");
-  } finally {
-    loading.value = false;
+    console.log(error)
+    message.error(error.message || "Staff not added")
   }
 };
 
@@ -415,6 +413,7 @@ const rules = {
     },
   ],
   phone_number: [
+    
     {
       validator: (rule, value) => {
         if (!/^(\+234|0)[789][01]\d{8}$/.test(value)) {
@@ -426,6 +425,7 @@ const rules = {
     },
   ],
   startDate: [
+    
     {
       validator(rule, value) {
         if (!value) {

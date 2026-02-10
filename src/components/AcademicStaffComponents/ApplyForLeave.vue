@@ -9,13 +9,13 @@
     @close="closeModal"
   >
     <p
-      class="text-[rgba(30,30,30,1)] font-normal leading-[120%] tracking-[0%] text-[16px]"
+      class="text-[rgba(30,30,30,1)] font-[400] leading-[120%] tracking-[0%] text-[16px]"
     >
       Submit a leave request. Ensure all details are accurate before submission
     </p>
     <div class="flex my-[40px] justify-center items-center gap-2">
       <span
-        class="text-[rgba(17,27,73,1)] text-[20px] leading-[100%] tracking-[0%] font-bold"
+        class="text-[rgba(17,27,73,1)] text-[20px] leading-[100%] tracking-[0%] font-[700]"
         >Basic Publication Details</span
       >
     </div>
@@ -24,7 +24,7 @@
         <div class="">
           <div class="flex items-center gap-[10px]">
             <h2
-              class="text-[rgba(27,37,89,1)] font-bold text-[16px] leading-[120%] tracking-[-2%]"
+              class="text-[rgba(27,37,89,1)] font-[700] text-[16px] leading-[120%] tracking-[-2%]"
             >
               Leave Type
             </h2>
@@ -45,7 +45,7 @@
         <div class="">
           <div class="flex items-center gap-[10px]">
             <h2
-              class="text-[rgba(27,37,89,1)] font-bold text-[16px] leading-[120%] tracking-[-2%]"
+              class="text-[rgba(27,37,89,1)] font-[700] text-[16px] leading-[120%] tracking-[-2%]"
             >
               Start Date
             </h2>
@@ -65,7 +65,7 @@
         <div class="">
           <div class="flex items-center gap-[10px]">
             <h2
-              class="text-[rgba(27,37,89,1)] font-bold text-[16px] leading-[120%] tracking-[-2%]"
+              class="text-[rgba(27,37,89,1)] font-[700] text-[16px] leading-[120%] tracking-[-2%]"
             >
               End Date
             </h2>
@@ -85,7 +85,7 @@
         <div class="">
           <div class="flex items-center gap-[10px]">
             <h2
-              class="text-[rgba(27,37,89,1)] font-bold text-[16px] leading-[120%] tracking-[-2%]"
+              class="text-[rgba(27,37,89,1)] font-[700] text-[16px] leading-[120%] tracking-[-2%]"
             >
               Number of Days
             </h2>
@@ -97,7 +97,7 @@
             :borderd="false"
             :v-model:value="form.number_of_days"
             placeholder="Auto calculated"
-            class="w-full outline-none font-normal text-[14px] leading-[120%] tracking-[-2%] text-[rgba(161,161,170,1)]"
+            class="w-full outline-none  font-[400] text-[14px] leading-[120%] tracking-[-2%] text-[rgba(161,161,170,1)]"
           />
         </div>
       </div>
@@ -105,7 +105,7 @@
         <div class="">
           <div class="flex items-center gap-[10px]">
             <h2
-              class="text-[rgba(27,37,89,1)] font-bold text-[16px] leading-[120%] tracking-[-2%]"
+              class="text-[rgba(27,37,89,1)] font-[700] text-[16px] leading-[120%] tracking-[-2%]"
             >
               Phone During Leave
             </h2>
@@ -117,7 +117,7 @@
             :borderd="false"
             :v-model:value="form.phone_number"
             placeholder="Enter any Emergency contact"
-            class="w-full outline-none font-normal text-[14px] leading-[120%] tracking-[-2%] text-[rgba(161,161,170,1)]"
+            class="w-full outline-none  font-[400] text-[14px] leading-[120%] tracking-[-2%] text-[rgba(161,161,170,1)]"
           />
         </div>
       </div>
@@ -125,7 +125,7 @@
         <div class="">
           <div class="flex items-center gap-[10px]">
             <h2
-              class="text-[rgba(27,37,89,1)] font-bold text-[16px] leading-[120%] tracking-[-2%]"
+              class="text-[rgba(27,37,89,1)] font-[700] text-[16px] leading-[120%] tracking-[-2%]"
             >
               Reason for Leave
             </h2>
@@ -137,7 +137,7 @@
             :bordered="false"
             :v-model:value="form.reason_for_leave"
             placeholder="Your message here"
-            class="w-full outline-none border px-[12px] py-[15px] h-[82px] font-normal text-[14px] leading-[120%] tracking-[-2%] text-[rgba(161,161,170,1)]"
+            class="w-full outline-none border px-[12px] py-[15px] h-[82px] font-[400] text-[14px] leading-[120%] tracking-[-2%] text-[rgba(161,161,170,1)]"
           ></n-input>
         </div>
       </div>
@@ -145,7 +145,7 @@
         <div class="">
           <div class="flex items-center justify-between gap-[10px]">
             <h2
-              class="text-[rgba(27,37,89,1)] font-bold text-[16px] leading-[120%] tracking-[-2%]"
+              class="text-[rgba(27,37,89,1)] font-[700] text-[16px] leading-[120%] tracking-[-2%]"
             >
               Supporting Documents
             </h2>
@@ -154,7 +154,10 @@
             </button>
           </div>
         </div>
-        <div id="drop-zone" class="my-3 relative w-full">
+        <div
+          id="drop-zone"
+          class="my-3 relative w-full  "
+        >
           <n-upload
             :default-upload="false"
             directory-dnd
@@ -197,17 +200,13 @@
             </n-upload-dragger>
           </n-upload>
           <span v-if="documentPreview" class="block mt-2">
-            <img
-              :src="documentPreview"
-              class="h-24 w-24 object-cover rounded-lg"
-            />
-          </span>
+          <img :src="documentPreview" class="h-24 w-24 object-cover rounded-lg" />
+        </span>
         </div>
       </div>
     </div>
     <div class="grid grid-cols-1 mt-5 md:grid-cols-1 lg:grid-cols-1 gap-[20px]">
-      <button
-        @click="submit"
+      <button @click="submit"
         class="submit border-2 border-[rgba(35,136,255,1)] bg-[rgba(35,136,255,1)] text-[rgba(255,255,255,1)] font-[600] text-[16px] leading-[100%] tracking-[0] p-[15px]"
       >
         Submit Leave Application
@@ -230,7 +229,10 @@ const { show } = defineProps({
 const supportingDocument = ref(null);
 const documentPreview = ref(null);
 
-const emit = defineEmits(["closeApplyForLeave", "openApplyForLeave"]);
+const emit = defineEmits([
+  "closeApplyForLeave",
+  "openApplyForLeave",
+]);
 
 const form = reactive({
   endDate: null,
@@ -242,9 +244,9 @@ const form = reactive({
 });
 
 function handleDocumentUpload(options) {
-  const file = options.file.file;
-  supportingDocument.value = file;
-  documentPreview.value = URL.createObjectURL(supportingDocument.value);
+    const file = options.file.file;
+    supportingDocument.value = file;
+    documentPreview.value = URL.createObjectURL(supportingDocument.value);
 }
 
 const leaveOptions = ref([

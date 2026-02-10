@@ -876,8 +876,8 @@ const data = reactive({
 const activeState = ref(null);
 const adminDuties = ref(true);
 const showFiles = ref(true);
-const showBasicBio = ref(true);
-const showEmploymentDetails = ref(true);
+const showBasicBio = ref(true); 
+const showEmploymentDetails = ref(true); 
 
 function toggleAdminDuties() {
   adminDuties.value = !adminDuties.value;
@@ -888,10 +888,10 @@ function toggleShowFiles() {
   console.log("Clicked");
 }
 function toggleBasicBio() {
-  showBasicBio.value = !showBasicBio.value;
+    showBasicBio.value = !showBasicBio.value;
 }
 function toggleEmploymentDetails() {
-  showEmploymentDetails.value = !showEmploymentDetails.value;
+    showEmploymentDetails.value = !showEmploymentDetails.value;
 }
 
 function isActive(id) {
@@ -927,7 +927,7 @@ const Research_Contributions_columns = [
           class: "text-blue-600 hover:underline font-semibold cursor-pointer",
           onClick: () => router.push(`/home/edit/${row.id}`),
         },
-        row.id,
+        row.id
       );
     },
   },
@@ -946,7 +946,7 @@ const Research_Breakdown_columns = [
           class: "text-blue-600 hover:underline font-semibold cursor-pointer",
           onClick: () => router.push(`/home/edit/${row.id}`),
         },
-        row.id,
+        row.id
       );
     },
   },

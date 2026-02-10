@@ -2,7 +2,7 @@
   <div class="relative">
     <button
       @click="toggleSideBar"
-      class="absolute md:hidden menu-bar lg:hidden z-[2000] font-bold text-[30px] top-[20px] right-[20px] px-[4px] py-[-2px] rounded-sm"
+      class="absolute md:hidden menu-bar lg:hidden z-[2000] font-[700] text-[30px] top-[20px] right-[20px] px-[4px] py-[-2px] rounded-sm"
     >
       <i class="fa fa-bars"></i>
     </button>
@@ -10,13 +10,13 @@
       <div class=" ">
         <aside
           :class="[
-            `{ w-67 sidebar z-3000 transition-all duration-100 ease-in-out  fixed top-0 left-0 h-screen md:flex lg:flex px-[35px] flex flex-col gap-[67px] py-[45px] bg-[var(--primary)]`,
+            `{ w-[268px] sidebar z-[3000] transition-all duration-100 ease-in-out  fixed top-0 left-0 h-screen md:flex lg:flex px-[35px] flex flex-col gap-[67px] py-[45px] bg-[var(--primary)]`,
             !toggleState ? `hidden` : `md:flex lg:flex`,
           ]"
         >
           <div class="">
             <li
-              class="text-[rgba(14,253,193,1)] font-bold text-[20px] flex gap-2 items-center tracking-[-2%] leading-[120%]"
+              class="text-[rgba(14,253,193,1)] font-[700] text-[20px] flex gap-2 items-center  tracking-[-2%] leading-[120%]"
             >
               Orbit <img :src="Orbit" />
             </li>
@@ -25,44 +25,42 @@
             <li>
               <router-link
                 to="/dap"
-                class="text-(--pri-text) cursor-pointer font-normal flex gap-2 items-center text-[16px] tracking-[-2%] leading-[120%]"
+                class="text-[var(--pri-text)] cursor-pointer font-[400] flex gap-2 items-center text-[16px] tracking-[-2%] leading-[120%]"
                 ><i class="fa fa-th-large"></i>Dashboard</router-link
               >
             </li>
             <li>
               <router-link
                 to="/dap/staff-records"
-                class="text-(--pri-text) cursor-pointer font-normal text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
+                class="text-[var(--pri-text)] cursor-pointer font-[400] text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
                 ><i class="fa fa-user-circle"></i>Staff Records</router-link
               >
             </li>
             <li>
               <router-link
                 to="/dap/appraisal-management"
-                class="text-(--pri-text) font-normal text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
+                class=" text-[var(--pri-text)] font-[400] text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
                 ><i class="fa fa-file-text"></i> Appraisals Management
               </router-link>
             </li>
             <li>
               <router-link
                 to="/dap/leave-analytics"
-                class="text-(--pri-text) font-normal text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
+                class="text-[var(--pri-text)] font-[400] text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
                 ><i class="fa fa-bed"></i> Leave Analytics</router-link
               >
             </li>
             <li>
               <router-link
                 to="/dap/promotion-career-progression"
-                class="text-(--pri-text) font-normal text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
-                ><i class="fa fa-award"></i> Promotions & Career
-                Progression</router-link
+                class="text-[var(--pri-text)] font-[400] text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
+                ><i class="fa fa-award"></i> Promotions & Career Progression</router-link
               >
             </li>
-
+           
             <li>
-              <router-link
-                to="/dap/publications-research-verification"
-                class="text-[rgba(14,253,193,1)] font-bold text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
+              <router-link to="/dap/publications-research-verification"
+                class=" text-[rgba(14,253,193,1)] font-[700]  text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
                 href="#"
                 ><i class="fa fa-file-text"></i> Publications & Research
                 Verification</router-link
@@ -71,7 +69,7 @@
             <li>
               <router-link
                 to="/dap/report-analysis"
-                class="text-(--pri-text) font-normal text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
+                class="text-[var(--pri-text)] font-[400] text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
                 href="Report_Analysis.html"
                 ><i class="fa-solid fa-chart-column"></i>Reports &
                 Analytics</router-link
@@ -82,30 +80,30 @@
           <div class="flex flex-col gap-[25px]">
             <li>
               <a
-                class="text-(--pri-text) flex items-center gap-2 font-normal text-[16px] tracking-[-2%] leading-[120%]"
+                class="text-[var(--pri-text)] flex items-center gap-2 font-[400] text-[16px] tracking-[-2%] leading-[120%]"
                 href="#"
                 ><i class="fa fa-gear"></i> Settings</a
               >
             </li>
             <li>
               <a
-                class="text-(--pri-text) flex items-center gap-2 font-normal text-[16px] tracking-[-2%] leading-[120%]"
+                class="text-[var(--pri-text)] flex items-center gap-2 font-[400] text-[16px] tracking-[-2%] leading-[120%]"
                 href="#"
                 ><i class="fa-solid fa-right-from-bracket"></i> Logout</a
               >
             </li>
             <li class="md:hidden lg:hidden items-center gap-[10px] flex">
-              <i class="fa fa-bell text-(--pri-text)"></i>
+              <i class="fa fa-bell text-[var(--pri-text)]"></i>
               <span
-                class="text-(--pri-text) flex items-center gap-2 font-normal text-[16px] tracking-[-2%] leading-[120%]"
+                class="text-[var(--pri-text)] flex items-center gap-2 font-[400] text-[16px] tracking-[-2%] leading-[120%]"
                 >Notification</span
               >
             </li>
             <li class="md:hidden lg:hidden items-center gap-[10px] flex">
               <div class="user">
-                <i class="fa fa-user text-xl text-(--pri-text)"></i>
+                <i class="fa fa-user text-xl text-[var(--pri-text)]"></i>
               </div>
-              <div class="user-id mbc text-(--pri-text) break-words">
+              <div class="user-id mbc text-[var(--pri-text)] break-words">
                 Nnamdichuzu@edu.EU.ng
               </div>
             </li>
@@ -125,7 +123,7 @@
               </h5>
             </div>
             <div class="md:flex lg:flex items-center gap-[10px] hidden">
-              <i class="fa fa-bell text-(--sec-text)"></i>
+              <i class="fa fa-bell text-[var(--sec-text)]"></i>
               <div class="user">
                 <i class="fa fa-user text-2xl"></i>
               </div>
@@ -172,7 +170,7 @@
           </div>
           <div class="grid lg:grid-cols-[1fr_2fr] grid-cols-1 gap-[25px]">
             <div
-              class="bg-var(--twhite) p-[12px] w-full shadow-sm border border-slate-100 rounded-[20px] gap-[20px] flex flex-col justify-between"
+              class="bg-[var(--twhite)] p-[12px] w-full shadow-sm border border-slate-100 rounded-[20px] gap-[20px] flex flex-col justify-between"
             >
               <div
                 class="rounded-[17px] shadow bg-[rgba(17,27,73,1)] flex flex-col gap-[20px] py-[20px] px-[20px]"
@@ -223,7 +221,7 @@
                       class="h-[41px] rounded-[16px] w-[4px] bg-[rgba(35,136,255,1)]"
                     ></span>
                     <h2
-                      class="text-[rgba(27,37,89,1)] font-bold text-[16px] leading-[120%] tracking-[-2%]"
+                      class="text-[rgba(27,37,89,1)] font-[700] text-[16px] leading-[120%] tracking-[-2%]"
                     >
                       Pending Verifications
                     </h2>
@@ -241,7 +239,7 @@
                       class="h-[41px] rounded-[16px] w-[4px] bg-[rgba(35,136,255,1)]"
                     ></span>
                     <h2
-                      class="text-[rgba(27,37,89,1)] font-bold text-[16px] leading-[120%] tracking-[-2%]"
+                      class="text-[rgba(27,37,89,1)] font-[700] text-[16px] leading-[120%] tracking-[-2%]"
                     >
                       Rejected / Returned
                     </h2>
@@ -259,7 +257,7 @@
                       class="h-[41px] rounded-[16px] w-[4px] bg-[rgba(35,136,255,1)]"
                     ></span>
                     <h2
-                      class="text-[rgba(27,37,89,1)] font-bold text-[16px] leading-[120%] tracking-[-2%]"
+                      class="text-[rgba(27,37,89,1)] font-[700] text-[16px] leading-[120%] tracking-[-2%]"
                     >
                       Verification Completion Rate
                     </h2>
@@ -277,7 +275,7 @@
                       class="h-[41px] rounded-[16px] w-[4px] bg-[rgba(35,136,255,1)]"
                     ></span>
                     <h2
-                      class="text-[rgba(27,37,89,1)] font-bold text-[16px] leading-[120%] tracking-[-2%]"
+                      class="text-[rgba(27,37,89,1)] font-[700] text-[16px] leading-[120%] tracking-[-2%]"
                     >
                       Top Performing Faculty
                     </h2>
@@ -292,7 +290,7 @@
               </div>
             </div>
           </div>
-
+         
           <form class="w-full mb-5">
             <div
               class="top flex justify-between w-full items-center flex-wrap md:flex-nowrap gap-[10px]"
@@ -301,7 +299,7 @@
                 class="left flex flex-wrap md:flex-nowrap lg:flex-nowrap items-center w-full md:w-[50%] lg:w-[50%] gap-[10px]"
               >
                 <h2
-                  class="font-bold text-(--sec-text) w-[270px] text-[20px] leading-[120%] tracking-[-2%]"
+                  class="font-[700] text-[var(--sec-text)] w-[270px] text-[20px] leading-[120%] tracking-[-2%]"
                 >
                   Faculty SUBMISSIONS
                 </h2>
@@ -402,6 +400,7 @@ let leaveTypeDistributions = reactive([
   {
     name: "2025",
   },
+ 
 ]);
 const isActiveAppraisalPerformanceTrend = ref(null);
 
@@ -442,9 +441,9 @@ const horizontalChartOptions = ref({
 });
 
 const verticalChartDataSets = reactive({
-  2023: [23, 45, 55, 35, 67, 89, 45, 90],
-  2024: [23, 75, 85, 35, 67, 40, 25, 70],
-  2025: [53, 75, 35, 75, 87, 70, 95, 70],
+  "2023": [23, 45, 55, 35, 67, 89, 45, 90],
+  "2024": [23, 75, 85, 35, 67, 40, 25, 70],
+  "2025": [53, 75, 35, 75, 87, 70, 95, 70],
 });
 
 const series_1 = ref([
@@ -496,10 +495,10 @@ const columns = [
           onclick: () =>
             router.push(
               "/dap/appraisal-management/departmental-appraisal-records/" +
-                row.id,
+                row.id
             ),
         },
-        row.faculty,
+        row.faculty
       );
     },
   },
@@ -518,15 +517,16 @@ const columns = [
         {
           style:
             row.is_active == "Completed"
-              ? "rounded-[22.5px] text-[rgba(58,151,76,1)] px font-bold text-[14px] leading-[100%] tracking-[0%] px-[20px] py-[10px] bg-[rgba(58,151,76,0.15)] w-[120px]"
+              ? "rounded-[22.5px] text-[rgba(58,151,76,1)] px font-[700] text-[14px] leading-[100%] tracking-[0%] px-[20px] py-[10px] bg-[rgba(58,151,76,0.15)] w-[120px]"
               : row.is_active == "Pending"
-                ? "rounded-[22.5px] text-[rgba(234,67,53,1)] px font-bold text-[14px] leading-[100%] tracking-[0%] px-[20px] py-[10px] bg-[rgba(234,67,53,0.2)]"
-                : "rounded-[22.5px] text-[rgba(35,136,255,1)] px font-bold text-[14px] leading-[100%] tracking-[0%] px-[20px] py-[10px] bg-[rgba(35,136,255,0.25)]",
+              ? "rounded-[22.5px] text-[rgba(234,67,53,1)] px font-[700] text-[14px] leading-[100%] tracking-[0%] px-[20px] py-[10px] bg-[rgba(234,67,53,0.2)]"
+              : "rounded-[22.5px] text-[rgba(35,136,255,1)] px font-[700] text-[14px] leading-[100%] tracking-[0%] px-[20px] py-[10px] bg-[rgba(35,136,255,0.25)]",
         },
-        row.is_active,
+        row.is_active
       );
     },
   },
+ 
 ];
 const pagination = {
   // pageSize:10,

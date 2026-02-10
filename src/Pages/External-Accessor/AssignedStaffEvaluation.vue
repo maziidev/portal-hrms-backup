@@ -94,9 +94,9 @@
 </template>
 <script setup>
 import { ref, reactive } from "vue";
-import ExternalEvaluationSubmission from "@/components/ExternalAccessorComponents/ExternalEvaluationSubmission.vue";
-import TeachingResearchAdministrativeDuties from "@/components/ExternalAccessorComponents/TeachingResearchAdministrativeDuties.vue";
-import StaffInformation from "@/components/ExternalAccessorComponents/StaffInformation.vue";
+import ExternalEvaluationSubmission from "@/components/ExternalAccessorComponents/ExternalEvaluationSubmission.vue"
+import TeachingResearchAdministrativeDuties from "@/components/ExternalAccessorComponents/TeachingResearchAdministrativeDuties.vue"
+import StaffInformation from "@/components/ExternalAccessorComponents/StaffInformation.vue"
 import Orbit from "@/assets/imgs/Orbit.png";
 
 const data = reactive({
@@ -164,7 +164,7 @@ const columns = [
           class: "text-blue-600 hover:underline font-semibold cursor-pointer",
           onClick: () => router.push(`/home/edit/${row.id}`),
         },
-        row.id,
+        row.id
       );
     },
   },
@@ -183,14 +183,14 @@ const columns = [
             color: row.is_active
               ? "text-[rgba(251,188,4,1)]"
               : row.is_active == "Due in 12 mo"
-                ? "red"
-                : "blue",
+              ? "red"
+              : "blue",
             fontWeight: "700",
             backgroundColor: row.is_active
               ? "bg-[rgba(234,67,53,0.2)]"
               : row.is_active == "Due in 12 mo"
-                ? "bg-[rgba(251,188,4,0.2)]"
-                : "bg-[rgba(58,151,76,0.15)]",
+              ? "bg-[rgba(251,188,4,0.2)]"
+              : "bg-[rgba(58,151,76,0.15)]",
             fontSize: "14px",
             padding: "10px 20px",
             borderRadius: "22.5px",
@@ -198,7 +198,7 @@ const columns = [
             wordSpacing: "0%",
           },
         },
-        row.is_active,
+        row.is_active
       );
     },
   },
@@ -213,31 +213,31 @@ const columns = [
               href: row.file,
               download: "",
               style:
-                "rounded-[2px] text-[rgba(255,255,255,1)] font-bold text-[14px] leading-[100%] flex gap-3 items-center justify-center tracking-[0%] px-[20px] py-[16px] bg-[rgba(35,136,255,1)]",
+                "rounded-[2px] text-[rgba(255,255,255,1)] font-[700] text-[14px] leading-[100%] flex gap-3 items-center justify-center tracking-[0%] px-[20px] py-[16px] bg-[rgba(35,136,255,1)]",
             },
-            ["Continue"],
+            ["Continue"]
           )
         : row.isActive == 0
-          ? h(
-              "a",
-              {
-                href: row.file,
-                download: "",
-                style:
-                  "rounded-[2px] text-[rgba(255,255,255,1)] font-bold text-[14px] leading-[100%] flex gap-3 items-center justify-center tracking-[0%] px-[20px] py-[16px] bg-[rgba(35,136,255,1)]",
-              },
-              ["Start"],
-            )
-          : h(
-              "a",
-              {
-                href: row.file,
-                download: "",
-                style:
-                  "rounded-[2px] text-[rgba(255,255,255,1)] font-bold text-[14px] leading-[100%] flex gap-3 items-center justify-center tracking-[0%] px-[20px] py-[16px] bg-[rgba(35,136,255,1)]",
-              },
-              ["View"],
-            );
+        ? h(
+            "a",
+            {
+              href: row.file,
+              download: "",
+              style:
+                "rounded-[2px] text-[rgba(255,255,255,1)] font-[700] text-[14px] leading-[100%] flex gap-3 items-center justify-center tracking-[0%] px-[20px] py-[16px] bg-[rgba(35,136,255,1)]",
+            },
+            ["Start"]
+          )
+        : h(
+            "a",
+            {
+              href: row.file,
+              download: "",
+              style:
+                "rounded-[2px] text-[rgba(255,255,255,1)] font-[700] text-[14px] leading-[100%] flex gap-3 items-center justify-center tracking-[0%] px-[20px] py-[16px] bg-[rgba(35,136,255,1)]",
+            },
+            ["View"]
+          );
     },
   },
 ];

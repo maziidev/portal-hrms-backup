@@ -1,10 +1,8 @@
+import { useMessage } from "naive-ui";
 import { defineStore } from "pinia";
 import { computed, ref } from "vue";
+import { deleteSession } from "../apis/auth";
 import router from "../router";
-// import { useRouter } from "vue-router";
-import { useMessage } from "naive-ui";
-
-const message = useMessage();
 
 export const useAuthStore = defineStore("authstore", () => {
   // --- State ---

@@ -6,10 +6,10 @@
     :closeable="true"
     :mask-closable="true"
     title="Staff Information"
-    class="md:w-[50%]! lg:w-[60%]! my-5 w-full"
+    class="md:w-[50%] lg:w-[60%] my-[20px] w-full"
   >
     <div
-      class="bg-var(--twhite) p-[20px] shadow-sm border-b mb-[10px] border-slate-100 gap-[10px] flex flex-col justify-between"
+      class="bg-[var(--twhite)] p-[20px] shadow-sm border-b mb-[10px] border-slate-100 gap-[10px] flex flex-col justify-between"
     >
       <div class="flex p-[10px] gap-[20px] items-center">
         <!-- <button
@@ -18,12 +18,12 @@
           x
         </button> -->
         <h2
-          class="text-[rgba(27,37,89,1)] w-full mb-[20px] text-center font-bold text-[20px] leading-[120%] tracking-[-2%]"
+          class="text-[rgba(27,37,89,1)] w-full mb-[20px] text-center font-[700] text-[20px] leading-[120%] tracking-[-2%]"
         >
           Staff Information
         </h2>
         <p
-          class="text-[rgba(4,183,107,1)] font-bold text-[14px] leading-[100%] rounded-[22.5px] bg-[rgba(4,183,107,0.2)] w-[200px] text-center px-[20px] py-[10px]"
+          class="text-[rgba(4,183,107,1)] font-[700] text-[14px] leading-[100%] rounded-[22.5px] bg-[rgba(4,183,107,0.2)] w-[200px] text-center px-[20px] py-[10px]"
         >
           Completed
         </p>
@@ -32,7 +32,7 @@
         class="flex flex-col gap-[10px] gap-[20px] border-b py-[20px] border-[rgba(240,240,240,1)]"
       >
         <h2
-          class="font-bold text-[16px] leading-[100%] tracking-[0%] text-[rgba(17,27,73,1)]"
+          class="font-[700] text-[16px] leading-[100%] tracking-[0%] text-[rgba(17,27,73,1)]"
         >
           Staff Info
         </h2>
@@ -88,7 +88,7 @@
         <div class="flex flex-col gap-[20px]">
           <div class="phone flex justify-between items-center">
             <h2
-              class="font-bold text-[16px] leading-[100%] tracking-[0%] text-[rgba(17,27,73,1)]"
+              class="font-[700] text-[16px] leading-[100%] tracking-[0%] text-[rgba(17,27,73,1)]"
             >
               Appraisal Metrics
             </h2>
@@ -154,7 +154,7 @@
           </div>
           <div class="phone flex justify-between items-center">
             <h2
-              class="font-bold text-[16px] leading-[100%] tracking-[0%] text-[rgba(17,27,73,1)]"
+              class="font-[700] text-[16px] leading-[100%] tracking-[0%] text-[rgba(17,27,73,1)]"
             >
               Appraisal Metrics
             </h2>
@@ -168,7 +168,7 @@
       <div class="flex flex-col gap-[10px] py-[20px]">
         <div class="flex justify-between items-center gap-[10px]">
           <span
-            class="text-[rgba(17,27,73,1)] font-bold text-[16px] leading-[100%] tracking-[0%]"
+            class="text-[rgba(17,27,73,1)] font-[700] text-[16px] leading-[100%] tracking-[0%]"
           >
             Comments
           </span>
@@ -193,12 +193,12 @@
 
               <div class="flex gap-1 items-center">
                 <h2
-                  class="text-[rgba(27,37,89,1)] font-bold text-[16px] leading-[120%] tracking-[-0.09px]"
+                  class="text-[rgba(27,37,89,1)] font-[700] text-[16px] leading-[120%] tracking-[-0.09px]"
                 >
                   {{ comment.name }}
                 </h2>
                 <p
-                  class="text-[rgba(6,11,19,1)] font-normal text-[16px] leading-[120%] tracking-[-0.09px]"
+                  class="text-[rgba(6,11,19,1)] font-[400] text-[16px] leading-[120%] tracking-[-0.09px]"
                 >
                   {{ comment.role }}
                 </p>
@@ -213,12 +213,12 @@
           <div class="body">
             <div class="top flex gap-[3px] my-[10px]">
               <h2
-                class="text-[rgba(17,27,73,1)] font-[600] tracking-[-0.26px]leading-[23.8px] text-[14px] font-bold"
+                class="text-[rgba(17,27,73,1)] font-[600] tracking-[-0.26px]leading-[23.8px] text-[14px] font-[700]"
               >
                 Stage:
               </h2>
               <span
-                class="text-[rgba(34,32,32,1)] font-normal text-[14px] leading-[23.8px] tracking-[-0.09px]"
+                class="text-[rgba(34,32,32,1)] font-[400] text-[14px] leading-[23.8px] tracking-[-0.09px]"
                 >{{ comment.stage }}</span
               >
             </div>
@@ -237,9 +237,10 @@
           v-model:page="page"
           v-model:page-size="pageSize"
           :item-count="comments.length"
-          :page-sizes="[5, comments.length - 5, comments.length]"
+           :page-sizes="[5, comments.length-5, comments.length]"
           show-size-picker
           show-total
+          
         />
       </div>
     </div>

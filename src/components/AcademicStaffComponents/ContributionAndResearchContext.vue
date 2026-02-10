@@ -9,22 +9,20 @@
     @close="closeModal"
   >
     <p
-      class="text-[rgba(30,30,30,1)] font-normal leading-[120%] tracking-[0%] text-[16px]"
+      class="text-[rgba(30,30,30,1)] font-[400] leading-[120%] tracking-[0%] text-[16px]"
     >
       Submit your research work for verification and record update
     </p>
     <div class="flex my-[40px] items-center gap-5">
-      <a href="#" class="back w-[100px] flex items-center gap-[10px]">
+      <a href="#" class=" back  w-[100px] flex items-center gap-[10px]">
         <i class="fa fa-chevron-left"></i>
-        <button
-          @click="moveToPreviousModel"
-          class="rgba(107,114,128,1) font-normal text-[14px] leading-[100%] tracking-[0%]"
+        <button @click="moveToPreviousModel"
+          class="rgba(107,114,128,1) font-[400] text-[14px] leading-[100%] tracking-[0%]"
+          >Back</button
         >
-          Back
-        </button>
       </a>
       <span
-        class="text-[rgba(17,27,73,1)] text-center w-full block text-[20px] leading-[100%] tracking-[0%] font-bold"
+        class="text-[rgba(17,27,73,1)] text-center w-full block text-[20px] leading-[100%] tracking-[0%] font-[700]"
         >Contribution and Research Context</span
       >
     </div>
@@ -33,7 +31,7 @@
         <div class="">
           <div class="flex items-center gap-[10px]">
             <h2
-              class="text-[rgba(27,37,89,1)] font-bold text-[16px] leading-[120%] tracking-[-2%]"
+              class="text-[rgba(27,37,89,1)] font-[700] text-[16px] leading-[120%] tracking-[-2%]"
             >
               Authors / Co-Authors
             </h2>
@@ -45,7 +43,7 @@
             :v-model:value="form.author"
             :bordered="false"
             placeholder="Input authors, co-authors details, press enter to start input another in cases of multiple"
-            class="w-full outline-none border font-normal text-[14px] leading-[120%] tracking-[-2%] text-[rgba(161,161,170,1)]"
+            class="w-full outline-none border font-[400] text-[14px] leading-[120%] tracking-[-2%] text-[rgba(161,161,170,1)]"
           />
         </div>
       </div>
@@ -53,7 +51,7 @@
         <div class="">
           <div class="flex items-center gap-[10px]">
             <h2
-              class="text-[rgba(27,37,89,1)] font-bold text-[16px] leading-[120%] tracking-[-2%]"
+              class="text-[rgba(27,37,89,1)] font-[700] text-[16px] leading-[120%] tracking-[-2%]"
             >
               Your Role in Publication
             </h2>
@@ -64,8 +62,9 @@
             :options="yearRoleInPublication"
             :v-model="form.year_in_publication"
             :bordered="false"
+
             placeholder="Journal Article"
-            class="w-full outline-none border font-normal text-[14px] leading-[120%] tracking-[-2%] text-[rgba(161,161,170,1)]"
+            class="w-full outline-none border font-[400] text-[14px] leading-[120%] tracking-[-2%] text-[rgba(161,161,170,1)]"
           >
           </n-select>
         </div>
@@ -74,7 +73,7 @@
         <div class="">
           <div class="flex items-center gap-[10px]">
             <h2
-              class="text-[rgba(27,37,89,1)] font-bold text-[16px] leading-[120%] tracking-[-2%]"
+              class="text-[rgba(27,37,89,1)] font-[700] text-[16px] leading-[120%] tracking-[-2%]"
             >
               Affiliated Department / Faculty
             </h2>
@@ -82,7 +81,7 @@
         </div>
         <div class="my-3">
           <p
-            class="w-full py-[15px] h-[47px] font-normal text-[14px] leading-[120%] tracking-[-2%] text-[rgba(24,24,27,1)]"
+            class="w-full py-[15px] h-[47px] font-[400] text-[14px] leading-[120%] tracking-[-2%] text-[rgba(24,24,27,1)]"
           >
             Department Of Automobile Engineering , Faculty of Engineering
           </p>
@@ -92,13 +91,13 @@
         <div class="">
           <div class="flex items-center justify-between gap-[10px]">
             <h2
-              class="text-[rgba(27,37,89,1)] font-bold text-[16px] leading-[120%] tracking-[-2%]"
+              class="text-[rgba(27,37,89,1)] font-[700] text-[16px] leading-[120%] tracking-[-2%]"
             >
               Research Area / Keywords
             </h2>
             <div class="flex items-center gap-3">
               <span
-                class="ml-3 ai_suggestion text-[14px] font-normal text-gray-700"
+                class="ml-3 ai_suggestion text-[14px] font-[400] text-gray-700"
               >
                 AI Suggestion
               </span>
@@ -107,6 +106,7 @@
                   id="toggle_research_area"
                   type="checkbox"
                   :v-model:value="aiSuggestion"
+                  
                 />
               </label>
             </div>
@@ -116,8 +116,9 @@
           <n-input
             :v-model:value="form.keywords"
             :bordered="false"
+
             placeholder="Press enter after every keyword to input the next one"
-            class="w-full outline-none border font-normal text-[14px] leading-[120%] tracking-[-2%] text-[rgba(161,161,170,1)]"
+            class="w-full outline-none border font-[400] text-[14px] leading-[120%] tracking-[-2%] text-[rgba(161,161,170,1)]"
           />
         </div>
       </div>
@@ -125,7 +126,7 @@
         <div class="">
           <div class="flex items-center gap-[10px]">
             <h2
-              class="text-[rgba(27,37,89,1)] font-bold text-[16px] leading-[120%] tracking-[-2%]"
+              class="text-[rgba(27,37,89,1)] font-[700] text-[16px] leading-[120%] tracking-[-2%]"
             >
               Abstract
             </h2>
@@ -136,8 +137,8 @@
             type="textarea"
             placeholder="Choose Date"
             :v-model="form.abstract"
-            :bordered="false"
-            class="w-full outline-none border px-[12px] py-[15px] font-normal h-[100px] text-[14px] leading-[120%] tracking-[-2%] text-[rgba(161,161,170,1)]"
+            :bordered = "false"
+            class="w-full outline-none border px-[12px] py-[15px]  font-[400] h-[100px] text-[14px] leading-[120%] tracking-[-2%] text-[rgba(161,161,170,1)]"
           />
         </div>
       </div>
@@ -146,7 +147,7 @@
         <div class="">
           <div class="flex items-center gap-[10px]">
             <h2
-              class="text-[rgba(27,37,89,1)] font-bold text-[16px] leading-[120%] tracking-[-2%]"
+              class="text-[rgba(27,37,89,1)] font-[700] text-[16px] leading-[120%] tracking-[-2%]"
             >
               Publisher / Journal Name
             </h2>
@@ -155,9 +156,9 @@
         <div class="my-3">
           <n-input
             :v-model="form.publisher"
-            :bordered="false"
+            :bordered = false
             placeholder="E.g. Elsevier, Springer Nature, Oxford Press"
-            class="w-full outline-none border font-normal text-[14px] leading-[120%] tracking-[-2%] text-[rgba(161,161,170,1)]"
+            class="w-full outline-none border font-[400] text-[14px] leading-[120%] tracking-[-2%] text-[rgba(161,161,170,1)]"
           />
         </div>
       </div>
@@ -165,7 +166,7 @@
         <div class="">
           <div class="flex items-center gap-[10px]">
             <h2
-              class="text-[rgba(27,37,89,1)] font-bold text-[16px] leading-[120%] tracking-[-2%]"
+              class="text-[rgba(27,37,89,1)] font-[700] text-[16px] leading-[120%] tracking-[-2%]"
             >
               ISSN / ISBN Number (optional)
             </h2>
@@ -176,8 +177,8 @@
             type="number"
             :v-model="form.issn"
             placeholder="Enter Number"
-            :bordered="false"
-            class="w-full outline-none border font-normal text-[14px] leading-[120%] tracking-[-2%] text-[rgba(161,161,170,1)]"
+            :bordered = false
+            class="w-full outline-none border font-[400] text-[14px] leading-[120%] tracking-[-2%] text-[rgba(161,161,170,1)]"
           />
         </div>
       </div>
@@ -185,7 +186,7 @@
         <div class="">
           <div class="flex items-center gap-[10px]">
             <h2
-              class="text-[rgba(27,37,89,1)] font-bold text-[16px] leading-[120%] tracking-[-2%]"
+              class="text-[rgba(27,37,89,1)] font-[700] text-[16px] leading-[120%] tracking-[-2%]"
             >
               Volume / Issue / Page
             </h2>
@@ -195,9 +196,10 @@
           <n-input
             type="text"
             :v-model="form.volume"
-            :bordered="false"
+            :bordered = false
+
             placeholder="E.g. Vol. 4, Issue 3, pp. 102–118"
-            class="w-full outline-none border font-normal text-[14px] leading-[120%] tracking-[-2%] text-[rgba(161,161,170,1)]"
+            class="w-full outline-none border font-[400] text-[14px] leading-[120%] tracking-[-2%] text-[rgba(161,161,170,1)]"
           />
         </div>
       </div>
@@ -260,6 +262,7 @@ const unitOptions = [
 function moveToPreviousModel() {
   emit("closeContributionAndResearchContextModal");
   emit("openAddNewPublication");
+
 }
 function closeModal() {
   emit("closeContributionAndResearchContextModal");

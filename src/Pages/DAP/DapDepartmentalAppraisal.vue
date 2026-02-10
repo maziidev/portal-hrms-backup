@@ -197,7 +197,7 @@ const columns = [
         {
           onClick: () => router.push("/dap/all-staff-records/" + id),
         },
-        row.department,
+        row.department
       );
     },
   },
@@ -236,12 +236,12 @@ const columns = [
         {
           class:
             row.is_active == "view"
-              ? "bg-[rgba(78,159,255,0.2)] view text-[rgba(78,159,255,1)] font-bold text-[11px] w-[200px] py-[20px] px-[20px] rounded-[5px]"
+              ? "bg-[rgba(78,159,255,0.2)] view text-[rgba(78,159,255,1)] font-[700] text-[11px] w-[200px] py-[20px] px-[20px] rounded-[5px]"
               : row.is_active == "continue"
-                ? "text-[rgba(255,255,255,1)] show_appraisal_form rounded-[5px] bg-[rgba(35,136,255,1)] font-bold text-[11px] w-[200px] px-[20px] py-[20px] leading-[100%] tracking-[0%]"
-                : "text-[rgba(255,255,255,1)] rounded-[5px] bg-[rgba(58,151,76,1)] font-bold text-[11px] w-[200px] px-[20px] py-[20px] leading-[100%] tracking-[0%]",
+              ? "text-[rgba(255,255,255,1)] show_appraisal_form rounded-[5px] bg-[rgba(35,136,255,1)] font-[700] text-[11px] w-[200px] px-[20px] py-[20px] leading-[100%] tracking-[0%]"
+              : "text-[rgba(255,255,255,1)] rounded-[5px] bg-[rgba(58,151,76,1)] font-[700] text-[11px] w-[200px] px-[20px] py-[20px] leading-[100%] tracking-[0%]",
         },
-        row.is_active,
+        row.is_active
       );
     },
   },

@@ -44,9 +44,10 @@ import HodStaffRecordDetails from "../Pages/HOD/HodStaffRecordDetails.vue";
 import HodStaffRecords from "../Pages/HOD/HodStaffRecords.vue";
 import NotFound from "../Pages/NotFound.vue";
 
-// dean, hou
-import { deanRoutes } from "./modules/dean.routes";
-import { houRoutes } from "./modules/hou.routes";
+
+// // dean, hou
+// import { deanRoutes } from './modules/dean.routes';
+// import { houRoutes } from './modules/hou.routes';
 
 import AcademicStaff from "../Layout/Academic-Staff/Academic-Staff.vue";
 import AdminLayout from "../Layout/AdminLayout/Admin.vue";
@@ -68,8 +69,10 @@ const router = createRouter({
       name: "login",
     },
 
-    deanRoutes,
-    houRoutes,
+
+    // deanRoutes,
+    // houRoutes,
+
 
     // ADMIN ROUTES
     {
@@ -81,11 +84,6 @@ const router = createRouter({
         roles: ["admin"],
       },
       children: [
-        {
-          path: "",
-          component: Admin,
-          name: "admin",
-        },
         {
           path: "staff-managment",
           component: StaffManagment,
@@ -187,63 +185,58 @@ const router = createRouter({
     // HOD
     {
       path: "/hod",
-      component: HodLayout,
+      component: HodDashboard,
+      name: "hod",
       meta: {
         requiresAuth: true,
         roles: ["hod"],
       },
       children: [
         {
-          path: "",
-          component: HodDashboard,
-          name: "hod",
-        },
-        {
           path: "staff-records",
           component: HodStaffRecords,
-          name: "staff-records",
+          name: "hod-staff-records",
         },
-
         {
           path: "staff-records/:id",
           component: HodStaffRecordDetails,
-          name: "staff-record-details",
+          name: "hod-staff-record-details",
           props: true,
         },
-        // {
-        //   path: "research-publication",
-        //   component: ReasearchPublication,
-        //   name: "research-publication",
-        // },
+        {
+          path: "research-publication",
+          component: ReasearchPublication,
+          name: "hod-research-publication",
+        },
         {
           path: "appraisal",
           component: HodAppraisal,
-          name: "appraisal",
+          name: "hod-appraisal",
         },
         {
           path: "leave-management",
           component: HodLeaveManagment,
-          name: "leave-management",
+          name: "hod-leave-management",
         },
         {
           path: "leave-management/active-leaves",
           component: HodActiveLeaves,
-          name: "leave-management-active-leaves",
+          name: "hod-leave-management-active-leaves",
         },
         {
           path: "leave-management/leave-balance-report",
           component: HodLeaveBalanceReport,
-          name: "leave-management-leave-balance-report",
+          name: "hod-leave-management-leave-balance-report",
         },
         {
           path: "promotion-career-progression",
           component: HodPromotion_Career_Progression,
-          name: "promotion-career-progression",
+          name: "hod-promotion-career-progression",
         },
         {
           path: "promotion-summary",
           component: HodPromotionSummary,
-          name: "promotion-summary",
+          name: "hod-promotion-summary",
         },
       ],
     },
@@ -251,17 +244,13 @@ const router = createRouter({
     // DAP
     {
       path: "/dap",
-      component: DapLayout,
+      component: DapDashboard,
+      name: "dap",
       meta: {
         requiresAuth: true,
         roles: ["dap"],
       },
       children: [
-        {
-          path: "",
-          component: DapDashboard,
-          name: "dap",
-        },
         {
           path: "/dap/staff-records",
           component: DapStaffRecords,
@@ -337,6 +326,10 @@ const router = createRouter({
         },
       ],
     },
+
+
+
+
 
     {
       path: "/:pathMatch(.*)*",

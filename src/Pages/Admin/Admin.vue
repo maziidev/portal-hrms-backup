@@ -3,7 +3,7 @@
     class="grid grid-cols-1 md:grid-cols-[1fr_2fr] lg:grid-cols-[1fr_2fr] gap-[25px]"
   >
     <div
-      class="bg-var(--twhite) p-[12px] shadow-sm border border-slate-100 rounded-[20px] gap-[10px] flex flex-col justify-between"
+      class="bg-[var(--twhite)] p-[12px] shadow-sm border border-slate-100 rounded-[20px] gap-[10px] flex flex-col justify-between"
     >
       <div
         class="rounded-[40px] shadow bg-[rgba(17,27,73,1)] flex flex-col gap-[10px] py-[20px] px-[40px]"
@@ -12,7 +12,7 @@
         <div class="flex justify-between items-center gap-3">
           <div class="balance">
             <h2
-              class="text-[rgba(255,255,255,1)] text-[34px] font-bold leading-[120%] tracking-[-2%]"
+              class="text-[rgba(255,255,255,1)] text-[34px] font-[700] leading-[120%] tracking-[-2%]"
             >
               23,458
             </h2>
@@ -117,7 +117,7 @@
         class="top flex  justify-between p-5 w-full gap-[10px] items-center"
       >
         <h2
-          class="text-[rgba(27,37,89,1)] text-[20px] tracking-[-2%] leading-[120%] font-bold"
+          class="text-[rgba(27,37,89,1)] text-[20px] tracking-[-2%] leading-[120%] font-[700]"
         >
           Appraisal Progress Overview
         </h2>
@@ -162,7 +162,7 @@
   <!-- Quick Actions -->
   <div class="quick_actions flex flex-col gap-[15px]">
     <h2
-      class="text-[rgba(30,43,58,1)] font-bold text-[16px] leading-[120%] tracking-[-2%]"
+      class="text-[rgba(30,43,58,1)] font-[700] text-[16px] leading-[120%] tracking-[-2%]"
     >
       Quick Actions
     </h2>
@@ -203,7 +203,7 @@
         class="left flex flex-wrap md:flex-nowrap lg:flex-nowrap items-center w-full md:w-[50%] lg:w-[50%] gap-[10px]"
       >
         <h2
-          class="font-bold text-(--sec-text) w-62.5 text-[20px] leading-[120%] tracking-[-2%]"
+          class="font-[700] text-[var(--sec-text)] w-[250px] text-[20px] leading-[120%] tracking-[-2%]"
         >
           Upcoming Retirements
         </h2>
@@ -217,7 +217,6 @@
             placeholder="Search for anything..."
             id="search"
             :bordered="false"
-            @update:value="fetchStaffData"
             v-model:value="form.search"
             class="search w-full border outline-none rounded-[5px] border-[rgba(229,231,235,1)]"
           />
@@ -229,7 +228,7 @@
         <n-select
           name="date"
           id="date"
-          v-model:value="form.date"
+          v-model:value="form.units"
           :options="dates"
           @update:value="fetchStaffData"
           clearable
@@ -239,11 +238,10 @@
         >
         </n-select>
         <n-select
-          v-model:value="form.years_of_services"
+          v-model:value="form.units"
           :options="years_of_services"
           clearable
           :bordered="true"
-          @update:value="fetchStaffData"
           name="years_of_service"
           id="years_of_service"
           placeholder="Year of service"
@@ -363,23 +361,6 @@ const series = ref([
   },
 ]);
 
-// Get All Staff
-const fetchStaffData = async () => {
-  try {
-    loading.value = true;
-    const { data } = await getAllStaff({
-      dept_code: form.dept_code,
-      employment_type: form.employment_type,
-      search: form.search,
-    });
-    staffData.value = data;
-  } catch (error) {
-    message.error("Staff data could not be fetched");
-    console.log(error);
-  } finally {
-    loading.value = false;
-  }
-};
 const DataSets = reactive({
   week: [30, 45, 60, 25, 50, 50, 20, 40],
   month: [45, 55, 65, 40, 60, 20, 40, 65],
@@ -390,6 +371,12 @@ onMounted(async () => {
   btns.value[0].value.classList.add("text-[rgba(247,249,250,1)]");
   btns.value[0].value.classList.remove("text-[rgba(30,30,30,1)]");
   series.value[0].data = DataSets["week"];
+
+  staffData.value = await getAllStaff({
+    dept_code: form.dept_code,
+    employment_type: form.employment_type,
+    search: form.search,
+  });
 });
 
 const currentDataset = ref("week");

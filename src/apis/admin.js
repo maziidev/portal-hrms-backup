@@ -63,9 +63,11 @@ export const checkStaffImportStatus = async (task_id) => {
     throw error;
   }
 };
-export const importStaff = async (csvFile) => {
+export const importStaff = async ({ file }) => {
   try {
-    const { data } = await api.postForm(`${BaseUrl}hrms/upload_staff_csv/`, csvFile);
+    const { data } = await api.postForm(`${BaseUrl}/upload_staff_csv/`, {
+      file: file,
+    });
     return data;
   } catch (error) {
     throw error;

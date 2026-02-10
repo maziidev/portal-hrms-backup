@@ -10,7 +10,7 @@
     <div id="final_submission" action="#" class="final_submission">
       <div class="flex my-[20px] justify-center items-center gap-5">
         <span
-          class="text-[rgba(17,27,73,1)] text-center w-full block text-[20px] leading-[100%] tracking-[0%] font-bold"
+          class="text-[rgba(17,27,73,1)] text-center w-full block text-[20px] leading-[100%] tracking-[0%] font-[700]"
           >Final Submission</span
         >
       </div>
@@ -23,7 +23,7 @@
           entries
         </p>
         <p
-          class="text-[rgba(24,24,27,1)] text-center w-full block text-[20px] leading-[100%] tracking-[0%] font-bold"
+          class="text-[rgba(24,24,27,1)] text-center w-full block text-[20px] leading-[100%] tracking-[0%] font-[700]"
         >
           Are you sure you want to submit
         </p>

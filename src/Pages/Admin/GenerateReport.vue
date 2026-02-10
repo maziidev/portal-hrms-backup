@@ -2,7 +2,7 @@
   <div class="relative">
     <button
       @click="toggleSideBar"
-      class="absolute md:hidden menu-bar lg:hidden z-[2000] font-bold text-[30px] top-[20px] right-[20px] px-[4px] py-[-2px] rounded-sm"
+      class="absolute md:hidden menu-bar lg:hidden z-[2000] font-[700] text-[30px] top-[20px] right-[20px] px-[4px] py-[-2px] rounded-sm"
     >
       <i class="fa fa-bars"></i>
     </button>
@@ -10,13 +10,13 @@
       <div class=" ">
         <aside
           :class="[
-            `{ w-67 sidebar z-3000 transition-all duration-100 ease-in-out  fixed top-0 left-0 h-screen md:flex lg:flex px-[35px] flex flex-col gap-[67px] py-[45px] bg-[var(--primary)]`,
+            `{ w-[268px] sidebar z-[3000] transition-all duration-100 ease-in-out  fixed top-0 left-0 h-screen md:flex lg:flex px-[35px] flex flex-col gap-[67px] py-[45px] bg-[var(--primary)]`,
             !toggleState ? `hidden` : `md:flex lg:flex`,
           ]"
         >
           <div class="">
             <li
-              class="text-[rgba(14,253,193,1)] font-bold text-[20px] flex gap-2 items-center text-[16px] tracking-[-2%] leading-[120%]"
+              class="text-[rgba(14,253,193,1)] font-[700] text-[20px] flex gap-2 items-center text-[16px] tracking-[-2%] leading-[120%]"
             >
               Orbit <img :src="Orbit" />
             </li>
@@ -25,42 +25,42 @@
             <li>
               <router-link
                 to="/admin"
-                class="text-(--pri-text) font-normal flex gap-2 items-center text-[16px] tracking-[-2%] leading-[120%]"
+                class="text-[var(--pri-text)] font-[400] flex gap-2 items-center text-[16px] tracking-[-2%] leading-[120%]"
                 ><i class="fa fa-th-large"></i>Dashboard</router-link
               >
             </li>
             <li>
               <router-link
                 to="/admin/staff-managment"
-                class="text-(--pri-text) font-normal text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
+                class="text-[var(--pri-text)] font-[400] text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
                 ><i class="fa fa-user-circle"></i>Staff Management</router-link
               >
             </li>
             <li>
               <router-link
                 to="/admin/appraisal"
-                class="text-(--pri-text) font-normal text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
+                class="text-[var(--pri-text)] font-[400] text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
                 ><i class="fa fa-user-circle"></i>Appraisals</router-link
               >
             </li>
 
             <li>
               <a
-                class="text-(--pri-text) font-normal text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
+                class="text-[var(--pri-text)] font-[400] text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
                 href="#"
                 ><i class="fa fa-bed"></i> Leave Management</a
               >
             </li>
             <li>
               <a
-                class="text-(--pri-text) font-normal text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
+                class="text-[var(--pri-text)] font-[400] text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
                 href="#"
                 ><i class="fa fa-award"></i> Promotions & Career Progression</a
               >
             </li>
             <li>
               <a
-                class="text-(--pri-text) font-normal text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
+                class="text-[var(--pri-text)] font-[400] text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
                 href="#"
                 ><i class="fa fa-calendar"></i> Retirement & Exit</a
               >
@@ -68,7 +68,7 @@
             <li>
               <router-link
                 to="/admin/report-analysis"
-                class="text-[rgba(14,253,193,1)] font-bold text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
+                class="text-[rgba(14,253,193,1)] font-[700] text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
                 href="Report_Analysis.html"
                 ><i class="fa-solid fa-chart-column"></i>Reports &
                 Analytics</router-link
@@ -79,30 +79,30 @@
           <div class="flex flex-col gap-[25px]">
             <li>
               <a
-                class="text-(--pri-text) flex items-center gap-2 font-normal text-[16px] tracking-[-2%] leading-[120%]"
+                class="text-[var(--pri-text)] flex items-center gap-2 font-[400] text-[16px] tracking-[-2%] leading-[120%]"
                 href="#"
                 ><i class="fa fa-gear"></i> Settings</a
               >
             </li>
             <li>
               <a
-                class="text-(--pri-text) flex items-center gap-2 font-normal text-[16px] tracking-[-2%] leading-[120%]"
+                class="text-[var(--pri-text)] flex items-center gap-2 font-[400] text-[16px] tracking-[-2%] leading-[120%]"
                 href="#"
                 ><i class="fa-solid fa-right-from-bracket"></i> Logout</a
               >
             </li>
             <li class="md:hidden lg:hidden items-center gap-[10px] flex">
-              <i class="fa fa-bell text-(--pri-text)"></i>
+              <i class="fa fa-bell text-[var(--pri-text)]"></i>
               <span
-                class="text-(--pri-text) flex items-center gap-2 font-normal text-[16px] tracking-[-2%] leading-[120%]"
+                class="text-[var(--pri-text)] flex items-center gap-2 font-[400] text-[16px] tracking-[-2%] leading-[120%]"
                 >Notification</span
               >
             </li>
             <li class="md:hidden lg:hidden items-center gap-[10px] flex">
               <div class="user">
-                <i class="fa fa-user text-xl text-(--pri-text)"></i>
+                <i class="fa fa-user text-xl text-[var(--pri-text)]"></i>
               </div>
-              <div class="user-id mbc text-(--pri-text) break-words">
+              <div class="user-id mbc text-[var(--pri-text)] break-words">
                 Nnamdichuzu@edu.EU.ng
               </div>
             </li>
@@ -119,7 +119,7 @@
               <h5 class="sbc">Appraisal</h5>
             </div>
             <div class="md:flex lg:flex items-center gap-[10px] hidden">
-              <i class="fa fa-bell text-(--sec-text)"></i>
+              <i class="fa fa-bell text-[var(--sec-text)]"></i>
               <div class="user">
                 <i class="fa fa-user text-2xl"></i>
               </div>
@@ -142,7 +142,7 @@
                 </button>
               </div>
               <div class="created_by flex items-center gap-[5px]">
-                <h3 class="font-bold text-[rgba(27,37,89,1)] text-[20px]">
+                <h3 class="font-[700] text-[rgba(27,37,89,1)] text-[20px]">
                   Generated By:
                 </h3>
                 <p class="font-[500] text-[16px] text-[rgba(27,37,89,1)]">
@@ -158,7 +158,7 @@
               <div
                 class="created_by flex items-center gap-[5px] flex-wrap md:flex-nowrap lg:flex-nowrap gap-[10px]"
               >
-                <h3 class="font-bold text-[rgba(27,37,89,1)] text-[20px]">
+                <h3 class="font-[700] text-[rgba(27,37,89,1)] text-[20px]">
                   Scope:
                 </h3>
                 <p class="font-[500] text-[16px] text-[rgba(27,37,89,1)]">
@@ -192,10 +192,10 @@
                   </h2>
                   <h2
                     :class="[
-                      `text-[34px] font-bold leading-[120%] tracking-[-2%]`,
+                      `text-[34px] font-[700] leading-[120%] tracking-[-2%]`,
                       activeState == btn.name
                         ? `text-[rgba(255,255,255,1)]`
-                        : `text-(--sec-text)`,
+                        : `text-[var(--sec-text)]`,
                     ]"
                   >
                     {{ btn.value }}
@@ -208,7 +208,7 @@
             class="grid grid-cols-1 md:grid-cols-[1fr_2fr] lg:grid-cols-[1fr_2fr] gap-[25px]"
           >
             <div
-              class="bg-var(--twhite) p-[20px] shadow-sm border border-slate-100 rounded-[20px] gap-[10px] flex flex-col justify-between"
+              class="bg-[var(--twhite)] p-[20px] shadow-sm border border-slate-100 rounded-[20px] gap-[10px] flex flex-col justify-between"
             >
               <div class="">
                 <h2
@@ -278,7 +278,7 @@
                 class="top flex justify-between p-[20px] w-full gap-[10px] items-center"
               >
                 <h2
-                  class="text-[rgba(27,37,89,1)] text-[20px] tracking-[-2%] leading-[120%] font-bold"
+                  class="text-[rgba(27,37,89,1)] text-[20px] tracking-[-2%] leading-[120%] font-[700]"
                 >
                   Appraisal Completion by Department
                 </h2>
@@ -317,7 +317,7 @@
               class="flex items-center gap-[20px] flex-wrap lg:flex-nowrap md:flex-nowrap"
             >
               <h2
-                class="text-[rgba(30,43,58,1)] font-bold text-[20px] leading-[120%] tracking-[-2%]"
+                class="text-[rgba(30,43,58,1)] font-[700] text-[20px] leading-[120%] tracking-[-2%]"
               >
                 Staff Appraisal Details
               </h2>
@@ -329,7 +329,7 @@
                 @click="OpenModal"
                 class="border-[rgba(35,136,255,1)] text-[rgba(255,255,255,1)] bulk_upload_ px-[40px] py-[10px] font-[600] text-[16px] flex gap-[10px] items-center leading-[120%] tracking-[-2%] rounded-[5px] border-2 bg-[rgba(35,136,255,1)]"
               >
-                <i class="fa fa-download"></i> Download
+               <i class="fa fa-download"></i> Download
               </button>
             </div>
           </div>
@@ -424,59 +424,60 @@ const form = reactive({
 // Pie Chart
 const pieSeries = ref([55, 45]);
 const labels = ref(["Non-Academic Staff", "Academic Staff"]);
-const colors = ["rgba(43,7,237,1)", "rgba(35,136,255,1)"];
+const colors = ["rgba(43,7,237,1)", "rgba(35,136,255,1)"]
 
 const pieChartOptions = computed(() => ({
   chart: {
-    type: "donut",
+    type: 'donut',
     toolbar: { show: true },
     animations: { enabled: true },
     events: {
       // Example: click on a slice
       dataPointSelection: (event, chartContext, config) => {
-        const idx = config.dataPointIndex;
-        const label = labels.value[idx];
-        const value = pieSeries.value[idx];
+        const idx = config.dataPointIndex
+        const label = labels.value[idx]
+        const value = pieSeries.value[idx]
         // You can emit or handle this event as needed
         // console.log('Slice clicked:', { label, value })
-      },
-    },
+      }
+    }
   },
   labels: labels.value,
   colors,
-  legend: { show: false },
+  legend: { show:false},
   responsive: [
     {
       breakpoint: 768,
       options: {
-        chart: { width: "100%" },
-        legend: { position: "bottom" },
-      },
+        chart: { width: '100%' },
+        legend: { position: 'bottom' }
+      }
     },
     {
       breakpoint: 1024,
       options: {
-        chart: { width: 380 },
-      },
-    },
+        chart: { width: 380 }
+      }
+    }
   ],
   tooltip: {
     y: {
-      formatter: (val) => `${val}`, // format value text
-    },
+      formatter: (val) => `${val}` // format value text
+    }
   },
   plotOptions: {
     pie: {
       expandOnClick: true,
       donut: {
-        size: "58%",
+        size: '58%',
         labels: {
           show: false,
-        },
-      },
-    },
-  },
-}));
+          
+        }
+      }
+    }
+  }
+}))
 
 const verticalChartDataSets = {
   "2025-2026": [30, 45, 60, 25, 50, 55, 60, 70, 80, 40, 66, 12],
@@ -518,6 +519,7 @@ const buttonState = ref("previous");
 function switchButton(val) {
   buttonState.value = val.id;
   series_1.value[0].data = verticalChartDataSets[val.year];
+
 }
 
 const buttons = reactive([
@@ -533,12 +535,14 @@ const buttons = reactive([
   },
 ]);
 
+
+
 watch(
   () => form.year,
   (newVal, oldVal) => {
     console.log(oldVal, newVal);
     series_1.value[0].data = verticalChartDataSets[newVal];
-  },
+  }
 );
 
 const router = useRouter();
@@ -600,7 +604,7 @@ const columns = [
           class: "text-blue-600 hover:underline font-semibold cursor-pointer",
           onClick: () => router.push(`/home/edit/${row.id}`),
         },
-        row.id,
+        row.id
       );
     },
   },
@@ -620,14 +624,14 @@ const columns = [
             color: row.is_active
               ? "text-[rgba(251,188,4,1)]"
               : row.is_active == "Due in 12 mo"
-                ? "red"
-                : "blue",
+              ? "red"
+              : "blue",
             fontWeight: "700",
             backgroundColor: row.is_active
               ? "bg-[rgba(234,67,53,0.2)]"
               : row.is_active == "Due in 12 mo"
-                ? "bg-[rgba(251,188,4,0.2)]"
-                : "bg-[rgba(58,151,76,0.15)]",
+              ? "bg-[rgba(251,188,4,0.2)]"
+              : "bg-[rgba(58,151,76,0.15)]",
             fontSize: "14px",
             padding: "10px 20px",
             borderRadius: "22.5px",
@@ -635,7 +639,7 @@ const columns = [
             wordSpacing: "0%",
           },
         },
-        row.is_active,
+        row.is_active
       );
     },
   },

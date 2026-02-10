@@ -2,7 +2,7 @@
   <div class="relative">
     <button
       @click="toggleSideBar"
-      class="absolute md:hidden menu-bar lg:hidden z-[2000] font-bold text-[30px] top-[20px] right-[20px] px-[4px] py-[-2px] rounded-sm"
+      class="absolute md:hidden menu-bar lg:hidden z-[2000] font-[700] text-[30px] top-[20px] right-[20px] px-[4px] py-[-2px] rounded-sm"
     >
       <i class="fa fa-bars"></i>
     </button>
@@ -10,13 +10,13 @@
       <div class=" ">
         <aside
           :class="[
-            `{ w-67 sidebar z-3000 transition-all duration-100 ease-in-out  fixed top-0 left-0 h-screen md:flex lg:flex px-[35px] flex flex-col gap-[67px] py-[45px] bg-[var(--primary)]`,
+            `{ w-[268px] sidebar z-[3000] transition-all duration-100 ease-in-out  fixed top-0 left-0 h-screen md:flex lg:flex px-[35px] flex flex-col gap-[67px] py-[45px] bg-[var(--primary)]`,
             !toggleState ? `hidden` : `md:flex lg:flex`,
           ]"
         >
           <div class="">
             <li
-              class="text-[rgba(14,253,193,1)] font-bold text-[20px] flex gap-2 items-center text-[16px] tracking-[-2%] leading-[120%]"
+              class="text-[rgba(14,253,193,1)] font-[700] text-[20px] flex gap-2 items-center text-[16px] tracking-[-2%] leading-[120%]"
             >
               Orbit <img :src="Orbit" />
             </li>
@@ -25,35 +25,35 @@
             <li>
               <router-link
                 to="/dap"
-                class="text-(--pri-text) cursor-pointer font-normal flex gap-2 items-center text-[16px] tracking-[-2%] leading-[120%]"
+                class="text-[var(--pri-text)] cursor-pointer font-[400] flex gap-2 items-center text-[16px] tracking-[-2%] leading-[120%]"
                 ><i class="fa fa-th-large"></i>Dashboard</router-link
               >
             </li>
             <li>
               <router-link
                 to="/dap/staff-records"
-                class="text-[rgba(14,253,193,1)] font-bold cursor-pointer text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
+                class="text-[rgba(14,253,193,1)] font-[700] cursor-pointer text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
                 ><i class="fa fa-user-circle"></i>Staff Records</router-link
               >
             </li>
             <li>
               <router-link
                 to="/dap/appraisal-management"
-                class="text-(--pri-text) font-normal text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
+                class="text-[var(--pri-text)] font-[400] text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
                 ><i class="fa fa-file-text"></i> Appraisals Management
               </router-link>
             </li>
             <li>
               <router-link
                 to="/dap/leave-analytics"
-                class="text-(--pri-text) font-normal text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
+                class="text-[var(--pri-text)] font-[400] text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
                 ><i class="fa fa-bed"></i> Leave Analytics</router-link
               >
             </li>
             <li>
               <router-link
                 to="/dap/promotion-career-progression"
-                class="text-(--pri-text) font-normal text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
+                class="text-[var(--pri-text)] font-[400] text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
                 ><i class="fa fa-award"></i> Promotions & Career
                 Progression</router-link
               >
@@ -62,7 +62,7 @@
             <li>
               <router-link
                 to="/dap/report-analysis"
-                class="text-(--pri-text) font-normal text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
+                class="text-[var(--pri-text)] font-[400] text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
                 ><i class="fa-solid fa-chart-column"></i>Reports &
                 Analytics</router-link
               >
@@ -72,30 +72,30 @@
           <div class="flex flex-col gap-[25px]">
             <li>
               <a
-                class="text-(--pri-text) flex items-center gap-2 font-normal text-[16px] tracking-[-2%] leading-[120%]"
+                class="text-[var(--pri-text)] flex items-center gap-2 font-[400] text-[16px] tracking-[-2%] leading-[120%]"
                 href="#"
                 ><i class="fa fa-gear"></i> Settings</a
               >
             </li>
             <li>
               <a
-                class="text-(--pri-text) flex items-center gap-2 font-normal text-[16px] tracking-[-2%] leading-[120%]"
+                class="text-[var(--pri-text)] flex items-center gap-2 font-[400] text-[16px] tracking-[-2%] leading-[120%]"
                 href="#"
                 ><i class="fa-solid fa-right-from-bracket"></i> Logout</a
               >
             </li>
             <li class="md:hidden lg:hidden items-center gap-[10px] flex">
-              <i class="fa fa-bell text-(--pri-text)"></i>
+              <i class="fa fa-bell text-[var(--pri-text)]"></i>
               <span
-                class="text-(--pri-text) flex items-center gap-2 font-normal text-[16px] tracking-[-2%] leading-[120%]"
+                class="text-[var(--pri-text)] flex items-center gap-2 font-[400] text-[16px] tracking-[-2%] leading-[120%]"
                 >Notification</span
               >
             </li>
             <li class="md:hidden lg:hidden items-center gap-[10px] flex">
               <div class="user">
-                <i class="fa fa-user text-xl text-(--pri-text)"></i>
+                <i class="fa fa-user text-xl text-[var(--pri-text)]"></i>
               </div>
-              <div class="user-id mbc text-(--pri-text) break-words">
+              <div class="user-id mbc text-[var(--pri-text)] break-words">
                 Nnamdichuzu@edu.EU.ng
               </div>
             </li>
@@ -109,12 +109,12 @@
           >
             <div class="flex items-center gap-[10px]">
               <span
-                class="text-[rgba(20,21,15,1)] text-[24px] leading-[120%] tracking-[0%] font-bold"
+                class="text-[rgba(20,21,15,1)] text-[24px] leading-[120%] tracking-[0%] font-[700]"
                 >Staff Records</span
               >
             </div>
             <div class="md:flex lg:flex items-center gap-[10px] hidden">
-              <i class="fa fa-bell text-(--sec-text)"></i>
+              <i class="fa fa-bell text-[var(--sec-text)]"></i>
               <div class="user">
                 <i class="fa fa-user text-2xl"></i>
               </div>
@@ -134,19 +134,19 @@
                   <i class="fas fa-chevron-left"></i>
 
                   <span
-                    class="rgba(107,114,128,1) font-normal text-[14px] leading-[100%] tracking-[0%]"
+                    class="rgba(107,114,128,1) font-[400] text-[14px] leading-[100%] tracking-[0%]"
                     >Back</span
                   >
                 </button>
                 <span
-                  class="text-[rgba(20,21,15,1)] text-[24px] leading-[120%] tracking-[0%] font-bold"
+                  class="text-[rgba(20,21,15,1)] text-[24px] leading-[120%] tracking-[0%] font-[700]"
                   >EUN/ACA/0231</span
                 >
               </div>
 
               <div class="flex items-center gap-[10px]">
                 <button
-                  class="bg-[rgba(35,136,255,1)] view_performance_history text-[rgba(255,255,255,1)] text-[14px] font-bold px-[20px] py-[10px] flex gap-[10px] rounded-[5px] items-center"
+                  class="bg-[rgba(35,136,255,1)] view_performance_history text-[rgba(255,255,255,1)] text-[14px] font-[700] px-[20px] py-[10px] flex gap-[10px] rounded-[5px] items-center"
                   href="#"
                 >
                   <i class="fa fa-file-text text-[rgba(255,255,255,1)]"></i>
@@ -170,7 +170,7 @@
               </div>
               <div class="top flex justify-between">
                 <h2
-                  class="text-[rgba(17,27,73,1)] font-bold text-[16px] leading-[100%] tracking-[0%]"
+                  class="text-[rgba(17,27,73,1)] font-[700] text-[16px] leading-[100%] tracking-[0%]"
                 >
                   Personal Information
                 </h2>
@@ -273,7 +273,7 @@
             <div class="">
               <div class="top flex justify-between">
                 <h2
-                  class="text-[rgba(17,27,73,1)] font-bold text-[16px] leading-[100%] tracking-[0%]"
+                  class="text-[rgba(17,27,73,1)] font-[700] text-[16px] leading-[100%] tracking-[0%]"
                 >
                   Employment Details
                 </h2>
@@ -396,7 +396,7 @@
             <div class="">
               <div class="top my-[12px] mr-0 flex justify-between">
                 <h2
-                  class="text-[rgba(17,27,73,1)] font-bold text-[16px] leading-[100%] tracking-[0%]"
+                  class="text-[rgba(17,27,73,1)] font-[700] text-[16px] leading-[100%] tracking-[0%]"
                 >
                   Academic Qualifications
                 </h2>
@@ -432,7 +432,7 @@
             <div class="">
               <div class="top m-[12px] mr-0 flex justify-between">
                 <h2
-                  class="text-[rgba(17,27,73,1)] font-bold text-[16px] leading-[100%] tracking-[0%]"
+                  class="text-[rgba(17,27,73,1)] font-[700] text-[16px] leading-[100%] tracking-[0%]"
                 >
                   Professional Memberships - Contact & Emergency
                   Information-Activity Summary
@@ -459,7 +459,7 @@
               >
                 <div class="flex p-[12px] flex-col gap-[30px] border-[1.5px]">
                   <h2
-                    class="text-[rgba(27,37,89,1)] flex justify-between items-center font-bold text-[16px] leading-[100%] tracking-[0%]"
+                    class="text-[rgba(27,37,89,1)] flex justify-between items-center font-[700] text-[16px] leading-[100%] tracking-[0%]"
                   >
                     Professional Memberships
                     <i
@@ -475,7 +475,7 @@
                           class="w-[4px] block bg-[rgba(67,24,255,1)] h-[41px] rounded-[16px]"
                         ></span>
                         <h2
-                          class="text-[rgba(27,37,89,1)] font-bold text-[14px] leading-[120%] tracking-[-2%]"
+                          class="text-[rgba(27,37,89,1)] font-[700] text-[14px] leading-[120%] tracking-[-2%]"
                         >
                           COREN
                         </h2>
@@ -496,7 +496,7 @@
                           class="w-[4px] block bg-[rgba(67,24,255,1)] h-[41px] rounded-[16px]"
                         ></span>
                         <h2
-                          class="text-[rgba(27,37,89,1)] font-bold text-[14px] leading-[120%] tracking-[-2%]"
+                          class="text-[rgba(27,37,89,1)] font-[700] text-[14px] leading-[120%] tracking-[-2%]"
                         >
                           NSE
                         </h2>
@@ -517,7 +517,7 @@
                           class="w-[4px] block bg-[rgba(67,24,255,1)] h-[41px] rounded-[16px]"
                         ></span>
                         <h2
-                          class="text-[rgba(27,37,89,1)] font-bold text-[14px] leading-[120%] tracking-[-2%]"
+                          class="text-[rgba(27,37,89,1)] font-[700] text-[14px] leading-[120%] tracking-[-2%]"
                         >
                           NASMSSN
                         </h2>
@@ -532,7 +532,7 @@
                 </div>
                 <div class="flex p-[12px] flex-col gap-[30px] border-[1.5px]">
                   <h2
-                    class="text-[rgba(27,37,89,1)] flex justify-between items-center font-bold text-[16px] leading-[100%] tracking-[0%]"
+                    class="text-[rgba(27,37,89,1)] flex justify-between items-center font-[700] text-[16px] leading-[100%] tracking-[0%]"
                   >
                     Contact & Emergency Information
                     <i
@@ -548,7 +548,7 @@
                           class="w-[4px] block bg-[rgba(67,24,255,1)] h-[41px] rounded-[16px]"
                         ></span> -->
                         <h2
-                          class="text-[rgba(27,37,89,1)] font-bold text-[14px] leading-[120%] tracking-[-2%]"
+                          class="text-[rgba(27,37,89,1)] font-[700] text-[14px] leading-[120%] tracking-[-2%]"
                         >
                           Aisha Musa (Wife)
                         </h2>
@@ -569,7 +569,7 @@
                           class="w-[4px] block bg-[rgba(67,24,255,1)] h-[41px] rounded-[16px]"
                         ></span> -->
                         <h2
-                          class="text-[rgba(27,37,89,1)] font-bold text-[14px] leading-[120%] tracking-[-2%]"
+                          class="text-[rgba(27,37,89,1)] font-[700] text-[14px] leading-[120%] tracking-[-2%]"
                         >
                           Alt Email
                         </h2>
@@ -590,7 +590,7 @@
                           class="w-[4px] block bg-[rgba(67,24,255,1)] h-[41px] rounded-[16px]"
                         ></span> -->
                         <h2
-                          class="text-[rgba(27,37,89,1)] font-bold text-[14px] leading-[120%] tracking-[-2%]"
+                          class="text-[rgba(27,37,89,1)] font-[700] text-[14px] leading-[120%] tracking-[-2%]"
                         >
                           Office Phone
                         </h2>
@@ -611,7 +611,7 @@
                           class="w-[4px] block bg-[rgba(67,24,255,1)] h-[41px] rounded-[16px]"
                         ></span> -->
                         <h2
-                          class="text-[rgba(27,37,89,1)] font-bold text-[14px] leading-[120%] tracking-[-2%]"
+                          class="text-[rgba(27,37,89,1)] font-[700] text-[14px] leading-[120%] tracking-[-2%]"
                         >
                           Address
                         </h2>
@@ -626,7 +626,7 @@
                 </div>
                 <div class="flex p-[12px] flex-col gap-[30px] border-[1.5px]">
                   <h2
-                    class="text-[rgba(27,37,89,1)] font-bold text-[16px] leading-[100%] tracking-[0%]"
+                    class="text-[rgba(27,37,89,1)] font-[700] text-[16px] leading-[100%] tracking-[0%]"
                   >
                     Activity Summary
                   </h2>
@@ -639,7 +639,7 @@
                           class="w-[4px] block bg-[rgba(67,24,255,1)] h-[41px] rounded-[16px]"
                         ></span> -->
                         <h2
-                          class="text-[rgba(27,37,89,1)] font-bold text-[14px] leading-[120%] tracking-[-2%]"
+                          class="text-[rgba(27,37,89,1)] font-[700] text-[14px] leading-[120%] tracking-[-2%]"
                         >
                           Total Years in Service
                         </h2>
@@ -660,7 +660,7 @@
                           class="w-[4px] block bg-[rgba(67,24,255,1)] h-[41px] rounded-[16px]"
                         ></span> -->
                         <h2
-                          class="text-[rgba(27,37,89,1)] font-bold text-[14px] leading-[120%] tracking-[-2%]"
+                          class="text-[rgba(27,37,89,1)] font-[700] text-[14px] leading-[120%] tracking-[-2%]"
                         >
                           Appraisals Completed
                         </h2>
@@ -681,7 +681,7 @@
                           class="w-[4px] block bg-[rgba(67,24,255,1)] h-[41px] rounded-[16px]"
                         ></span> -->
                         <h2
-                          class="text-[rgba(27,37,89,1)] font-bold text-[14px] leading-[120%] tracking-[-2%]"
+                          class="text-[rgba(27,37,89,1)] font-[700] text-[14px] leading-[120%] tracking-[-2%]"
                         >
                           Publications Uploaded
                         </h2>
@@ -702,7 +702,7 @@
                           class="w-[4px] block bg-[rgba(67,24,255,1)] h-[41px] rounded-[16px]"
                         ></span> -->
                         <h2
-                          class="text-[rgba(27,37,89,1)] font-bold text-[14px] leading-[120%] tracking-[-2%]"
+                          class="text-[rgba(27,37,89,1)] font-[700] text-[14px] leading-[120%] tracking-[-2%]"
                         >
                           Next Promotion Eligibility
                         </h2>
@@ -722,7 +722,7 @@
             <div class="py-[7px]">
               <div class="top flex justify-between">
                 <h2
-                  class="text-[rgba(17,27,73,1)] font-bold text-[16px] leading-[100%] tracking-[0%]"
+                  class="text-[rgba(17,27,73,1)] font-[700] text-[16px] leading-[100%] tracking-[0%]"
                 >
                   RETIREMENT & EXIT
                 </h2>
@@ -755,7 +755,7 @@
                   >
                   <div class="">
                     <span
-                      class="text-[14px] font-bold leading-[100%] tracking-[0%] text-(--sec-text) rounded-[5px]"
+                      class="text-[14px] font-[700] leading-[100%] tracking-[0%] text-[var(--sec-text)] rounded-[5px]"
                       >01/12/2035</span
                     >
                   </div>
@@ -769,7 +769,7 @@
                   >
                   <div class="">
                     <span
-                      class="text-[14px] font-bold leading-[100%] tracking-[0%] text-(--sec-text) rounded-[5px]"
+                      class="text-[14px] font-[700] leading-[100%] tracking-[0%] text-[var(--sec-text)] rounded-[5px]"
                       >Not initiated</span
                     >
                   </div>
@@ -780,7 +780,7 @@
             <div class="py-[7px]">
               <div class="top flex justify-between">
                 <h2
-                  class="text-[rgba(17,27,73,1)] font-bold text-[16px] leading-[100%] tracking-[0%]"
+                  class="text-[rgba(17,27,73,1)] font-[700] text-[16px] leading-[100%] tracking-[0%]"
                 >
                   FILES / DOCUMENTS
                 </h2>
@@ -809,10 +809,10 @@
                   >
                   <div class="flex items-center gap-[10px]">
                     <a href="#" download="download"
-                      ><i class="fa fa-download text-(--sec-text)"></i
+                      ><i class="fa fa-download text-[var(--sec-text)]"></i
                     ></a>
                     <span
-                      class="view bg-[rgba(35,136,255,1)] text-[14px] font-bold leading-[100%] tracking-[0%] text-[rgba(255,255,255,1)] py-[10px] px-[20px] rounded-[5px]"
+                      class="view bg-[rgba(35,136,255,1)] text-[14px] font-[700] leading-[100%] tracking-[0%] text-[rgba(255,255,255,1)] py-[10px] px-[20px] rounded-[5px]"
                       >View</span
                     >
                   </div>
@@ -826,10 +826,10 @@
                   >
                   <div class="flex items-center gap-[10px]">
                     <a href="#" download="download"
-                      ><i class="fa fa-download text-(--sec-text)"></i
+                      ><i class="fa fa-download text-[var(--sec-text)]"></i
                     ></a>
                     <span
-                      class="view bg-[rgba(35,136,255,1)] text-[14px] font-bold leading-[100%] tracking-[0%] text-[rgba(255,255,255,1)] py-[10px] px-[20px] rounded-[5px]"
+                      class="view bg-[rgba(35,136,255,1)] text-[14px] font-[700] leading-[100%] tracking-[0%] text-[rgba(255,255,255,1)] py-[10px] px-[20px] rounded-[5px]"
                       >View</span
                     >
                   </div>
@@ -843,10 +843,10 @@
                   >
                   <div class="flex items-center gap-[10px]">
                     <a href="#" download="download"
-                      ><i class="fa fa-download text-(--sec-text)"></i
+                      ><i class="fa fa-download text-[var(--sec-text)]"></i
                     ></a>
                     <span
-                      class="view bg-[rgba(35,136,255,1)] text-[14px] font-bold leading-[100%] tracking-[0%] text-[rgba(255,255,255,1)] py-[10px] px-[20px] rounded-[5px]"
+                      class="view bg-[rgba(35,136,255,1)] text-[14px] font-[700] leading-[100%] tracking-[0%] text-[rgba(255,255,255,1)] py-[10px] px-[20px] rounded-[5px]"
                       >View</span
                     >
                   </div>
@@ -860,10 +860,10 @@
                   >
                   <div class="flex items-center gap-[10px]">
                     <a href="#" download="download"
-                      ><i class="fa fa-download text-(--sec-text)"></i
+                      ><i class="fa fa-download text-[var(--sec-text)]"></i
                     ></a>
                     <span
-                      class="view bg-[rgba(35,136,255,1)] text-[14px] font-bold leading-[100%] tracking-[0%] text-[rgba(255,255,255,1)] py-[10px] px-[20px] rounded-[5px]"
+                      class="view bg-[rgba(35,136,255,1)] text-[14px] font-[700] leading-[100%] tracking-[0%] text-[rgba(255,255,255,1)] py-[10px] px-[20px] rounded-[5px]"
                       >View</span
                     >
                   </div>
@@ -877,10 +877,10 @@
                   >
                   <div class="flex items-center gap-[10px]">
                     <a href="#" download="download"
-                      ><i class="fa fa-download text-(--sec-text)"></i
+                      ><i class="fa fa-download text-[var(--sec-text)]"></i
                     ></a>
                     <span
-                      class="view bg-[rgba(35,136,255,1)] text-[14px] font-bold leading-[100%] tracking-[0%] text-[rgba(255,255,255,1)] py-[10px] px-[20px] rounded-[5px]"
+                      class="view bg-[rgba(35,136,255,1)] text-[14px] font-[700] leading-[100%] tracking-[0%] text-[rgba(255,255,255,1)] py-[10px] px-[20px] rounded-[5px]"
                       >View</span
                     >
                   </div>
@@ -989,7 +989,7 @@ const columns = [
           class:
             "bg-[rgba(35,136,255,1)] view text-[rgba(255,255,255,1)] rounded-[5px] py-[10px] px-[20px] w-full",
         },
-        ["View"],
+        ["View"]
       );
     },
   },

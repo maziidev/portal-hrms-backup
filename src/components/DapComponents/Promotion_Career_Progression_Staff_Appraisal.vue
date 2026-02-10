@@ -11,12 +11,12 @@
       <div class="flex justify-between items-center gap-[10px]">
         <div class="flex flex-col gap-[10px]">
           <h2
-            class="text-[rgba(24,24,27,1)] font-bold leading-[100%] tracking-[0%] text-[20px]"
+            class="text-[rgba(24,24,27,1)] font-[700] leading-[100%] tracking-[0%] text-[20px]"
           >
             Staff Appraisal Form - Dr. Jane Okafor
           </h2>
           <p
-            class="text-[rgba(30,30,30,1)] font-normal leading-[120%] tracking-[0%] text-[16px]"
+            class="text-[rgba(30,30,30,1)] font-[400] leading-[120%] tracking-[0%] text-[16px]"
           >
             Department of Political Science | Appraisal Period: Jan–Dec 2025
           </p>
@@ -27,12 +27,16 @@
       <div class="personal_information">
         <div class="">
           <h2
-            class="text-[rgba(17,27,73,1)] my-[20px] text-[20px] font-bold leading-[100%] tracking-[0%]"
+            class="text-[rgba(17,27,73,1)] my-[20px] text-[20px] font-[700] leading-[100%] tracking-[0%]"
           >
             Staff Information
           </h2>
           <div class="image my-[10px]">
-            <img :src="Img" class="object-contain w-[300px] h-[184px]" alt="" />
+            <img
+              :src="Img"
+              class="object-contain w-[300px] h-[184px]"
+              alt=""
+            />
           </div>
 
           <div class="flex flex-col gap-[10px] gap-[20px] py-[20px]">
@@ -146,8 +150,7 @@
             >
               Save as Draft
             </button>
-            <button
-              @click="Next"
+            <button @click="Next"
               class="next border-2 border-[rgba(35,136,255,1)] bg-[rgba(35,136,255,1)] text-[rgba(255,255,255,1)] font-[600] text-[16px] leading-[100%] tracking-[0] p-[15px]"
             >
               Next
@@ -173,7 +176,7 @@ const emit = defineEmits([
 ]);
 function closeModal() {
   emit("closeStaffAppraisalForm");
-  //   emit("OpenTeachingResearchAndAdminstrativeDutiesModal");
+//   emit("OpenTeachingResearchAndAdminstrativeDutiesModal");
 }
 function Next() {
   emit("closeStaffAppraisalForm");

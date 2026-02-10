@@ -9,11 +9,11 @@
   >
     <div class="">
       <div
-        class="bg-var(--twhite) shadow-sm border-b mb-[10px] border-slate-100 gap-[10px] flex flex-col justify-between"
+        class="bg-[var(--twhite)]  shadow-sm border-b mb-[10px] border-slate-100 gap-[10px] flex flex-col justify-between"
       >
         <div class="flex p-[10px] gap-[20px] items-center">
           <h2
-            class="text-[rgba(27,37,89,1)] w-full mb-[20px] text-center font-bold text-[20px] leading-[120%] tracking-[-2%]"
+            class="text-[rgba(27,37,89,1)] w-full mb-[20px] text-center font-[700] text-[20px] leading-[120%] tracking-[-2%]"
           >
             Publication Details
           </h2>
@@ -27,7 +27,7 @@
                   class="w-[4px] block bg-[rgba(67,24,255,1)] h-[41px] rounded-[16px]"
                 ></span>
                 <h2
-                  class="text-[rgba(27,37,89,1)] font-bold text-[14px] leading-[120%] tracking-[-2%]"
+                  class="text-[rgba(27,37,89,1)] font-[700] text-[14px] leading-[120%] tracking-[-2%]"
                 >
                   Title
                 </h2>
@@ -46,7 +46,7 @@
                   class="w-[4px] block bg-[rgba(67,24,255,1)] h-[41px] rounded-[16px]"
                 ></span>
                 <h2
-                  class="text-[rgba(27,37,89,1)] font-bold text-[14px] leading-[120%] tracking-[-2%]"
+                  class="text-[rgba(27,37,89,1)] font-[700] text-[14px] leading-[120%] tracking-[-2%]"
                 >
                   Author(s)
                 </h2>
@@ -65,7 +65,7 @@
                   class="w-[4px] block bg-[rgba(67,24,255,1)] h-[41px] rounded-[16px]"
                 ></span>
                 <h2
-                  class="text-[rgba(27,37,89,1)] font-bold text-[14px] leading-[120%] tracking-[-2%]"
+                  class="text-[rgba(27,37,89,1)] font-[700] text-[14px] leading-[120%] tracking-[-2%]"
                 >
                   Faculty
                 </h2>
@@ -84,7 +84,7 @@
                   class="w-[4px] block bg-[rgba(67,24,255,1)] h-[41px] rounded-[16px]"
                 ></span>
                 <h2
-                  class="text-[rgba(27,37,89,1)] font-bold text-[14px] leading-[120%] tracking-[-2%]"
+                  class="text-[rgba(27,37,89,1)] font-[700] text-[14px] leading-[120%] tracking-[-2%]"
                 >
                   Department
                 </h2>
@@ -103,7 +103,7 @@
                   class="w-[4px] block bg-[rgba(67,24,255,1)] h-[41px] rounded-[16px]"
                 ></span>
                 <h2
-                  class="text-[rgba(27,37,89,1)] font-bold text-[14px] leading-[120%] tracking-[-2%]"
+                  class="text-[rgba(27,37,89,1)] font-[700] text-[14px] leading-[120%] tracking-[-2%]"
                 >
                   Journal / Publisher
                 </h2>
@@ -122,7 +122,7 @@
                   class="w-[4px] block bg-[rgba(67,24,255,1)] h-[41px] rounded-[16px]"
                 ></span>
                 <h2
-                  class="text-[rgba(27,37,89,1)] font-bold text-[14px] leading-[120%] tracking-[-2%]"
+                  class="text-[rgba(27,37,89,1)] font-[700] text-[14px] leading-[120%] tracking-[-2%]"
                 >
                   Year of Publication
                 </h2>
@@ -141,7 +141,7 @@
                   class="w-[4px] block bg-[rgba(67,24,255,1)] h-[41px] rounded-[16px]"
                 ></span>
                 <h2
-                  class="text-[rgba(27,37,89,1)] font-bold text-[14px] leading-[120%] tracking-[-2%]"
+                  class="text-[rgba(27,37,89,1)] font-[700] text-[14px] leading-[120%] tracking-[-2%]"
                 >
                   Type
                 </h2>
@@ -160,7 +160,7 @@
                   class="w-[4px] block bg-[rgba(67,24,255,1)] h-[41px] rounded-[16px]"
                 ></span>
                 <h2
-                  class="text-[rgba(27,37,89,1)] font-bold text-[14px] leading-[120%] tracking-[-2%]"
+                  class="text-[rgba(27,37,89,1)] font-[700] text-[14px] leading-[120%] tracking-[-2%]"
                 >
                   DOI / ISSN
                 </h2>
@@ -179,7 +179,7 @@
                   class="w-[4px] block bg-[rgba(67,24,255,1)] h-[41px] rounded-[16px]"
                 ></span>
                 <h2
-                  class="text-[rgba(27,37,89,1)] font-bold text-[14px] leading-[120%] tracking-[-2%]"
+                  class="text-[rgba(27,37,89,1)] font-[700] text-[14px] leading-[120%] tracking-[-2%]"
                 >
                   Document Upload
                 </h2>
@@ -198,7 +198,7 @@
                   class="w-[4px] block bg-[rgba(67,24,255,1)] h-[41px] rounded-[16px]"
                 ></span>
                 <h2
-                  class="text-[rgba(27,37,89,1)] font-bold text-[14px] leading-[120%] tracking-[-2%]"
+                  class="text-[rgba(27,37,89,1)] font-[700] text-[14px] leading-[120%] tracking-[-2%]"
                 >
                   Additional Notes
                 </h2>
@@ -217,7 +217,7 @@
             >
               <div class="flex items-center gap-[10px]">
                 <h2
-                  class="text-[rgba(27,37,89,1)] font-bold text-[16px] leading-[120%] tracking-[-2%]"
+                  class="text-[rgba(27,37,89,1)] font-[700] text-[16px] leading-[120%] tracking-[-2%]"
                 >
                   Decision
                 </h2>
@@ -226,7 +226,7 @@
                 <select
                   name="approve"
                   id="approve"
-                  class="cursor-pointer px-[17px] py-[11px] border border-[rgba(240,240,240,1)] text-[rgba(107,114,128,1)] text-[14px] font-normal leading-[100%] tracking-[0%] outline-none w-[404px]"
+                  class="cursor-pointer px-[17px] py-[11px] border border-[rgba(240,240,240,1)] text-[rgba(107,114,128,1)] text-[14px] font-[400] leading-[100%] tracking-[0%] outline-none w-[404px]"
                 >
                   <option value="Approve">Approve</option>
                   <option value="Approve">Approve</option>
@@ -237,7 +237,7 @@
               <input
                 type="text"
                 placeholder="Enter your comment here"
-                class="w-full outline-none border-0 px-[12px] py-[15px] h-[47px] bg-[rgba(141,193,255,0.13)] font-normal text-[14px] leading-[120%] tracking-[-2%] text-[rgba(161,161,170,1)]"
+                class="w-full outline-none border-0 px-[12px] py-[15px] h-[47px] bg-[rgba(141,193,255,0.13)] font-[400] text-[14px] leading-[120%] tracking-[-2%] text-[rgba(161,161,170,1)]"
               />
             </div>
           </div>
@@ -245,7 +245,7 @@
             <div class="">
               <div class="flex items-center justify-between gap-[10px]">
                 <h2
-                  class="text-[rgba(27,37,89,1)] font-bold text-[16px] leading-[120%] tracking-[-2%]"
+                  class="text-[rgba(27,37,89,1)] font-[700] text-[16px] leading-[120%] tracking-[-2%]"
                 >
                   Upload supporting documents
                 </h2>
@@ -265,7 +265,7 @@
                 id="file"
                 accept=".pdf,.doc,.docx,.txt, image/* "
                 aria-hidden="false"
-                class="w-full absolute inset-0 opacity-0 cursor-pointer outline-none border-0 px-[12px] py-[15px] bg-[rgba(248,248,249,1)] font-normal text-[14px] leading-[120%] tracking-[-2%] text-[rgba(161,161,170,1)]"
+                class="w-full absolute inset-0 opacity-0 cursor-pointer outline-none border-0 px-[12px] py-[15px] bg-[rgba(248,248,249,1)] font-[400] text-[14px] leading-[120%] tracking-[-2%] text-[rgba(161,161,170,1)]"
               />
               <!-- Visual content -->
               <div class="pointer-events-none flex flex-col items-center gap-1">
@@ -325,7 +325,10 @@ const { show } = defineProps({
   },
 });
 
-const emit = defineEmits(["closePublicationDetails"]);
+const emit = defineEmits([
+  "closePublicationDetails",
+ 
+]);
 function closeModal() {
   emit("closePublicationDetails");
 }

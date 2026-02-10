@@ -7,16 +7,20 @@
     :mask-closable="true"
     class="md:w-[50%] lg:w-[60%] my-[20px] w-full"
   >
-    <div id="leave_balance_approval" action="#" class="leave_balance_approval">
+    <div
+      id="leave_balance_approval"
+      action="#"
+      class="leave_balance_approval "
+    >
       <div class="flex justify-between items-center gap-[10px]">
-        <div class="flex flex-col gap-[10px]">
+        <div class="flex flex-col  gap-[10px]">
           <h2
-            class="text-[rgba(24,24,27,1)] font-bold leading-[100%] tracking-[0%] text-[20px]"
+            class="text-[rgba(24,24,27,1)] font-[700] leading-[100%] tracking-[0%] text-[20px]"
           >
             Leave Request
           </h2>
           <p
-            class="text-[rgba(30,30,30,1)] font-normal leading-[120%] tracking-[0%] text-[16px]"
+            class="text-[rgba(30,30,30,1)] font-[400] leading-[120%] tracking-[0%] text-[16px]"
           >
             Review & Decision
           </p>
@@ -34,7 +38,7 @@
               <i class="fa fa-check text-[rgba(30,30,30,1)]"></i>
             </div>
             <p
-              class="text-[rgba(24,24,27,1)] font-bold leading-[120%] text-[11px] tracking-[0%]"
+              class="text-[rgba(24,24,27,1)] font-[700] leading-[120%] text-[11px] tracking-[0%]"
             >
               Staff Information
             </p>
@@ -50,7 +54,7 @@
               <i class="fa fa-check text-[rgba(141,193,255,0.27)]"></i>
             </div>
             <p
-              class="text-[rgba(24,24,27,1)] font-bold leading-[120%] text-[11px] tracking-[0%]"
+              class="text-[rgba(24,24,27,1)] font-[700] leading-[120%] text-[11px] tracking-[0%]"
             >
               Leave Details
             </p>
@@ -65,7 +69,7 @@
               <i class="fa fa-check text-[rgba(141,193,255,0.27)]"></i>
             </div>
             <p
-              class="text-[rgba(24,24,27,1)] font-bold leading-[120%] text-[11px] tracking-[0%]"
+              class="text-[rgba(24,24,27,1)] font-[700] leading-[120%] text-[11px] tracking-[0%]"
             >
               Leave Balance/Approval
             </p>
@@ -76,15 +80,14 @@
         <a href="#" class="session back block flex items-center gap-[10px]">
           <i class="fas fa-chevron-left"></i>
 
-          <button
-            @click="Previous"
-            class="rgba(107,114,128,1) font-normal text-[14px] leading-[100%] tracking-[0%]"
+          <button @click="Previous"
+            
+            class="rgba(107,114,128,1) font-[400] text-[14px] leading-[100%] tracking-[0%]"
+            >Back</button
           >
-            Back
-          </button>
         </a>
         <span
-          class="text-[rgba(20,21,15,1)] text-[20px] leading-[120%] tracking-[0%] font-bold"
+          class="text-[rgba(20,21,15,1)] text-[20px] leading-[120%] tracking-[0%] font-[700]"
           >Leave Balance/Approval</span
         >
       </div>
@@ -155,7 +158,7 @@
               >Decision</span
             >
             <select
-              class="text-[rgba(107,114,128,1)] p-[15px] w-[40%] border outline-none font-normal text-[14px] leading-[100%] tracking-[0%]"
+              class="text-[rgba(107,114,128,1)] p-[15px] w-[40%] border outline-none font-[400] text-[14px] leading-[100%] tracking-[0%]"
             >
               <option value="Approve">Approve</option>
               <option value="Reject">Reject</option>
@@ -197,12 +200,17 @@ const { show2 } = defineProps({
   },
 });
 
-const emit = defineEmits(["closeLeaveBalanceApproval", "openLeaveDetails"]);
+const emit = defineEmits([
+  "closeLeaveBalanceApproval",
+  "openLeaveDetails",
+]);
 function closeModal() {
   emit("closeLeaveBalanceApproval");
 }
 
-function Next() {}
+function Next() {
+  
+}
 function Previous() {
   emit("closeLeaveBalanceApproval");
   emit("openLeaveDetails");

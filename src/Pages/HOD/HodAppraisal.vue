@@ -423,9 +423,9 @@ const archivedAppraisalTableColumn = [
           href: "",
           download,
           style:
-            "rounded-[2px] text-[rgba(255,255,255,1)] font-bold text-[14px] leading-[100%] flex gap-3 items-center justify-center tracking-[0%] px-[20px] py-[16px] bg-[rgba(35,136,255,1)]",
+            "rounded-[2px] text-[rgba(255,255,255,1)] font-[700] text-[14px] leading-[100%] flex gap-3 items-center justify-center tracking-[0%] px-[20px] py-[16px] bg-[rgba(35,136,255,1)]",
         },
-        [h("i", { class: "fa fa-download" }), "Download"],
+        [h("i", { class: "fa fa-download" }), "Download"]
       );
     },
   },
@@ -463,6 +463,36 @@ const columns = [
     render(row) {
       return h(
         "span",
+        {
+          style: {
+            color: row.is_active
+              ? "text-[rgba(251,188,4,1)]"
+              : row.is_active == "Due in 12 mo"
+              ? "red"
+              : "blue",
+            fontWeight: "700",
+            backgroundColor: row.is_active
+              ? "bg-[rgba(234,67,53,0.2)]"
+              : row.is_active == "Due in 12 mo"
+              ? "bg-[rgba(251,188,4,0.2)]"
+              : "bg-[rgba(58,151,76,0.15)]",
+            fontSize: "14px",
+            padding: "10px 20px",
+            borderRadius: "22.5px",
+            lineHeight: "100%",
+            wordSpacing: "0%",
+          },
+        },
+        row.is_active
+      );
+    },
+  },
+  {
+    title: "Action",
+    key: "action",
+    render(row) {
+      return h(
+        "button",
         {
           style: {
             color: row.is_active

@@ -43,11 +43,11 @@ export const getSession = async () => {
     throw error;
   }
 };
-// export const deleteSession = async () => {
-//   try {
-//     const { data } = await api.delete(`${BaseUrl}/hrms/session`);
-//     return data;
-//   } catch (error) {
-//     throw error;
-//   }
-// };
+export const deleteSession = async () => {
+  try {
+    const { data } = await api.delete(`${BaseUrl}/hrms/session`);
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};

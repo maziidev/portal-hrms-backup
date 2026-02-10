@@ -1,129 +1,256 @@
 <template>
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[25px]">
+  <div class="relative">
     <button
-      :class="[
-        `rounded-[20px] box cursor-pointer h-[97px] shadow  flex flex-col justify-center gap-[24px] py-[20px] px-[25px]`,
-        activeState == btn.name ? `bg-[rgba(17,27,73,1)]` : `bg-white `,
-      ]"
-      v-for="btn in btns"
-      :key="btn"
-      :id="btn.name"
-      @click="isActive(btn.name)"
+      @click="toggleSideBar"
+      class="absolute md:hidden menu-bar lg:hidden z-[2000] font-[700] text-[30px] top-[20px] right-[20px] px-[4px] py-[-2px] rounded-sm"
     >
-      <div>
-        <div class="flex justify-between items-center gap-3 w-full">
-          <h2
-            :class="[
-              `font-[500] text-[16px] text-[rgba(204,204,204,1)] leading-[120%] tracking-[-2%]`,
-            ]"
-          >
-            {{ btn.name }}
-          </h2>
-          <h2
-            :class="[
-              `text-[34px] font-bold leading-[120%] tracking-[-2%]`,
-              activeState == btn.name
-                ? `text-[rgba(255,255,255,1)]`
-                : `text-(--sec-text)`,
-            ]"
-          >
-            {{ btn.value }}
-          </h2>
-        </div>
-      </div>
+      <i class="fa fa-bars"></i>
     </button>
-  </div>
-
-  <!-- All Staff Directory -->
-  <div
-    class="quick_actions flex justify-between flex-wrap lg:flex-nowrap md:flex-nowrap items-center gap-[15px]"
-  >
-    <div
-      class="flex items-center gap-[20px] flex-wrap lg:flex-nowrap md:flex-nowrap"
-    >
-      <h2
-        class="text-[rgba(30,43,58,1)] font-bold text-[16px] leading-[120%] tracking-[-2%]"
-      >
-        All Staff Directory
-      </h2>
-      <div class="flex items-center gap-3">
-        <span
-          class="ml-3 ai_suggestion text-[14px] font-[500] leading-[120%] tracking-[0.2%] text-[rgba(30,30,30,1)]"
+    <div class="dashboard w-full min-h-screen">
+      <div class=" ">
+        <aside
+          :class="[
+            `{ w-[268px] sidebar z-[3000] transition-all duration-100 ease-in-out  fixed top-0 left-0 h-screen md:flex lg:flex px-[35px] flex flex-col gap-[67px] py-[45px] bg-[var(--primary)]`,
+            !toggleState ? `hidden` : `md:flex lg:flex`,
+          ]"
         >
-          Group by Department/Unit
-        </span>
-        <label class="relative inline-flex items-center cursor-pointer">
-          <n-switch
-            v-model:value="form.is_active"
-            class="text-white h-full rounded-full p-2"
-          >
-          </n-switch>
-        </label>
-      </div>
-    </div>
-    <div
-      class="grid grid-cols-1 md:grid-cols-2 relative lg:grid-cols-2 items-center gap-[20px]"
-    >
-      <button
-        class="text-[rgba(255,255,255,1)] cursor-pointer px-10 py-2.5 font-[600] text-[16px] flex gap-[10px] items-center leading-[120%] tracking-[-2%] rounded-[5px] bg-[rgba(35,136,255,1)] border-2 border-[rgba(35,136,255,1)]"
-      >
-        <i class="fas fa-user-plus"></i> Add New Staff
-      </button>
-      <button
-        @click="openImportStaffModal"
-        class="text-[rgba(35,136,255,1)] relative z-2 cursor-pointer bulk_upload_ px-[40px] py-[10px] font-[600] text-[16px] flex gap-[10px] items-center leading-[120%] tracking-[-2%] rounded-[5px] border-2 border-[rgba(35,136,255,1)]"
-      >
-        <i class="fas fa-file-import fa-flip-horizontal"></i> import staff
-        records
-      </button>
-    </div>
-  </div>
-
-  <form class="all_staff_directory w-full">
-    <div
-      class="top flex flex-wrap lg:flex-nowrap md:flex-nowrap justify-between gap-[20px] items-center"
-    >
-      <div class="left flex items-center md:w-[50%] gap-[15px]">
-        <div class="relative h-[40px] w-full">
-          <div class="h-full absolute left-[10px] flex items-center">
-            <i class="fa text-[rgba(107,114,128,1)] fa-search"></i>
+          <div class="">
+            <li
+              class="text-[rgba(14,253,193,1)] font-[700] text-[20px] flex gap-2 items-center text-[16px] tracking-[-2%] leading-[120%]"
+            >
+              Orbit <img :src="Orbit" />
+            </li>
           </div>
-          <n-input
-            type="search"
-            name="search"
-            placeholder="by Name/Staff ID/Email/Unit"
-            id="search"
-            @update:value="fetchStaffData"
-            :bordered="false"
-            class="search outline-none w-full lg:w-[50%] border rounded-[6px] border-[rgba(229,231,235,1)]"
-          />
-        </div>
+          <div class="flex flex-col gap-[25px]">
+            <li>
+              <router-link
+                to="/admin"
+                class="text-[var(--pri-text)] font-[400] flex gap-2 items-center text-[16px] tracking-[-2%] leading-[120%]"
+                ><i class="fa fa-th-large"></i>Dashboard</router-link
+              >
+            </li>
+            <li>
+              <router-link
+                to="/admin/staff-managment"
+                class="text-[rgba(14,253,193,1)] font-[700] text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
+                ><i class="fa fa-user-circle"></i>Staff Management</router-link
+              >
+            </li>
+            <li>
+              <router-link
+                to="/admin/appraisal"
+                class="text-[var(--pri-text)] font-[400] text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
+                ><i class="fa fa-user-circle"></i>Appraisals</router-link
+              >
+            </li>
+
+            <li>
+              <a
+                class="text-[var(--pri-text)] font-[400] text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
+                href="#"
+                ><i class="fa fa-bed"></i> Leave Management</a
+              >
+            </li>
+            <li>
+              <a
+                class="text-[var(--pri-text)] font-[400] text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
+                href="#"
+                ><i class="fa fa-award"></i> Promotions & Career Progression</a
+              >
+            </li>
+            <li>
+              <a
+                class="text-[var(--pri-text)] font-[400] text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
+                href="#"
+                ><i class="fa fa-calendar"></i> Retirement & Exit</a
+              >
+            </li>
+            <li>
+              <router-link
+                to="/admin/report-analysis"
+                class="text-[var(--pri-text)] font-[400] text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
+                href="Report_Analysis.html"
+                ><i class="fa-solid fa-chart-column"></i>Reports &
+                Analytics</router-link
+              >
+            </li>
+          </div>
+
+          <div class="flex flex-col gap-[25px]">
+            <li>
+              <a
+                class="text-[var(--pri-text)] flex items-center gap-2 font-[400] text-[16px] tracking-[-2%] leading-[120%]"
+                href="#"
+                ><i class="fa fa-gear"></i> Settings</a
+              >
+            </li>
+            <li>
+              <a
+                class="text-[var(--pri-text)] flex items-center gap-2 font-[400] text-[16px] tracking-[-2%] leading-[120%]"
+                href="#"
+                ><i class="fa-solid fa-right-from-bracket"></i> Logout</a
+              >
+            </li>
+            <li class="md:hidden lg:hidden items-center gap-[10px] flex">
+              <i class="fa fa-bell text-[var(--pri-text)]"></i>
+              <span
+                class="text-[var(--pri-text)] flex items-center gap-2 font-[400] text-[16px] tracking-[-2%] leading-[120%]"
+                >Notification</span
+              >
+            </li>
+            <li class="md:hidden lg:hidden items-center gap-[10px] flex">
+              <div class="user">
+                <i class="fa fa-user text-xl text-[var(--pri-text)]"></i>
+              </div>
+              <div class="user-id mbc text-[var(--pri-text)] break-words">
+                Nnamdichuzu@edu.EU.ng
+              </div>
+            </li>
+          </div>
+        </aside>
       </div>
-      <div
-        class="right grid grid-cols-1 w-full items-center gap-[15px] flex-wrap lg:grid-cols-4 md:grid-cols-4"
-      >
-        <n-select
-          :options="departmentCodes"
-          clearable
-          v-model:value="form.dept_code"
-          @update:value="fetchStaffData"
-          name="dept_code"
-          id="dept_code"
-          placeholder="Department Code"
-          class="cursor-pointer rounded-[10px] outline-none"
-        >
-        </n-select>
-        <n-select
-          clearable
-          :options="employmentType"
-          v-model:value="form.employment_type"
-          name="employment_type"
-          @update:value="fetchStaffData"
-          id="employment_type"
-          placeholder="Employment Type"
-          class="cursor-pointer rounded-[10px] outline-none"
-        >
-        </n-select>
+      <main class="lg:ml-[270px] md:ml-[270px] ml-[0px] min-w-screen relative">
+        <div class="header">
+          <header
+            class="bg-[var(--pri-bg)] py-[25px] items-center px-[25px] w-[] top-0 flex justify-between"
+          >
+            <div class="w-[70%]">
+              <h2 class="bc mb-[7px]">Staff Records</h2>
+            </div>
+            <div class="md:flex lg:flex items-center gap-[10px] hidden">
+              <i class="fa fa-bell text-[var(--sec-text)]"></i>
+              <div class="user">
+                <i class="fa fa-user text-2xl"></i>
+              </div>
+              <div class="user-id mbc">Nnamdichuzu@edu.EU.ng</div>
+            </div>
+          </header>
+        </div>
+
+        <div class="main px-[25px] mt-[50px] flex flex-col gap-[40px]">
+          <div
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[25px]"
+          >
+            <button
+              :class="[
+                `rounded-[20px] box cursor-pointer h-[97px] shadow  flex flex-col justify-center gap-[24px] py-[20px] px-[25px]`,
+                activeState == btn.name ? `bg-[rgba(17,27,73,1)]` : `bg-white `,
+              ]"
+              v-for="btn in btns"
+              :key="btn"
+              :id="btn.name"
+              @click="isActive(btn.name)"
+            >
+              <div>
+                <div class="flex justify-between items-center gap-3 w-full">
+                  <h2
+                    :class="[
+                      `font-[500] text-[16px] text-[rgba(204,204,204,1)] leading-[120%] tracking-[-2%]`,
+                    ]"
+                  >
+                    {{ btn.name }}
+                  </h2>
+                  <h2
+                    :class="[
+                      `text-[34px] font-[700] leading-[120%] tracking-[-2%]`,
+                      activeState == btn.name
+                        ? `text-[rgba(255,255,255,1)]`
+                        : `text-[var(--sec-text)]`,
+                    ]"
+                  >
+                    {{ btn.value }}
+                  </h2>
+                </div>
+              </div>
+            </button>
+          </div>
+
+          <!-- All Staff Directory -->
+          <div
+            class="quick_actions flex justify-between flex-wrap lg:flex-nowrap md:flex-nowrap items-center gap-[15px]"
+          >
+            <div
+              class="flex items-center gap-[20px] flex-wrap lg:flex-nowrap md:flex-nowrap"
+            >
+              <h2
+                class="text-[rgba(30,43,58,1)] font-[700] text-[16px] leading-[120%] tracking-[-2%]"
+              >
+                All Staff Directory
+              </h2>
+              <div class="flex items-center gap-3">
+                <span
+                  class="ml-3 ai_suggestion text-[14px] font-[500] leading-[120%] tracking-[0.2%] text-[rgba(30,30,30,1)]"
+                >
+                  Group by Department/Unit
+                </span>
+                <label class="relative inline-flex items-center cursor-pointer">
+                  <n-switch
+                    v-model:value="form.is_active"
+                    class="text-white h-full rounded-full p-2"
+                  >
+                  </n-switch>
+                </label>
+              </div>
+            </div>
+            <div
+              class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 items-center gap-[20px]"
+            >
+              <button
+                class="text-[rgba(255,255,255,1)] px-[40px] py-[10px] font-[600] text-[16px] flex gap-[10px] items-center leading-[120%] tracking-[-2%] rounded-[5px] bg-[rgba(35,136,255,1)] border-2 border-[rgba(35,136,255,1)]"
+              >
+                <i class="fas fa-user-plus"></i> Add New Staff
+              </button>
+              <button
+                @click="openImportStaffModal"
+                class="text-[rgba(35,136,255,1)] cursor-pointer bulk_upload_ px-[40px] py-[10px] font-[600] text-[16px] flex gap-[10px] items-center leading-[120%] tracking-[-2%] rounded-[5px] border-2 border-[rgba(35,136,255,1)]"
+              >
+                <i class="fas fa-file-import fa-flip-horizontal"></i> import
+                staff records
+              </button>
+            </div>
+          </div>
+
+          <form class="all_staff_directory w-full">
+            <div
+              class="top flex flex-wrap lg:flex-nowrap md:flex-nowrap justify-between gap-[20px] items-center"
+            >
+              <div class="left flex items-center md:w-[50%] gap-[15px]">
+                <div class="relative h-[40px] w-full">
+                  <div class="h-full absolute left-[10px] flex items-center">
+                    <i class="fa text-[rgba(107,114,128,1)] fa-search"></i>
+                  </div>
+                  <n-input
+                    type="search"
+                    name="search"
+                    placeholder="by Name/Staff ID/Email/Unit"
+                    id="search"
+                    :bordered="false"
+                    class="search outline-none w-full lg:w-[50%] border rounded-[6px] border-[rgba(229,231,235,1)]"
+                  />
+                </div>
+              </div>
+              <div
+                class="right grid grid-cols-1 w-full items-center gap-[15px] flex-wrap lg:grid-cols-4 md:grid-cols-4"
+              >
+                <n-select
+                  :options="unitOptions"
+                  clearable
+                  v-model:value="form.dept_code"
+                  name="department_unit"
+                  id="department_unit"
+                  placeholder="Department / Unit"
+                  class="cursor-pointer rounded-[10px] outline-none"
+                >
+                </n-select>
+                <n-select
+                  clearable
+                  v-model:value="form.employment_type"
+                  name="employment_type"
+                  id="employment_type"
+                  placeholder="Employment Type"
+                  class="cursor-pointer rounded-[10px] outline-none"
+                >
+                </n-select>
 
         <n-select
           clearable
@@ -139,8 +266,8 @@
           v-model:value="form.date"
           type="date"
           placeholder="DD-MM-YYYY"
-          :bordered="true"
-          class="custom-select"
+          :bordered="false"
+          class="custom-select border"
         />
       </div>
     </div>
@@ -157,100 +284,103 @@
       </div>
     </div>
 
-    <!-- Modal -->
-    <n-modal
-      :show="importState"
-      preset="card"
-      title="Bulk Upload Staff"
-      class="bulk_upload lg:w-[50%]! relative md:w-[40%]! rounded-md p-10 bg-white top-[20%] w-full overflow-y-auto"
-      :mask-closable="true"
-      :closable="true"
-      @close="closeUploadModal"
-    >
-      <n-spin
-        size="large"
-        v-if="loadingFile"
-        class="absolute top-[50%] left-[50%]"
-      ></n-spin>
-
-      <n-upload
-        :default-upload="false"
-        directory-dnd
-        accept=".csv"
-        :max="1"
-        @change="handleCSVFileChange"
-      >
-        <n-upload-dragger
-          style="border-radius: 20px; padding: 20px; text-align: center"
-        >
-          <div style="margin-bottom: 12px">
-            <n-icon size="48" :depth="3">
-              <ArchiveIcon />
-            </n-icon>
-          </div>
-
-          <n-text class="text-[rgba(71,84,103,1)]" style="font-size: 16px">
-            <span class="text-[rgba(80,48,229,1)] font-[600]"
-              >Click to upload
-            </span>
-            <span class="text-[rgba(71,84,103,1)] font-[400]">
-              or drag to upload</span
+            <!-- Modal -->
+            <n-modal
+              :show="importState"
+              preset="card"
+              title="Bulk Upload Staff"
+              class="bulk_upload !lg:w-[50%] md:w-[40%] rounded-md border p-10 bg-white top-[20%] w-full overflow-y-auto"
+              :mask-closable="true"
+              :closable="true"
+              @close="closeUploadModal"
             >
-          </n-text>
+              <div
+                id="drop-zone"
+                class="my-3 relative w-full px-[24px] py-[14px] bg-[rgba(248,248,249,1)]"
+              >
+                <input
+                  type="file"
+                  id="file"
+                  accept=".pdf,.doc,.docx,.txt, image/* "
+                  aria-hidden="false"
+                  class="w-full absolute inset-0 opacity-0 cursor-pointer outline-none border-0 px-[12px] py-[15px] bg-[rgba(248,248,249,1)] font-[400] text-[14px] leading-[120%] tracking-[-2%] text-[rgba(161,161,170,1)]"
+                />
+                <!-- Visual content -->
+                <div
+                  class="pointer-events-none flex flex-col items-center gap-1"
+                >
+                  <div
+                    class="w-16 h-16 rounded-full bg-white/80 flex items-center justify-center text-2xl text-gray-600 shadow-sm"
+                  >
+                    <i class="fas fa-arrow-up-from-bracket"></i>
+                  </div>
 
-          <n-p depth="3" style="margin: 8px 0 0 0; font-weight: 500">
-            supports only .xsl and .csv (max. 5mb)
-          </n-p>
-        </n-upload-dragger>
-      </n-upload>
+                  <div class="flex flex-col items-center gap-[5px]">
+                    <div class="flex items-center gap-[10px]">
+                      <span
+                        class="text-[rgba(0,149,255,1)] text-[14px] font-[500]"
+                      >
+                        Upload file
+                      </span>
+                      <p class="text-sm text-gray-500">
+                        or
+                        <span
+                          class="text-[14px] font-[500] text-[rgba(71,84,103,1)]"
+                          >or drag and drop</span
+                        ><br />
+                      </p>
+                    </div>
+                    <span
+                      class="text-[12px] leading-[18px] font-[500] text-[rgba(71,84,103,1)]"
+                    >
+                      supports only .xsl and .csv (max. 5mb)
+                    </span>
+                  </div>
 
-      <button
-        @click="uploadFile"
-        class="border-2 border-[rgba(35,136,255,1)] cursor-pointer bg-[rgba(35,136,255,1)] text-[rgba(255,255,255,1)] text-center font-[600] text-[16px] leading-[100%] tracking-[0] p-[15px] rounded-md w-full"
-      >
-        Upload Staff
-      </button>
-    </n-modal>
-  </form>
+                  <!-- filename preview -->
+                  <div id="file-info" class="mt-3 text-sm text-gray-600"></div>
+                </div>
+              </div>
+              <div
+                class="grid grid-cols-1 mt-5 md:grid-cols-1 lg:grid-cols-1 gap-[20px]"
+              >
+                <span class="preview"></span>
+                <n-upload
+                  :max="1"
+                  accept=".csv",
+                  :before-upload="beforeUploadingFile"
+                  :custom-request="uploadFile"
+                  class="submit border-2 border-[rgba(35,136,255,1)] cursor-pointer bg-[rgba(35,136,255,1)] text-[rgba(255,255,255,1)] text-center font-[600] text-[16px] leading-[100%] tracking-[0] p-[15px]"
+                >
+                  Upload Staff
+                </n-upload>
+
+              </div>
+            </n-modal>
+          </form>
+        </div>
+      </main>
+    </div>
+  </div>
 </template>
 <script setup>
 import { ref, reactive, onMounted, watch, computed, h } from "vue";
 import { addStaff } from "@/apis/admin.js";
 import { useMessage } from "naive-ui";
 import Orbit from "@/assets/imgs/Orbit.png";
-import { ArchiveOutline as ArchiveIcon } from "@vicons/ionicons5";
 import { getAllStaff, getStaffById, importStaff } from "@/apis/admin.js";
 
 const message = useMessage();
 const loading = ref(false);
-const loadingFile = ref(false);
-const csvFilePreview = ref(null);
 
 const importState = ref(false);
 
-const departmentCodes = ref([
-  { label: "ENG", value: "2" },
-  { label: "COM", value: "3" },
-  { label: "BUS ADMIN", value: "4" },
-]);
-const employmentType = ref([
-  { label: "Full Time", value: "full_time" },
-  { label: "Part Time", value: "part_time" },
-  { label: "Contract", value: "contract" },
-]);
-const status = ref([
-  { label: "Pending", value: "pending" },
-  { label: "Completed", value: "completed" },
-]);
-
-const csvFile = ref("");
 const staffData = ref([]);
 const form = reactive({
   date: null,
   search: null,
   dept_code: null,
   is_active: false,
-  status: null,
   employment_type: null,
   year_of_services: null,
 });
@@ -264,20 +394,18 @@ const closeUploadModal = () => {
 };
 
 const handleCSVFileChange = (options) => {
-  csvFile.value = options.file.file;
+  const file = options.file.file;
+  csvFile.value = file;
   console.log(csvFile.value);
-  csvFilePreview.value = URL.createObjectURL(csvFile.value);
+  csvFilePreview.value = URL.createObjectURL(file);
 };
 
 const uploadFile = async () => {
-  if (!csvFile.value) {
-    return;
-  }
-  const formData = new FormData();
-  formData.append("file", csvFile.value);
+  
+
   loadingFile.value = true;
   try {
-    const res = await importStaff(formData);
+    const res = await importStaff({ file: csvFile.value });
     message.success("Staff data imported successfully");
   } catch (err) {
     message.error("Staff data not imported");
@@ -290,13 +418,12 @@ const uploadFile = async () => {
 const fetchStaffData = async () => {
   try {
     loading.value = true;
-    const res = await getAllStaff({
+    const { data } = await getAllStaff({
       dept_code: form.dept_code,
       employment_type: form.employment_type,
       search: form.search,
     });
-    staffData.value = res;
-    console.log(res, "Beans");
+    staffData.value = data;
   } catch (error) {
     message.error("Staff data could not be fetched");
     console.log(error);
@@ -328,7 +455,19 @@ const toggleSideBar = () => {
 
 onMounted(async () => {
   isActive("Active Staff");
-  fetchStaffData();
+  loading.value = true;
+
+  try {
+    staffData.value = await getAllStaff({
+      dept_code: form.dept_code,
+      employment_type: form.employment_type,
+      search: form.search,
+    });
+    loading.value = false;
+  } catch (error) {
+    loading.value = false;
+    message.error("Error fetching staff data");
+  }
 });
 
 // Define table columns

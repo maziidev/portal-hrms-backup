@@ -216,7 +216,7 @@ const columns = [
         {
           onClick: () => router.push("/dap/appraisal-management/department-appraisal/" + row.department),
         },
-        row.department,
+        row.department
       );
     },
   },

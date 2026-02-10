@@ -2,7 +2,7 @@
   <div class="relative">
     <button
       @click="toggleSideBar"
-      class="absolute md:hidden menu-bar lg:hidden z-[2000] font-bold text-[30px] top-[20px] right-[20px] px-[4px] py-[-2px] rounded-sm"
+      class="absolute md:hidden menu-bar lg:hidden z-[2000] font-[700] text-[30px] top-[20px] right-[20px] px-[4px] py-[-2px] rounded-sm"
     >
       <i class="fa fa-bars"></i>
     </button>
@@ -10,13 +10,13 @@
       <div class=" ">
         <aside
           :class="[
-            `{ w-67 sidebar z-3000 transition-all duration-100 ease-in-out  fixed top-0 left-0 h-screen md:flex lg:flex px-[35px] flex flex-col gap-[67px] py-[45px] bg-[var(--primary)]`,
+            `{ w-[268px] sidebar z-[3000] transition-all duration-100 ease-in-out  fixed top-0 left-0 h-screen md:flex lg:flex px-[35px] flex flex-col gap-[67px] py-[45px] bg-[var(--primary)]`,
             !toggleState ? `hidden` : `md:flex lg:flex`,
           ]"
         >
           <div class="">
             <li
-              class="text-[rgba(14,253,193,1)] font-bold text-[20px] flex gap-2 items-center text-[16px] tracking-[-2%] leading-[120%]"
+              class="text-[rgba(14,253,193,1)] font-[700] text-[20px] flex gap-2 items-center text-[16px] tracking-[-2%] leading-[120%]"
             >
               Orbit <img :src="Orbit" />
             </li>
@@ -25,44 +25,41 @@
             <li>
               <router-link
                 to="/admin"
-                class="text-(--pri-text) font-normal flex gap-2 items-center text-[16px] tracking-[-2%] leading-[120%]"
+                class="text-[var(--pri-text)] font-[400] flex gap-2 items-center text-[16px] tracking-[-2%] leading-[120%]"
                 ><i class="fa fa-th-large"></i>Dashboard</router-link
               >
             </li>
             <li>
               <router-link
                 to="/admin/staff-managment"
-                class="text-(--pri-text) cursor-pointer font-normal text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
+                class="text-[var(--pri-text)] cursor-pointer font-[400] text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
                 ><i class="fa fa-user-circle"></i>Staff Management</router-link
               >
             </li>
             <li>
               <router-link
-                class="text-(--pri-text) font-normal text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
+                class="text-[var(--pri-text)] font-[400] text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
                 to="/admin/appraisal"
                 ><i class="fa fa-file-text"></i> Appraisals
               </router-link>
             </li>
             <li>
               <router-link
-                class="text-(--pri-text) font-normal text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
+                class="text-[var(--pri-text)] font-[400] text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
                 href="#"
                 ><i class="fa fa-bed"></i> Leave Management</router-link
               >
             </li>
             <li>
-              <router-link
-                to="/admin/promotion-career-progression"
-                class="text-(--pri-text) font-normal text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
+              <router-link to="/admin/promotion-career-progression"
+                class="text-[var(--pri-text)] font-[400] text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
                 href="#"
-                ><i class="fa fa-award"></i> Promotions & Career
-                Progression</router-link
+                ><i class="fa fa-award"></i> Promotions & Career Progression</router-link
               >
             </li>
             <li>
-              <router-link
-                to="/admin/retirement-exit"
-                class="text-(--pri-text) font-normal text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
+              <router-link to="/admin/retirement-exit"
+                class="text-[var(--pri-text)] font-[400] text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
                 href="#"
                 ><i class="fa fa-calendar"></i> Retirement & Exit</router-link
               >
@@ -70,7 +67,7 @@
             <li>
               <router-link
                 to="/admin/report-analysis"
-                class="text-[rgba(14,253,193,1)] font-bold text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
+                class="text-[rgba(14,253,193,1)] font-[700] text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
                 href="Report_Analysis.html"
                 ><i class="fa-solid fa-chart-column"></i>Reports &
                 Analytics</router-link
@@ -80,32 +77,31 @@
 
           <div class="flex flex-col gap-[25px]">
             <li>
-              <router-link
-                to="/admin/settings"
-                class="text-(--pri-text) flex items-center gap-2 font-normal text-[16px] tracking-[-2%] leading-[120%]"
+              <router-link to="/admin/settings"
+                class="text-[var(--pri-text)] flex items-center gap-2 font-[400] text-[16px] tracking-[-2%] leading-[120%]"
                 href="#"
                 ><i class="fa fa-gear"></i> Settings</router-link
               >
             </li>
             <li>
               <a
-                class="text-(--pri-text) flex items-center gap-2 font-normal text-[16px] tracking-[-2%] leading-[120%]"
+                class="text-[var(--pri-text)] flex items-center gap-2 font-[400] text-[16px] tracking-[-2%] leading-[120%]"
                 href="#"
                 ><i class="fa-solid fa-right-from-bracket"></i> Logout</a
               >
             </li>
             <li class="md:hidden lg:hidden items-center gap-[10px] flex">
-              <i class="fa fa-bell text-(--pri-text)"></i>
+              <i class="fa fa-bell text-[var(--pri-text)]"></i>
               <span
-                class="text-(--pri-text) flex items-center gap-2 font-normal text-[16px] tracking-[-2%] leading-[120%]"
+                class="text-[var(--pri-text)] flex items-center gap-2 font-[400] text-[16px] tracking-[-2%] leading-[120%]"
                 >Notification</span
               >
             </li>
             <li class="md:hidden lg:hidden items-center gap-[10px] flex">
               <div class="user">
-                <i class="fa fa-user text-xl text-(--pri-text)"></i>
+                <i class="fa fa-user text-xl text-[var(--pri-text)]"></i>
               </div>
-              <div class="user-id mbc text-(--pri-text) break-words">
+              <div class="user-id mbc text-[var(--pri-text)] break-words">
                 Nnamdichuzu@edu.EU.ng
               </div>
             </li>
@@ -125,7 +121,7 @@
               </h5>
             </div>
             <div class="md:flex lg:flex items-center gap-[10px] hidden">
-              <i class="fa fa-bell text-(--sec-text)"></i>
+              <i class="fa fa-bell text-[var(--sec-text)]"></i>
               <div class="user">
                 <i class="fa fa-user text-2xl"></i>
               </div>
@@ -139,7 +135,7 @@
             class="grid grid-cols-1 md:grid-cols-[1fr_2fr] lg:grid-cols-[1fr_2fr] gap-[25px]"
           >
             <div
-              class="bg-var(--twhite) p-[12px] shadow-sm border border-slate-100 rounded-[20px] gap-[10px] flex flex-col justify-between"
+              class="bg-[var(--twhite)] p-[12px] shadow-sm border border-slate-100 rounded-[20px] gap-[10px] flex flex-col justify-between"
             >
               <div
                 class="rounded-[40px] shadow bg-[rgba(17,27,73,1)] flex flex-col gap-[10px] py-[20px] px-[40px]"
@@ -148,7 +144,7 @@
                 <div class="flex justify-between items-center gap-3">
                   <div class="balance">
                     <h2
-                      class="text-[rgba(255,255,255,1)] text-[34px] font-bold leading-[120%] tracking-[-2%]"
+                      class="text-[rgba(255,255,255,1)] text-[34px] font-[700] leading-[120%] tracking-[-2%]"
                     >
                       23,458
                     </h2>
@@ -243,7 +239,7 @@
                 class="top flex flex justify-between p-[20px] w-full gap-[10px] items-center"
               >
                 <h2
-                  class="text-[rgba(27,37,89,1)] text-[20px] tracking-[-2%] leading-[120%] font-bold"
+                  class="text-[rgba(27,37,89,1)] text-[20px] tracking-[-2%] leading-[120%] font-[700]"
                 >
                   Appraisal Progress Overview
                 </h2>
@@ -254,7 +250,7 @@
                     id="week"
                     @click="updateChartData($event)"
                     ref="btn1"
-                    class="active rounded-[4px] text-[rgba(30,30,30,1)] font-normal text-[14px] px-[8px] py-[10px] leading-[20px] tracking-[0%]"
+                    class="active rounded-[4px] text-[rgba(30,30,30,1)] font-[400] text-[14px] px-[8px] py-[10px] leading-[20px] tracking-[0%]"
                   >
                     Week
                   </button>
@@ -262,7 +258,7 @@
                     id="month"
                     @click="updateChartData($event)"
                     ref="btn2"
-                    class="active rounded-[4px] text-[rgba(30,30,30,1)] font-normal text-[14px] px-[8px] py-[10px] leading-[20px] tracking-[0%]"
+                    class="active rounded-[4px] text-[rgba(30,30,30,1)] font-[400] text-[14px] px-[8px] py-[10px] leading-[20px] tracking-[0%]"
                   >
                     Month
                   </button>
@@ -270,7 +266,7 @@
                     id="year"
                     @click="updateChartData($event)"
                     ref="btn3"
-                    class="active rounded-[4px] text-[rgba(30,30,30,1)] font-normal text-[14px] px-[8px] py-[10px] leading-[20px] tracking-[0%]"
+                    class="active rounded-[4px] text-[rgba(30,30,30,1)] font-[400] text-[14px] px-[8px] py-[10px] leading-[20px] tracking-[0%]"
                   >
                     Year
                   </button>
@@ -290,7 +286,7 @@
             class="grid grid-cols-1 md:grid-cols-[1fr_2fr] lg:grid-cols-[1fr_2fr] gap-[25px]"
           >
             <div
-              class="bg-var(--twhite) p-[20px] shadow-sm border border-slate-100 rounded-[20px] gap-[10px] flex flex-col justify-between"
+              class="bg-[var(--twhite)] p-[20px] shadow-sm border border-slate-100 rounded-[20px] gap-[10px] flex flex-col justify-between"
             >
               <div class="">
                 <h2
@@ -360,7 +356,7 @@
                 class="top flex justify-between p-[20px] w-full gap-[10px] items-center"
               >
                 <h2
-                  class="text-[rgba(27,37,89,1)] text-[20px] tracking-[-2%] leading-[120%] font-bold"
+                  class="text-[rgba(27,37,89,1)] text-[20px] tracking-[-2%] leading-[120%] font-[700]"
                 >
                   Retirement Projection
                 </h2>
@@ -394,7 +390,7 @@
             >
               <div class="left flex items-center gap-[20px]">
                 <h2
-                  class="font-bold text-(--sec-text) text-[20px] leading-[120%] tracking-[-2%]"
+                  class="font-[700] text-[var(--sec-text)] text-[20px] leading-[120%] tracking-[-2%]"
                 >
                   Reports
                 </h2>
@@ -643,7 +639,7 @@ watch(
   (newVal, oldVal) => {
     console.log(oldVal, newVal);
     series_1.value[0].data = verticalChartDataSets[newVal];
-  },
+  }
 );
 
 onMounted(() => {
@@ -665,7 +661,7 @@ const columns = [
           class: "text-blue-600 hover:underline font-semibold cursor-pointer",
           onClick: () => router.push(`/home/edit/${row.id}`),
         },
-        row.id,
+        row.id
       );
     },
   },
@@ -682,9 +678,9 @@ const columns = [
           href: row.file,
           download: "",
           style:
-            "rounded-[2px] text-[rgba(255,255,255,1)] font-bold text-[14px] leading-[100%] flex gap-3 items-center justify-center tracking-[0%] px-[20px] py-[16px] bg-[rgba(35,136,255,1)]",
+            "rounded-[2px] text-[rgba(255,255,255,1)] font-[700] text-[14px] leading-[100%] flex gap-3 items-center justify-center tracking-[0%] px-[20px] py-[16px] bg-[rgba(35,136,255,1)]",
         },
-        [h("i", { class: "fa fa-download" }), "Download"],
+        [h("i", { class: "fa fa-download" }), "Download"]
       );
     },
   },

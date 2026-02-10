@@ -8,7 +8,7 @@
     class="md:w-[50%] lg:w-[60%] my-[20px] w-full"
   >
     <div
-      class="bg-var(--twhite) p-[20px] shadow-sm border-b mb-[10px] border-slate-100 gap-[10px] flex flex-col justify-between"
+      class="bg-[var(--twhite)] p-[20px] shadow-sm border-b mb-[10px] border-slate-100 gap-[10px] flex flex-col justify-between"
     >
       <div class="flex p-[10px] gap-[20px] items-center">
         <!-- <button
@@ -17,12 +17,12 @@
           x
         </button> -->
         <h2
-          class="text-[rgba(24,24,27,1)] font-bold leading-[100%] tracking-[0%] text-[20px]"
+          class="text-[rgba(24,24,27,1)] font-[700] leading-[100%] tracking-[0%] text-[20px]"
         >
           Staff Evaluation Form – Dr. Jane Okafor
         </h2>
         <p
-          class="text-[rgba(30,30,30,1)] font-normal leading-[120%] tracking-[0%] text-[16px]"
+          class="text-[rgba(30,30,30,1)] font-[400] leading-[120%] tracking-[0%] text-[16px]"
         >
           Department of Education Management & Policy
         </p>
@@ -37,7 +37,7 @@
               <i class="fa fa-check text-[rgba(30,30,30,1)]"></i>
             </div>
             <p
-              class="text-[rgba(24,24,27,1)] font-bold leading-[120%] text-[11px] tracking-[0%]"
+              class="text-[rgba(24,24,27,1)] font-[700] leading-[120%] text-[11px] tracking-[0%]"
             >
               Staff Information
             </p>
@@ -53,7 +53,7 @@
               <i class="fa fa-check text-[rgba(141,193,255,0.27)]"></i>
             </div>
             <p
-              class="text-[rgba(24,24,27,1)] font-bold leading-[120%] text-[11px] tracking-[0%]"
+              class="text-[rgba(24,24,27,1)] font-[700] leading-[120%] text-[11px] tracking-[0%]"
             >
               Teaching, Research & Administrative Duties
             </p>
@@ -68,7 +68,7 @@
               <i class="fa fa-check text-[rgba(141,193,255,0.27)]"></i>
             </div>
             <p
-              class="text-[rgba(24,24,27,1)] font-bold leading-[120%] text-[11px] tracking-[0%]"
+              class="text-[rgba(24,24,27,1)] font-[700] leading-[120%] text-[11px] tracking-[0%]"
             >
               External Evaluation & Submission
             </p>
@@ -77,7 +77,7 @@
       </div>
       <div class="personal_information mt-[30px]">
         <h2
-          class="text-[rgba(17,27,73,1)] font-bold my-[10px] text-[16px] leading-[100%] tracking-[0%]"
+          class="text-[rgba(17,27,73,1)] font-[700] my-[10px] text-[16px] leading-[100%] tracking-[0%]"
         >
           Personal Information
         </h2>
@@ -204,10 +204,7 @@ const { show } = defineProps({
   },
 });
 
-const emit = defineEmits([
-  "closeStaffInformationModal",
-  "OpenTeachingResearchAndAdminstrativeDutiesModal",
-]);
+const emit = defineEmits(["closeStaffInformationModal", "OpenTeachingResearchAndAdminstrativeDutiesModal"]);
 function closeModal() {
   emit("closeStaffInformationModal");
   emit("OpenTeachingResearchAndAdminstrativeDutiesModal");

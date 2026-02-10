@@ -15,12 +15,12 @@
       <div class="flex justify-between items-center gap-[10px]">
         <div class="flex flex-col gap-[10px]">
           <h2
-            class="text-[rgba(24,24,27,1)] font-bold leading-[100%] tracking-[0%] text-[20px]"
+            class="text-[rgba(24,24,27,1)] font-[700] leading-[100%] tracking-[0%] text-[20px]"
           >
             Staff Appraisal Form - Dr. Jane Okafor
           </h2>
           <p
-            class="text-[rgba(30,30,30,1)] font-normal leading-[120%] tracking-[0%] text-[16px]"
+            class="text-[rgba(30,30,30,1)] font-[400] leading-[120%] tracking-[0%] text-[16px]"
           >
             Department of Political Science | Appraisal Period: Jan–Dec 2025
           </p>
@@ -37,7 +37,7 @@
               <i class="fa fa-check text-[rgba(58,151,76,1)]"></i>
             </div>
             <p
-              class="text-[rgba(58,151,76,1)] font-bold leading-[120%] text-[11px] tracking-[0%]"
+              class="text-[rgba(58,151,76,1)] font-[700] leading-[120%] text-[11px] tracking-[0%]"
             >
               Teaching & Research Performance
             </p>
@@ -53,7 +53,7 @@
               <i class="fa fa-check"></i>
             </div>
             <p
-              class="text-[rgba(24,24,27,1)] font-bold leading-[120%] text-[11px] tracking-[0%]"
+              class="text-[rgba(24,24,27,1)] font-[700] leading-[120%] text-[11px] tracking-[0%]"
             >
               Administrative & Community Service
             </p>
@@ -68,7 +68,7 @@
               <i class="fa fa-check"></i>
             </div>
             <p
-              class="text-[rgba(24,24,27,1)] font-bold leading-[120%] text-[11px] tracking-[0%]"
+              class="text-[rgba(24,24,27,1)] font-[700] leading-[120%] text-[11px] tracking-[0%]"
             >
               Professional Development
             </p>
@@ -83,7 +83,7 @@
               <i class="fa fa-check"></i>
             </div>
             <p
-              class="text-[rgba(24,24,27,1)] font-bold leading-[120%] text-[11px] tracking-[0%]"
+              class="text-[rgba(24,24,27,1)] font-[700] leading-[120%] text-[11px] tracking-[0%]"
             >
               Summary & Submission
             </p>
@@ -96,13 +96,13 @@
           <i class="fa fa-chevron-left"></i>
           <button
             @click="Previous"
-            class="rgba(107,114,128,1) font-normal text-[14px] leading-[100%] tracking-[0%]"
+            class="rgba(107,114,128,1) font-[400] text-[14px] leading-[100%] tracking-[0%]"
           >
             Back
           </button>
         </a>
         <span
-          class="text-[rgba(17,27,73,1)] text-center w-full block text-[20px] leading-[100%] tracking-[0%] font-bold"
+          class="text-[rgba(17,27,73,1)] text-center w-full block text-[20px] leading-[100%] tracking-[0%] font-[700]"
           >Administrative & Community Service</span
         >
       </div>
@@ -118,7 +118,7 @@
             <n-select
               :options="departmentalRoles"
               v-model:value="formData.departmental_role"
-              class="w-full outline-none border-0 px-[12px] py-[15px] h-[47px] bg-[rgba(141,193,255,0.13)] font-normal text-[14px] leading-[120%] tracking-[-2%] text-[rgba(161,161,170,1)]"
+              class="w-full outline-none border-0 px-[12px] py-[15px] h-[47px] bg-[rgba(141,193,255,0.13)] font-[400] text-[14px] leading-[120%] tracking-[-2%] text-[rgba(161,161,170,1)]"
             >
               <option value="Select Role">Select Role</option>
             </n-select>
@@ -130,7 +130,7 @@
               type="text"
               v-model:value="formData.community_service"
               placeholder="Explain in details, press enter to start input another in cases of multiple"
-              class="w-full outline-none border-0 px-[12px] py-[15px] h-[82px] bg-[rgba(141,193,255,0.13)] font-normal text-[14px] leading-[120%] tracking-[-2%] text-[rgba(161,161,170,1)]"
+              class="w-full outline-none border-0 px-[12px] py-[15px] h-[82px] bg-[rgba(141,193,255,0.13)] font-[400] text-[14px] leading-[120%] tracking-[-2%] text-[rgba(161,161,170,1)]"
             />
           </n-form-item>
         </div>
@@ -142,7 +142,7 @@
               type="textarea"
               v-model:value="formData.community_service"
               placeholder="Your message here"
-              class="w-full outline-none border-0 px-[12px] py-[15px] h-[82px] bg-[rgba(141,193,255,0.13)] font-normal text-[14px] leading-[120%] tracking-[-2%] text-[rgba(161,161,170,1)]"
+              class="w-full outline-none border-0 px-[12px] py-[15px] h-[82px] bg-[rgba(141,193,255,0.13)] font-[400] text-[14px] leading-[120%] tracking-[-2%] text-[rgba(161,161,170,1)]"
             />
           </n-form-item>
         </div>
@@ -152,7 +152,7 @@
               type="text"
               placeholder="Your message here"
               v-model:value="formData.awards_recognitions"
-              class="w-full outline-none border-0 px-[12px] py-[15px] h-[47px] bg-[rgba(141,193,255,0.13)] font-normal text-[14px] leading-[120%] tracking-[-2%] text-[rgba(161,161,170,1)]"
+              class="w-full outline-none border-0 px-[12px] py-[15px] h-[47px] bg-[rgba(141,193,255,0.13)] font-[400] text-[14px] leading-[120%] tracking-[-2%] text-[rgba(161,161,170,1)]"
             />
           </n-form-item>
         </div>
@@ -214,7 +214,7 @@ const rules = {
   ],
   departmental_role: [
     {
-      max: 100,
+      max:100,
       required: true,
       message: "Departmental Role is required",
       trigger: "blur",

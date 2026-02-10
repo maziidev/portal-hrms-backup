@@ -11,12 +11,12 @@
       <div class="flex justify-between items-center gap-[10px]">
         <div class="flex flex-col gap-[10px]">
           <h2
-            class="text-[rgba(24,24,27,1)] font-bold leading-[100%] tracking-[0%] text-[20px]"
+            class="text-[rgba(24,24,27,1)] font-[700] leading-[100%] tracking-[0%] text-[20px]"
           >
             Staff Appraisal Form - Dr. Jane Okafor
           </h2>
           <p
-            class="text-[rgba(30,30,30,1)] font-normal leading-[120%] tracking-[0%] text-[16px]"
+            class="text-[rgba(30,30,30,1)] font-[400] leading-[120%] tracking-[0%] text-[16px]"
           >
             Department of Political Science | Appraisal Period: Jan–Dec 2025
           </p>
@@ -30,13 +30,13 @@
 
           <button
             @click="Previous"
-            class="back rgba(107,114,128,1) font-normal text-[14px] leading-[100%] tracking-[0%]"
+            class="back rgba(107,114,128,1) font-[400] text-[14px] leading-[100%] tracking-[0%]"
           >
             Back
           </button>
         </a>
         <span
-          class="text-[rgba(20,21,15,1)] text-[24px] leading-[120%] tracking-[0%] font-bold"
+          class="text-[rgba(20,21,15,1)] text-[24px] leading-[120%] tracking-[0%] font-[700]"
           >Score Breakdown & Approval</span
         >
       </div>
@@ -48,7 +48,7 @@
                 class="h-[41px] rounded-[16px] w-[4px] bg-[rgba(35,136,255,1)]"
               ></span>
               <h2
-                class="text-[rgba(27,37,89,1)] font-bold text-[16px] leading-[120%] tracking-[-2%]"
+                class="text-[rgba(27,37,89,1)] font-[700] text-[16px] leading-[120%] tracking-[-2%]"
               >
                 Teaching Effectiveness
               </h2>
@@ -82,7 +82,7 @@
                 class="h-[41px] rounded-[16px] w-[4px] bg-[rgba(35,136,255,1)]"
               ></span>
               <h2
-                class="text-[rgba(27,37,89,1)] font-bold text-[16px] leading-[120%] tracking-[-2%]"
+                class="text-[rgba(27,37,89,1)] font-[700] text-[16px] leading-[120%] tracking-[-2%]"
               >
                 Research Output
               </h2>
@@ -116,7 +116,7 @@
                 class="h-[41px] rounded-[16px] w-[4px] bg-[rgba(35,136,255,1)]"
               ></span>
               <h2
-                class="text-[rgba(27,37,89,1)] font-bold text-[16px] leading-[120%] tracking-[-2%]"
+                class="text-[rgba(27,37,89,1)] font-[700] text-[16px] leading-[120%] tracking-[-2%]"
               >
                 Supervision
               </h2>
@@ -150,7 +150,7 @@
                 class="h-[41px] rounded-[16px] w-[4px] bg-[rgba(35,136,255,1)]"
               ></span>
               <h2
-                class="text-[rgba(27,37,89,1)] font-bold text-[16px] leading-[120%] tracking-[-2%]"
+                class="text-[rgba(27,37,89,1)] font-[700] text-[16px] leading-[120%] tracking-[-2%]"
               >
                 Contribution to Department
               </h2>
@@ -183,7 +183,7 @@
           >
             <div class="flex items-center gap-[10px]">
               <h2
-                class="text-[rgba(35,136,255,1)] font-bold text-[16px] leading-[120%] tracking-[-2%]"
+                class="text-[rgba(35,136,255,1)] font-[700] text-[16px] leading-[120%] tracking-[-2%]"
               >
                 Total Average
               </h2>
@@ -193,7 +193,7 @@
               class="relative bg-[rgba(58,151,76,0.09)] flex justify-end p-[12px] w-[424px] items-center"
             >
               <p
-                class="font-bold text-[16px] text-[rgba(58,151,76,1)] leading-[120%] tracking-[-2%]"
+                class="font-[700] text-[16px] text-[rgba(58,151,76,1)] leading-[120%] tracking-[-2%]"
               >
                 90%
               </p>
@@ -206,7 +206,7 @@
           >
             <div class="flex items-center gap-[10px]">
               <h2
-                class="text-[rgba(27,37,89,1)] font-bold text-[16px] leading-[120%] tracking-[-2%]"
+                class="text-[rgba(27,37,89,1)] font-[700] text-[16px] leading-[120%] tracking-[-2%]"
               >
                 Supervisor’s Remarks
               </h2>
@@ -215,7 +215,7 @@
               <select
                 name="approve"
                 id="approve"
-                class="cursor-pointer px-[17px] py-[11px] border border-[rgba(240,240,240,1)] text-[rgba(107,114,128,1)] text-[14px] font-normal leading-[100%] tracking-[0%] outline-none w-[404px]"
+                class="cursor-pointer px-[17px] py-[11px] border border-[rgba(240,240,240,1)] text-[rgba(107,114,128,1)] text-[14px] font-[400] leading-[100%] tracking-[0%] outline-none w-[404px]"
               >
                 <option value="Approve">Approve</option>
                 <option value="Approve">Approve</option>
@@ -226,7 +226,7 @@
             <input
               type="text"
               placeholder="Enter your comment here"
-              class="w-full outline-none border-0 px-[12px] py-[15px] h-[47px] bg-[rgba(141,193,255,0.13)] font-normal text-[14px] leading-[120%] tracking-[-2%] text-[rgba(161,161,170,1)]"
+              class="w-full outline-none border-0 px-[12px] py-[15px] h-[47px] bg-[rgba(141,193,255,0.13)] font-[400] text-[14px] leading-[120%] tracking-[-2%] text-[rgba(161,161,170,1)]"
             />
           </div>
         </div>

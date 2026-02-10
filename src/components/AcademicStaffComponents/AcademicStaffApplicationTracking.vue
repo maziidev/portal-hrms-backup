@@ -12,17 +12,16 @@
       class="application_tracking absolute w-full z-[200] transition-all ease-in-out duration-500 top-0 h-full left-0 bg-white"
     >
       <div
-        class="bg-var(--twhite) p-[20px] mb-[10px] gap-[10px] flex flex-col justify-between"
+        class="bg-[var(--twhite)] p-[20px]   mb-[10px]  gap-[10px] flex flex-col justify-between"
       >
         <div class="flex p-[10px] gap-[20px] items-center">
-          <button
-            @click="closeModal"
+          <button @click="closeModal"
             class="bg-[rgba(17,27,73,1)] close text-white rounded-full px-[9px] py-[2px] flex items-center justify-center"
           >
             x
           </button>
           <h2
-            class="text-[rgba(27,37,89,1)] w-full mb-[20px] text-center font-bold text-[20px] leading-[120%] tracking-[-2%]"
+            class="text-[rgba(27,37,89,1)] w-full mb-[20px] text-center font-[700] text-[20px] leading-[120%] tracking-[-2%]"
           >
             Application Tracking
           </h2>
@@ -46,7 +45,7 @@
                   class="w-[4px] block bg-[rgba(67,24,255,1)] h-[41px] rounded-[16px]"
                 ></span>
                 <h2
-                  class="text-[rgba(27,37,89,1)] font-bold text-[14px] leading-[120%] tracking-[-2%]"
+                  class="text-[rgba(27,37,89,1)] font-[700] text-[14px] leading-[120%] tracking-[-2%]"
                 >
                   Promotion for Lecturer I → Senior Lecturer endorsed and sent
                   to Dean
@@ -66,7 +65,7 @@
                   class="w-[4px] block bg-[rgba(67,24,255,1)] h-[41px] rounded-[16px]"
                 ></span>
                 <h2
-                  class="text-[rgba(27,37,89,1)] font-bold text-[14px] leading-[120%] tracking-[-2%]"
+                  class="text-[rgba(27,37,89,1)] font-[700] text-[14px] leading-[120%] tracking-[-2%]"
                 >
                   New promotion request from Dr. Helen Eze awaiting review
                 </h2>
@@ -85,7 +84,7 @@
                   class="w-[4px] block bg-[rgba(67,24,255,1)] h-[41px] rounded-[16px]"
                 ></span>
                 <h2
-                  class="text-[rgba(27,37,89,1)] font-bold text-[14px] leading-[120%] tracking-[-2%]"
+                  class="text-[rgba(27,37,89,1)] font-[700] text-[14px] leading-[120%] tracking-[-2%]"
                 >
                   Promotion request for Dr. Iweala Nkem returned for
                   corrections.
@@ -105,7 +104,7 @@
                   class="w-[4px] block bg-[rgba(67,24,255,1)] h-[41px] rounded-[16px]"
                 ></span>
                 <h2
-                  class="text-[rgba(27,37,89,1)] font-bold text-[14px] leading-[120%] tracking-[-2%]"
+                  class="text-[rgba(27,37,89,1)] font-[700] text-[14px] leading-[120%] tracking-[-2%]"
                 >
                   Promotion request for Dr. Iweala Nkem returned for
                   corrections.
@@ -153,7 +152,7 @@ const columns = [
           class: "text-blue-600 hover:underline font-semibold cursor-pointer",
           onClick: () => router.push(`/home/edit/${row.id}`),
         },
-        row.id,
+        row.id
       );
     },
   },
@@ -169,12 +168,12 @@ const columns = [
         {
           style:
             row.is_active == "Completed"
-              ? "rounded-[22.5px] text-[rgba(58,151,76,1)] px font-bold text-[14px] leading-[100%] tracking-[0%] px-[20px] py-[10px] bg-[rgba(58,151,76,0.15)] w-[120px]"
+              ? "rounded-[22.5px] text-[rgba(58,151,76,1)] px font-[700] text-[14px] leading-[100%] tracking-[0%] px-[20px] py-[10px] bg-[rgba(58,151,76,0.15)] w-[120px]"
               : row.is_active == "Pending"
-                ? "rounded-[22.5px] text-[rgba(234,67,53,1)] px font-bold text-[14px] leading-[100%] tracking-[0%] px-[20px] py-[10px] bg-[rgba(234,67,53,0.2)]"
-                : "rounded-[22.5px] text-[rgba(251,188,4,1)] px font-bold text-[14px] leading-[100%] tracking-[0%] px-[20px] py-[10px] bg-[rgba(251,188,4,0.2)]",
+              ? "rounded-[22.5px] text-[rgba(234,67,53,1)] px font-[700] text-[14px] leading-[100%] tracking-[0%] px-[20px] py-[10px] bg-[rgba(234,67,53,0.2)]"
+              : "rounded-[22.5px] text-[rgba(251,188,4,1)] px font-[700] text-[14px] leading-[100%] tracking-[0%] px-[20px] py-[10px] bg-[rgba(251,188,4,0.2)]",
         },
-        row.is_active,
+        row.is_active
       );
     },
   },

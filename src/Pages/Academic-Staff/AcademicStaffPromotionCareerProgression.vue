@@ -3,7 +3,7 @@
     class="bg-[rgba(255,255,255,1)] px-[12px] py-[15px] border border-[rgba(141,193,255,0.27)]"
   >
     <h2
-      class="text-[rgba(27,37,89,1)] mb-[20px] font-bold text-[16px] leading-[120%] tracking-[-2%]"
+      class="text-[rgba(27,37,89,1)] mb-[20px] font-[700] text-[16px] leading-[120%] tracking-[-2%]"
     >
       Promotion Overview
     </h2>
@@ -14,7 +14,7 @@
             class="h-[41px] rounded-[16px] w-[4px] bg-[rgba(35,136,255,1)]"
           ></span>
           <h2
-            class="text-[rgba(27,37,89,1)] font-bold text-[16px] leading-[120%] tracking-[-2%]"
+            class="text-[rgba(27,37,89,1)] font-[700] text-[16px] leading-[120%] tracking-[-2%]"
           >
             Current Cadre
           </h2>
@@ -32,7 +32,7 @@
             class="h-[41px] rounded-[16px] w-[4px] bg-[rgba(35,136,255,1)]"
           ></span>
           <h2
-            class="text-[rgba(27,37,89,1)] font-bold text-[16px] leading-[120%] tracking-[-2%]"
+            class="text-[rgba(27,37,89,1)] font-[700] text-[16px] leading-[120%] tracking-[-2%]"
           >
             Date of Last Promotion
           </h2>
@@ -50,7 +50,7 @@
             class="h-[41px] rounded-[16px] w-[4px] bg-[rgba(35,136,255,1)]"
           ></span>
           <h2
-            class="text-[rgba(27,37,89,1)] font-bold text-[16px] leading-[120%] tracking-[-2%]"
+            class="text-[rgba(27,37,89,1)] font-[700] text-[16px] leading-[120%] tracking-[-2%]"
           >
             Next Eligible Promotion
           </h2>
@@ -68,7 +68,7 @@
             class="h-[41px] rounded-[16px] w-[4px] bg-[rgba(35,136,255,1)]"
           ></span>
           <h2
-            class="text-[rgba(27,37,89,1)] font-bold text-[16px] leading-[120%] tracking-[-2%]"
+            class="text-[rgba(27,37,89,1)] font-[700] text-[16px] leading-[120%] tracking-[-2%]"
           >
             Status
           </h2>
@@ -87,7 +87,7 @@
     <div class="overview_metrics">
       <div class="top">
         <h2
-          class="text-[rgba(27,37,89,1)] text-[20px] tracking-[-2%] leading-[120%] font-bold"
+          class="text-[rgba(27,37,89,1)] text-[20px] tracking-[-2%] leading-[120%] font-[700]"
         >
           Average Years-in-Rank
         </h2>
@@ -104,12 +104,12 @@
     <div class="leave_category_distribution">
       <div class="top flex flex justify-between w-full gap-[10px] items-center">
         <h2
-          class="text-[rgba(27,37,89,1)] text-[20px] tracking-[-2%] leading-[120%] font-bold"
+          class="text-[rgba(27,37,89,1)] text-[20px] tracking-[-2%] leading-[120%] font-[700]"
         >
           Promotion Rate by Rank
         </h2>
         <div
-          class="flex leave_category_distribution switch_bar > border border-slate-200 rounded-[6px] bg-[rgba(241,243,247,1)] p-2 gap-[6px] items-center"
+          class="flex leave_category_distribution switch_bar > border rounded-[6px] bg-[rgba(241,243,247,1)] px-[4px] py-[4px] gap-[6px] items-center"
         >
           <button
             v-for="promotion_rate_by_rank in promotion_rate_by_ranks"
@@ -117,7 +117,7 @@
             @click="switchPromotionRateByRank(promotion_rate_by_rank.name)"
             :id="promotion_rate_by_rank.name"
             :class="[
-              `active rounded-[4px] text-[rgba(30,30,30,1)] cursor-pointer font-normal text-[14px] px-[8px] py-[10px] leading-[20px] tracking-[0%]`,
+              `active rounded-[4px] text-[rgba(30,30,30,1)] font-[400] text-[14px] px-[8px] py-[10px] leading-[20px] tracking-[0%]`,
               promotion_rate_by_rank.name === isActivePromotionRateByRank
                 ? `bg-[rgba(35,136,255,1)] !text-[rgba(247,249,250,1)]`
                 : `text-[rgba(30,30,30,1)]`,
@@ -146,13 +146,13 @@
         class="left flex flex-wrap md:flex-nowrap lg:flex-nowrap items-center w-full md:w-[50%] lg:w-[50%] gap-[10px]"
       >
         <h2
-          class="font-bold text-(--sec-text) text-[20px] leading-[120%] tracking-[-2%]"
+          class="font-[700] text-[var(--sec-text)] text-[20px] leading-[120%] tracking-[-2%]"
         >
           Promotion History Table
         </h2>
         <button
           @click="openApplyForPromotion"
-          class="flex rounded-[5px] cursor-pointer apply_for_leave gap-[10px] items-center px-[10px] py-[10px] bg-[rgba(35,136,255,1)] text-[rgba(255,255,255,1)]"
+          class="flex rounded-[5px] apply_for_leave gap-[10px] items-center px-[10px] py-[10px] bg-[rgba(35,136,255,1)] text-[rgba(255,255,255,1)]"
         >
           <i class="fa fa-user-plus"></i> Apply for Promotion
         </button>
@@ -216,7 +216,7 @@
   </form>
 </template>
 <script setup>
-import { ref, reactive, computed, onMounted } from "vue";
+import { ref, reactive, computed } from "vue";
 import ApplyForPromotion from "@/components/AcademicStaffComponents/ApplyForPromotion.vue";
 import AcademicStaffApplicationTracking from "@/components/AcademicStaffComponents/AcademicStaffApplicationTracking.vue";
 
@@ -322,13 +322,10 @@ const verticalChartOptions = ref({
 
 function switchPromotionRateByRank(state) {
   isActivePromotionRateByRank.value = state;
+  console.log();
 
   series_1.value[0].data = verticalChartDataSets[state.toLowerCase()];
 }
-onMounted(() => {
-  isActivePromotionRateByRank.value =
-    promotion_rate_by_ranks[0].name.toLowerCase();
-});
 // Show Modals
 const show = ref(false);
 const show1 = ref(false);
@@ -379,10 +376,10 @@ const columns = [
         {
           style:
             row.is_active == "Endorsed"
-              ? "rounded-[22.5px] text-[rgba(58,151,76,1)] px font-bold text-[14px] leading-[100%] tracking-[0%] px-[20px] py-[10px] bg-[rgba(58,151,76,0.15)] w-[120px]"
+              ? "rounded-[22.5px] text-[rgba(58,151,76,1)] px font-[700] text-[14px] leading-[100%] tracking-[0%] px-[20px] py-[10px] bg-[rgba(58,151,76,0.15)] w-[120px]"
               : row.is_active == "Sent to Dean"
-                ? "rounded-[22.5px] text-[rgba(234,67,53,1)] px font-bold text-[14px] leading-[100%] tracking-[0%] px-[20px] py-[10px] bg-[rgba(234,67,53,0.2)]"
-                : "rounded-[22.5px] text-[rgba(251,188,4,1)] px font-bold text-[14px] leading-[100%] tracking-[0%] px-[20px] py-[10px] bg-[rgba(251,188,4,0.2)]",
+                ? "rounded-[22.5px] text-[rgba(234,67,53,1)] px font-[700] text-[14px] leading-[100%] tracking-[0%] px-[20px] py-[10px] bg-[rgba(234,67,53,0.2)]"
+                : "rounded-[22.5px] text-[rgba(251,188,4,1)] px font-[700] text-[14px] leading-[100%] tracking-[0%] px-[20px] py-[10px] bg-[rgba(251,188,4,0.2)]",
         },
         row.is_active,
       );
@@ -396,7 +393,7 @@ const columns = [
         "button",
         {
           style:
-            "bg-[rgba(35,136,255,1)] view text-[rgba(255,255,255,1)] font-bold text-[11px] w-full py-[20px] px-[20px] rounded-[5px]",
+            "bg-[rgba(35,136,255,1)] view text-[rgba(255,255,255,1)] font-[700] text-[11px] w-full py-[20px] px-[20px] rounded-[5px]",
           onClick: () => openAcademicStaffApplicationTrackingForPromotion(),
         },
         ["View"],

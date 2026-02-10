@@ -511,7 +511,7 @@ const columns = [
                 row.faculty,
             ),
         },
-        row.faculty,
+        row.faculty
       );
     },
   },

@@ -228,4 +228,3 @@ export const getHodPastAppraisalStats = async () => {
     throw error;
   }
 }
-

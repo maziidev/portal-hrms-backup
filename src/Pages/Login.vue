@@ -1,6 +1,5 @@
 <script setup>
 import { loginStaff } from "@/apis/auth.js";
-import Toast from "@/components/base/Toast.vue";
 import { useAuthStore } from "@/store/auth.js";
 import { reactive, ref } from "vue";
 import { useRouter } from "vue-router";
@@ -31,7 +30,7 @@ const handleLogin = async () => {
     const res = await loginStaff(formData);
 
     if (!res || !res.access || !res.staff) {
-      showToast("Invalid credentials", "error");
+      // showToast("Invalid credentials", "error");
       return;
     }
 
@@ -43,12 +42,12 @@ const handleLogin = async () => {
       role: activeRole?.role?.toLowerCase() || "user",
     });
 
-    showToast("Login successful", "success");
+    // showToast("Login successful", "success");
 
     // Redirect to dashboard
     router.push(`/${auth.role}`);
   } catch (err) {
-    showToast("Login failed. Please try again.", "error");
+    // showToast("Login failed. Please try again.", "error");
   }
 };
 </script>

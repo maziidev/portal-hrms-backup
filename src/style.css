@@ -139,25 +139,25 @@ body {
 .btn-orange-main {
   background: var(--color-orbit-orange);
   color: var(--color-orbit-light);
-  width: 7.5rem;
+  /* width: 7.5rem; */
 }
 
 .btn-blue-main {
   background: var(--color-orbit-blue);
   color: var(--color-orbit-light);
-  width: 7.5rem;
+  /* width: 7.5rem; */
 }
 
 .btn-red-main {
   background-color: var(--color-orbit-red);
   color: var(--color-orbit-light);
-  width: 7.5rem;
+  /* width: 7.5rem; */
 }
 
 .btn-green-main {
   background-color: var(--color-orbit-green);
   color: var(--color-orbit-light);
-  width: 7.5rem;
+  /* width: 7.5rem; */
 }
 
 /*

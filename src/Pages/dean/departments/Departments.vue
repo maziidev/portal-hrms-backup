@@ -1,3 +1,3 @@
 <template>
-    <h1>Department Page</h1>
+    <h2>DepartmentOverview</h2>
 </template>

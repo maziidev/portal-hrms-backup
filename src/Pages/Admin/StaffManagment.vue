@@ -1,169 +1,38 @@
 <template>
-  <div class="relative">
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[25px]">
     <button
-      @click="toggleSideBar"
-      class="absolute md:hidden menu-bar lg:hidden z-[2000] font-[700] text-[30px] top-[20px] right-[20px] px-[4px] py-[-2px] rounded-sm"
+      :class="[
+        `rounded-[20px] box cursor-pointer h-[97px] shadow  flex flex-col justify-center gap-[24px] py-[20px] px-[25px]`,
+        activeState == btn.name ? `bg-[rgba(17,27,73,1)]` : `bg-white `,
+      ]"
+      v-for="btn in btns"
+      :key="btn"
+      :id="btn.name "
+      @click="isActive(btn.name)"
     >
-      <i class="fa fa-bars"></i>
-    </button>
-    <div class="dashboard w-full min-h-screen">
-      <div class=" ">
-        <aside
-          :class="[
-            `{ w-[268px] sidebar z-[3000] transition-all duration-100 ease-in-out  fixed top-0 left-0 h-screen md:flex lg:flex px-[35px] flex flex-col gap-[67px] py-[45px] bg-[var(--primary)]`,
-            !toggleState ? `hidden` : `md:flex lg:flex`,
-          ]"
-        >
-          <div class="">
-            <li
-              class="text-[rgba(14,253,193,1)] font-[700] text-[20px] flex gap-2 items-center text-[16px] tracking-[-2%] leading-[120%]"
-            >
-              Orbit <img :src="Orbit" />
-            </li>
-          </div>
-          <div class="flex flex-col gap-[25px]">
-            <li>
-              <router-link
-                to="/admin"
-                class="text-[var(--pri-text)] font-[400] flex gap-2 items-center text-[16px] tracking-[-2%] leading-[120%]"
-                ><i class="fa fa-th-large"></i>Dashboard</router-link
-              >
-            </li>
-            <li>
-              <router-link
-                to="/admin/staff-managment"
-                class="text-[rgba(14,253,193,1)] font-[700] text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
-                ><i class="fa fa-user-circle"></i>Staff Management</router-link
-              >
-            </li>
-            <li>
-              <router-link
-                to="/admin/appraisal"
-                class="text-[var(--pri-text)] font-[400] text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
-                ><i class="fa fa-user-circle"></i>Appraisals</router-link
-              >
-            </li>
-
-            <li>
-              <a
-                class="text-[var(--pri-text)] font-[400] text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
-                href="#"
-                ><i class="fa fa-bed"></i> Leave Management</a
-              >
-            </li>
-            <li>
-              <a
-                class="text-[var(--pri-text)] font-[400] text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
-                href="#"
-                ><i class="fa fa-award"></i> Promotions & Career Progression</a
-              >
-            </li>
-            <li>
-              <a
-                class="text-[var(--pri-text)] font-[400] text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
-                href="#"
-                ><i class="fa fa-calendar"></i> Retirement & Exit</a
-              >
-            </li>
-            <li>
-              <router-link
-                to="/admin/report-analysis"
-                class="text-[var(--pri-text)] font-[400] text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
-                href="Report_Analysis.html"
-                ><i class="fa-solid fa-chart-column"></i>Reports &
-                Analytics</router-link
-              >
-            </li>
-          </div>
-
-          <div class="flex flex-col gap-[25px]">
-            <li>
-              <a
-                class="text-[var(--pri-text)] flex items-center gap-2 font-[400] text-[16px] tracking-[-2%] leading-[120%]"
-                href="#"
-                ><i class="fa fa-gear"></i> Settings</a
-              >
-            </li>
-            <li>
-              <a
-                class="text-[var(--pri-text)] flex items-center gap-2 font-[400] text-[16px] tracking-[-2%] leading-[120%]"
-                href="#"
-                ><i class="fa-solid fa-right-from-bracket"></i> Logout</a
-              >
-            </li>
-            <li class="md:hidden lg:hidden items-center gap-[10px] flex">
-              <i class="fa fa-bell text-[var(--pri-text)]"></i>
-              <span
-                class="text-[var(--pri-text)] flex items-center gap-2 font-[400] text-[16px] tracking-[-2%] leading-[120%]"
-                >Notification</span
-              >
-            </li>
-            <li class="md:hidden lg:hidden items-center gap-[10px] flex">
-              <div class="user">
-                <i class="fa fa-user text-xl text-[var(--pri-text)]"></i>
-              </div>
-              <div class="user-id mbc text-[var(--pri-text)] break-words">
-                Nnamdichuzu@edu.EU.ng
-              </div>
-            </li>
-          </div>
-        </aside>
-      </div>
-      <main class="lg:ml-[270px] md:ml-[270px] ml-[0px] min-w-screen relative">
-        <div class="header">
-          <header
-            class="bg-[var(--pri-bg)] py-[25px] items-center px-[25px] w-[] top-0 flex justify-between"
+      <div>
+        <div class="flex justify-between items-center gap-3 w-full">
+          <h2
+            :class="[
+              `font-[500] text-[16px] text-[rgba(204,204,204,1)] leading-[120%] tracking-[-2%]`,
+            ]"
           >
-            <div class="w-[70%]">
-              <h2 class="bc mb-[7px]">Staff Records</h2>
-            </div>
-            <div class="md:flex lg:flex items-center gap-[10px] hidden">
-              <i class="fa fa-bell text-[var(--sec-text)]"></i>
-              <div class="user">
-                <i class="fa fa-user text-2xl"></i>
-              </div>
-              <div class="user-id mbc">Nnamdichuzu@edu.EU.ng</div>
-            </div>
-          </header>
+            {{ btn.name }}
+          </h2>
+          <h2
+            :class="[
+              `text-[34px] font-bold leading-[120%] tracking-[-2%]`,
+              activeState == btn.name
+                ? `text-[rgba(255,255,255,1)]`
+                : `text-(--sec-text)`,
+            ]"
+          >
+            {{ btn.value }}
+          </h2>
         </div>
-
-        <div class="main px-[25px] mt-[50px] flex flex-col gap-[40px]">
-          <div
-            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[25px]"
-          >
-            <button
-              :class="[
-                `rounded-[20px] box cursor-pointer h-[97px] shadow  flex flex-col justify-center gap-[24px] py-[20px] px-[25px]`,
-                activeState == btn.name ? `bg-[rgba(17,27,73,1)]` : `bg-white `,
-              ]"
-              v-for="btn in btns"
-              :key="btn"
-              :id="btn.name"
-              @click="isActive(btn.name)"
-            >
-              <div>
-                <div class="flex justify-between items-center gap-3 w-full">
-                  <h2
-                    :class="[
-                      `font-[500] text-[16px] text-[rgba(204,204,204,1)] leading-[120%] tracking-[-2%]`,
-                    ]"
-                  >
-                    {{ btn.name }}
-                  </h2>
-                  <h2
-                    :class="[
-                      `text-[34px] font-[700] leading-[120%] tracking-[-2%]`,
-                      activeState == btn.name
-                        ? `text-[rgba(255,255,255,1)]`
-                        : `text-[var(--sec-text)]`,
-                    ]"
-                  >
-                    {{ btn.value }}
-                  </h2>
-                </div>
-              </div>
-            </button>
-          </div>
+      </div>
+    </button>
+  </div>
 
           <!-- All Staff Directory -->
           <div
@@ -364,11 +233,9 @@
   </div>
 </template>
 <script setup>
-import { ref, reactive, onMounted, watch, computed, h } from "vue";
-import { addStaff } from "@/apis/admin.js";
+import { getAllStaff, importStaff } from "@/apis/admin.js";
 import { useMessage } from "naive-ui";
-import Orbit from "@/assets/imgs/Orbit.png";
-import { getAllStaff, getStaffById, importStaff } from "@/apis/admin.js";
+import { h, onMounted, reactive, ref } from "vue";
 
 const message = useMessage();
 const loading = ref(false);
@@ -401,7 +268,7 @@ const handleCSVFileChange = (options) => {
 };
 
 const uploadFile = async () => {
-  
+
 
   loadingFile.value = true;
   try {

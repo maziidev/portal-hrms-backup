@@ -7,7 +7,7 @@
       ]"
       v-for="btn in btns"
       :key="btn"
-      :id="btn.name"
+      :id="btn.name "
       @click="isActive(btn.name)"
     >
       <div>

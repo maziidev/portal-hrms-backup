@@ -1,7 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 
 // ADMIN PAGES
-import Admin from "../Pages/Admin/Admin.vue";
 import StaffManagment from "../Pages/Admin/StaffManagment.vue";
 // import Main from "../Layouts/Main.vue";
 import Login from "@/Pages/Login.vue";
@@ -45,9 +44,9 @@ import HodStaffRecords from "../Pages/HOD/HodStaffRecords.vue";
 import NotFound from "../Pages/NotFound.vue";
 
 
-// dean, hou
-import { deanRoutes } from './modules/dean.routes';
-import { houRoutes } from './modules/hou.routes';
+// // dean, hou
+// import { deanRoutes } from './modules/dean.routes';
+// import { houRoutes } from './modules/hou.routes';
 
 import AcademicStaff from "../Layout/Academic-Staff/Academic-Staff.vue";
 import AdminLayout from "../Layout/AdminLayout/Admin.vue";
@@ -67,8 +66,8 @@ const router = createRouter({
     },
 
 
-    deanRoutes,
-    houRoutes,
+    // deanRoutes,
+    // houRoutes,
 
 
     // ADMIN ROUTES

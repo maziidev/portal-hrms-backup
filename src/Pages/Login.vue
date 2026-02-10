@@ -17,12 +17,7 @@ const formData = reactive({
 const showPassword = ref(false);
 const togglePassword = () => (showPassword.value = !showPassword.value);
 
-// Toast state
-const toast = ref({ message: "", type: "", visible: false });
-const showToast = (message, type = "success") => {
-  toast.value = { message, type, visible: true };
-  setTimeout(() => (toast.value.visible = false), 3000);
-};
+
 
 // Handle login
 const handleLogin = async () => {
@@ -30,7 +25,7 @@ const handleLogin = async () => {
     const res = await loginStaff(formData);
 
     if (!res || !res.access || !res.staff) {
-      // showToast("Invalid credentials", "error");
+
       return;
     }
 
@@ -44,27 +39,24 @@ const handleLogin = async () => {
 
     auth.role = userRole.value.role.toLowerCase();
 
-    console.log(auth);
+    // console.log(auth);
 
     auth.login( userRole.value.role.toLowerCase(), res?.staff, res?.access );
-    // const sessionData = await getSession();
-    // this.user = sessionData.data.authenticated
-    //   ? sessionData.data.user
-    //   : null;
+
 
     message.success("You have logged in successfully");
     loading.value = false;
     // console.log(this.token, this.user, this.role);
     router.push(`/${auth.role}`);
   } catch (err) {
-    // showToast("Login failed. Please try again.", "error");
+
   }
 };
 </script>
 
 <template>
   <div class="h-screen">
-    <Toast v-if="toast.visible" :type="toast.type" :message="toast.message" />
+
 
     <div class="flex flex-col md:flex-row h-full bg-orbit-bg">
       <!-- left image section -->

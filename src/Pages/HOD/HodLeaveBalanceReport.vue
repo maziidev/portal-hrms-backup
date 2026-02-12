@@ -120,11 +120,9 @@
               >
                 <i class="fas fa-chevron-left"></i>
 
-                <span
-                  class="rgba(107,114,128,1) font-[400] text-[14px] leading-[100%] tracking-[0%]"
-                  >Back</span
-                > </router-link
-              ><span
+                <span class="rgba(107,114,128,1) font-[400] text-[14px] leading-[100%] tracking-[0%]">Back</span>
+              </router-link>
+              <span
                 class="text-[rgba(20,21,15,1)] text-[24px] leading-[120%] tracking-[0%] font-[700]"
                 >Leave Balance Report</span
               >

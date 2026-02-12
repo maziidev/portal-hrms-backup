@@ -2,7 +2,7 @@
   <div class="relative">
     <button
       @click="toggleSideBar"
-      class="absolute md:hidden menu-bar lg:hidden z-[2000] font-[700] text-[30px] top-[20px] right-[20px] px-[4px] py-[-2px] rounded-sm"
+      class="absolute md:hidden menu-bar lg:hidden z-50 font-bold text-3xl top-5 right-5 px-1 py-0 rounded-sm"
     >
       <i class="fa fa-bars"></i>
     </button>
@@ -10,36 +10,37 @@
       <div class=" ">
         <aside
           :class="[
-            `{ w-[268px] sidebar z-[3000] transition-all duration-100 ease-in-out  fixed top-0 left-0 h-screen md:flex lg:flex px-[35px] flex flex-col gap-[67px] py-[45px] bg-[var(--primary)]`,
+            `{ w-64 sidebar z-50 transition-all duration-100 ease-in-out fixed top-0 left-0 h-screen md:flex lg:flex px-9 flex flex-col gap-16 py-11`,
             !toggleState ? `hidden` : `md:flex lg:flex`,
           ]"
+          :style="{ background: 'var(--primary)' }"
         >
           <div class="">
             <li
-              class="text-[rgba(14,253,193,1)] font-[700] text-[20px] flex gap-2 items-center text-[16px] tracking-[-2%] leading-[120%]"
+              class="text-[rgba(14,253,193,1)] font-bold text-xl flex gap-2 items-center tracking-[-2%] leading-[120%]"
             >
               Orbit <img :src="Orbit" />
             </li>
           </div>
-          <div class="flex flex-col gap-[25px]">
+          <div class="flex flex-col gap-6">
             <li>
               <router-link
                 to="/admin"
-                class="text-[var(--pri-text)] font-[400] flex gap-2 items-center text-[16px] tracking-[-2%] leading-[120%]"
+                class="text-[var(--pri-text)] font-normal flex gap-2 items-center text-base tracking-[-2%] leading-[120%]"
                 ><i class="fa fa-th-large"></i>Dashboard</router-link
               >
             </li>
             <li>
               <router-link
                 to="/admin/staff-managment"
-                class="text-[var(--pri-text)] font-[400] text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
+                class="text-[var(--pri-text)] font-normal text-sm tracking-[-2%] leading-[120%] flex items-center gap-2"
                 ><i class="fa fa-user-circle"></i>Staff Management</router-link
               >
             </li>
             <li>
               <router-link
                 to="/admin/appraisal"
-                class="text-[rgba(14,253,193,1)] font-[700] text-[14px] tracking-[-2%] leading-[120%] flex items-center gap-2"
+                class="text-[rgba(14,253,193,1)] font-bold text-sm tracking-[-2%] leading-[120%] flex items-center gap-2"
                 ><i class="fa fa-user-circle"></i>Appraisals</router-link
               >
             </li>
@@ -143,39 +144,34 @@
                   <i class="fa fa-chevron-left"></i> Back
                 </button>
               </div>
-              <div class="created_by flex items-center gap-[5px]">
-                <h3 class="font-[700] text-[rgba(27,37,89,1)] text-[20px]">
+              <div class="created_by flex items-center gap-1">
+                <h3 class="font-bold text-[rgba(27,37,89,1)] text-xl">
                   Created By:
                 </h3>
-                <p class="font-[500] text-[16px] text-[rgba(27,37,89,1)]">
+                <p class="font-medium text-base text-[rgba(27,37,89,1)]">
                   Mrs. A. Johnson (HOD Finance)
                 </p>
               </div>
-              <div class="calender flex items-center gap-[5px]">
+              <div class="calender flex items-center gap-1">
                 <i class="fas fa-calendar"></i
                 ><span class="text-[rgba(20,21,15,1)]">Jan–Mar 2025</span>
               </div>
             </div>
             <div
-              class="right border border-[rgba(225,228,237,1)] flex items-center justify-around w-[122px] h-[51px] rounded-[6px] bg-[rgba(241,243,247,1)]"
+              class="right border flex items-center justify-around w-32 h-12 rounded-md"
+              :style="{ background: 'rgba(241,243,247,1)', borderColor: 'rgba(225,228,237,1)' }"
             >
-              <h2
-                class="rounded-full py-[8px] px-[8px] bg-[rgba(0,194,168,1)]"
-              ></h2>
-              <h2
-                class="text-[rgba(30,30,30,1)] pt-[4px] font-[600] text-[14px] leading-[120%] tracking-[0%]"
-              >
+              <h2 class="rounded-full py-2 px-2" :style="{ background: 'rgba(0,194,168,1)' }"></h2>
+              <h2 class="text-[rgba(30,30,30,1)] pt-1 font-semibold text-sm leading-[120%] tracking-[0%]">
                 Active
               </h2>
             </div>
           </div>
-          <div
-            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[25px]"
-          >
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <button
               :class="[
-                `rounded-[20px] box cursor-pointer h-[97px] shadow  flex flex-col justify-center gap-[24px] py-[20px] px-[25px]`,
-                activeState == btn.name ? `bg-[rgba(17,27,73,1)]` : `bg-white `,
+                `rounded-2xl box cursor-pointer h-24 shadow flex flex-col justify-center gap-6 py-5 px-6`,
+                activeState == btn.name ? `bg-[rgba(17,27,73,1)]` : `bg-white`,
               ]"
               v-for="btn in btns"
               :key="btn"
@@ -186,17 +182,15 @@
                 <div class="flex justify-between items-center gap-3 w-full">
                   <h2
                     :class="[
-                      `font-[500] text-[16px] text-[rgba(204,204,204,1)] leading-[120%] tracking-[-2%]`,
+                      `font-medium text-base text-[rgba(204,204,204,1)] leading-[120%] tracking-[-2%]`,
                     ]"
                   >
                     {{ btn.name }}
                   </h2>
                   <h2
                     :class="[
-                      `text-[34px] font-[700] leading-[120%] tracking-[-2%]`,
-                      activeState == btn.name
-                        ? `text-[rgba(255,255,255,1)]`
-                        : `text-[var(--sec-text)]`,
+                      `text-3xl font-bold leading-[120%] tracking-[-2%]`,
+                      activeState == btn.name ? `text-[rgba(255,255,255,1)]` : `text-[var(--sec-text)]`,
                     ]"
                   >
                     {{ btn.value }}
@@ -207,15 +201,11 @@
           </div>
 
           <!-- Staff Appraisal -->
-          <div
-            class="quick_actions flex justify-between flex-wrap lg:flex-nowrap md:flex-nowrap items-center gap-[15px]"
-          >
+          <div class="quick_actions flex justify-between flex-wrap lg:flex-nowrap md:flex-nowrap items-center gap-4">
             <div
               class="flex items-center gap-[20px] flex-wrap lg:flex-nowrap md:flex-nowrap"
             >
-              <h2
-                class="text-[rgba(30,43,58,1)] font-[700] text-[20px] leading-[120%] tracking-[-2%]"
-              >
+              <h2 class="text-[rgba(30,43,58,1)] font-bold text-xl leading-[120%] tracking-[-2%]">
                 Staff Appraisal
               </h2>
             </div>
@@ -224,7 +214,8 @@
             >
               <button
                 @click="OpenModal"
-                class="border-[rgba(35,136,255,1)] text-[rgba(255,255,255,1)] bulk_upload_ px-[40px] py-[10px] font-[600] text-[16px] flex gap-[10px] items-center leading-[120%] tracking-[-2%] rounded-[5px] border-2 bg-[rgba(35,136,255,1)]"
+                class="border-2 text-white bulk_upload_ px-10 py-2.5 font-semibold text-base flex gap-2.5 items-center leading-[120%] tracking-[-2%] rounded-md"
+                :style="{ background: 'rgba(35,136,255,1)', borderColor: 'rgba(35,136,255,1)' }"
               >
                 Close Appraisal
               </button>
@@ -246,7 +237,8 @@
                     placeholder="Search through apparaisals"
                     id="search"
                     :bordered="false"
-                    class="search outline-none w-full border rounded-[6px] border-[rgba(229,231,235,1)]"
+                    class="search outline-none w-full border rounded-md"
+                    :style="{ borderColor: 'rgba(229,231,235,1)' }"
                   />
                 </div>
               </div>

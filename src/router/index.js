@@ -1,59 +1,63 @@
 import { createRouter, createWebHistory } from "vue-router";
 
 // ADMIN PAGES
-import Admin from "@/Pages/Admin/Admin.vue";
-import StaffManagment from "../Pages/Admin/StaffManagment.vue";
-// import Main from "../Layouts/Main.vue";
+import StaffManagment from "@/Pages/Admin/StaffManagment.vue";
+// import Main from "@/Layouts/Main.vue";
 import Login from "@/Pages/Login.vue";
 import { useAuthStore } from "@/store/auth.js";
-import AcademicStaffDashboard from "../Pages/Academic-Staff/AcademicStaffDashboard.vue";
-import AcademicStaffPromotionCareerProgression from "../Pages/Academic-Staff/AcademicStaffPromotionCareerProgression.vue";
-import AcademicStaffAppraisal from "../Pages/Academic-Staff/Appraisal.vue";
-import LeaveManagement from "../Pages/Academic-Staff/LeaveManagement.vue";
-import ReasearchPublication from "../Pages/Academic-Staff/ReasearchPublication.vue";
-import Appraisal from "../Pages/Admin/Appraisal.vue";
-import Appraisal_Details from "../Pages/Admin/Appraisal_Details.vue";
-import GenerateReport from "../Pages/Admin/GenerateReport.vue";
-import ReportAnalysis from "../Pages/Admin/ReportAnalysis.vue";
-import Dap_Promotion_Career_Progression from "../Pages/DAP/Dap_Promotion_Career_Progression.vue";
-import Dap_Promotion_Career_Progression_Department from "../Pages/DAP/Dap_Promotion_Career_Progression_Department.vue";
-import Dap_Publications_Research_Verification from "../Pages/DAP/Dap_Publications_Research_Verification.vue";
-import Dap_Publications_Research_Verification_Faculty from "../Pages/DAP/Dap_Publications_Research_Verification_Faculty.vue";
-import DapAllStaffRecords from "../Pages/DAP/DapAllStaffRecords.vue";
-import DapAppraisalManagement from "../Pages/DAP/DapAppraisalManagement.vue";
-import DapDashboard from "../Pages/DAP/DapDashboard.vue";
-import DapDepartmentalAppraisal from "../Pages/DAP/DapDepartmentalAppraisal.vue";
-import DapDepartmentalAppraisalRecords from "../Pages/DAP/DapDepartmentalAppraisalRecords.vue";
-import DapDepartmentRecords from "../Pages/DAP/DapDepartmentRecords.vue";
-import DapLeaveAnalytics from "../Pages/DAP/DapLeaveAnalytics.vue";
-import DapLeaveDetails from "../Pages/DAP/DapLeaveDetails.vue";
-import DapStaffDetails from "../Pages/DAP/DapStaffDetails.vue";
-import DapStaffRecords from "../Pages/DAP/DapStaffRecords.vue";
-import AssignedStaffEvaluation from "../Pages/External-Accessor/AssignedStaffEvaluation.vue";
-import Evaluation from "../Pages/External-Accessor/Evaluation.vue";
-import Evaluation_Summary from "../Pages/External-Accessor/Evaluation_Summary.vue";
-import ExternalAccessorDashboard from "../Pages/External-Accessor/ExternalAccessorDashboard.vue";
-import HodActiveLeaves from "../Pages/HOD/HodActiveLeaves.vue";
-import HodAppraisal from "../Pages/HOD/HodAppraisal.vue";
-import HodDashboard from "../Pages/HOD/HodDashboard.vue";
-import HodLeaveBalanceReport from "../Pages/HOD/HodLeaveBalanceReport.vue";
-import HodLeaveManagment from "../Pages/HOD/HodLeaveManagment.vue";
-import HodPromotion_Career_Progression from "../Pages/HOD/HodPromotion_Career_Progression.vue";
-import HodPromotionSummary from "../Pages/HOD/HodPromotionSummary.vue";
-import HodStaffRecordDetails from "../Pages/HOD/HodStaffRecordDetails.vue";
-import HodStaffRecords from "../Pages/HOD/HodStaffRecords.vue";
-import NotFound from "../Pages/NotFound.vue";
+import AcademicStaffDashboard from "@/Pages/Academic-Staff/AcademicStaffDashboard.vue";
+import AcademicStaffPromotionCareerProgression from "@/Pages/Academic-Staff/AcademicStaffPromotionCareerProgression.vue";
+import AcademicStaffAppraisal from "@/Pages/Academic-Staff/Appraisal.vue";
+import LeaveManagement from "@/Pages/Academic-Staff/LeaveManagement.vue";
+import ReasearchPublication from "@/Pages/Academic-Staff/ReasearchPublication.vue";
+import Appraisal from "@/Pages/Admin/Appraisal.vue";
+import Appraisal_Details from "@/Pages/Admin/Appraisal_Details.vue";
+import GenerateReport from "@/Pages/Admin/GenerateReport.vue";
+import ReportAnalysis from "@/Pages/Admin/ReportAnalysis.vue";
+import Dap_Promotion_Career_Progression from "@/Pages/DAP/Dap_Promotion_Career_Progression.vue";
+import Dap_Promotion_Career_Progression_Department from "@/Pages/DAP/Dap_Promotion_Career_Progression_Department.vue";
+import Dap_Publications_Research_Verification from "@/Pages/DAP/Dap_Publications_Research_Verification.vue";
+import Dap_Publications_Research_Verification_Faculty from "@/Pages/DAP/Dap_Publications_Research_Verification_Faculty.vue";
+import DapAllStaffRecords from "@/Pages/DAP/DapAllStaffRecords.vue";
+import DapAppraisalManagement from "@/Pages/DAP/DapAppraisalManagement.vue";
+import DapDashboard from "@/Pages/DAP/DapDashboard.vue";
+import DapDepartmentalAppraisal from "@/Pages/DAP/DapDepartmentalAppraisal.vue";
+import DapDepartmentalAppraisalRecords from "@/Pages/DAP/DapDepartmentalAppraisalRecords.vue";
+import DapDepartmentRecords from "@/Pages/DAP/DapDepartmentRecords.vue";
+import DapLeaveAnalytics from "@/Pages/DAP/DapLeaveAnalytics.vue";
+import DapLeaveDetails from "@/Pages/DAP/DapLeaveDetails.vue";
+import DapStaffDetails from "@/Pages/DAP/DapStaffDetails.vue";
+import DapStaffRecords from "@/Pages/DAP/DapStaffRecords.vue";
+import AssignedStaffEvaluation from "@/Pages/External-Accessor/AssignedStaffEvaluation.vue";
+import Evaluation from "@/Pages/External-Accessor/Evaluation.vue";
+import Evaluation_Summary from "@/Pages/External-Accessor/Evaluation_Summary.vue";
+import ExternalAccessorDashboard from "@/Pages/External-Accessor/ExternalAccessorDashboard.vue";
+import HodActiveLeaves from "@/Pages/HOD/HodActiveLeaves.vue";
+import HodAppraisal from "@/Pages/HOD/HodAppraisal.vue";
+import HodDashboard from "@/Pages/HOD/HodDashboard.vue";
+import HodLeaveBalanceReport from "@/Pages/HOD/HodLeaveBalanceReport.vue";
+import HodLeaveManagment from "@/Pages/HOD/HodLeaveManagment.vue";
+import HodPromotion_Career_Progression from "@/Pages/HOD/HodPromotion_Career_Progression.vue";
+import HodPromotionSummary from "@/Pages/HOD/HodPromotionSummary.vue";
+import HodStaffRecordDetails from "@/Pages/HOD/HodStaffRecordDetails.vue";
+import HodStaffRecords from "@/Pages/HOD/HodStaffRecords.vue";
+import NotFound from "@/Pages/NotFound.vue";
 
 
 // // dean, hou
 // import { deanRoutes } from './modules/dean.routes';
 // import { houRoutes } from './modules/hou.routes';
 
-import AcademicStaff from "../Layout/Academic-Staff/Academic-Staff.vue";
-import AdminLayout from "../Layout/AdminLayout/Admin.vue";
-import HodLayout from "../Layout/HodLayout/HodLayout.vue";
-import DapLayout from "../Layout/DapLayout/DapLayout.vue";
-import ExternalAccessorLayout from "../Layout/ExternalAccessorLayout/ExternalAccessorLayout.vue";
+import AcademicStaff from "@/Layout/Academic-Staff/Academic-Staff.vue";
+import AdminLayout from "@/Layout/AdminLayout/Admin.vue";
+import ExternalAccessorLayout from "@/Layout/ExternalAccessorLayout/ExternalAccessorLayout.vue";
+
+
+import { deanRoutes } from './modules/dean.routes';
+import { headOfDivisionRoutes } from './modules/headofdivision.routes';
+import { houRoutes } from './modules/hou.routes';
+import { nonAcademicRoutes } from './modules/nonacademic.routes';
+import { vcRoutes } from './modules/vc.routes';
 
 const router = createRouter({
   history: createWebHistory(),
@@ -69,9 +73,12 @@ const router = createRouter({
       name: "login",
     },
 
-
-    // deanRoutes,
-    // houRoutes,
+    // routes from modules
+    deanRoutes,
+    headOfDivisionRoutes,
+    houRoutes,
+    nonAcademicRoutes,
+    vcRoutes,
 
 
     // ADMIN ROUTES

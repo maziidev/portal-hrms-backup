@@ -136,10 +136,7 @@
                 >
                   <i class="fas fa-chevron-left"></i>
 
-                  <span
-                    class="rgba(107,114,128,1) font-[400] text-[14px] leading-[100%] tracking-[0%]"
-                    >Back</span
-                  >
+                  <span class="rgba(107,114,128,1) font-[400] text-[14px] leading-[100%] tracking-[0%]">Back</span>
                 </router-link>
                 <span
                   class="text-[rgba(20,21,15,1)] text-[24px] leading-[120%] tracking-[0%] font-[700]"
@@ -847,10 +844,10 @@
   </div>
 </template>
 <script setup>
-import { ref, reactive, onMounted } from "vue";
-import { useRouter, useRoute } from "vue-router";
 import Orbit from "@/assets/imgs/Orbit.png";
 import Img from "@/assets/imgs/img.jpg";
+import { onMounted, reactive, ref } from "vue";
+import { useRoute, useRouter } from "vue-router";
 
 
 const router = useRouter();
@@ -881,8 +878,8 @@ function isActive(id) {
 const retirementAndExit = ref(true);
 const performanceAndAppraisalLeaveAndAttendanceCareerProgression  = ref(true);
 const showFiles = ref(true);
-const showBasicBio = ref(true); 
-const showPersonalInformation = ref(true); 
+const showBasicBio = ref(true);
+const showPersonalInformation = ref(true);
 
 function toggleRetirementAndExist() {
   retirementAndExit.value = !retirementAndExit.value;

@@ -7,6 +7,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
+    "type-check": "vue-tsc --noEmit",
     "mock:server": "json-server --watch db.json --port 3001"
   },
   "dependencies": {
@@ -26,10 +27,13 @@
     "vue3-apexcharts": "^1.10.0"
   },
   "devDependencies": {
+    "@types/node": "^25.2.3",
     "@vitejs/plugin-vue": "^6.0.1",
     "autoprefixer": "^10.4.22",
     "baseline-browser-mapping": "^2.9.19",
     "json-server": "^1.0.0-beta.3",
-    "vite": "^7.2.4"
+    "typescript": "^5.9.3",
+    "vite": "^7.2.4",
+    "vue-tsc": "^3.2.4"
   }
 }

@@ -103,12 +103,12 @@
         </SideBar>
       </div>
 
-      <main class="md:ml-[260px] relative z-1 w-full flex-1 ml-[0px]">
+      <main class="md:ml-64 relative z-1 w-full flex-1 ml-0">
         <!-- Header -->
         <Header>
           <template #left>
             <div class="w-[70%]">
-              <h2 class="bc mb-[7px]">Dashboard</h2>
+              <h2 class="bc mb-1.75">Dashboard</h2>
               <h5 class="sbc">
                 Welcome back, Dr.
                 {{
@@ -119,7 +119,7 @@
             </div>
           </template>
           <template #right>
-            <div class="md:flex lg:flex items-center gap-[10px] hidden">
+            <div class="md:flex lg:flex items-center gap-2.5 hidden">
               <i class="fa fa-bell text-(--sec-text)"></i>
               <div class="user">
                 <i class="fa fa-user text-2xl"></i>
@@ -129,7 +129,7 @@
           </template>
         </Header>
 
-        <div class="main px-[25px] mt-[50px] flex flex-col gap-[40px]">
+        <div class="main px-6 mt-12 flex flex-col gap-10">
           <SessionSemesterDate />
           <router-view />
         </div>
@@ -139,13 +139,12 @@
 </template>
 
 <script setup>
-import { ref, computed } from "vue";
-import Header from "@/components/Header.vue";
 import SessionSemesterDate from "@/components/General/SessionSemesterDate.vue";
 import SideBar from "@/components/General/SideBar.vue";
+import Header from "@/components/Header.vue";
 import { useAuthStore } from "@/store/auth.js";
-import { logOutStaff } from "@/apis/auth.js";
 import { useMessage } from "naive-ui";
+import { computed, ref } from "vue";
 import { useRoute } from "vue-router";
 
 const auth = useAuthStore();

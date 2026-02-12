@@ -3,8 +3,7 @@
     <!-- Mobile Menu Button -->
     <button
       @click="toggleSideBar"
-      class="absolute z-[2000] top-[20px] right-[20px] md:hidden lg:hidden
-             px-[4px] rounded-sm font-[700] text-[30px]"
+      class="absolute z-50 top-5 right-5 md:hidden lg:hidden px-1 rounded-sm font-bold text-3xl"
     >
       <i class="fa fa-bars"></i>
     </button>
@@ -13,23 +12,24 @@
       <!-- Sidebar -->
       <aside
         :class="[
-          'w-[268px] sidebar z-[3000] transition-all duration-100 ease-in-out fixed top-0 left-0 h-screen px-[35px] py-[45px] bg-[var(--primary)] flex flex-col gap-[67px]',
+          'w-64 sidebar z-50 transition-all duration-100 ease-in-out fixed top-0 left-0 h-screen px-9 py-11 flex flex-col gap-16',
           toggleState ? 'md:flex lg:flex' : 'hidden'
         ]"
+        :style="{ background: 'var(--primary)' }"
       >
         <!-- Logo -->
         <div>
-          <li class="flex items-center gap-2 font-[700] text-[16px] text-[rgba(14,253,193,1)]">
+          <li class="flex items-center gap-2 font-bold text-base text-[rgba(14,253,193,1)]">
             Orbit <img :src="Orbit" />
           </li>
         </div>
 
         <!-- Navigation -->
-        <div class="flex flex-col gap-[25px]">
+        <div class="flex flex-col gap-6">
           <li>
-            <router-link
+              <router-link
               to="/hod"
-              class="flex items-center gap-2 text-[16px] text-[var(--pri-text)]"
+              class="flex items-center gap-2 text-base text-[var(--pri-text)]"
             >
               <i class="fa fa-th-large"></i>
               Dashboard
@@ -39,7 +39,7 @@
           <li>
             <router-link
               to="/hod/staff-records"
-              class="flex items-center gap-2 font-[700] text-[14px] text-[rgba(14,253,193,1)]"
+              class="flex items-center gap-2 font-bold text-sm text-[rgba(14,253,193,1)]"
             >
               <i class="fa fa-user-circle"></i>
               Staff Records
@@ -49,7 +49,7 @@
           <li>
             <router-link
               to="/hod/appraisal"
-              class="flex items-center gap-2 text-[14px] text-[var(--pri-text)]"
+              class="flex items-center gap-2 text-sm text-[var(--pri-text)]"
             >
               <i class="fa fa-user-circle"></i>
               Appraisals
@@ -80,7 +80,7 @@
         </div>
 
         <!-- Footer -->
-        <div class="flex flex-col gap-[25px]">
+        <div class="flex flex-col gap-6">
           <li class="nav-link">
             <i class="fa fa-gear"></i> Settings
           </li>
@@ -89,11 +89,11 @@
             <i class="fa-solid fa-right-from-bracket"></i> Logout
           </li>
 
-          <li class="md:hidden flex items-center gap-[10px]">
+          <li class="md:hidden flex items-center gap-2.5">
             <i class="fa fa-bell"></i> Notification
           </li>
 
-          <li class="md:hidden flex items-center gap-[10px]">
+          <li class="md:hidden flex items-center gap-2.5">
             <i class="fa fa-user text-xl"></i>
             <span class="break-words">Nnamdichuzu@edu.EU.ng</span>
           </li>
@@ -101,11 +101,9 @@
       </aside>
 
       <!-- Main Content -->
-      <main class="relative ml-0 md:ml-[270px] lg:ml-[270px]">
+      <main class="relative ml-0 md:ml-64 lg:ml-64">
         <!-- Header -->
-        <header
-          class="flex justify-between items-center px-[25px] py-[25px] bg-[var(--pri-bg)]"
-        >
+        <header class="flex justify-between items-center px-6 py-6" :style="{ background: 'var(--pri-bg)' }">
           <h2 class="bc">Staff Records</h2>
 
           <div class="hidden md:flex items-center gap-[10px]">
@@ -116,27 +114,25 @@
         </header>
 
         <!-- Content -->
-        <div class="main px-[25px] mt-[50px] flex flex-col gap-[40px]">
+        <div class="main px-6 mt-12 flex flex-col gap-10">
           <!-- Stats Cards -->
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[25px]">
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <button
               v-for="btn in btns"
               :key="btn.name"
               @click="isActive(btn.name)"
               :class="[
-                'rounded-[20px] h-[97px] shadow flex flex-col justify-center px-[25px]',
-                activeState === btn.name
-                  ? 'bg-[rgba(17,27,73,1)]'
-                  : 'bg-white'
+                'rounded-2xl h-24 shadow flex flex-col justify-center px-6',
+                activeState === btn.name ? 'bg-[rgba(17,27,73,1)]' : 'bg-white'
               ]"
             >
               <div class="flex justify-between items-center">
-                <h2 class="text-[16px] text-[rgba(204,204,204,1)]">
+                <h2 class="text-base text-[rgba(204,204,204,1)]">
                   {{ btn.name }}
                 </h2>
                 <h2
                   :class="[
-                    'text-[34px] font-[700]',
+                    'text-3xl font-bold',
                     activeState === btn.name
                       ? 'text-white'
                       : 'text-[var(--sec-text)]'
@@ -166,12 +162,12 @@
 </template>
 
 <script setup>
-import { h, onMounted, reactive, ref } from "vue";
 import { useMessage } from "naive-ui";
+import { h, onMounted, reactive, ref } from "vue";
 
-import Orbit from "@/assets/imgs/Orbit.png";
-import { exportStaff, getAllStaff } from "@/apis/admin.js";
+import { getAllStaff } from "@/apis/admin.js";
 import { getStaffSummary } from "@/apis/hod.js";
+import Orbit from "@/assets/imgs/Orbit.png";
 
 /* ---------------- State ---------------- */
 

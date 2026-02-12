@@ -498,13 +498,13 @@ export const updateStaffDocument = async (id, formData) => {
 export const deleteStaffDocument = async (id) => {
   try {
     await api.delete(`${BaseUrl}/hrms/staff-documents/${id}`);
-    return {message:"Staff document deleted"};
+    return { message: "Staff document deleted" };
   } catch (error) {
     throw error;
   }
 };
 
-// STAFF DETAIL 
+// STAFF DETAIL
 export const getStaffDetail = async () => {
   try {
     const { data } = await api.get(`${BaseUrl}/hrms/staff/dashboard/`);

@@ -1,7 +1,8 @@
 <template>
   <div class="header">
     <header
-      class="bg-[var(--pri-bg)] py-[25px] items-center px-[25px] w-[] top-0 flex justify-between"
+      style="background-color: var(--pri-bg)"
+      class="py-6 items-center px-6 top-0 flex justify-between"
     >
       <slot name="left"> </slot>
       <slot name="right"> </slot>

@@ -1,8 +1,6 @@
-import { useMessage } from "naive-ui";
 import { defineStore } from "pinia";
 import { computed, ref } from "vue";
-import { deleteSession } from "../apis/auth";
-import router from "../router";
+import router from "@/router";
 
 export const useAuthStore = defineStore("authstore", () => {
   // --- State ---
@@ -15,11 +13,14 @@ export const useAuthStore = defineStore("authstore", () => {
   const isLoggedIn = computed(() => !!token.value);
 
   // --- Actions ---
-  const login = (role, user, token) => {
-    console.log(user.value);
-    localStorage.setItem("token", token);
-    localStorage.setItem("user", JSON.stringify(user));
-    localStorage.setItem("role", role);
+  const login = (roleParam, userParam, tokenParam) => {
+    // update reactive refs
+    user.value = userParam;
+    token.value = tokenParam;
+    role.value = roleParam;
+    localStorage.setItem("token", tokenParam);
+    localStorage.setItem("user", JSON.stringify(userParam));
+    localStorage.setItem("role", roleParam);
   };
 
   const logout = async () => {

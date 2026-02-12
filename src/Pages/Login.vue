@@ -1,11 +1,13 @@
 <script setup>
 import { loginStaff } from "@/apis/auth.js";
 import { useAuthStore } from "@/store/auth.js";
+import { useMessage } from 'naive-ui';
 import { reactive, ref } from "vue";
 import { useRouter } from "vue-router";
 
 const auth = useAuthStore();
 const router = useRouter();
+const message = useMessage();
 
 // Login form data
 const formData = reactive({
@@ -17,6 +19,9 @@ const formData = reactive({
 const showPassword = ref(false);
 const togglePassword = () => (showPassword.value = !showPassword.value);
 
+// local state
+const userRole = ref(null);
+const loading = ref(false);
 
 
 // Handle login

@@ -3,9 +3,9 @@ import naiva from "naive-ui";
 import { createPinia } from "pinia";
 import { createApp } from "vue";
 import VueApexCharts from "vue3-apexcharts";
-import App from "./App.vue";
-import { setUpInterceptors } from "./apis";
-import { useAuthStore } from "./store/auth";
+import App from "@/App.vue";
+import { setUpInterceptors } from "@/apis";
+import { useAuthStore } from "@/store/auth";
 import "./style.css";
 
 const app = createApp(App);

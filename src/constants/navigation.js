@@ -111,7 +111,7 @@ export const HOU_NAV = [
     },
     {
         name: 'Promotion & Career Progression',
-        path: '/unit_head/promotion',
+        path: '/unit_head/promotions',
         icon: Award
     },
     {

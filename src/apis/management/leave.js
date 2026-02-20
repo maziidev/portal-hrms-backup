@@ -1,4 +1,4 @@
-/hrmsimport {api} from "./index.js";
+import { api } from "./index.js";
 
 
 /**

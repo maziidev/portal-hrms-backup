@@ -131,33 +131,33 @@ export const HOU_NAV = [
 export const VC_NAV = [
     {
         name: 'Dashboard',
-        path: '/vice_chancellor',
+        path: '/vc',
         icon: LayoutDashboard
     },
     {
         name: 'Staff Records',
-        path: '/vice_chancellor/staffs',
+        path: '/vc/staffs',
         icon: CircleUserRound
     },
     {
         name: 'Appraisals',
-        path: '/vice_chancellor/appraisals',
+        path: '/vc/appraisals',
         icon: FileText
     },
 
     {
         name: 'Leave Management',
-        path: '/vice_chancellor/leaves',
+        path: '/vc/leaves',
         icon: BedDouble
     },
     {
         name: 'Promotions',
-        path: '/vice_chancellor/promotion',
+        path: '/vc/promotions',
         icon: Award
     },
     {
         name: 'Research & Publications',
-        path: '/vice_chancellor/research',
+        path: '/vc/research-and-publications',
         icon: BookA
     },
     {

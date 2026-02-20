@@ -1,3 +1,10 @@
+<script setup lang="ts">
+import DeanDepartmentStaffAppraisal from '@/components/DeanComponents/DeanDepartmentStaffAppraisal.vue';
+
+</script>
+
 <template>
-    <h1>Appraisals Department Page</h1>
+    <section class="px-2 lg:px-4">
+        <DeanDepartmentStaffAppraisal/>
+    </section>
 </template>

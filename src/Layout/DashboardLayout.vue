@@ -10,9 +10,9 @@
 
 
         <!-- Main Content Area -->
-        <div class="flex-1 flex flex-col">
+        <div class="flex-1 overflow-y-auto md:ml-64 ml-0 transition-all duration-300 flex-col">
             <!-- Header -->
-            <DashboardHeader @toggle="sidebarOpen = !sidebarOpen" />
+            <DashboardHeader @toggle="sidebarOpen = !sidebarOpen" class="px-4"/>
 
             <!-- Page Content -->
             <main class="flex-1 p-6">

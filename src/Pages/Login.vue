@@ -1,7 +1,8 @@
 <script setup>
-import { loginStaff } from "@/apis/auth.js";
-import { useAuthStore } from "@/store/auth.js";
-import { useMessage } from 'naive-ui';
+import { loginStaff } from "@/apis/auth"; // FIX 1: Missing Import added
+import { useAuthStore } from "@/store/auth";
+import { Eye, EyeOff, Lock, Mail } from 'lucide-vue-next';
+import { NSpin, useMessage } from "naive-ui"; // Added NSpin import
 import { reactive, ref } from "vue";
 import { useRouter } from "vue-router";
 
@@ -9,153 +10,189 @@ const auth = useAuthStore();
 const router = useRouter();
 const message = useMessage();
 
-// Login form data
 const formData = reactive({
   email: "",
   password: "",
 });
 
-// Password toggle
 const showPassword = ref(false);
 const togglePassword = () => (showPassword.value = !showPassword.value);
 
-// local state
 const userRole = ref(null);
 const loading = ref(false);
 
-
-// Handle login
 const handleLogin = async () => {
+  loading.value = true; // Start loading
   try {
-    const res = await loginStaff(formData);
+    // FIX 2: Ensure we send 'email' and 'password' as the backend requested
+    const payload = {
+      email: formData.email,
+      password: formData.password
+    };
 
-    if (!res || !res.access || !res.staff) {
+    const res = await loginStaff(payload);
 
+    if (!res || !res.staff) {
+      loading.value = false;
       return;
     }
 
-    auth.token = res?.access;
-    auth.user = res?.staff;
-    // auth.role = res?.staff.staff_roles?.find((role) => role.is_active).role.toLowerCase();
-
-    userRole.value = res?.staff.staff_roles?.find(
-      (role) => role.is_active === true,
+    // Find the active role object
+    const activeRoleObj = res.staff.staff_roles?.find(
+      (role) => role.is_active === true
     );
 
-    auth.role = userRole.value.role.toLowerCase();
+    if (!activeRoleObj) {
+      message.error("No active role assigned to this account.");
+      loading.value = false;
+      return;
+    }
 
-    // console.log(auth);
+    // FIX 3: Format the role name for the URL (e.g., "Vice Chancellor" -> "vice_chancellor")
+    const formattedRole = activeRoleObj.role.toLowerCase().replace(/\s+/g, '_');
 
-    auth.login( userRole.value.role.toLowerCase(), res?.staff, res?.access );
-
+    // Update Store
+    auth.login(formattedRole, res.staff, res.access);
 
     message.success("You have logged in successfully");
-    loading.value = false;
-    // console.log(this.token, this.user, this.role);
-    router.push(`/${auth.role}`);
-  } catch (err) {
 
+    // Redirect using the formatted role
+    router.push(`/${formattedRole}`);
+
+  } catch (err) {
+    // Log the actual backend error so you can see it
+    console.error("Login Error:", err.response?.data);
+    const errorMsg = err.response?.data?.message || err.response?.data?.detail || "Login failed";
+    message.error(errorMsg);
+  } finally {
+    loading.value = false; // Stop loading regardless of outcome
   }
 };
 </script>
 
 <template>
-  <div class="h-screen">
-
-
-    <div class="flex flex-col md:flex-row h-full bg-orbit-bg">
-      <!-- left image section -->
-      <div class="relative w-full h-64 md:w-1/2 md:h-full">
+  <div class="h-screen overflow-hidden bg-orbit-bg">
+    <div class="flex flex-col md:flex-row h-full">
+      <div class="relative hidden md:flex w-1/2 h-full items-center justify-center p-12">
         <img
           src="@/assets/imgs/login_img.jpg"
-          alt="Lady sitting in front of a laptop"
-          class="w-full h-full object-cover"
+          alt="University Staff"
+          class="absolute inset-0 w-full h-full object-cover opacity-60"
         />
-        <div class="absolute bottom-5 left-5 right-5 md:bottom-10 md:left-10 md:right-10 bg-black/50 p-4 md:p-8 text-center rounded-xl font-bold">
-          <p class="text-white text-sm md:text-base leading-relaxed">
-            OrbitHR streamlines staff management, giving your university a single source of truth. From recruitment to retirement, we follow every staff member's journey with precision.
-          </p>
+        <div class="absolute inset-0 bg-gradient-to-tr from-orbit-bg via-orbit-bg/40 to-transparent"></div>
+
+        <div class="relative z-10 max-w-lg">
+          <div class="mb-8 flex items-center gap-3">
+             <div class="bg-white/10 p-3 rounded-2xl backdrop-blur-xl border border-white/20">
+                <div class="w-8 h-8 bg-orbit-cyan rounded-full animate-pulse shadow-[0_0_15px_rgba(0,255,255,0.5)]"></div>
+             </div>
+             <h1 class="text-4xl font-black text-white italic tracking-tighter uppercase">Orbit<span class="text-orbit-cyan">.</span></h1>
+          </div>
+
+          <div class="space-y-6">
+            <h2 class="text-5xl font-black text-white leading-none uppercase italic tracking-tighter">
+              Streamlining <br/> <span class="text-orbit-cyan">Excellence.</span>
+            </h2>
+            <p class="text-gray-300 text-lg font-medium leading-relaxed italic border-l-4 border-orbit-cyan pl-6">
+              "OrbitHR provides a single source of truth for your university’s lifecycle, from recruitment to retirement."
+            </p>
+          </div>
+        </div>
+
+        <div class="absolute bottom-10 left-12 text-[10px] font-bold text-white/30 uppercase tracking-[0.3em]">
+          © 2026 Orbit Human Resources Management System
         </div>
       </div>
 
-      <!-- login form -->
-      <div class="flex items-center justify-center md:w-1/2 w-full px-6 md:px-16 py-8 md:py-0">
+      <div class="flex items-center justify-center w-full md:w-1/2 px-6 lg:px-20 bg-white md:rounded-l-[40px] shadow-2xl z-20">
         <div class="w-full max-w-md">
-          <div class="mb-6 md:mb-8 text-center">
-            <h1 class="text-white text-2xl md:text-3xl font-semibold mb-2">Login</h1>
-            <p class="text-gray-400 text-sm">Please login to access your account</p>
+          <div class="mb-10">
+            <h1 class="text-4xl font-black text-orbit-bg tracking-tighter uppercase italic leading-none">Account Login</h1>
+            <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-2">Enter your credentials to access the portal</p>
           </div>
 
-          <form @submit.prevent="handleLogin" class="space-y-4 md:space-y-6">
-            <!-- Email -->
-            <div>
-              <label for="email" class="block text-white text-sm font-medium mb-1 md:mb-2">
-                E-mail address
-              </label>
-              <input
-                v-model="formData.email"
-                type="email"
-                id="email"
-                placeholder="Please enter your e-mail address"
-                class="w-full border text-white border-[#1a3a5f] rounded-lg py-2.5 px-3 placeholder-gray-500 focus:outline-none focus:border-[#2a5a8f] text-sm md:text-base"
-              />
+          <form @submit.prevent="handleLogin" class="space-y-6">
+            <div class="space-y-2">
+              <label class="text-[10px] font-black text-orbit-bg uppercase tracking-widest ml-1">E-mail Address</label>
+              <div class="relative group">
+                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                  <Mail class="h-5 w-5 text-gray-400 group-focus-within:text-orbit-bg transition-colors" />
+                </div>
+                <input
+                  v-model="formData.email"
+                  type="email"
+                  placeholder="name@university.edu"
+                  class="w-full bg-gray-50 border-2 border-transparent rounded-2xl py-4 pl-12 pr-4 text-orbit-bg font-bold placeholder-gray-400 focus:bg-white focus:border-orbit-bg focus:outline-none transition-all duration-300 shadow-sm"
+                  required
+                />
+              </div>
             </div>
 
-            <!-- Password -->
-            <div>
-              <label for="password" class="block text-white text-sm font-medium mb-1 md:mb-2">
-                Password
-              </label>
-              <div class="relative">
+            <div class="space-y-2">
+              <div class="flex justify-between items-center px-1">
+                <label class="text-[10px] font-black text-orbit-bg uppercase tracking-widest">Password</label>
+                <a href="#" class="text-[10px] font-bold text-orbit-bg/50 hover:text-orbit-bg uppercase tracking-widest transition-colors">Forgot?</a>
+              </div>
+              <div class="relative group">
+                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                  <Lock class="h-5 w-5 text-gray-400 group-focus-within:text-orbit-bg transition-colors" />
+                </div>
                 <input
                   v-model="formData.password"
                   :type="showPassword ? 'text' : 'password'"
-                  id="password"
-                  placeholder="Please enter your password"
-                  class="w-full border border-[#1a3a5f] rounded-lg py-2.5 px-3 text-white placeholder-gray-500 focus:outline-none focus:border-[#2a5a8f] text-sm md:text-base"
+                  placeholder="••••••••"
+                  class="w-full bg-gray-50 border-2 border-transparent rounded-2xl py-4 pl-12 pr-12 text-orbit-bg font-bold placeholder-gray-400 focus:bg-white focus:border-orbit-bg focus:outline-none transition-all duration-300 shadow-sm"
+                  required
                 />
                 <button
                   type="button"
                   @click="togglePassword"
-                  class="absolute cursor-pointer inset-y-0 right-0 pr-3 flex items-center"
+                  class="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400 hover:text-orbit-bg transition-colors border-none bg-transparent cursor-pointer"
                 >
-                  <svg
-                    v-if="!showPassword"
-                    class="w-5 h-5 text-gray-400 hover:text-gray-300"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M3 3l3.59 3.59M12 5c4.478 0 8 3.582 8 8s-3.582 8-8 8-8-3.582-8-8 3.582-8 8-8z"/>
-                  </svg>
-                  <svg
-                    v-else
-                    class="w-5 h-5 text-gray-400 hover:text-gray-300"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                  </svg>
+                  <Eye v-if="!showPassword" class="h-5 w-5" />
+                  <EyeOff v-else class="h-5 w-5" />
                 </button>
               </div>
             </div>
 
-            <div class="text-right">
-              <a href="#" class="text-orbit-blue cursor-pointer text-sm underline"
-                >Forgot Password?</a
-              >
-            </div>
-
             <button
               type="submit"
-              class="w-full block cursor-pointer btn btn-blue-main font-bold"
+              :disabled="loading"
+              class="group relative w-full bg-orbit-bg py-5 rounded-2xl overflow-hidden transition-all duration-500 hover:shadow-xl hover:shadow-blue-900/20 active:scale-[0.98] disabled:opacity-70 border-none cursor-pointer"
             >
-              Login
+              <div v-if="loading" class="flex justify-center">
+                <n-spin size="small" stroke="#00ffff" />
+              </div>
+              <div v-else class="flex items-center justify-center gap-2">
+                <span class="text-white font-black uppercase italic tracking-[0.2em]">Sign In</span>
+                <div class="w-0 group-hover:w-5 overflow-hidden transition-all duration-300">
+                   <svg class="w-5 h-5 text-orbit-cyan" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-width="3" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
+                </div>
+              </div>
             </button>
           </form>
+
+          <div class="mt-12 md:hidden text-center">
+             <p class="text-[9px] font-black text-gray-300 uppercase tracking-widest">Orbit HR Management System</p>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </template>
+
+<style scoped>
+.bg-orbit-bg { background-color: #003366; }
+.text-orbit-bg { color: #003366; }
+.text-orbit-cyan { color: #00ffff; }
+.border-orbit-cyan { border-color: #00ffff; }
+
+form {
+  animation: formEntrance 0.6s ease-out;
+}
+
+@keyframes formEntrance {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+</style>

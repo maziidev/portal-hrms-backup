@@ -1,4 +1,4 @@
-import { api } from "./index.js";
+import { api } from "../index.js";
 
 
 
@@ -22,8 +22,8 @@ export const getDepartmentStaff = (departmentId, params = {}) => {
 };
 
 
-export const getDepartmentAppraisals = (departmentId) => {
-    return api.get(`/hrms/get_department_appraisals/${departmentId}/`);
+export const getDepartmentAppraisals = (departmentId, params = {}) => {
+    return api.get(`/hrms/get_department_appraisals/${departmentId}/`, { params });
 };
 
 

@@ -4,6 +4,7 @@ import router from "@/router";
 
 export const useAuthStore = defineStore("authstore", () => {
   // --- State ---
+  const showSessionDateAndSemesterComponent = ref(true);
   const user = ref(JSON.parse(localStorage.getItem("user")) || null);
   const token = ref(localStorage.getItem("token") || null);
   const role = ref(localStorage.getItem("role") || null);
@@ -11,6 +12,10 @@ export const useAuthStore = defineStore("authstore", () => {
 
   // --- Getters ---
   const isLoggedIn = computed(() => !!token.value);
+
+  const facultyId = computed(() => user.value?.staff?.faculty || user.value?.faculty || null);
+  const departmentId = computed(() => user.value?.staff?.department || user.value?.department || null);
+  const staffId = computed(() => user.value?.staff?.id || user.value?.id || null);
 
   // --- Actions ---
   const login = (roleParam, userParam, tokenParam) => {
@@ -24,7 +29,7 @@ export const useAuthStore = defineStore("authstore", () => {
   };
 
   const logout = async () => {
-    const userId = user.value?.id; // save id before clearing
+    const userId = user.value?.id;
     token.value = null;
     user.value = null;
     role.value = null;
@@ -52,11 +57,15 @@ export const useAuthStore = defineStore("authstore", () => {
   return {
     user,
     token,
+    showSessionDateAndSemesterComponent,
     role,
     loading,
     isLoggedIn,
     login,
     logout,
     refreshSession,
+    facultyId,
+    departmentId,
+    staffId,
   };
 });

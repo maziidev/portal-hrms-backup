@@ -127,7 +127,7 @@
 
 body {
   background: var(--color-orbit-light);
-  font-family: var(--font-sans);
+  font-family: var(--font-sans) !important;
   color: var(--color-orbit-ta);
 }
 

@@ -1,83 +1,16 @@
-<template>
-  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-    <!-- Session Card -->
-    <div
-      class="cursor-pointer rounded-xl shadow-lg border border-gray-200 px-6 py-5 flex items-center gap-4 transition-all duration-200 hover:shadow-xl hover:scale-105"
-      :class="activeCard === 'session' ? 'bg-orbit-bg text-white' : 'bg-white text-gray-800'"
-      @click="toggleActive('session')"
-    >
-      <div class="p-2 rounded-md bg-orbit-cyan/10 flex items-center justify-center">
-        <CalendarDays class="w-5 h-5" :class="activeCard === 'session' ? 'text-white' : 'text-orbit-cyan'" />
-      </div>
-      <div>
-        <p class="text-xs font-medium text-gray-400">Session</p>
-        <p class="text-lg font-bold">{{ activeSession || '-' }}</p>
-      </div>
-    </div>
-
-    <!-- Semester Card -->
-    <div
-      class="cursor-pointer rounded-xl shadow-lg border border-gray-200 px-6 py-5 flex items-center gap-4 transition-all duration-200 hover:shadow-xl hover:scale-105"
-      :class="activeCard === 'semester' ? 'bg-orbit-bg text-white' : 'bg-white text-gray-800'"
-      @click="toggleActive('semester')"
-    >
-      <div class="p-2 rounded-md bg-orbit-cyan/10 flex items-center justify-center">
-        <BookOpen class="w-5 h-5" :class="activeCard === 'semester' ? 'text-white' : 'text-orbit-cyan'" />
-      </div>
-      <div>
-        <p class="text-xs font-medium text-gray-400">Semester</p>
-        <p class="text-lg font-bold">{{ activeSemester || '-' }}</p>
-      </div>
-    </div>
-
-    <!-- Date Card -->
-    <div
-      class="cursor-pointer rounded-xl shadow-lg border border-gray-200 px-6 py-5 flex items-center gap-4 transition-all duration-200 hover:shadow-xl hover:scale-105"
-      :class="activeCard === 'date' ? 'bg-orbit-bg text-white' : 'bg-white text-gray-800'"
-      @click="toggleActive('date')"
-    >
-      <div class="p-2 rounded-md bg-orbit-cyan/10 flex items-center justify-center">
-        <Calendar class="w-5 h-5" :class="activeCard === 'date' ? 'text-white' : 'text-orbit-cyan'" />
-      </div>
-      <div>
-        <p class="text-xs font-medium text-gray-400">Date</p>
-        <p class="text-lg font-bold">{{ formattedDate }}</p>
-      </div>
-    </div>
-
-    <!-- Time Card -->
-    <div
-      class="cursor-pointer rounded-xl shadow-lg border border-gray-200 px-6 py-5 flex items-center gap-4 transition-all duration-200 hover:shadow-xl hover:scale-105"
-      :class="activeCard === 'time' ? 'bg-orbit-bg text-white' : 'bg-white text-gray-800'"
-      @click="toggleActive('time')"
-    >
-      <div class="p-2 rounded-md bg-orbit-cyan/10 flex items-center justify-center">
-        <Clock4 class="w-5 h-5" :class="activeCard === 'time' ? 'text-white' : 'text-orbit-cyan'" />
-      </div>
-      <div>
-        <p class="text-xs font-medium text-gray-400">Time</p>
-        <p class="text-lg font-bold">{{ formattedTime }}</p>
-      </div>
-    </div>
-  </div>
-</template>
-
 <script setup>
-import { useDateTime } from '@/composable/useDateTime'
-import {getActiveSessionSemester} from "@/apis/shared/sessionSemester"
-import { BookOpen, Calendar, CalendarDays, Clock4 } from 'lucide-vue-next'
+import { getActiveSessionSemester } from "@/apis/shared/sessionSemester"
+import { useDateTime } from '@/composables/useDateTime'
 import { onMounted, ref } from 'vue'
-
 
 const { formattedDate, formattedTime } = useDateTime()
 
-// First card (Session) is active by default
+// Active state control
 const activeCard = ref('session')
-
-// Toggle behavior: click to activate/deactivate
 const toggleActive = (card) => {
-  activeCard.value = activeCard.value === card ? null : card
+  activeCard.value = card
 }
+
 const activeSession = ref(null);
 const activeSemester = ref(null);
 const loading = ref(false);
@@ -86,21 +19,94 @@ const fetchActive = async () => {
   loading.value = true;
   try {
     const res = await getActiveSessionSemester();
-    activeSession.value = res.data.active_session;
-    activeSemester.value = res.data.active_semester;
+    const data = res.data;
+
+    // Handle if the backend returns objects { id, name } or just strings
+    activeSession.value = typeof data.active_session === 'object'
+        ? data.active_session?.name
+        : data.active_session;
+
+    activeSemester.value = typeof data.active_semester === 'object'
+        ? data.active_semester?.name
+        : data.active_semester;
+
   } catch (err) {
-    console.error('Error:', err);
+    console.error('Session API Error:', err);
   } finally {
     loading.value = false;
+
+    // Fallbacks if nothing exists after fetch
+    if (!activeSession.value) activeSession.value = 'No Active Session'
+    if (!activeSemester.value) activeSemester.value = 'No Active Semester'
   }
 };
 
-onMounted(async () => {
-  await fetchActive();
-
-    // Fallbacks if nothing exists
-  if (!activeSession.value) activeSession.value = '-'
-  if (!activeSemester.value) activeSemester.value = '-'
+onMounted(() => {
+  fetchActive();
 });
-
 </script>
+
+<template>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8 p-6">
+
+    <div
+      v-for="item in [
+        { id: 'session', label: 'Academic Session', value: activeSession, mark: 'S' },
+        { id: 'semester', label: 'Current Semester', value: activeSemester, mark: 'T' },
+        { id: 'date', label: 'Today\'s Date', value: formattedDate, mark: 'D' },
+        { id: 'time', label: 'Current Time', value: formattedTime, mark: 'H' }
+      ]"
+      :key="item.id"
+      @click="toggleActive(item.id)"
+      class="group cursor-pointer relative overflow-hidden rounded-xl border transition-all duration-300 px-5 py-4 flex flex-col justify-between h-24"
+      :class="activeCard === item.id
+        ? 'bg-orbit-bg border-orbit-bg shadow-md translate-y-[-2px]'
+        : 'bg-white border-gray-100 hover:border-gray-300'"
+    >
+      <span
+        class="absolute -right-2 -bottom-4 text-7xl font-black transition-opacity duration-300 pointer-events-none select-none"
+        :class="activeCard === item.id ? 'text-white/5 opacity-100' : 'text-gray-50 opacity-0 group-hover:opacity-100'"
+      >
+        {{ item.mark }}
+      </span>
+
+      <div class="flex items-center justify-between relative z-10">
+        <span
+          class="text-[10px] uppercase tracking-widest font-bold"
+          :class="activeCard === item.id ? 'text-blue-200' : 'text-gray-400'"
+        >
+          {{ item.label }}
+        </span>
+        <div
+          class="w-1.5 h-1.5 rounded-full transition-colors duration-300"
+          :class="activeCard === item.id ? 'bg-blue-300 shadow-[0_0_8px_rgba(147,197,253,0.8)]' : 'bg-gray-200'"
+        ></div>
+      </div>
+
+      <div class="relative z-10">
+        <p
+          class="text-lg font-bold tracking-tight truncate"
+          :class="activeCard === item.id ? 'text-white' : 'text-orbit-bg'"
+        >
+          {{ item.value }}
+        </p>
+      </div>
+    </div>
+
+  </div>
+</template>
+
+<style scoped>
+.bg-orbit-bg { background-color: #003366; }
+.text-orbit-bg { color: #003366; }
+
+/* Animation for the grid entrance */
+.grid > div {
+  animation: entrance 0.4s ease-out forwards;
+}
+
+@keyframes entrance {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+</style>

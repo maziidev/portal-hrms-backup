@@ -75,7 +75,7 @@ export const deanRoutes = {
             meta: { requiresAuth: true, role: 'dean', title: 'Appraisals', subtitle: 'Manage and oversee staff appraisals within your faculty' }
         },
         {
-            path: 'appraisal-department/:id',
+            path: 'appraisals/:id',
             name: 'DeanAppraisalDepartment',
             component: AppraisalDepartment,
             meta: { requiresAuth: true, role: 'dean', title: 'Appraisal Department', subtitle: 'View appraisals for a specific department within your faculty' }

@@ -3,7 +3,7 @@ import SessionSemesterCard from '@/components/SessionSemesterCard.vue';
 import VCAppraisalRateChart from '@/components/VCComponents/VCAppraisalRateChart.vue';
 import VCAppraisalStat from '@/components/VCComponents/VCAppraisalStat.vue';
 import VCAppraisalTrendChart from '@/components/VCComponents/VCAppraisalTrendChart.vue';
-import VCFacultyAppraisalOverview from '@/components/VCComponents/VCFacultyAppraisalOverview.vue';
+import VCFacultyAppraisalOverviewTable from '@/components/VCComponents/VCFacultyAppraisalOverviewTable.vue';
 
 </script>
 
@@ -20,7 +20,7 @@ import VCFacultyAppraisalOverview from '@/components/VCComponents/VCFacultyAppra
         </div>
 
         <div class="p-6">
-            <VCFacultyAppraisalOverview/>
+            <VCFacultyAppraisalOverviewTable/>
         </div>
     </section>
 </template>

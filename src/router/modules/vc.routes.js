@@ -40,7 +40,7 @@ export const vcRoutes = {
 
         // appraisals
         { path: 'appraisals', name: 'VCAppraisals', component: Appraisals, title: "Appraisal Management", subtitle: "Manage and oversee staff appraisals within your institution" },
-        { path: 'appraisal-department/:id', name: 'AppraisalsDepartment', component: AppraisalsDepartment, title: 'Appraisal Department', subtitle: 'View appraisals for a specific department within your institution' },
+        { path: 'appraisals-department/:id', name: 'AppraisalsDepartment', component: AppraisalsDepartment, title: 'Appraisal Department', subtitle: 'View appraisals for a specific department within your institution' },
         { path: 'appraisals-department-record/:id', name: 'AppraisalsDepartmentRecord', component: AppraisalsDepartmentRecord, title: 'Appraisal Department Record', subtitle: 'View appraisals records for a department within your institution' },
 
         // leaves
@@ -48,8 +48,8 @@ export const vcRoutes = {
         { path: 'leave-details/:id', name: 'LeaveDetails', component: LeaveDetails, title: "Leave Detail", subtitle: "Detailed Information for academic leave" },
 
         // promotions
-        { path: 'promotion', name: 'VCPromotions', component: Promotions, title: "Promotions", subtitle: "View and manage all promotions in your institutioni" },
-        { path: 'promotion-department-records/:id', name: 'PromotionDepartmentRecords', component: PromotionDepartmentRecords, title: "Departmental Promotions", subtitle: "Manage and view all departmental promotion" },
+        { path: 'promotions', name: 'VCPromotions', component: Promotions, title: "Promotions", subtitle: "View and manage all promotions in your institutioni" },
+        { path: 'promotions-department-records/:id', name: 'PromotionDepartmentRecords', component: PromotionDepartmentRecords, title: "Departmental Promotions", subtitle: "Manage and view all departmental promotion" },
 
         // researches
         { path: 'research-and-publications', name: 'VCResearchAndPublication', component: ResearchAndPublications, title: "Researches and Publications", subtitle: "Manage all staff publications and researches" },

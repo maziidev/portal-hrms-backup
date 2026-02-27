@@ -1,3 +1,10 @@
+<script setup lang="ts">
+import VCAppraisalDepartments from '@/components/VCComponents/VCAppraisalDepartments.vue';
+
+</script>
+
 <template>
-    <h1>VC Appraisals Department Page</h1>
+    <section class="px-2 lg:px-4">
+        <VCAppraisalDepartments/>
+    </section>
 </template>

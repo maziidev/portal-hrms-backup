@@ -4,6 +4,9 @@ import { debounce } from 'lodash-es';
 import { NDataTable, NDatePicker, NInput, NInputNumber, NPagination, NSelect, useMessage } from 'naive-ui';
 import { h, onMounted, ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
+
+const auth = useAuthStore();
 
 const router = useRouter()
 const route = useRoute()
@@ -22,6 +25,7 @@ const searchKeyword = ref('')
 const selectedRole = ref(null)
 const selectedStatus = ref(null)
 const dateRange = ref(null)
+const departmentId = auth.departmentId;
 
 // Options
 const roleOptions = [
@@ -66,8 +70,7 @@ const fetchRecords = async () => {
             search: searchKeyword.value || undefined,
             role: selectedRole.value || undefined,
             employment_type: selectedStatus.value || undefined,
-            // Assuming the Staff API accepts dept_id from route if the VC is drilldown
-            dept_code: route.params.id || undefined
+            dept_code: departmentId
         }
 
         if (dateRange.value) {

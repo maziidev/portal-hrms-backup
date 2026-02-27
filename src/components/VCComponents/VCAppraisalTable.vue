@@ -1,10 +1,12 @@
 <script setup>
 import { getVCDepartmentRecords } from "@/apis/management/vc";
+import { useAuthStore } from '@/store/auth.js';
 import { debounce } from 'lodash-es';
 import { NDataTable, NDatePicker, NInput, NInputNumber, NPagination, NSelect, NTag, useMessage } from 'naive-ui';
 import { h, onMounted, ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 
+const auth = useAuthStore();
 const router = useRouter()
 const route = useRoute()
 const message = useMessage()
@@ -91,7 +93,7 @@ const columns = [
 const fetchRecords = async () => {
     loading.value = true
     try {
-        const facultyId = route.params.id;
+        const facultyId = auth.facultyId;
         if (!facultyId) return;
 
         const params = {};
@@ -104,7 +106,6 @@ const fetchRecords = async () => {
 
         const res = await getVCDepartmentRecords(facultyId, params);
 
-        // Based on your API doc: data contains a "departments" array
         const responseData = res.data || res;
         departmentData.value = responseData.departments || [];
         totalRecords.value = departmentData.value.length;
@@ -128,7 +129,6 @@ const handleJumpToPage = () => {
 }
 
 const handleRowClick = (row) => {
-    // API shows 'id', not 'department_id'
     router.push(`/appraisal-department/${row.id}`)
 }
 

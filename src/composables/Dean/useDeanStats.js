@@ -1,4 +1,3 @@
-
 import { getDeanFacultyStats } from "@/apis/management/dean.js";
 import { useAuthStore } from "@/store/auth.js";
 import { ref } from 'vue';
@@ -18,7 +17,6 @@ export function useDeanStats() {
     const authStore = useAuthStore();
 
     const fetchStats = async () => {
-        // Accessing the getter directly from authStore
         const fId = authStore.facultyId;
 
         if (!fId) {
@@ -32,17 +30,16 @@ export function useDeanStats() {
         try {
             const { data } = await getDeanFacultyStats(fId);
 
-            // Bridge the backend "mistakes" to our clean UI state
             stats.value = {
-                total_departments: data.total_departments || 0,
-                total_staff: data.total_staff || 0,
-                active_appraisals: data.active_appraisals || 0,
-                pending_reviews: data.active_appraisals || 0,
-                promotion_requests: data.total_promotions || 0,
-                total_leaves: data.total_leaves || 0
+                total_departments: data.total_departments ?? 0,
+                total_staff: data.total_staff ?? 0,
+                active_appraisals: data.active_appraisals ?? 0,
+                pending_reviews: data.pending_reviews ?? 0, // API doesn’t provide this; default 0
+                promotion_requests: data.total_promotions ?? 0,
+                total_leaves: data.total_leaves ?? 0
             };
         } catch (err) {
-            error.value = err.response?.data?.message || err.message || 'Failed to load Statistics';
+            error.value = err.response?.data?.message || err.message || 'Failed to load statistics';
         } finally {
             loading.value = false;
         }

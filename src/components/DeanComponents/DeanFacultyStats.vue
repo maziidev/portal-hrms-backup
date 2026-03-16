@@ -1,13 +1,20 @@
 <script setup>
 import { useDeanStats } from "@/composables/Dean/useDeanStats.js";
+import { useAuthStore } from '@/store/auth.js';
 import { NAlert, NSpin } from "naive-ui";
-import { onMounted } from "vue";
+import { watch } from "vue";
 
 const { loading, error, stats, fetchStats } = useDeanStats();
 
-onMounted(() => {
-    fetchStats()
-})
+const authStore = useAuthStore()
+
+watch(
+  () => authStore.facultyId,
+  (val) => {
+    if (val) fetchStats();
+  },
+  { immediate: true } // will also run if facultyId already exists
+);
 </script>
 
 <template>
@@ -21,7 +28,7 @@ onMounted(() => {
         <div class="md:col-span-4 bg-orbit-bg rounded-2xl p-8 text-white flex flex-col justify-between shadow-lg">
           <div>
             <p class="text-xs uppercase tracking-[0.2em] font-bold opacity-70">Faculty Overview</p>
-            <h2 class="text-4xl font-black mt-2">8</h2>
+            <h2 class="text-4xl font-black mt-2">{{ stats.total_departments }}</h2>
             <p class="text-sm opacity-90 font-medium">Total Departments</p>
           </div>
 

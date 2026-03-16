@@ -50,27 +50,27 @@ export const DEAN_NAV = [
 export const HOD_NAV = [
     {
         name: 'Dashboard',
-        path: '/head_of_division',
+        path: '/division_head',
         icon: LayoutDashboard
     },
     {
         name: 'Staff Records',
-        path: '/head_of_division/staffs',
+        path: '/division_head/staffs',
         icon: CircleUserRound
     },
     {
         name: 'Appraisals',
-        path: '/head_of_division/appraisals',
+        path: '/division_head/appraisal',
         icon: FileText
     },
     {
         name: 'Leave Management',
-        path: '/head_of_division/leaves',
+        path: '/division_head/leaves',
         icon: BedDouble
     },
     {
         name: 'Promotion & Career Progression',
-        path: '/head_of_division/promotion',
+        path: '/division_head/promotion',
         icon: Award
     },
     {

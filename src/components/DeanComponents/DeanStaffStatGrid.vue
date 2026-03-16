@@ -29,7 +29,13 @@ const fetchStats = async () => {
   loading.value = true
   try {
     const { data } = await getStaffStatsPerDepartment(departmentId.value)
-    stats.value = data || {}
+
+    stats.value = {
+      active_staff: data.total_staff ?? 0,        // total_staff = active staff
+      on_probation: 0,                            // API doesn’t provide, keep as 0
+      on_leave: data.total_leaves ?? 0,          // map leaves
+      retired: 0                                  // API doesn’t provide retired, keep 0
+    }
   } catch (err) {
     message.error('Failed to load department statistics')
   } finally {

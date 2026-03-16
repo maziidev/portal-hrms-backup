@@ -178,7 +178,7 @@ const statusOptions = [
 ];
 
 const loadData = async () => {
-  const id = route.params.id || authStore.facultyId;
+  const id = route.params.id || authStore.facultyId || authStore.user?.faculty_id || authStore.user?.staff?.faculty_id;
   if (!id) {
     message.warning("Faculty ID not found.");
     return;
@@ -187,7 +187,19 @@ const loadData = async () => {
   loading.value = true;
   try {
     const res = await getVCDepartmentRecords(id);
-    departments.value = res.data || [];
+
+    console.log("RAW API RESPONSE:", res.data);
+    departments.value = (res.data.departments || []).map(d => ({
+      id: d.id,
+      department_name: d.name,
+      hod_name: d.dept_hod,
+      total_staff: d.staff_count,
+      academic_staff_count: d.academic_staff_count || 0,       // backend adds this later
+      non_academic_staff_count: d.non_academic_staff_count || 0, // backend adds this later
+      active_appraisals_count: d.active_appraisals,
+      pending_promotions_count: d.pending_promotions,
+      status: d.status || 'Active'
+    }));
     if (departments.value.length === 0) {
       message.info("No department records found.");
     }

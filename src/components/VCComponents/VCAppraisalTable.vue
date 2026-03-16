@@ -35,7 +35,7 @@ const columns = [
         key: 'name', // Updated to match API
         minWidth: 300,
         fixed: 'left',
-        render: (row) => h('span', { class: 'font-black text-[#003366] uppercase tracking-tighter text-base' }, row.name || 'N/A')
+        render: (row) => h('span', { class: 'font-black text-orbit-bg uppercase tracking-tighter text-base' }, row.name || 'N/A')
     },
     {
         title: 'HOD',
@@ -147,7 +147,7 @@ onMounted(fetchRecords)
         <div class="p-8">
             <div class="flex flex-col xl:flex-row xl:items-center justify-between gap-6">
                 <div class="shrink-0">
-                    <h4 class="text-3xl font-black text-[#003366] tracking-tighter uppercase italic leading-none">
+                    <h4 class="text-3xl font-black text-orbit-bg tracking-tighter uppercase italic leading-none">
                         Departments Appraisals
                     </h4>
                     <p class="text-[10px] font-bold text-gray-400 uppercase tracking-[0.3em] mt-3">
@@ -217,9 +217,9 @@ onMounted(fetchRecords)
             />
 
             <div class="flex items-center gap-3 bg-white p-2 px-4 rounded-2xl border border-gray-200 shadow-sm">
-                <span class="text-[10px] font-black text-[#003366] uppercase tracking-tighter">Jump to</span>
+                <span class="text-[10px] font-black text-orbit-bg uppercase tracking-tighter">Jump to</span>
                 <n-input-number v-model:value="jumpToPageValue" :min="1" size="small" style="width: 70px;" :show-button="false" />
-                <button @click="handleJumpToPage" class="bg-[#003366] text-white px-5 py-2 rounded-xl text-[10px] font-black uppercase hover:bg-blue-900 transition-colors">
+                <button @click="handleJumpToPage" class="bg-orbit-blue text-white px-5 py-2 rounded-xl text-[10px] font-black uppercase hover:bg-blue-900 transition-colors">
                     Go
                 </button>
             </div>

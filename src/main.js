@@ -12,6 +12,8 @@ const app = createApp(App);
 const pinia = createPinia();
 
 app.use(pinia);
+setUpInterceptors(pinia, router);
+
 // Ensures user is not logged out on page refresh
 const auth = useAuthStore();
 auth.refreshSession();
@@ -19,6 +21,5 @@ app.use(router);
 app.use(VueApexCharts);
 app.use(naiva);
 
-setUpInterceptors(pinia, router);
 
 app.mount("#app");

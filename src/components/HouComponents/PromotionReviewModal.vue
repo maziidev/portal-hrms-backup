@@ -2,226 +2,183 @@
   <Teleport to="body">
     <div
       v-if="show"
-      class="fixed inset-0 z-[9000] flex items-center justify-center bg-black/40 backdrop-blur-sm px-4"
+      class="fixed inset-0 z-[9000] flex items-center justify-center bg-gray-900/50 backdrop-blur-sm px-4"
       @click.self="$emit('close')"
     >
-      <div class="bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[92vh] flex flex-col overflow-hidden">
+      <div class="bg-white rounded-3xl shadow-xl w-full max-w-2xl max-h-[90vh] flex flex-col overflow-hidden border border-gray-200">
 
-        <!-- Header -->
-        <div class="px-7 pt-6 pb-4 border-b border-gray-100 shrink-0">
-          <div class="flex items-start justify-between mb-5">
-            <div>
-              <h2 class="text-lg font-black text-orbit-bg">Promotion Review</h2>
-              <p class="text-sm text-gray-400 mt-0.5">{{ staff.staffId }} ({{ staff.name }})</p>
+        <div class="px-8 pt-8 pb-6 bg-gray-50/50 border-b border-gray-100 shrink-0">
+          <div class="flex items-start justify-between mb-8">
+            <div class="flex items-center gap-4">
+              <div class="w-10 h-10 rounded-lg bg-orbit-blue flex items-center justify-center text-white shadow-md">
+                <img v-if="staff.photo" :src="staff.photo" class="w-full h-full object-cover rounded-lg" />
+                <span v-else class="text-xs font-semibold">{{ getInitials(staff.name) }}</span>
+              </div>
+              <div>
+                <h2 class="text-xl font-semibold text-gray-900">Promotion Review</h2>
+                <p class="text-sm text-gray-500 font-medium">{{ staff.staffId }}</p>
+              </div>
             </div>
-            <button @click="$emit('close')" class="text-gray-400 hover:text-orbit-bg transition-colors mt-0.5">
+            <button @click="$emit('close')" class="p-2 rounded-lg hover:bg-gray-100 text-gray-400 hover:text-gray-900 transition-all">
               <X :size="20" />
             </button>
           </div>
 
-          <!-- Stepper -->
-          <div class="flex items-center gap-0">
+          <div class="flex items-center px-4">
             <template v-for="(step, idx) in steps" :key="step.label">
-              <div class="flex flex-col items-center shrink-0">
+              <div class="flex flex-col items-center shrink-0 relative">
                 <div
                   :class="[
-                    'w-7 h-7 rounded-full border-2 flex items-center justify-center transition-all duration-300',
-                    idx < currentStep
-                      ? 'bg-orbit-green border-orbit-green'
-                      : idx === currentStep
-                        ? 'bg-white border-orbit-bg'
-                        : 'bg-white border-gray-200'
+                    'w-8 h-8 rounded-full border-2 flex items-center justify-center transition-all duration-500',
+                    idx <= currentStep ? 'bg-orbit-blue border-orbit-blue text-white' : 'bg-white border-gray-200 text-gray-300'
                   ]"
                 >
-                  <Check v-if="idx <= currentStep" :size="13"
-                    :class="idx < currentStep ? 'text-white' : 'text-orbit-bg'"
-                    strokeWidth="3"
-                  />
+                  <Check v-if="idx < currentStep" :size="14" strokeWidth="3" />
+                  <span v-else class="text-xs font-bold">{{ idx + 1 }}</span>
                 </div>
-                <span
-                  :class="[
-                    'text-[9px] font-bold mt-1 text-center w-20',
-                    idx < currentStep ? 'text-orbit-green' : idx === currentStep ? 'text-orbit-bg' : 'text-gray-300'
-                  ]"
-                >{{ step.label }}</span>
+                <span :class="['text-[11px] font-semibold mt-2 absolute -bottom-6 w-28 text-center', idx <= currentStep ? 'text-gray-900' : 'text-gray-400']">
+                  {{ step.label }}
+                </span>
               </div>
-              <div
-                v-if="idx < steps.length - 1"
-                :class="['h-0.5 flex-1 mb-3 transition-all duration-500', idx < currentStep ? 'bg-orbit-green' : 'bg-gray-200']"
-              />
+              <div v-if="idx < steps.length - 1" :class="['h-0.5 flex-1 mx-2 transition-all duration-500', idx < currentStep ? 'bg-orbit-blue' : 'bg-gray-200']" />
             </template>
           </div>
+          <div class="h-4"></div>
         </div>
 
-        <!-- Body -->
-        <div class="flex-1 overflow-y-auto">
+        <div class="flex-1 overflow-y-auto px-8 py-8 bg-white">
 
-          <!-- ── Step 0: Staff Information ── -->
-          <div v-if="currentStep === 0" class="px-7 py-6 space-y-6">
-            <h3 class="text-base font-black text-orbit-blue">Staff Information</h3>
-
-            <!-- Photo -->
-            <div class="w-52 h-52 rounded-xl overflow-hidden bg-gray-100">
-              <img
-                v-if="staff.photo"
-                :src="staff.photo"
-                :alt="staff.name"
-                class="w-full h-full object-cover"
-              />
-              <div v-else class="w-full h-full flex items-center justify-center">
-                <User :size="48" class="text-gray-300" />
+          <div v-if="currentStep === 0" class="animate-in fade-in slide-in-from-bottom-2">
+            <div class="flex flex-col md:flex-row gap-8 items-start">
+              <div class="w-full md:w-48 h-56 rounded-2xl bg-gray-50 border border-gray-100 overflow-hidden shrink-0 flex items-center justify-center shadow-inner">
+                <img v-if="staff.photo" :src="staff.photo" class="w-full h-full object-cover" />
+                <div v-else class="flex flex-col items-center gap-2">
+                   <User :size="40" class="text-gray-200" />
+                   <span class="text-2xl font-bold text-gray-300">{{ getInitials(staff.name) }}</span>
+                </div>
               </div>
-            </div>
 
-            <!-- Staff ID -->
-            <p class="text-sm font-bold text-orbit-bg">{{ staff.staffId }}</p>
-
-            <!-- Info rows -->
-            <div class="divide-y divide-gray-50">
-              <div class="flex items-center justify-between py-3.5">
-                <span class="text-sm text-gray-400">Full Name</span>
-                <span class="text-sm font-black text-orbit-bg">{{ staff.name }}</span>
-              </div>
-              <div class="flex items-center justify-between py-3.5">
-                <span class="text-sm text-gray-400">{{ staff.roleLabel || 'Designation' }}</span>
-                <span class="text-sm font-black text-orbit-bg">{{ staff.role }}</span>
-              </div>
-              <div class="flex items-center justify-between py-3.5">
-                <span class="text-sm text-gray-400">Subunit</span>
-                <span class="text-sm font-black text-orbit-bg">{{ staff.subunit }}</span>
+              <div class="flex-1 space-y-6">
+                <div class="space-y-1">
+                  <label class="text-[10px] uppercase tracking-widest text-gray-400 font-bold">Full Name</label>
+                  <p class="text-lg font-semibold text-gray-900">{{ staff.name }}</p>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                  <div class="space-y-1">
+                    <label class="text-[10px] uppercase tracking-widest text-gray-400 font-bold">Designation</label>
+                    <p class="text-sm font-semibold text-gray-900">{{ staff.role }}</p>
+                  </div>
+                  <div class="space-y-1">
+                    <label class="text-[10px] uppercase tracking-widest text-gray-400 font-bold">Subunit</label>
+                    <p class="text-sm font-semibold text-gray-900">{{ staff.subunit }}</p>
+                  </div>
+                </div>
+                <div class="pt-4 border-t border-gray-50">
+                   <span class="px-3 py-1.5 bg-gray-50 text-gray-600 rounded-lg text-xs font-bold border border-gray-100">
+                     STAFF ID: {{ staff.staffId }}
+                   </span>
+                </div>
               </div>
             </div>
           </div>
 
-          <!-- ── Step 1: Appraisal Review ── -->
-          <div v-if="currentStep === 1" class="px-7 py-6 space-y-5">
-            <div class="flex items-center gap-3">
-              <button @click="currentStep--" class="flex items-center gap-1 text-sm font-semibold text-gray-500 hover:text-orbit-bg transition-colors">
-                <ChevronLeft :size="16" />
-              </button>
-              <h3 class="text-base font-black text-orbit-bg">Appraisal Review</h3>
-            </div>
-
-            <!-- Performance Records card -->
-            <div class="border border-gray-100 rounded-xl overflow-hidden">
-              <div class="px-5 py-4 bg-white">
-                <h4 class="font-black text-orbit-bg text-sm mb-4">Performance Records</h4>
-                <div class="grid grid-cols-3 gap-4 mb-3">
-                  <span class="text-xs font-black text-orbit-bg uppercase tracking-wide">Appraisal Year</span>
-                  <span class="text-xs font-black text-orbit-bg uppercase tracking-wide">Comment</span>
-                  <span class="text-xs font-black text-orbit-bg uppercase tracking-wide text-right">Score</span>
-                </div>
-                <div class="space-y-0 divide-y divide-gray-50">
-                  <div v-for="rec in staff.appraisalRecords" :key="rec.year" class="grid grid-cols-3 gap-4 py-4 items-center">
-                    <div class="flex items-center gap-2.5">
-                      <span class="w-0.5 h-5 rounded-full bg-orbit-blue shrink-0"></span>
-                      <span class="text-sm font-black text-orbit-bg">{{ rec.year }}</span>
+          <div v-if="currentStep === 1" class="space-y-6 animate-in fade-in">
+             <div class="flex items-center justify-between">
+                <h3 class="text-sm font-bold text-gray-900 uppercase tracking-wide">Historical Appraisal</h3>
+                <span class="text-xs text-orbit-blue font-semibold italic">Recent Records</span>
+             </div>
+             <div class="space-y-3">
+                <div v-for="rec in staff.appraisalRecords" :key="rec.year" class="flex items-center justify-between p-4 bg-white border border-gray-100 rounded-xl hover:border-orbit-blue/30 transition-all">
+                  <div class="flex items-center gap-4">
+                    <div class="w-10 h-10 rounded-lg bg-gray-50 flex items-center justify-center font-bold text-gray-700 text-xs border border-gray-100">
+                      {{ rec.year }}
                     </div>
-                    <span class="text-sm text-gray-400">{{ rec.comment }}</span>
-                    <span class="text-sm text-gray-400 text-right font-semibold">{{ rec.score }}</span>
+                    <div>
+                      <p class="text-sm font-semibold text-gray-900">{{ rec.comment }}</p>
+                      <p class="text-[11px] text-gray-400">Standard Review</p>
+                    </div>
+                  </div>
+                  <div class="text-right">
+                    <p class="text-lg font-bold text-gray-900">{{ rec.score }}</p>
+                    <p class="text-[10px] font-bold text-gray-400 uppercase">Points</p>
                   </div>
                 </div>
-              </div>
-            </div>
+             </div>
           </div>
 
-          <!-- ── Step 2: Evaluation Summary / Decision ── -->
-          <div v-if="currentStep === 2" class="px-7 py-6 space-y-6">
-            <div class="flex items-center gap-3">
-              <button @click="currentStep--" class="flex items-center gap-1 text-sm font-semibold text-gray-500 hover:text-orbit-bg transition-colors">
-                <ChevronLeft :size="16" />
-              </button>
-              <h3 class="text-base font-black text-orbit-bg">Evaluation Summary/Decision</h3>
-            </div>
-
-            <!-- Suggested Grade slider -->
-            <div class="space-y-3">
+          <div v-if="currentStep === 2" class="space-y-8 animate-in fade-in">
+            <div class="space-y-4">
               <div class="flex items-center justify-between">
-                <div class="flex items-center gap-3">
-                  <span class="w-1 h-6 rounded-full bg-orbit-blue shrink-0"></span>
-                  <span class="text-sm font-black text-orbit-bg">Suggested Grade</span>
-                </div>
-                <div class="flex items-center gap-3 w-64">
-                  <span class="text-xs font-bold text-gray-400">0</span>
-                  <div class="relative flex-1 pt-5">
-                    <!-- Value label -->
-                    <span
-                      class="absolute -top-0 text-[11px] font-black text-orbit-bg -translate-x-1/2 pointer-events-none"
-                      :style="{ left: `calc(${(suggestedGrade / 40) * 100}%)` }"
-                    >{{ suggestedGrade }}</span>
-                    <input
-                      type="range"
-                      v-model.number="suggestedGrade"
-                      min="0"
-                      max="40"
-                      step="1"
-                      class="promo-slider w-full"
-                      :style="{ '--val': `${(suggestedGrade / 40) * 100}%` }"
-                    />
-                  </div>
-                  <span class="text-xs font-bold text-gray-400">40</span>
-                </div>
+                <label class="text-sm font-bold text-gray-900 uppercase tracking-wide">Suggested Score</label>
+                <span class="text-lg font-bold text-orbit-blue">{{ suggestedGrade }} <span class="text-xs text-gray-500">/ 40</span></span>
               </div>
-              <textarea
-                v-model="gradeComment"
-                placeholder="Enter your comment here"
-                rows="2"
-                class="w-full text-sm px-4 py-3 rounded-xl border border-gray-100 bg-blue-50/40 focus:outline-none focus:border-orbit-blue resize-none placeholder:text-gray-400"
+              <input
+                type="range"
+                v-model.number="suggestedGrade"
+                min="0"
+                max="40"
+                class="modern-slider w-full"
+                :style="{ '--val': `${(suggestedGrade / 40) * 100}%` }"
               />
             </div>
 
-            <!-- Decision -->
-            <div class="space-y-3">
-              <div class="flex items-center justify-between gap-4">
-                <span class="text-sm font-black text-orbit-bg">Decision</span>
-                <div class="relative w-64">
+            <div class="space-y-4 pt-4 border-t border-gray-100">
+              <div class="flex flex-col gap-2">
+                <label class="text-sm font-bold text-gray-900 uppercase tracking-wide">Final Action</label>
+                <div class="relative">
                   <select
                     v-model="decision"
-                    class="w-full text-sm px-4 py-2.5 rounded-xl border border-gray-200 bg-white focus:outline-none focus:border-orbit-blue appearance-none font-semibold text-orbit-bg"
+                    class="w-full h-12 px-4 rounded-xl border border-gray-200 bg-gray-50 focus:bg-white focus:border-orbit-blue outline-none appearance-none font-semibold text-gray-900 transition-all"
                   >
-                    <option value="Endorse">Endorse</option>
-                    <option value="Reject">Reject</option>
+                    <option value="Endorse">Endorse Application</option>
+                    <option value="Reject">Reject Application</option>
                     <option value="Return for Correction">Return for Correction</option>
-                    <option value="Defer">Defer</option>
+                    <option value="Defer">Defer Application</option>
                   </select>
-                  <ChevronDown :size="14" class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
+                  <ChevronDown :size="16" class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
                 </div>
               </div>
               <textarea
                 v-model="decisionComment"
-                placeholder="Enter your comment here"
-                rows="2"
-                class="w-full text-sm px-4 py-3 rounded-xl border border-gray-100 bg-blue-50/40 focus:outline-none focus:border-orbit-blue resize-none placeholder:text-gray-400"
+                placeholder="Write your justification here..."
+                rows="4"
+                class="w-full text-sm px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 focus:bg-white focus:border-orbit-blue outline-none transition-all resize-none font-medium text-gray-900"
               />
             </div>
           </div>
-
         </div>
 
-        <!-- Footer -->
-        <div class="px-7 py-4 border-t border-gray-100 shrink-0">
-          <!-- Step 2: Submit Decision (full-width) -->
+        <div class="px-8 py-6 bg-gray-50/50 border-t border-gray-100 flex items-center justify-between gap-4">
           <button
-            v-if="currentStep === 2"
-            @click="handleSubmit"
-            class="w-full py-3.5 bg-orbit-blue text-white font-black text-sm rounded-xl hover:bg-orbit-bgSec transition-colors"
+            v-if="currentStep > 0"
+            @click="currentStep--"
+            class="px-6 py-3 text-sm font-bold text-gray-500 hover:text-gray-900 transition-colors"
           >
-            Submit Decision
+            Previous
           </button>
+          <div v-else />
 
-          <!-- Steps 0 & 1: Save as Draft + Next -->
-          <div v-else class="grid grid-cols-2 gap-3">
+          <div class="flex gap-3">
             <button
               @click="$emit('close')"
-              class="py-3.5 border-2 border-orbit-blue text-orbit-blue font-black text-sm rounded-xl hover:bg-blue-50 transition-colors"
+              class="px-6 py-3 text-sm font-bold text-gray-400 hover:text-gray-600 transition-colors"
             >
-              Save as Draft
+              Cancel
             </button>
             <button
+              v-if="currentStep < 2"
               @click="currentStep++"
-              class="py-3.5 bg-orbit-blue text-white font-black text-sm rounded-xl hover:bg-orbit-bgSec transition-colors"
+              class="px-8 py-3 bg-gray-900 text-white font-bold text-sm rounded-xl hover:bg-gray-800 transition-all flex items-center gap-2"
             >
-              Next
+              Continue Review
+              <ChevronRight :size="16" />
+            </button>
+            <button
+              v-else
+              @click="handleSubmit"
+              class="px-8 py-3 bg-orbit-blue text-white font-bold text-sm rounded-xl shadow-lg shadow-orbit-blue/20 hover:bg-orbit-blue/90 transition-all"
+            >
+              Submit Decision
             </button>
           </div>
         </div>
@@ -232,11 +189,11 @@
 </template>
 
 <script setup>
-import { Check, ChevronDown, ChevronLeft, User, X } from 'lucide-vue-next'
-import { ref, watch } from 'vue'
+import { Check, ChevronDown, ChevronRight, User, X } from 'lucide-vue-next';
+import { ref, watch } from 'vue';
 
 const props = defineProps({
-  show:  { type: Boolean, default: false },
+  show: { type: Boolean, default: false },
   staff: {
     type: Object,
     default: () => ({
@@ -254,68 +211,66 @@ const props = defineProps({
 const emit = defineEmits(['close', 'submitted'])
 
 const steps = [
-  { label: 'Staff Information' },
-  { label: 'Appraisal Review' },
-  { label: 'Recommendation & Decision' },
+  { label: 'Verify Profile' },
+  { label: 'Check Appraisal' },
+  { label: 'Decision' },
 ]
 
-const currentStep   = ref(0)
+const currentStep = ref(0)
 const suggestedGrade = ref(15)
-const gradeComment  = ref('')
-const decision      = ref('Endorse')
+const decision = ref('Endorse')
 const decisionComment = ref('')
 
+const getInitials = (name) => {
+  if (!name) return '??';
+  return name.trim().split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+}
+
 watch(() => props.show, (v) => {
-  if (v) {
-    currentStep.value    = 0
-    suggestedGrade.value = 15
-    gradeComment.value   = ''
-    decision.value       = 'Endorse'
-    decisionComment.value = ''
-  }
+  if (v) currentStep.value = 0;
 })
 
 function handleSubmit() {
   emit('submitted', {
     staffId: props.staff.staffId,
     suggestedGrade: suggestedGrade.value,
-    gradeComment: gradeComment.value,
     decision: decision.value,
     decisionComment: decisionComment.value,
   })
+  // Closes modal immediately
   emit('close')
 }
 </script>
 
 <style scoped>
-.promo-slider {
+.modern-slider {
   -webkit-appearance: none;
-  appearance: none;
   width: 100%;
-  height: 4px;
-  border-radius: 9999px;
-  background: linear-gradient(to right, #3a974c var(--val, 37.5%), #e2e8f0 var(--val, 37.5%));
-  cursor: pointer;
+  height: 6px;
+  background: #f3f4f6;
+  border-radius: 10px;
   outline: none;
+  background-image: linear-gradient(#2563eb, #2563eb);
+  background-size: var(--val) 100%;
+  background-repeat: no-repeat;
 }
-.promo-slider::-webkit-slider-thumb {
+.modern-slider::-webkit-slider-thumb {
   -webkit-appearance: none;
-  appearance: none;
-  width: 18px;
-  height: 18px;
+  height: 20px;
+  width: 20px;
   border-radius: 50%;
-  background: white;
-  border: 2.5px solid #3a974c;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+  background: #ffffff;
   cursor: pointer;
+  border: 2px solid #2563eb;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
 }
-.promo-slider::-moz-range-thumb {
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background: white;
-  border: 2.5px solid #3a974c;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
-  cursor: pointer;
+
+.animate-in {
+  animation: slideIn 0.4s ease-out forwards;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 </style>

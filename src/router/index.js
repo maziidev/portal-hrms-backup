@@ -32,15 +32,6 @@ import AssignedStaffEvaluation from "@/Pages/External-Accessor/AssignedStaffEval
 import Evaluation from "@/Pages/External-Accessor/Evaluation.vue";
 import Evaluation_Summary from "@/Pages/External-Accessor/Evaluation_Summary.vue";
 import ExternalAccessorDashboard from "@/Pages/External-Accessor/ExternalAccessorDashboard.vue";
-import HodActiveLeaves from "@/Pages/HOD/HodActiveLeaves.vue";
-import HodAppraisal from "@/Pages/HOD/HodAppraisal.vue";
-import HodDashboard from "@/Pages/HOD/HodDashboard.vue";
-import HodLeaveBalanceReport from "@/Pages/HOD/HodLeaveBalanceReport.vue";
-import HodLeaveManagment from "@/Pages/HOD/HodLeaveManagment.vue";
-import HodPromotion_Career_Progression from "@/Pages/HOD/HodPromotion_Career_Progression.vue";
-import HodPromotionSummary from "@/Pages/HOD/HodPromotionSummary.vue";
-import HodStaffRecordDetails from "@/Pages/HOD/HodStaffRecordDetails.vue";
-import HodStaffRecords from "@/Pages/HOD/HodStaffRecords.vue";
 import NotFound from "@/Pages/NotFound.vue";
 
 
@@ -189,64 +180,7 @@ const router = createRouter({
       ],
     },
 
-    // HOD
-    {
-      path: "/hod",
-      component: HodDashboard,
-      name: "hod",
-      meta: {
-        requiresAuth: true,
-        roles: ["hod"],
-      },
-      children: [
-        {
-          path: "staff-records",
-          component: HodStaffRecords,
-          name: "hod-staff-records",
-        },
-        {
-          path: "staff-records/:id",
-          component: HodStaffRecordDetails,
-          name: "hod-staff-record-details",
-          props: true,
-        },
-        {
-          path: "research-publication",
-          component: ReasearchPublication,
-          name: "hod-research-publication",
-        },
-        {
-          path: "appraisal",
-          component: HodAppraisal,
-          name: "hod-appraisal",
-        },
-        {
-          path: "leave-management",
-          component: HodLeaveManagment,
-          name: "hod-leave-management",
-        },
-        {
-          path: "leave-management/active-leaves",
-          component: HodActiveLeaves,
-          name: "hod-leave-management-active-leaves",
-        },
-        {
-          path: "leave-management/leave-balance-report",
-          component: HodLeaveBalanceReport,
-          name: "hod-leave-management-leave-balance-report",
-        },
-        {
-          path: "promotion-career-progression",
-          component: HodPromotion_Career_Progression,
-          name: "hod-promotion-career-progression",
-        },
-        {
-          path: "promotion-summary",
-          component: HodPromotionSummary,
-          name: "hod-promotion-summary",
-        },
-      ],
-    },
+
 
     // DAP
     {

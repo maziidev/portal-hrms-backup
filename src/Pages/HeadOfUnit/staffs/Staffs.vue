@@ -1,246 +1,377 @@
 <template>
-  <section class="px-2 lg:px-8 space-y-8">
-
-    <!-- Session / Semester / Date / Time -->
+  <section class="px-2 lg:px-8 space-y-8 pb-10">
     <SessionSemesterCard />
 
     <div class="px-6 space-y-8">
+      <n-spin :show="loadingStats">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <template v-for="stat in summaryStats" :key="stat.key">
+            <div v-if="stat.primary"
+              class="bg-orbit-blue rounded-3xl px-8 py-7 text-white shadow-2xl relative overflow-hidden group transition-transform hover:scale-[1.01]">
+              <div class="absolute -right-4 -bottom-4 w-24 h-24 bg-white/5 rounded-full blur-2xl"></div>
+              <div class="relative z-10 flex flex-col justify-between h-full">
+                <div class="flex items-center space-x-2 opacity-60">
+                  <div class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></div>
+                  <span class="text-[10px] font-black uppercase tracking-widest">{{ stat.label }}</span>
+                </div>
+                <div class="mt-4">
+                  <h3 class="text-5xl font-black tracking-tighter leading-none">{{ stat.value.toLocaleString() }}</h3>
+                  <p class="text-[10px] font-bold text-blue-200/40 uppercase mt-2 tracking-widest italic">Live Personnel</p>
+                </div>
+              </div>
+            </div>
 
-      <!-- Summary Stats -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div class="bg-orbit-bg rounded-2xl px-7 py-5 text-white shadow-lg flex items-center justify-between">
-          <span class="text-sm font-bold opacity-80">Active Staff</span>
-          <span class="text-3xl font-black">1,240</span>
+            <div v-else
+              class="bg-white rounded-3xl border border-gray-100 shadow-sm px-8 py-7 flex flex-col justify-between hover:shadow-md transition-all group">
+              <span class="text-[10px] font-black text-gray-400 uppercase tracking-widest">{{ stat.label }}</span>
+              <div class="mt-4 flex items-end justify-between">
+                <span class="text-4xl font-black text-orbit-bg tracking-tighter">{{ stat.value }}</span>
+                <div class="w-10 h-10 rounded-2xl bg-gray-50 flex items-center justify-center group-hover:bg-blue-50 transition-colors">
+                   <div class="w-1.5 h-1.5 rounded-full bg-gray-200 group-hover:bg-blue-400"></div>
+                </div>
+              </div>
+            </div>
+          </template>
         </div>
-        <div v-for="stat in summaryStats" :key="stat.label" class="bg-white rounded-2xl border border-gray-100 shadow-sm px-7 py-5 flex items-center justify-between">
-          <span class="text-sm font-semibold text-gray-500">{{ stat.label }}</span>
-          <span class="text-3xl font-black text-orbit-bg">{{ stat.value }}</span>
+      </n-spin>
+
+      <div class="bg-white rounded-[2rem] shadow-sm border border-gray-100 overflow-hidden">
+        <div class="p-8 border-b border-gray-50 bg-white">
+          <div class="flex flex-col xl:flex-row xl:items-center justify-between gap-6">
+            <div>
+              <h4 class="text-3xl font-black text-orbit-bg tracking-tighter uppercase italic leading-none">
+                Unit Directory
+              </h4>
+              <p class="text-[10px] font-bold text-gray-400 uppercase tracking-[0.3em] mt-3">
+                Personnel Management & Monitoring
+              </p>
+            </div>
+
+            <div class="flex flex-wrap items-center gap-3">
+              <n-input v-model:value="searchQuery" placeholder="SEARCH NAME OR ID..." size="large" clearable style="width: 220px" class="custom-input">
+                <template #prefix><Search :size="16" class="text-gray-400" /></template>
+              </n-input>
+
+              <n-select v-model:value="filters.category" :options="categoryOptions" placeholder="CADRE" clearable size="large" style="width: 160px" />
+              <n-select v-model:value="filters.status" :options="statusOptions" placeholder="STATUS" clearable size="large" style="width: 160px" />
+
+              <n-button type="primary" size="large" @click="handleExport" class="orbit-btn-header" :loading="exporting">
+                <template #icon><Upload :size="18" /></template>
+                GENERATE PDF
+              </n-button>
+            </div>
+          </div>
         </div>
-      </div>
 
-      <!-- Directory Header -->
-      <div class="flex items-center justify-between flex-wrap gap-4">
-        <h2 class="text-xl font-black text-orbit-bg tracking-tight">All Staff Directory</h2>
-        <button class="flex items-center gap-2 border border-orbit-blue text-orbit-blue font-bold text-sm rounded-xl px-5 py-2.5 hover:bg-orbit-blue hover:text-white transition-colors">
-          <Upload :size="15" />
-          Export Staff List
-        </button>
-      </div>
+        <div class="w-full">
+          <n-data-table
+            remote
+            :loading="loadingTable"
+            :columns="columns"
+            :data="staffData"
+            :bordered="false"
+            :scroll-x="1300"
+            :row-props="rowProps"
 
-      <!-- Filters Row -->
-      <div class="flex flex-wrap items-center gap-3">
-        <!-- Search -->
-        <div class="relative flex-1 min-w-[220px] max-w-sm">
-          <Search :size="14" class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
-          <input
-            v-model="searchQuery"
-            type="text"
-            placeholder="by name, ID, or role"
-            class="w-full pl-9 pr-4 py-2.5 text-sm rounded-full border border-gray-200 bg-white focus:outline-none focus:border-orbit-blue"
+            @update:page="handlePageChange"
           />
         </div>
 
-        <!-- Dropdowns -->
-        <button v-for="f in filters" :key="f" class="flex items-center gap-1.5 text-sm text-gray-600 font-semibold border border-gray-200 bg-white rounded-lg px-4 py-2.5 hover:border-orbit-blue transition-colors">
-          {{ f }} <ChevronDown :size="13" />
-        </button>
+        <div class="p-8 border-t border-gray-50 flex flex-col lg:flex-row justify-between items-center gap-6 bg-gray-50/30">
+          <n-pagination
+            v-model:page="pagination.page"
+            :item-count="pagination.itemCount"
+            v-model:page-size="pagination.pageSize"
+            show-size-picker
+            :page-sizes="[7, 14, 21]"
+            @update:page="handlePageChange"
+            @update:page-size="handlePageSizeChange"
+          />
 
-        <!-- Date Range -->
-        <button class="flex items-center gap-1.5 text-sm text-gray-600 font-semibold border border-gray-200 bg-white rounded-lg px-4 py-2.5 hover:border-orbit-blue transition-colors">
-          Date Range <CalendarDays :size="14" />
-        </button>
-      </div>
-
-      <!-- Table -->
-      <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
-        <div class="overflow-x-auto">
-          <table class="w-full text-sm">
-            <thead class="border-b border-gray-100">
-              <tr>
-                <th
-                  v-for="col in columns"
-                  :key="col.key"
-                  class="text-left text-[10px] font-black uppercase tracking-widest text-gray-400 px-5 py-4 whitespace-nowrap"
-                >
-                  {{ col.label }}
-                  <ChevronDown :size="9" class="inline ml-0.5 opacity-60" />
-                </th>
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-gray-50">
-              <tr
-                v-for="staff in paginatedStaff"
-                :key="staff.id"
-                class="hover:bg-orbit-light/60 cursor-pointer transition-colors"
-                @click="goToDetail(staff.id)"
-              >
-                <td class="px-5 py-4 font-mono text-xs font-bold text-orbit-blue">{{ staff.staffId }}</td>
-                <td class="px-5 py-4 font-semibold text-orbit-bg">{{ staff.name }}</td>
-                <td class="px-5 py-4 text-gray-600">{{ staff.position }}</td>
-                <td class="px-5 py-4 text-gray-600">{{ staff.cadre }}</td>
-                <td class="px-5 py-4 text-gray-600">{{ staff.subunit }}</td>
-                <td class="px-5 py-4 text-gray-600">{{ staff.employmentStatus }}</td>
-                <td class="px-5 py-4">
-                  <div class="flex items-center gap-2 text-gray-500">
-                    <span class="w-4 h-4 rounded bg-orbit-blue/10 flex items-center justify-center shrink-0">
-                      <CalendarDays :size="9" class="text-orbit-blue" />
-                    </span>
-                    {{ staff.lastPromotion }}
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <!-- Pagination -->
-        <div class="flex items-center justify-between px-5 py-4 border-t border-gray-100 flex-wrap gap-3">
-          <div class="flex items-center gap-2 text-sm text-gray-600">
-            <span>Showing</span>
-            <select
-              v-model="pageSize"
-              class="border border-gray-200 rounded-lg px-2 py-1 text-sm font-semibold focus:outline-none focus:border-orbit-blue"
-              @change="currentPage = 1"
-            >
-              <option v-for="n in [10, 20, 50]" :key="n" :value="n">{{ n }}</option>
-            </select>
-            <span>of {{ filteredStaff.length }}</span>
-          </div>
-
-          <div class="flex items-center gap-1">
-            <button
-              @click="currentPage--"
-              :disabled="currentPage === 1"
-              class="w-8 h-8 rounded-lg border border-gray-200 flex items-center justify-center text-gray-400 hover:border-orbit-blue hover:text-orbit-blue disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
-            >
-              <ChevronLeft :size="14" />
-            </button>
-
-            <button
-              v-for="p in visiblePages"
-              :key="p"
-              @click="currentPage = p"
-              :class="[
-                'w-8 h-8 rounded-lg text-sm font-bold transition-colors',
-                currentPage === p
-                  ? 'bg-orbit-blue text-white shadow'
-                  : 'border border-gray-200 text-gray-500 hover:border-orbit-blue hover:text-orbit-blue'
-              ]"
-            >
-              {{ p }}
-            </button>
-
-            <button
-              @click="currentPage++"
-              :disabled="currentPage === totalPages"
-              class="w-8 h-8 rounded-lg border border-gray-200 flex items-center justify-center text-gray-400 hover:border-orbit-blue hover:text-orbit-blue disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
-            >
-              <ChevronRight :size="14" />
+          <div class="flex items-center gap-3 bg-white p-2 px-4 rounded-2xl border border-gray-200 shadow-sm">
+            <span class="text-[10px] font-black text-orbit-bg uppercase tracking-tighter">Jump to</span>
+            <n-input-number
+              v-model:value="jumpToPageValue"
+              :min="1"
+              :max="Math.ceil(pagination.itemCount / pagination.pageSize) || 1"
+              size="small"
+              class="w-20"
+              :show-button="false"
+            />
+            <button @click="handleJumpToPage" class="bg-orbit-blue text-white px-5 py-2 rounded-xl text-[10px] font-black uppercase active:scale-95 transition-all">
+              Go
             </button>
           </div>
         </div>
       </div>
-
     </div>
   </section>
 </template>
 
 <script setup>
+// ... (Imports remain same)
+import { getAllStaff, getStaffSummaryStats } from "@/apis/management/staff"
 import SessionSemesterCard from '@/components/SessionSemesterCard.vue'
-import { CalendarDays, ChevronDown, ChevronLeft, ChevronRight, Search, Upload } from 'lucide-vue-next'
-import { computed, ref } from 'vue'
+import jsPDF from 'jspdf'
+import autoTable from 'jspdf-autotable'
+import { Calendar, ChevronRight, Search, Upload } from 'lucide-vue-next'
+import { NButton, NDataTable, NInput, NInputNumber, NPagination, NSelect, NSpin, NTag, useMessage } from 'naive-ui'
+import { computed, h, onMounted, reactive, ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
+const message = useMessage()
 
-// ── Summary ──────────────────────────────────────────────────────────────────
-const summaryStats = [
-  { label: 'On Probation',   value: '1,240' },
-  { label: 'On Study Leave', value: '1,240' },
-  { label: 'Retired',        value: '1,240' },
-]
-
-// ── Filters ───────────────────────────────────────────────────────────────────
-const filters = ['Category', 'Role', 'Status']
+// States
+const loadingStats = ref(true)
+const loadingTable = ref(false)
+const exporting = ref(false)
+const jumpToPageValue = ref(1)
 const searchQuery = ref('')
+const filters = reactive({ category: null, status: null })
+const rawStats = ref(null)
+const staffData = ref([])
 
-// ── Table columns ─────────────────────────────────────────────────────────────
+// Enriched pagination state
+const pagination = reactive({
+  page: 1,
+  pageSize: 7,
+  itemCount: 0,
+  prefix: (info) => h('span', { class: 'text-[10px] font-bold text-gray-400 uppercase tracking-widest' }, `Total: ${info.itemCount}`)
+})
+
+// ... (Columns definition remains same)
 const columns = [
-  { key: 'staffId',          label: 'Staff ID'          },
-  { key: 'name',             label: 'Name'              },
-  { key: 'position',         label: 'Position'          },
-  { key: 'cadre',            label: 'Cadre'             },
-  { key: 'subunit',          label: 'Subunit'           },
-  { key: 'employmentStatus', label: 'Employment Status' },
-  { key: 'lastPromotion',    label: 'Last Promotion'    },
+  {
+    title: 'Staff ID',
+    key: 'id',
+    render(row) {
+      const val = row.staff_id || row.id
+      return h('span', { class: 'font-mono text-[11px] font-black text-blue-600 bg-blue-50 px-2 py-1 rounded-lg border border-blue-100' }, `ORBIT-${String(val).padStart(4, '0')}`)
+    }
+  },
+  {
+    title: 'Full Name',
+    key: 'full_name',
+    render: (row) => h('span', { class: 'font-black text-orbit-bg uppercase tracking-tighter' }, row.full_name || '-')
+  },
+  {
+    title: 'Position',
+    key: 'position',
+    render: (row) => h('span', { class: 'font-bold text-gray-500 italic text-[11px]' }, row.position || '-')
+  },
+  {
+    title: 'Cadre',
+    key: 'cadre',
+    render: (row) => h('span', { class: 'font-black text-gray-400 uppercase text-[9px] tracking-widest' }, row.cadre || (row.is_academic ? 'Academic' : 'Non-Academic'))
+  },
+  {
+    title: 'Status',
+    key: 'employment_status',
+    render: (row) => {
+      const status = row.employment_status || row.employment_type || '-'
+      const type = status.toLowerCase().includes('full') ? 'success' : 'warning'
+      return h(NTag, { bordered: false, type, round: true, class: 'font-black uppercase text-[9px] px-5 py-0.5 tracking-tighter' }, { default: () => status })
+    }
+  },
+  {
+    title: 'Last Promotion',
+    key: 'last_promotion',
+    render: (row) => h('div', { class: 'flex items-center space-x-2' }, [
+      h(Calendar, { size: 14, class: 'text-gray-300' }),
+      h('span', { class: 'font-black text-gray-400 text-[10px] tracking-tighter' }, row.last_promotion || 'N/A')
+    ])
+  },
+  {
+    title: 'Action',
+    key: 'actions',
+    align: 'right',
+    fixed: 'right',
+    render(row) {
+      return h(NButton, {
+        size: 'medium',
+        type: 'primary',
+        strong: true,
+        class: 'orbit-view-btn',
+        onClick: (e) => {
+          e.stopPropagation()
+          router.push(`/unit_head/staffs/${row.id}`)
+        }
+      }, {
+        default: () => 'View',
+        icon: () => h(ChevronRight, { size: 16 })
+      })
+    }
+  }
 ]
 
-// ── Dummy data ────────────────────────────────────────────────────────────────
-const allStaff = ref([
-  { id: 1,  staffId: 'ORBIT-0001', name: 'Prof. John A. Doe',     position: 'Senior Records Officer', cadre: 'Senior',   subunit: 'Records',    employmentStatus: 'Full-Time', lastPromotion: '05 Aug 2005' },
-  { id: 2,  staffId: 'ORBIT-0002', name: 'Mr. Emmanuel Udo',      position: 'Admin Clerk',            cadre: 'Junior',   subunit: 'Exams',      employmentStatus: 'Full-Time', lastPromotion: '05 Aug 2002' },
-  { id: 3,  staffId: 'ORBIT-0002', name: 'Dr. Adewale Johnson',   position: 'Secretary',              cadre: 'Senior',   subunit: 'Admissions', employmentStatus: 'Full-Time', lastPromotion: '05 Aug 2002' },
-  { id: 4,  staffId: 'ORBIT-0002', name: 'Engr. Fatima Sule',     position: 'Contract Staff',         cadre: 'Contract', subunit: 'Exams',      employmentStatus: 'Full-Time', lastPromotion: '05 Aug 1980' },
-  { id: 5,  staffId: 'ORBIT-0002', name: 'Mr. Emmanuel Udo',      position: 'Senior Records Officer', cadre: 'Senior',   subunit: 'Records',    employmentStatus: 'Full-Time', lastPromotion: '05 Aug 2002' },
-  { id: 6,  staffId: 'ORBIT-0002', name: 'Prof. John A. Doe',     position: 'Admin Clerk',            cadre: 'Junior',   subunit: 'Exams',      employmentStatus: 'Full-Time', lastPromotion: '05 Aug 2002' },
-  { id: 7,  staffId: 'ORBIT-0002', name: 'Prof. John A. Doe',     position: 'Admin Clerk',            cadre: 'Junior',   subunit: 'Exams',      employmentStatus: 'Full-Time', lastPromotion: '05 Aug 2002' },
-  { id: 8,  staffId: 'ORBIT-0002', name: 'Prof. John A. Doe',     position: 'Secretary',              cadre: 'Senior',   subunit: 'Admissions', employmentStatus: 'Contract',  lastPromotion: '05 Aug 2002' },
-  { id: 9,  staffId: 'ORBIT-0002', name: 'Prof. John A. Doe',     position: 'Secretary',              cadre: 'Senior',   subunit: 'HOD',        employmentStatus: 'Contract',  lastPromotion: '05 Aug 2002' },
-  { id: 10, staffId: 'ORBIT-0002', name: 'Prof. John A. Doe',     position: 'Contract Staff',         cadre: 'Contract', subunit: 'Exams',      employmentStatus: 'Visiting',  lastPromotion: '05 Aug 2002' },
-  { id: 11, staffId: 'ORBIT-0003', name: 'Dr. Ada Nwosu',         position: 'Senior Lecturer',        cadre: 'Senior',   subunit: 'Records',    employmentStatus: 'Full-Time', lastPromotion: '12 Jan 2019' },
-  { id: 12, staffId: 'ORBIT-0004', name: 'Mrs. Kemi Okafor',      position: 'Principal Officer',      cadre: 'Senior',   subunit: 'Registry',   employmentStatus: 'Full-Time', lastPromotion: '03 Mar 2021' },
-  { id: 13, staffId: 'ORBIT-0005', name: 'Mr. Emeka Eze',         position: 'Admin Officer',          cadre: 'Junior',   subunit: 'Finance',    employmentStatus: 'Full-Time', lastPromotion: '07 Jun 2018' },
-  { id: 14, staffId: 'ORBIT-0006', name: 'Prof. Bola Adeyemi',    position: 'Head of Unit',           cadre: 'Senior',   subunit: 'Admissions', employmentStatus: 'Full-Time', lastPromotion: '22 Nov 2020' },
-  { id: 15, staffId: 'ORBIT-0007', name: 'Dr. Ngozi Chukwu',      position: 'Secretary',              cadre: 'Junior',   subunit: 'Exams',      employmentStatus: 'Full-Time', lastPromotion: '15 Aug 2017' },
-  { id: 16, staffId: 'ORBIT-0008', name: 'Engr. Suleiman Yusuf',  position: 'Technical Officer',      cadre: 'Contract', subunit: 'ICT',        employmentStatus: 'Contract',  lastPromotion: '01 Feb 2023' },
-  { id: 17, staffId: 'ORBIT-0009', name: 'Mrs. Aisha Musa',       position: 'Data Entry Clerk',       cadre: 'Junior',   subunit: 'Records',    employmentStatus: 'Full-Time', lastPromotion: '10 Oct 2015' },
-  { id: 18, staffId: 'ORBIT-0010', name: 'Dr. Chinedu Obi',       position: 'Research Officer',       cadre: 'Senior',   subunit: 'Research',   employmentStatus: 'Full-Time', lastPromotion: '19 May 2022' },
-  { id: 19, staffId: 'ORBIT-0011', name: 'Miss. Fola Taiwo',      position: 'Admin Clerk',            cadre: 'Junior',   subunit: 'Finance',    employmentStatus: 'Visiting',  lastPromotion: '28 Jul 2016' },
-  { id: 20, staffId: 'ORBIT-0012', name: 'Prof. Ibrahim Lawal',   position: 'Senior Lecturer',        cadre: 'Senior',   subunit: 'HOD',        employmentStatus: 'Full-Time', lastPromotion: '30 Sep 2019' },
-  { id: 21, staffId: 'ORBIT-0013', name: 'Mr. Tunde Bakare',      position: 'Admin Officer',          cadre: 'Junior',   subunit: 'Admissions', employmentStatus: 'Full-Time', lastPromotion: '14 Dec 2014' },
-  { id: 22, staffId: 'ORBIT-0014', name: 'Dr. Grace Bello',       position: 'Lecturer II',            cadre: 'Senior',   subunit: 'Registry',   employmentStatus: 'Full-Time', lastPromotion: '09 Apr 2021' },
-  { id: 23, staffId: 'ORBIT-0015', name: 'Mr. Seun Adeleke',      position: 'Store Officer',          cadre: 'Junior',   subunit: 'Finance',    employmentStatus: 'Full-Time', lastPromotion: '03 Jan 2013' },
-  { id: 24, staffId: 'ORBIT-0016', name: 'Mrs. Patience Igwe',    position: 'Principal Secretary',    cadre: 'Senior',   subunit: 'Registry',   employmentStatus: 'Full-Time', lastPromotion: '17 Jun 2020' },
-  { id: 25, staffId: 'ORBIT-0017', name: 'Dr. Aminu Garba',       position: 'Research Fellow',        cadre: 'Senior',   subunit: 'Research',   employmentStatus: 'Contract',  lastPromotion: '25 Feb 2022' },
-  { id: 26, staffId: 'ORBIT-0018', name: 'Miss. Chisom Okafor',   position: 'Library Officer',        cadre: 'Junior',   subunit: 'Library',    employmentStatus: 'Full-Time', lastPromotion: '11 Nov 2018' },
-  { id: 27, staffId: 'ORBIT-0019', name: 'Mr. Biodun Fasanya',    position: 'IT Support',             cadre: 'Contract', subunit: 'ICT',        employmentStatus: 'Contract',  lastPromotion: '08 Aug 2023' },
-  { id: 28, staffId: 'ORBIT-0020', name: 'Prof. Yetunde Coker',   position: 'Deputy Registrar',       cadre: 'Senior',   subunit: 'Registry',   employmentStatus: 'Full-Time', lastPromotion: '02 Mar 2017' },
-  { id: 29, staffId: 'ORBIT-0021', name: 'Dr. Felix Udo',         position: 'Lecturer I',             cadre: 'Senior',   subunit: 'Exams',      employmentStatus: 'Full-Time', lastPromotion: '16 Jul 2019' },
-])
+const fetchStaffList = async () => {
+  loadingTable.value = true
+  try {
+    const res = await getAllStaff({
+      page: pagination.page,
+      page_size: pagination.pageSize,
+      search: searchQuery.value,
+      employment_type: filters.status,
+      dept_code: filters.category
+    })
 
-// ── Filtering & Pagination ────────────────────────────────────────────────────
-const filteredStaff = computed(() => {
-  const q = searchQuery.value.toLowerCase()
-  if (!q) return allStaff.value
-  return allStaff.value.filter(
-    (s) =>
-      s.staffId.toLowerCase().includes(q) ||
-      s.name.toLowerCase().includes(q) ||
-      s.position.toLowerCase().includes(q)
-  )
-})
+    const responseData = res.data || res
 
-const pageSize = ref(10)
-const currentPage = ref(1)
-const totalPages = computed(() => Math.ceil(filteredStaff.value.length / pageSize.value))
+    // Handle both wrapped and flat responses
+    staffData.value = responseData.results || (Array.isArray(responseData) ? responseData : [])
 
-const paginatedStaff = computed(() => {
-  const start = (currentPage.value - 1) * pageSize.value
-  return filteredStaff.value.slice(start, start + pageSize.value)
-})
+    // Fallback if backend doesn't provide 'count'
+    pagination.itemCount = responseData.count || staffData.value.length
 
-const visiblePages = computed(() => {
-  const total = totalPages.value
-  const current = currentPage.value
-  const pages = []
-  const start = Math.max(1, current - 2)
-  const end = Math.min(total, start + 4)
-  for (let i = start; i <= end; i++) pages.push(i)
-  return pages
-})
-
-// ── Navigation ────────────────────────────────────────────────────────────────
-const goToDetail = (id) => {
-  router.push(`/unit_head/staffs/${id}`)
+  } catch (err) {
+    message.error("Failed to load staff list")
+  } finally {
+    loadingTable.value = false
+  }
 }
+
+// Handlers for pagination updates
+const handlePageChange = (page) => {
+  pagination.page = page
+  fetchStaffList()
+}
+
+const handlePageSizeChange = (pageSize) => {
+  pagination.pageSize = pageSize
+  pagination.page = 1 // Reset to first page when density changes
+  fetchStaffList()
+}
+
+const handleJumpToPage = () => {
+  const max = Math.ceil(pagination.itemCount / pagination.pageSize)
+  if (jumpToPageValue.value >= 1 && jumpToPageValue.value <= max) {
+    pagination.page = jumpToPageValue.value
+    fetchStaffList()
+  }
+}
+
+// ... (Rest of logic: Export, rowProps, watch, onMounted)
+const fetchDashboardData = async () => {
+  loadingStats.value = true
+  try {
+    const res = await getStaffSummaryStats()
+    rawStats.value = res.data || res
+  } finally {
+    loadingStats.value = false
+  }
+}
+
+const handleExport = async () => {
+  if (!staffData.value.length) return message.warning("No data to export")
+  exporting.value = true
+  try {
+    const doc = jsPDF({ orientation: 'landscape' })
+    const body = staffData.value.map(row => [
+      `ORBIT-${String(row.staff_id || row.id).padStart(4, '0')}`,
+      row.full_name?.toUpperCase() || '-',
+      row.position || '-',
+      row.cadre || (row.is_academic ? 'Academic' : 'Non-Academic'),
+      (row.employment_status || row.employment_type || '-').toUpperCase(),
+      row.last_promotion || 'N/A'
+    ])
+
+    autoTable(doc, {
+      startY: 20,
+      head: [['STAFF ID', 'FULL NAME', 'DESIGNATION', 'CADRE', 'STATUS', 'LAST PROMOTION']],
+      body: body,
+      theme: 'grid',
+      headStyles: { fillColor: [0, 51, 102], textColor: [255, 255, 255], fontStyle: 'bold' },
+      styles: { fontSize: 8 }
+    })
+
+    doc.save(`Orbit_Directory_${Date.now()}.pdf`)
+    message.success("PDF Exported Successfully")
+  } catch (e) {
+    message.error("Export failed")
+  } finally {
+    exporting.value = false
+  }
+}
+
+const rowProps = (row) => ({
+  style: 'cursor: pointer;',
+  onClick: () => router.push(`/unit_head/staffs/${row.id}`)
+})
+
+const categoryOptions = computed(() => {
+  const unique = [...new Set(staffData.value.map(s => s.cadre || (s.is_academic ? 'Academic' : 'Non-Academic')))]
+  return unique.filter(Boolean).map(c => ({ label: c.toUpperCase(), value: c }))
+})
+
+const statusOptions = computed(() => {
+  const unique = [...new Set(staffData.value.map(s => s.employment_status || s.employment_type))]
+  return unique.filter(Boolean).map(s => ({ label: s.toUpperCase(), value: s }))
+})
+
+watch([searchQuery, () => filters.status, () => filters.category], () => {
+  pagination.page = 1
+  fetchStaffList()
+})
+
+onMounted(() => {
+  fetchDashboardData()
+  fetchStaffList()
+})
+
+const summaryStats = computed(() => [
+  { key: 'active', label: 'ACTIVE', value: rawStats.value?.active_count || 0, primary: true },
+  { key: 'probation', label: 'PROBATION', value: rawStats.value?.probation_count || 0, primary: false },
+  { key: 'leave', label: 'STUDY LEAVE', value: rawStats.value?.study_leave || 0, primary: false },
+  { key: 'retired', label: 'RETIRED', value: rawStats.value?.retired_count || 0, primary: false },
+])
 </script>
+
+<style scoped>
+/* ... (Style remains same) ... */
+:deep(.n-data-table-td) { padding: 24px 16px !important; }
+:deep(.n-data-table-th) {
+  background-color: #fcfcfc !important;
+  font-size: 10px !important;
+  font-weight: 900 !important;
+  color: #94a3b8 !important;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  border-bottom: 2px solid #f1f5f9 !important;
+}
+.orbit-btn-header {
+  background-color: #003366 !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 14px !important;
+  font-weight: 900 !important;
+  letter-spacing: 0.05em !important;
+  padding: 0 28px !important;
+  box-shadow: 0 4px 14px 0 rgba(0, 51, 102, 0.2);
+  transition: all 0.3s ease;
+}
+.orbit-btn-header:hover {
+  background-color: #002244 !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px 0 rgba(0, 51, 102, 0.3);
+}
+.orbit-view-btn {
+  background-color: #003366 !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 12px !important;
+  padding: 0 20px !important;
+  font-size: 10px !important;
+  font-weight: 900 !important;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  transition: all 0.2s ease;
+}
+.orbit-view-btn:hover {
+  background-color: #002244 !important;
+  box-shadow: 0 4px 12px rgba(0, 34, 68, 0.25);
+}
+:deep(.n-input), :deep(.n-select .n-base-selection) {
+  border-radius: 14px !important;
+}
+</style>

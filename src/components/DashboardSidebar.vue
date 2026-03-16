@@ -112,7 +112,7 @@ const dynamicNavigation = computed(() => {
     const role = auth.role?.toLowerCase().trim();
 
     if (role === 'dean') return DEAN_NAV;
-    if (role === 'head_of_division') return HOD_NAV;
+    if (role === 'division_head') return HOD_NAV;
     if (role === 'unit_head') return HOU_NAV;
     if (role === 'vc') return VC_NAV;
     if (role === 'non_academic') return NON_ACADEMIC_NAV;

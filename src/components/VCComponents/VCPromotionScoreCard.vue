@@ -12,14 +12,14 @@
 
           <p class="text-xl text-orbit-accent font-bold mb-4">Total Promotion Applications</p>
           <p class="text-5xl font-black italic tracking-tighter">
-            {{ promoData.total_applications || 318 }}
+            {{ promoData.total_applications || 0 }}
           </p>
         </div>
 
         <div class="px-6 py-8 flex items-center justify-between">
           <p class="font-bold text-orbit-bg uppercase text-[10px] tracking-widest">Approved Promotions</p>
           <p class="text-3xl font-black text-orbit-blue/50 italic tracking-tighter">
-            {{ promoData.approved_promotions || 255 }}
+            {{ promoData.approved_promotions || 0 }}
           </p>
         </div>
       </div>
@@ -31,7 +31,7 @@
             <p class="text-orbit-bg font-bold uppercase text-[10px] tracking-widest">Pending Applications</p>
           </div>
           <p class="text-3xl font-black text-orbit-green italic tracking-tighter">
-            {{ promoData.pending_applications || 47 }}
+            {{ promoData.pending_applications || 0 }}
           </p>
         </div>
 
@@ -43,7 +43,7 @@
             <p class="text-orbit-bg font-bold uppercase text-[10px] tracking-widest">Average Time to Decision</p>
           </div>
           <p class="text-3xl font-black text-orbit-green italic tracking-tighter">
-            {{ promoData.avg_decision_days || 4.6 }}<span class="text-xs not-italic ml-1 opacity-40 uppercase">days</span>
+            {{ promoData.avg_decision_days || 0 }}<span class="text-xs not-italic ml-1 opacity-40 uppercase">days</span>
           </p>
         </div>
       </div>
@@ -55,7 +55,7 @@
             <p class="text-orbit-bg font-bold uppercase text-[10px] tracking-widest">Rejected Applications</p>
           </div>
           <p class="text-3xl font-black text-orbit-green italic tracking-tighter">
-            {{ promoData.rejected_applications || 16 }}
+            {{ promoData.rejected_applications || 0 }}
           </p>
         </div>
 
@@ -68,13 +68,13 @@
                 <p class="text-orbit-bg font-bold uppercase text-[10px] tracking-widest">Promotion Success Rate</p>
               </div>
             <p class="text-3xl font-black text-orbit-green italic tracking-tighter">
-              {{ promoData.success_rate || 80.2 }}%
+              {{ promoData.success_rate || 0 }}%
             </p>
           </div>
           <div class="h-1.5 w-full bg-gray-100 rounded-full overflow-hidden">
              <div
                class="h-full bg-orbit-green transition-all duration-1000"
-               :style="{ width: (promoData.success_rate || 80.2) + '%' }"
+               :style="{ width: (promoData.success_rate || 0) + '%' }"
              ></div>
           </div>
         </div>
@@ -85,8 +85,8 @@
 </template>
 
 <script setup>
-import { getFacultiesPromotionStats, getVCDashboardStats } from "@/apis/management/vc";
-import { onMounted, ref } from 'vue';
+import { getFacultiesPromotionStats } from "@/apis/management/vc";
+import { onMounted, ref } from "vue";
 
 const promoData = ref({
   total_applications: 0,
@@ -99,24 +99,43 @@ const promoData = ref({
 
 const init = async () => {
   try {
-    const [promoRes, dashRes] = await Promise.all([
-      getFacultiesPromotionStats().catch(() => ({ data: {} })),
-      getVCDashboardStats().catch(() => ({ data: {} }))
-    ]);
+    const { data } = await getFacultiesPromotionStats()
+
+    const faculties = data ?? []
+
+    const totalApplications = faculties.reduce(
+      (sum, f) => sum + (f.total_applications || 0),
+      0
+    )
+
+    const approved = faculties.reduce(
+      (sum, f) => sum + (f.approved_count || 0),
+      0
+    )
+
+    const pending = faculties.reduce(
+      (sum, f) => sum + (f.pending_count || 0),
+      0
+    )
+
+    const rejected = totalApplications - approved - pending
 
     promoData.value = {
-      ...promoRes.data,
-      total_applications: promoRes.data.total_applications || dashRes.data.total_staff_promotions || 318,
-      approved_promotions: promoRes.data.approved_promotions || dashRes.data.approved_promotions || 255,
-      pending_applications: promoRes.data.pending_applications || 47,
-      avg_decision_days: promoRes.data.avg_decision_days || 4.6,
-      rejected_applications: promoRes.data.rejected_applications || 16,
-      success_rate: promoRes.data.success_rate || 80.2
-    };
+      total_applications: totalApplications,
+      approved_promotions: approved,
+      pending_applications: pending,
+      rejected_applications: rejected > 0 ? rejected : 0,
+      avg_decision_days: 0,
+      success_rate:
+        totalApplications > 0
+          ? Number(((approved / totalApplications) * 100).toFixed(1))
+          : 0
+    }
+
   } catch (err) {
-    console.error("Promotion Stat Load Error:", err);
+    console.error("Promotion Stat Load Error:", err)
   }
-};
+}
 
 onMounted(init);
 </script>

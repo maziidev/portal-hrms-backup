@@ -1,46 +1,37 @@
 import DashboardLayout from "@/Layout/DashboardLayout.vue";
 
-import HeadOfDivisionDashboard from '@/Pages/HeadOfDivision/HeadOfDivisionDashboard.vue';
+// Use Dynamic Imports (Lazy Loading)
+const HeadOfDivisionDashboard = () => import('@/Pages/HeadOfDivision/HeadOfDivisionDashboard.vue');
 
 // appraisals
-import Appraisals from '@/Pages/HeadOfDivision/appraisal/Appraisals.vue';
-import AppraisalsMaintenance from '@/Pages/HeadOfDivision/appraisal/AppraisalsMaintenance.vue';
+const Appraisals = () => import('@/Pages/HeadOfDivision/appraisal/Appraisal.vue');
+const AppraisalsMaintenance = () => import('@/Pages/HeadOfDivision/appraisal/AppraisalsMaintenance.vue');
 
 // staff
-import StaffDetails from '@/Pages/HeadOfDivision/staffs/StaffDetails.vue';
-import Staffs from '@/Pages/HeadOfDivision/staffs/Staffs.vue';
-import StaffSubunit from '@/Pages/HeadOfDivision/staffs/StaffSubunit.vue';
+const StaffDetails = () => import('@/Pages/HeadOfDivision/staffs/StaffDetails.vue');
+const Staffs = () => import('@/Pages/HeadOfDivision/staffs/Staffs.vue');
+const StaffSubunit = () => import('@/Pages/HeadOfDivision/staffs/StaffSubunit.vue');
 
 // promotion
-import Promotion from '@/Pages/HeadOfDivision/promotion/Promotion.vue';
+const Promotion = () => import('@/Pages/HeadOfDivision/promotion/Promotion.vue');
 
 // leave
-import LeaveManagement from '@/Pages/HeadOfDivision/leave/LeaveManagement.vue';
-import Leaves from '@/Pages/HeadOfDivision/leave/Leaves.vue';
+const LeaveManagement = () => import('@/Pages/HeadOfDivision/leave/LeaveManagement.vue');
+const Leaves = () => import('@/Pages/HeadOfDivision/leave/Leaves.vue');
 
 export const headOfDivisionRoutes = {
-    path: '/head-of-division',
+    path: '/division_head',
     component: DashboardLayout,
     meta: { role: 'head-of-division', requiresAuth: true },
-
     children: [
         { path: '', name: 'HeadOfDivisionDashboard', component: HeadOfDivisionDashboard },
-
-        // staffs
         { path: 'staffs', name: 'Staffs', component: Staffs },
-        { path: 'staff-subunit/:id', name: 'StaffSubunit', component: StaffSubunit },
+        { path: 'staffs/subunit/:id', name: 'StaffSubunit', component: StaffSubunit },
         { path: 'staffs/:id', name: 'StaffDetails', component: StaffDetails },
-
-
-        // promotions
-        { path: 'promtion', name: 'Promotion', component: Promotion },
-
-        // leave
+        { path: 'promotion', name: 'Promotion', component: Promotion },
         { path: 'leaves', name: 'Leaves', component: Leaves },
-        { path: 'leave-management', name: 'LeaveManagement', component: LeaveManagement },
-
-        // appraisals
-        { path: 'appraisals', name: 'Appraisals', component: Appraisals },
-        { path: 'appraisals-maintenance', name: 'AppraisalsMaintenance', component: AppraisalsMaintenance },
+        { path: 'leaves/:id', name: 'LeaveManagement', component: LeaveManagement },
+        { path: 'appraisals', name: 'Appraisal', component: Appraisals },
+        { path: 'appraisals/unit/:id', name: 'AppraisalsMaintenance', component: AppraisalsMaintenance },
     ]
 };

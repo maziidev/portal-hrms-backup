@@ -10,13 +10,13 @@ const loading = ref(true);
 const fetchStats = async () => {
     try {
         loading.value = true;
-        // API call to the VC Stats endpoint
+
         const res = await getVCDashboardStats();
 
-        // Handle both { data: ... } and direct response structures
+
         stats.value = res.data || res;
 
-        console.log("VC Stats loaded successfully:", stats.value);
+        // console.log("VC Stats loaded successfully:", stats.value);
     } catch (err) {
         // Detailed error logging for debugging the 400/500 errors
         console.error("[VC Stats Error]:", {
@@ -39,7 +39,7 @@ onMounted(fetchStats);
     <div class="p-2">
         <div class="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-4 h-auto lg:h-[350px]">
 
-            <div class="md:col-span-2 md:row-span-2 bg-[#003366] rounded-[2.5rem] p-10 flex flex-col justify-between relative overflow-hidden group shadow-2xl shadow-blue-900/20">
+            <div class="md:col-span-2 md:row-span-2 bg-orbit-blue rounded-[2.5rem] p-10 flex flex-col justify-between relative overflow-hidden group shadow-2xl shadow-blue-900/20">
                 <div class="absolute -right-10 -top-10 w-64 h-64 bg-white/5 rounded-full blur-3xl group-hover:bg-white/10 transition-all duration-700"></div>
 
                 <div class="relative z-10">
@@ -49,7 +49,7 @@ onMounted(fetchStats);
                     </div>
                     <h3 class="text-white/60 text-sm font-bold mt-8 uppercase tracking-tight">Total Staff Appraised</h3>
                     <h1 class="text-white text-8xl font-black italic tracking-tighter mt-2 leading-none">
-                        {{ stats?.total_staff_appraised || '0' }}
+                         {{ stats?.total_staff ?? 0 }}
                     </h1>
                 </div>
 
@@ -69,7 +69,7 @@ onMounted(fetchStats);
                 </div>
                 <div>
                     <p class="text-gray-400 text-[10px] font-black uppercase tracking-widest">Pending Reviews</p>
-                    <p class="text-4xl font-black text-[#003366] tracking-tighter mt-1">{{ stats?.pending_reviews || '0' }}</p>
+                    <p class="text-4xl font-black text-orbit-bg tracking-tighter mt-1">{{ stats?.pending_appraisals ?? 0 }}</p>
                 </div>
             </div>
 
@@ -79,7 +79,7 @@ onMounted(fetchStats);
                 </div>
                 <div>
                     <p class="text-gray-400 text-[10px] font-black uppercase tracking-widest">Approved</p>
-                    <p class="text-4xl font-black text-[#003366] tracking-tighter mt-1">{{ stats?.approved_appraisals || '0' }}</p>
+                    <p class="text-4xl font-black text-orbit-bg tracking-tighter mt-1">{{ stats?.pending_appraisals ?? 0 }}</p>
                 </div>
             </div>
 
@@ -87,7 +87,9 @@ onMounted(fetchStats);
                 <div class="relative z-10">
                     <p class="text-gray-400 text-[10px] font-black uppercase tracking-widest">Departments Tracked</p>
                     <div class="flex items-baseline gap-2">
-                        <p class="text-5xl font-black text-[#003366] tracking-tighter mt-1">{{ stats?.departments_reviewed || '0' }}</p>
+                        <p class="text-5xl font-black text-orbit-bg tracking-tighter mt-1">
+                            {{ stats?.departments_reviewed ?? 0 }}
+                        </p>
                         <span class="text-xs font-bold text-gray-400">/ Total</span>
                     </div>
                 </div>

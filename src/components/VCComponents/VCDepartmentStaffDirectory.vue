@@ -38,7 +38,7 @@ const statusOptions = [
 
 // Table Columns
 const columns = [
-    { title: 'Staff ID', key: 'staff_id', render: (row) => h('span', { class: 'font-black text-[#003366]' }, row.staff_id) },
+    { title: 'Staff ID', key: 'staff_id', render: (row) => h('span', { class: 'font-black text-orbit-bg' }, row.staff_id) },
     { title: 'Name', key: 'full_name', render: (row) => h('span', { class: 'font-bold' }, row.full_name) },
     { title: 'Cadre', key: 'cadre' },
     { title: 'Rank', key: 'rank' },
@@ -111,14 +111,14 @@ onMounted(fetchRecords)
         <div class="p-6 md:p-8 border-b border-gray-50">
             <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
                 <div>
-                    <h4 class="text-2xl font-black text-[#003366] tracking-tighter uppercase italic leading-none">
+                    <h4 class="text-2xl font-black text-orbit-bg tracking-tighter uppercase italic leading-none">
                         Department Records
                     </h4>
                     <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-2">
                         Personnel Management System
                     </p>
                 </div>
-                <button class="bg-[#003366] text-white px-6 py-3 rounded-xl flex items-center justify-center gap-2 text-xs font-black uppercase tracking-widest hover:bg-[#002244] transition-all">
+                <button class="bg-orbit-blue text-white px-6 py-3 rounded-xl flex items-center justify-center gap-2 text-xs font-black uppercase tracking-widest hover:bg-[#002244] transition-all">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
                     Export Records
                 </button>
@@ -160,9 +160,9 @@ onMounted(fetchRecords)
             />
 
             <div class="flex items-center gap-3 bg-gray-100 p-1.5 pl-4 rounded-xl border border-gray-200">
-                <span class="text-[10px] font-black text-[#003366] uppercase tracking-tighter">Jump to Page</span>
+                <span class="text-[10px] font-black text-orbit-bg uppercase tracking-tighter">Jump to Page</span>
                 <n-input-number v-model:value="jumpToPageValue" :min="1" size="small" class="w-20" :show-button="false" />
-                <button @click="handleJumpToPage" class="bg-[#003366] text-white px-4 py-1.5 rounded-lg text-[10px] font-black hover:opacity-90 transition-all uppercase">
+                <button @click="handleJumpToPage" class="bg-orbit-blue text-white px-4 py-1.5 rounded-lg text-[10px] font-black hover:opacity-90 transition-all uppercase">
                     Go
                 </button>
             </div>

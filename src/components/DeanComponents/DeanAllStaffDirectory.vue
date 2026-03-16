@@ -92,7 +92,15 @@ const columns = [
 ]
 
 const fetchStaff = async () => {
-  if (!departmentId.value) return
+  const dId = departmentId.value
+
+  if (!dId) {
+    staffData.value = []
+    totalRecords.value = 0
+    message.warning('No valid department selected')
+    return
+  }
+
   loading.value = true
   try {
     const params = {
@@ -102,15 +110,28 @@ const fetchStaff = async () => {
       status: selectedStatus.value,
       role: selectedRole.value,
     }
+
     if (dateRange.value) {
       params.start_date = new Date(dateRange.value[0]).toISOString().split('T')[0]
       params.end_date = new Date(dateRange.value[1]).toISOString().split('T')[0]
     }
-    const { data } = await getDepartmentStaff(departmentId.value, params)
+
+    const { data } = await getDepartmentStaff(dId, params)
     staffData.value = data?.results || []
     totalRecords.value = data?.count || 0
+
+    if ((data?.results || []).length === 0) {
+      message.info('No staff found for this department')
+    }
   } catch (err) {
-    console.error('Fetch error:', err)
+    if (err.response?.status === 404) {
+      staffData.value = []
+      totalRecords.value = 0
+      message.warning('No department matches the given query')
+    } else {
+      console.error('Fetch error:', err)
+      message.error('Failed to fetch staff data')
+    }
   } finally {
     loading.value = false
   }

@@ -13,23 +13,30 @@ export const useAuthStore = defineStore("authstore", () => {
   // --- Getters ---
   const isLoggedIn = computed(() => !!token.value);
 
+  // High-level Organizational IDs
   const facultyId = computed(() => user.value?.staff?.faculty || user.value?.faculty || null);
   const departmentId = computed(() => user.value?.staff?.department || user.value?.department || null);
+  const unitId = computed(() => user.value?.staff?.unit || user.value?.unit || null);
+
+  /** * NEW: Division ID for Head of Division dashboard
+   * Checks both nested staff object and top-level user object
+   */
+  const divisionId = computed(() => user.value?.staff?.division || user.value?.division || null);
+
   const staffId = computed(() => user.value?.staff?.id || user.value?.id || null);
 
   // --- Actions ---
   const login = (roleParam, userParam, tokenParam) => {
-    // update reactive refs
     user.value = userParam;
     token.value = tokenParam;
     role.value = roleParam;
+
     localStorage.setItem("token", tokenParam);
     localStorage.setItem("user", JSON.stringify(userParam));
     localStorage.setItem("role", roleParam);
   };
 
   const logout = async () => {
-    const userId = user.value?.id;
     token.value = null;
     user.value = null;
     role.value = null;
@@ -42,14 +49,14 @@ export const useAuthStore = defineStore("authstore", () => {
   };
 
   const refreshSession = () => {
-    const storedToken = ref(localStorage.getItem("token"));
-    const storedUser = ref(localStorage.getItem("user"));
-    const storedRole = ref(localStorage.getItem("role"));
+    const storedToken = localStorage.getItem("token");
+    const storedUser = localStorage.getItem("user");
+    const storedRole = localStorage.getItem("role");
 
     if (storedToken && storedUser) {
-      token.value = storedToken.value;
-      user.value = JSON.parse(storedUser.value);
-      role.value = storedRole.value;
+      token.value = storedToken;
+      user.value = JSON.parse(storedUser);
+      role.value = storedRole;
     }
   };
 
@@ -66,6 +73,8 @@ export const useAuthStore = defineStore("authstore", () => {
     refreshSession,
     facultyId,
     departmentId,
+    divisionId,
     staffId,
+    unitId
   };
 });

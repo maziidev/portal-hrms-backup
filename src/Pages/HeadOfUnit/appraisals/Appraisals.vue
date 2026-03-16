@@ -1,406 +1,237 @@
 <template>
-  <section class="px-2 lg:px-8 space-y-8">
+  <div class="px-6 lg:px-10 py-6 space-y-8 bg-slate-50 min-h-screen">
 
-    <!-- Draft resume preview -->
-    <ContinueDraftModal
-      :show="showDraftModal"
-      :staff="selectedStaff"
-      @close="showDraftModal = false"
-      @discard="discardDraft"
-      @continue="openFormFromDraft"
-    />
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <n-card embedded :bordered="false" class="rounded-xl shadow-sm bg-white border border-slate-100">
+        <n-statistic label="Cycle Completion">
+          <template #prefix><CheckCircle2 :size="20" class="text-emerald-500 mr-2" /></template>
+          <span class="font-bold text-2xl text-slate-900">{{ completionRate }}%</span>
+        </n-statistic>
+      </n-card>
 
-    <!-- Full appraisal form -->
-    <AppraisalFormModal
-      :show="showModal"
-      :staff="selectedStaff"
-      :initial-step="selectedStaff.savedStep || 0"
-      @close="showModal = false"
-      @submit="handleSubmit"
-    />
+      <n-card embedded :bordered="false" class="rounded-xl shadow-sm bg-white border border-slate-100">
+        <n-statistic label="Total Staff">
+          <template #prefix><Users :size="20" class="text-blue-500 mr-2" /></template>
+          <span class="font-bold text-2xl text-slate-900">{{ staffList.length }}</span>
+        </n-statistic>
+      </n-card>
 
-    <SessionSemesterCard />
-
-    <div class="px-6 space-y-8">
-
-      <!-- Top Two Panels -->
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-
-        <!-- Completed Appraisals -->
-        <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
-          <div class="flex items-center justify-between px-5 py-4 border-b border-gray-50">
-            <h3 class="font-black text-orbit-bg text-sm tracking-tight">Completed Appraisals</h3>
-            <div class="flex items-center gap-1">
-              <button
-                @click="completedPage = Math.max(0, completedPage - 1)"
-                class="w-7 h-7 rounded-lg border border-gray-200 flex items-center justify-center text-gray-400 hover:border-orbit-blue hover:text-orbit-blue transition-colors disabled:opacity-30"
-                :disabled="completedPage === 0"
-              >
-                <ChevronLeft :size="13" />
-              </button>
-              <button
-                @click="completedPage = Math.min(completedTotalPages - 1, completedPage + 1)"
-                class="w-7 h-7 rounded-lg bg-orbit-blue flex items-center justify-center text-white hover:bg-orbit-bgSec transition-colors disabled:opacity-30"
-                :disabled="completedPage === completedTotalPages - 1"
-              >
-                <ChevronRight :size="13" />
-              </button>
-            </div>
-          </div>
-
-          <table class="w-full text-sm">
-            <thead>
-              <tr class="border-b border-gray-50">
-                <th v-for="col in completedColumns" :key="col" class="text-left text-[10px] font-black uppercase tracking-widest text-gray-400 px-5 py-3 whitespace-nowrap">
-                  {{ col }} <ChevronDown :size="8" class="inline ml-0.5 opacity-50" />
-                </th>
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-gray-50">
-              <tr v-for="r in paginatedCompleted" :key="r.name" class="hover:bg-orbit-light/50 transition-colors">
-                <td class="px-5 py-4 font-semibold text-orbit-bg">{{ r.name }}</td>
-                <td class="px-5 py-4 text-gray-500">{{ r.position }}</td>
-                <td class="px-5 py-4 font-bold text-orbit-bg">{{ r.rating }}</td>
-                <td class="px-5 py-4">
-                  <div class="flex items-center gap-1.5 text-gray-500">
-                    <span class="w-4 h-4 rounded bg-orbit-blue/10 flex items-center justify-center shrink-0">
-                      <CalendarDays :size="9" class="text-orbit-blue" />
-                    </span>
-                    {{ r.date }}
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <!-- Archived / Past Appraisals -->
-        <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
-          <div class="flex items-center justify-between px-5 py-4 border-b border-gray-50">
-            <h3 class="font-black text-orbit-bg text-sm tracking-tight">Archived / Past Appraisals</h3>
-            <div class="flex items-center gap-1">
-              <button
-                @click="archivedPage = Math.max(0, archivedPage - 1)"
-                class="w-7 h-7 rounded-lg border border-gray-200 flex items-center justify-center text-gray-400 hover:border-orbit-blue hover:text-orbit-blue transition-colors disabled:opacity-30"
-                :disabled="archivedPage === 0"
-              >
-                <ChevronLeft :size="13" />
-              </button>
-              <button
-                @click="archivedPage = Math.min(archivedTotalPages - 1, archivedPage + 1)"
-                class="w-7 h-7 rounded-lg bg-orbit-blue flex items-center justify-center text-white hover:bg-orbit-bgSec transition-colors disabled:opacity-30"
-                :disabled="archivedPage === archivedTotalPages - 1"
-              >
-                <ChevronRight :size="13" />
-              </button>
-            </div>
-          </div>
-
-          <table class="w-full text-sm">
-            <thead>
-              <tr class="border-b border-gray-50">
-                <th v-for="col in archivedColumns" :key="col" class="text-left text-[10px] font-black uppercase tracking-widest text-gray-400 px-5 py-3 whitespace-nowrap">
-                  {{ col }} <ChevronDown :size="8" class="inline ml-0.5 opacity-50" />
-                </th>
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-gray-50">
-              <tr v-for="r in paginatedArchived" :key="r.year" class="hover:bg-orbit-light/50 transition-colors">
-                <td class="px-5 py-4 font-bold text-orbit-bg">{{ r.year }}</td>
-                <td class="px-5 py-4 text-gray-600">{{ r.totalStaff }}</td>
-                <td class="px-5 py-4 font-semibold text-orbit-bg">{{ r.avgScore }}</td>
-                <td class="px-5 py-4">
-                  <button class="flex items-center gap-2 bg-orbit-blue text-white text-xs font-bold px-4 py-2 rounded-lg hover:bg-orbit-bgSec transition-colors">
-                    <Download :size="13" /> Download
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <!-- Active Appraisals -->
-      <div class="space-y-4">
-        <h2 class="text-xl font-black text-orbit-bg tracking-tight">Active Appraisals</h2>
-
-        <!-- Filters -->
-        <div class="flex flex-wrap items-center gap-3">
-          <div class="relative min-w-[200px]">
-            <Search :size="13" class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
-            <input
-              v-model="searchQuery"
-              type="text"
-              placeholder="by name or staff ID"
-              class="w-full pl-8 pr-4 py-2.5 text-sm rounded-full border border-gray-200 bg-white focus:outline-none focus:border-orbit-blue"
-            />
-          </div>
-          <button v-for="f in activeFilters" :key="f" class="flex items-center gap-1.5 text-sm text-gray-600 font-semibold border border-gray-200 bg-white rounded-lg px-4 py-2.5 hover:border-orbit-blue transition-colors">
-            {{ f }} <ChevronDown :size="13" />
-          </button>
-          <button class="flex items-center gap-1.5 text-sm text-gray-600 font-semibold border border-gray-200 bg-white rounded-lg px-4 py-2.5 hover:border-orbit-blue transition-colors">
-            Date Range <CalendarDays :size="14" />
-          </button>
-        </div>
-
-        <!-- Active Table -->
-        <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
-          <div class="overflow-x-auto">
-            <table class="w-full text-sm">
-              <thead>
-                <tr class="border-b border-gray-100">
-                  <th v-for="col in activeColumns" :key="col" class="text-left text-[10px] font-black uppercase tracking-widest text-gray-400 px-5 py-4 whitespace-nowrap">
-                    {{ col }} <ChevronDown :size="8" class="inline ml-0.5 opacity-50" />
-                  </th>
-                </tr>
-              </thead>
-              <tbody class="divide-y divide-gray-50">
-                <tr v-for="r in paginatedActive" :key="r.staffId" class="hover:bg-orbit-light/50 transition-colors">
-                  <td class="px-5 py-4 font-mono text-xs font-bold text-orbit-blue">{{ r.staffId }}</td>
-                  <td class="px-5 py-4 font-semibold text-orbit-bg whitespace-nowrap">{{ r.name }}</td>
-                  <td class="px-5 py-4 text-gray-500 whitespace-nowrap">{{ r.position }}</td>
-                  <td class="px-5 py-4">
-                    <div class="flex items-center gap-1.5 text-gray-500 whitespace-nowrap">
-                      <span class="w-4 h-4 rounded bg-orbit-blue/10 flex items-center justify-center shrink-0">
-                        <CalendarDays :size="9" class="text-orbit-blue" />
-                      </span>
-                      {{ r.period }}
-                    </div>
-                  </td>
-                  <td class="px-5 py-4">
-                    <div class="flex items-center gap-1.5 text-gray-500 whitespace-nowrap">
-                      <span v-if="r.lastUpdated !== '-'" class="w-4 h-4 rounded bg-orbit-blue/10 flex items-center justify-center shrink-0">
-                        <CalendarDays :size="9" class="text-orbit-blue" />
-                      </span>
-                      {{ r.lastUpdated }}
-                    </div>
-                  </td>
-                  <td class="px-5 py-4 font-semibold text-orbit-bg">{{ r.progress }}</td>
-                  <td class="px-5 py-4">
-                    <span :class="statusClass(r.status)" class="px-3 py-1.5 rounded-full text-[11px] font-bold whitespace-nowrap">
-                      {{ r.status }}
-                    </span>
-                  </td>
-                  <td class="px-5 py-4">
-                    <button
-                      :class="actionClass(r.action)"
-                      class="text-xs font-bold px-4 py-2 rounded-lg whitespace-nowrap transition-colors"
-                      @click="openModal(r)"
-                    >
-                      {{ r.action }}
-                    </button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <!-- Pagination -->
-          <div class="flex items-center justify-between px-5 py-4 border-t border-gray-100 flex-wrap gap-3">
-            <div class="flex items-center gap-2 text-sm text-gray-600">
-              <span>Showing</span>
-              <select
-                v-model="activePageSize"
-                class="border border-gray-200 rounded-lg px-2 py-1 text-sm font-semibold focus:outline-none focus:border-orbit-blue"
-                @change="activePage = 1"
-              >
-                <option v-for="n in [10, 20, 50]" :key="n" :value="n">{{ n }}</option>
-              </select>
-              <span>of {{ filteredActive.length }}</span>
-            </div>
-
-            <div class="flex items-center gap-1">
-              <button
-                @click="activePage--"
-                :disabled="activePage === 1"
-                class="w-8 h-8 rounded-lg border border-gray-200 flex items-center justify-center text-gray-400 hover:border-orbit-blue hover:text-orbit-blue disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
-              >
-                <ChevronLeft :size="14" />
-              </button>
-              <button
-                v-for="p in visibleActivePages"
-                :key="p"
-                @click="activePage = p"
-                :class="[
-                  'w-8 h-8 rounded-lg text-sm font-bold transition-colors',
-                  activePage === p
-                    ? 'bg-orbit-blue text-white shadow'
-                    : 'border border-gray-200 text-gray-500 hover:border-orbit-blue hover:text-orbit-blue'
-                ]"
-              >
-                {{ p }}
-              </button>
-              <button
-                @click="activePage++"
-                :disabled="activePage === activeTotalPages"
-                class="w-8 h-8 rounded-lg border border-gray-200 flex items-center justify-center text-gray-400 hover:border-orbit-blue hover:text-orbit-blue disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
-              >
-                <ChevronRight :size="14" />
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-
+      <n-card embedded :bordered="false" class="rounded-xl shadow-sm bg-white border border-slate-100">
+        <n-statistic label="Awaiting HOU Review">
+          <template #prefix><Clock :size="20" class="text-amber-500 mr-2" /></template>
+          <span class="font-bold text-2xl text-slate-900">{{ pendingCount }}</span>
+        </n-statistic>
+      </n-card>
     </div>
-  </section>
+
+    <div class="space-y-4">
+      <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
+
+        <div class="mb-6">
+          <h2 class="text-xl font-bold text-slate-900">Staff Appraisal Management</h2>
+          <p class="text-slate-400 text-sm font-medium">Active Academic Session</p>
+        </div>
+
+        <div class="flex flex-col lg:flex-row items-center gap-4 mb-8">
+          <div class="w-full lg:w-1/3">
+            <label class="text-[10px] font-black text-slate-400 uppercase mb-1 block tracking-wider">Search Staff</label>
+            <n-input v-model:value="searchQuery" placeholder="Name or ID..." clearable class="w-full" />
+          </div>
+
+          <div class="w-full lg:w-1/4">
+            <label class="text-[10px] font-black text-slate-400 uppercase mb-1 block tracking-wider">Department</label>
+            <n-select v-model:value="selectedDept" placeholder="All Departments" :options="dynamicDeptOptions" clearable />
+          </div>
+
+          <div class="w-full lg:flex-1">
+            <label class="text-[10px] font-black text-slate-400 uppercase mb-1 block tracking-wider">Update Period</label>
+            <n-date-picker v-model:value="dateRange" type="daterange" clearable class="w-full" />
+          </div>
+        </div>
+
+        <n-data-table
+          :loading="loading"
+          :columns="activeColumns"
+          :data="filteredActive"
+          :bordered="false"
+          :pagination="pagination"
+          class="staff-appraisal-table"
+        />
+      </div>
+    </div>
+
+    <ContinueDraftModal :show="showDraftModal" :staff="selectedStaff" @close="showDraftModal = false" @continue="handleContinueFromDraft" />
+    <AppraisalFormModal :show="showModal" :staff="selectedStaff" @close="showModal = false" @submit="fetchData" />
+  </div>
 </template>
 
 <script setup>
-import AppraisalFormModal from '@/components/HouComponents/AppraisalFormModal.vue'
-import ContinueDraftModal from '@/components/HouComponents/ContinueDraftModal.vue'
-import SessionSemesterCard from '@/components/SessionSemesterCard.vue'
-import { CalendarDays, ChevronDown, ChevronLeft, ChevronRight, Download, Search } from 'lucide-vue-next'
-import { computed, ref } from 'vue'
+import { CheckCircle2, Clock, Users } from 'lucide-vue-next';
+import { NButton, NCard, NDataTable, NDatePicker, NInput, NSelect, NStatistic, NTag, useMessage } from 'naive-ui';
+import { computed, h, onMounted, ref } from 'vue';
 
-// ── Modal state ───────────────────────────────────────────────────────────────
-const showModal     = ref(false)
-const showDraftModal = ref(false)
-const selectedStaff = ref({})
+import {
+  getAllStaff,
+  getAppraisalOverviewStats,
+  reviewAppraisal
+} from "@/apis/management/staff";
 
-const openModal = (row) => {
-  selectedStaff.value = {
-    name:      row.name,
-    unit:      `${row.position} Unit`,
-    period:    row.period,
-    staffId:   row.staffId,
-    savedStep: row.savedStep ?? 0,
-    lastSaved: row.lastSaved ?? '',
+import AppraisalFormModal from '@/components/HouComponents/AppraisalFormModal.vue';
+import ContinueDraftModal from '@/components/HouComponents/ContinueDraftModal.vue';
+
+const message = useMessage();
+const loading = ref(false);
+const searchQuery = ref('');
+const selectedDept = ref(null);
+const dateRange = ref(null);
+const showModal = ref(false);
+const showDraftModal = ref(false);
+const selectedStaff = ref({});
+const staffList = ref([]);
+const completionRate = ref(0);
+const pendingCount = ref(0);
+
+// ORBIT BLUE BRANDING CONSTANT
+const ORBIT_BLUE = '#2388ff';
+
+const fetchData = async () => {
+  loading.value = true;
+  try {
+    const [staffRes, statRes] = await Promise.all([
+      getAllStaff().catch(() => ({ data: [] })),
+      getAppraisalOverviewStats().catch(() => ({ data: { completion_percentage: 0, pending_count: 0 } }))
+    ]);
+    staffList.value = staffRes.data?.data || staffRes.data || [];
+    completionRate.value = statRes.data?.completion_percentage || 0;
+    pendingCount.value = statRes.data?.pending_count || 0;
+  } catch (err) {
+    message.error("Data sync failed.");
+  } finally {
+    loading.value = false;
   }
+};
 
-  // "Continue" rows → show draft resume preview first
-  if (row.action === 'Continue') {
-    showDraftModal.value = true
-  } else {
-    showModal.value = true
-  }
-}
+onMounted(fetchData);
 
-// Called from the draft modal's "Continue" button
-const openFormFromDraft = () => {
-  showDraftModal.value = false
-  showModal.value = true
-}
-
-// Called from the draft modal's "Discard Draft" button
-const discardDraft = () => {
-  showDraftModal.value = false
-  const idx = activeData.value.findIndex((r) => r.staffId === selectedStaff.value.staffId)
-  if (idx !== -1) {
-    activeData.value[idx].savedStep = 0
-    activeData.value[idx].progress  = '0%'
-    activeData.value[idx].status    = 'Not Started'
-    activeData.value[idx].action    = 'Start'
-  }
-}
-
-const handleSubmit = () => {
-  // update status to Submitted after form completion
-  const idx = activeData.value.findIndex((r) => r.staffId === selectedStaff.value.staffId)
-  if (idx !== -1) {
-    activeData.value[idx].status = 'Submitted'
-    activeData.value[idx].action = 'View'
-    activeData.value[idx].progress = '100%'
-  }
-}
-
-// ── Completed Appraisals ──────────────────────────────────────────────────────
-const completedColumns = ['Staff Name', 'Position', 'Overall Rating', 'Date Completed']
-
-const completedData = [
-  { name: 'Dr. Jane Okafor',   position: 'Senior Records Officer', rating: '12/15', date: '05 Aug 2002' },
-  { name: 'Mr. Isaac Nwosu',   position: 'Admin Clerk',            rating: '10/15', date: '05 Aug 2002' },
-  { name: 'Mrs. Nneka Umeh',   position: 'Typist',                 rating: '9/15',  date: '05 Aug 2002' },
-  { name: 'Prof. Ada Obi',     position: 'Senior Lecturer',        rating: '14/15', date: '12 Jan 2024' },
-  { name: 'Mr. Emeka Eze',     position: 'Admin Officer',          rating: '11/15', date: '18 Mar 2024' },
-  { name: 'Dr. Grace Bello',   position: 'Lecturer II',            rating: '13/15', date: '22 Apr 2024' },
-]
-
-const completedPageSize = 3
-const completedPage = ref(0)
-const completedTotalPages = computed(() => Math.ceil(completedData.length / completedPageSize))
-const paginatedCompleted = computed(() =>
-  completedData.slice(completedPage.value * completedPageSize, (completedPage.value + 1) * completedPageSize)
-)
-
-// ── Archived Appraisals ───────────────────────────────────────────────────────
-const archivedColumns = ['Year', 'Total Staff Appraised', 'Avg. Score', 'Action']
-
-const archivedData = [
-  { year: '2024', totalStaff: 22, avgScore: '82%' },
-  { year: '2023', totalStaff: 20, avgScore: '79%' },
-  { year: '2022', totalStaff: 19, avgScore: '89%' },
-  { year: '2021', totalStaff: 18, avgScore: '75%' },
-  { year: '2020', totalStaff: 17, avgScore: '81%' },
-  { year: '2019', totalStaff: 15, avgScore: '77%' },
-]
-
-const archivedPageSize = 3
-const archivedPage = ref(0)
-const archivedTotalPages = computed(() => Math.ceil(archivedData.length / archivedPageSize))
-const paginatedArchived = computed(() =>
-  archivedData.slice(archivedPage.value * archivedPageSize, (archivedPage.value + 1) * archivedPageSize)
-)
-
-// ── Active Appraisals ─────────────────────────────────────────────────────────
-const activeFilters = ['Department/Unit', 'Author']
-const activeColumns = ['Staff ID', 'Staff Name', 'Position', 'Appraisal Period', 'Last Updated', 'Progress', 'Status', 'Action']
-const searchQuery = ref('')
-
-const activeData = ref([
-  { staffId: 'ORBIT-0001', name: 'Prof. John A. Doe',  position: 'Senior Records Officer', period: 'Jan–Mar 2025', lastUpdated: '02 Oct 2025', progress: '100%', status: 'Submitted',   action: 'View',           savedStep: 4, lastSaved: '03 Oct 2025, 2:45 PM' },
-  { staffId: 'ORBIT-0002', name: 'Mr. Emmanuel Udo',   position: 'Typist',                 period: 'Jan–Mar 2025', lastUpdated: '02 Oct 2025', progress: '80%',  status: 'In Review',   action: 'Continue',       savedStep: 2, lastSaved: '03 Oct 2025, 2:45 PM' },
-  { staffId: 'ORBIT-0003', name: 'Engr. Fatima Sule',  position: 'Admin Clerk',            period: 'Jan–Mar 2025', lastUpdated: '-',           progress: '0%',   status: 'Not Started', action: 'Start',          savedStep: 0, lastSaved: '' },
-  { staffId: 'ORBIT-0004', name: 'Mrs. A. Johnson',    position: 'Typist',                 period: 'Jan–Mar 2025', lastUpdated: '02 Oct 2025', progress: '100%', status: 'Submitted',   action: 'View',           savedStep: 4, lastSaved: '02 Oct 2025, 9:10 AM' },
-  { staffId: 'ORBIT-0005', name: 'Prof. D. Musa',      position: 'Senior Records Officer', period: 'Jan–Mar 2025', lastUpdated: '02 Oct 2025', progress: '100%', status: 'In Review',   action: 'Submit to Dean', savedStep: 4, lastSaved: '02 Oct 2025, 11:00 AM' },
-  { staffId: 'ORBIT-0006', name: 'Mr. K. Ade',         position: 'Admin Clerk',            period: 'Jan–Mar 2025', lastUpdated: '02 Oct 2025', progress: '65%',  status: 'In Review',   action: 'Continue',       savedStep: 2, lastSaved: '01 Oct 2025, 4:20 PM' },
-  { staffId: 'ORBIT-0007', name: 'Dr. Ada Nwosu',      position: 'Senior Lecturer',        period: 'Jan–Mar 2025', lastUpdated: '01 Oct 2025', progress: '45%',  status: 'In Review',   action: 'Continue',       savedStep: 1, lastSaved: '01 Oct 2025, 3:05 PM' },
-  { staffId: 'ORBIT-0008', name: 'Mrs. Kemi Okafor',   position: 'Principal Officer',      period: 'Jan–Mar 2025', lastUpdated: '-',           progress: '0%',   status: 'Not Started', action: 'Start',          savedStep: 0, lastSaved: '' },
-  { staffId: 'ORBIT-0009', name: 'Mr. Emeka Eze',      position: 'Admin Officer',          period: 'Jan–Mar 2025', lastUpdated: '30 Sep 2025', progress: '55%',  status: 'In Review',   action: 'Continue',       savedStep: 2, lastSaved: '30 Sep 2025, 1:15 PM' },
-  { staffId: 'ORBIT-0010', name: 'Prof. Bola Adeyemi', position: 'Head of Unit',           period: 'Jan–Mar 2025', lastUpdated: '02 Oct 2025', progress: '100%', status: 'Submitted',   action: 'View',           savedStep: 4, lastSaved: '02 Oct 2025, 10:45 AM' },
-  { staffId: 'ORBIT-0011', name: 'Dr. Ngozi Chukwu',   position: 'Secretary',              period: 'Jan–Mar 2025', lastUpdated: '28 Sep 2025', progress: '90%',  status: 'In Review',   action: 'Submit to Dean', savedStep: 4, lastSaved: '28 Sep 2025, 5:30 PM' },
-  { staffId: 'ORBIT-0012', name: 'Mrs. Aisha Musa',    position: 'Data Entry Clerk',       period: 'Jan–Mar 2025', lastUpdated: '-',           progress: '0%',   status: 'Not Started', action: 'Start',          savedStep: 0, lastSaved: '' },
-])
+const dynamicDeptOptions = computed(() => {
+  const depts = staffList.value
+    .map(s => s.dept_code)
+    .filter((v, i, a) => v && a.indexOf(v) === i);
+  return depts.map(d => ({ label: d, value: d }));
+});
 
 const filteredActive = computed(() => {
-  const q = searchQuery.value.toLowerCase()
-  if (!q) return activeData.value
-  return activeData.value.filter(
-    (r) => r.staffId.toLowerCase().includes(q) || r.name.toLowerCase().includes(q)
-  )
-})
+  let data = Array.isArray(staffList.value) ? staffList.value : [];
+  if (searchQuery.value) {
+    const q = searchQuery.value.toLowerCase();
+    data = data.filter(s =>
+      String(s.full_name || '').toLowerCase().includes(q) ||
+      String(s.id || s.staff_id || '').toLowerCase().includes(q)
+    );
+  }
+  if (selectedDept.value) data = data.filter(s => s.dept_code === selectedDept.value);
+  if (dateRange.value) {
+    const [start, end] = dateRange.value;
+    data = data.filter(s => {
+      const updateDate = new Date(s.updated_at).getTime();
+      return updateDate >= start && updateDate <= end;
+    });
+  }
+  return data;
+});
 
-const activePageSize = ref(10)
-const activePage = ref(1)
-const activeTotalPages = computed(() => Math.ceil(filteredActive.value.length / activePageSize.value))
+const activeColumns = [
+  {
+    title: 'Staff ID',
+    key: 'id',
+    render: (row) => h('span', { class: 'text-orbit-blue font-bold' }, `ORBIT-${row.id || '---'}`)
+  },
+  {
+    title: 'Staff Name',
+    key: 'full_name',
+    render: (row) => h('span', { class: 'font-bold text-slate-800' }, row.full_name)
+  },
+  { title: 'Position', key: 'rank' },
+  {
+    title: 'Appraisal Period',
+    key: 'period',
+    render: (row) => h('span', { class: 'text-slate-500' }, row.appraisal_period || '2025/2026')
+  },
+  {
+    title: 'Last Updated',
+    key: 'updated_at',
+    render: (row) => h('div', { class: 'text-[11px]' }, [
+      h('div', { class: 'font-bold' }, row.last_update_date || '---'),
+      h('div', { class: 'text-slate-400 font-medium' }, row.last_update_time || '')
+    ])
+  },
+  { title: 'Progress', key: 'progress', render: (row) => h('span', { class: 'font-bold' }, `${row.progress || 0}%`) },
+  {
+    title: 'Status',
+    key: 'status',
+    render(row) {
+      const status = row.appraisal_status || 'Not Started';
+      const type = status === 'Submitted' ? 'success' : status === 'In Review' ? 'info' : 'warning';
+      return h(NTag, { type, size: 'small', bordered: false, class: 'rounded-md px-2' }, { default: () => status });
+    }
+  },
+  {
+    title: 'Action',
+    key: 'actions',
+    align: 'right',
+    render(row) {
+      const status = row.appraisal_status;
+      let label = 'Start';
+      if (status === 'In Review') label = 'Continue';
+      else if (status === 'Submitted') label = 'Send to Dean';
 
-const paginatedActive = computed(() => {
-  const start = (activePage.value - 1) * activePageSize.value
-  return filteredActive.value.slice(start, start + activePageSize.value)
-})
+      return h(NButton, {
+        size: 'small',
+        themeOverrides: {
+          color: ORBIT_BLUE,
+          colorHover: '#0043a8',
+          textColor: '#fff',
+          textColorHover: '#fff',
+          borderRadiusSmall: '6px',
+          padding: '10px'
+        },
+        // px-6 for extra breathing space
+        class: 'px-6 font-bold shadow-sm',
+        onClick: () => handleActionClick(row)
+      }, { default: () => label });
+    }
+  }
+];
 
-const visibleActivePages = computed(() => {
-  const total = activeTotalPages.value
-  const current = activePage.value
-  const start = Math.max(1, current - 2)
-  const end = Math.min(total, start + 4)
-  const pages = []
-  for (let i = start; i <= end; i++) pages.push(i)
-  return pages
-})
+const handleActionClick = (row) => {
+  selectedStaff.value = { ...row };
+  if (row.appraisal_status === 'In Review') showDraftModal.value = true;
+  else if (row.appraisal_status === 'Submitted') handleForwardToDean(row);
+  else showModal.value = true;
+};
 
-// ── Status + Action styles ────────────────────────────────────────────────────
-const statusClass = (status) => {
-  if (status === 'Submitted')   return 'bg-gray-100 text-gray-500'
-  if (status === 'In Review')   return 'bg-blue-50 text-orbit-blue'
-  if (status === 'Not Started') return 'bg-orange-50 text-orange-500'
-  return 'bg-gray-100 text-gray-500'
-}
+const handleForwardToDean = async (staff) => {
+  const m = message.loading("Routing...");
+  try {
+    await reviewAppraisal(staff.appraisal_id, { decision: 'APPROVED', comment: 'Forwarded by HOU' });
+    message.success("Forwarded to Dean.");
+    fetchData();
+  } catch (err) {
+    message.error("Routing failed.");
+  } finally { m.destroy(); }
+};
 
-const actionClass = (action) => {
-  if (action === 'Start')          return 'bg-orbit-green text-white hover:opacity-80'
-  if (action === 'Submit to Dean') return 'bg-orbit-blue text-white hover:bg-orbit-bgSec'
-  if (action === 'View')           return 'bg-orbit-blue text-white hover:bg-orbit-bgSec'
-  return 'bg-orbit-blue text-white hover:bg-orbit-bgSec'
-}
+const handleContinueFromDraft = () => { showDraftModal.value = false; showModal.value = true; };
+const pagination = { pageSize: 10 };
 </script>
+
+<style scoped>
+@reference "@/style.css";
+
+:deep(.staff-appraisal-table .n-data-table-th) {
+  @apply bg-slate-50 text-[10px] uppercase tracking-[0.1em] text-slate-400 py-5 font-black border-b border-slate-100;
+}
+:deep(.staff-appraisal-table .n-data-table-td) {
+  @apply py-5 border-b border-slate-50 text-sm;
+}
+</style>

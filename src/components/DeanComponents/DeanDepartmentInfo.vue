@@ -122,7 +122,14 @@ const fetchDepartmentOverview = async () => {
   loading.value = true
   try {
     const { data: dept } = await getDepartmentInfo(dId)
-    department.value = dept || null
+    department.value = dept
+  ? {
+      ...dept,
+      hod_name: dept.staff?.full_name ?? 'N/A',
+      hod_email: dept.staff?.email ?? 'N/A',
+      hod_phone: dept.staff?.phone ?? 'N/A'
+    }
+  : null
 
     if (!department.value) return
 
@@ -134,14 +141,14 @@ const fetchDepartmentOverview = async () => {
     ])
 
     stats.value = {
-      total_staff: staffRes?.data?.total_staff ?? 0,
-      academic_staff: staffRes?.data?.academic ?? 0,
-      non_academic_staff: staffRes?.data?.non_academic ?? 0,
-      active_appraisals: appraisalRes?.data?.length ?? 0,
-      pending_promotions: promotionRes?.data?.length ?? 0,
-      pending_leaves: leaveRes?.data?.length ?? 0,
-      appraisal_completion_rate: staffRes?.data?.appraisal_completion_rate ?? 0
-    }
+  total_staff: staffRes?.data?.total_staff ?? 0,
+  academic_staff: staffRes?.data?.academic_staff ?? 0,
+  non_academic_staff: staffRes?.data?.non_academic_staff ?? 0,
+  active_appraisals: appraisalRes?.data?.length ?? 0,
+  pending_promotions: promotionRes?.data?.length ?? 0,
+  pending_leaves: leaveRes?.data?.length ?? 0,
+  appraisal_completion_rate: staffRes?.data?.appraisal_completion_rate ?? 0
+}
   } catch (error) {
     message.error('Failed to sync department data')
   } finally {

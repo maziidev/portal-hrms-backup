@@ -35,7 +35,7 @@ const columns = [
         key: 'staff_id',
         minWidth: 150,
         fixed: 'left',
-        render: (row) => h('span', { class: 'font-black text-[#003366] uppercase tracking-tighter text-base' }, row.staff_id || 'N/A')
+        render: (row) => h('span', { class: 'font-black text-orbit-bg uppercase tracking-tighter text-base' }, row.staff_id || 'N/A')
     },
     {
         title: 'Staff Name',
@@ -62,7 +62,7 @@ const columns = [
         key: 'rating_dean',
         align: 'center',
         minWidth: 120,
-        render: (row) => h('span', { class: 'font-black text-[#003366] text-lg' }, row.rating_dean ? `${row.rating_dean}/5` : '---')
+        render: (row) => h('span', { class: 'font-black text-orbit-bg text-lg' }, row.rating_dean ? `${row.rating_dean}/5` : '---')
     },
     {
         title: 'Status',
@@ -127,7 +127,7 @@ onMounted(fetchRecords)
 
 <template>
     <div class="px-6 mt-4">
-        <button @click="router.back()" class="flex items-center gap-2 text-[#003366] font-black uppercase italic text-[10px] hover:gap-4 transition-all border-none bg-transparent cursor-pointer">
+        <button @click="router.back()" class="flex items-center gap-2 text-orbit-bg font-black uppercase italic text-[10px] hover:gap-4 transition-all border-none bg-transparent cursor-pointer">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-width="3" d="M11 17l-5-5m0 0l5-5m-5 5h12"></path></svg>
             Back to Departments
         </button>
@@ -138,7 +138,7 @@ onMounted(fetchRecords)
             <div class="p-8">
                 <div class="flex flex-col xl:flex-row xl:items-center justify-between gap-6">
                     <div class="shrink-0">
-                        <h4 class="text-3xl font-black text-[#003366] tracking-tighter uppercase italic leading-none">
+                        <h4 class="text-3xl font-black text-orbit-bg tracking-tighter uppercase italic leading-none">
                             Department Staff Appraisals
                         </h4>
                         <p class="text-[10px] font-bold text-gray-400 uppercase tracking-[0.3em] mt-3 italic border-l-4 border-blue-400 pl-4">
@@ -162,7 +162,7 @@ onMounted(fetchRecords)
                             style="width: 160px;"
                             clearable
                         />
-                        <button class="bg-[#003366] text-white px-6 h-10 rounded-xl font-black uppercase text-[10px] tracking-widest hover:bg-blue-900 transition-all shadow-lg shadow-blue-900/20">
+                        <button class="bg-orbit-blue text-white px-6 h-10 rounded-xl font-black uppercase text-[10px] tracking-widest hover:bg-blue-900 transition-all shadow-lg shadow-blue-900/20">
                             Approve All
                         </button>
                     </div>
@@ -189,9 +189,9 @@ onMounted(fetchRecords)
                     :page-sizes="[10, 20, 50]"
                 />
                 <div class="flex items-center gap-3 bg-white p-2 px-4 rounded-2xl border border-gray-200 shadow-sm">
-                    <span class="text-[10px] font-black text-[#003366] uppercase tracking-tighter">Jump to</span>
+                    <span class="text-[10px] font-black text-orbit-bg uppercase tracking-tighter">Jump to</span>
                     <n-input-number v-model:value="jumpToPageValue" :min="1" size="small" style="width: 70px;" :show-button="false" />
-                    <button @click="handleJumpToPage" class="bg-[#003366] text-white px-5 py-2 rounded-xl text-[10px] font-black uppercase hover:bg-blue-900 transition-colors">
+                    <button @click="handleJumpToPage" class="bg-orbit-blue text-white px-5 py-2 rounded-xl text-[10px] font-black uppercase hover:bg-blue-900 transition-colors">
                         Go
                     </button>
                 </div>

@@ -125,7 +125,7 @@ const fetchVCData = async () => {
   const dId = departmentId.value
 
   if (!fId || !dId) {
-    message.warning('Insufficient context to load Department Records')
+    message.warning('No Department Records')
     return
   }
 
@@ -138,7 +138,16 @@ const fetchVCData = async () => {
     const found = allDepts.find(dept => String(dept.id) === String(dId))
 
     if (found) {
-      department.value = found
+      department.value = {
+    id: found.id,
+    department_name: found.name,
+    hod_name: found.dept_hod,
+    total_staff: found.staff_count,
+    active_appraisals_count: found.active_appraisals,
+    pending_promotions_count: found.pending_promotions,
+    academic_staff_count: found.academic_staff_count || 0,     // placeholder
+    non_academic_staff_count: found.non_academic_staff_count || 0
+  }
     } else {
       message.info('Department record not found in faculty list.')
     }

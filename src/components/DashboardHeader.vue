@@ -49,43 +49,48 @@
 import defaultProfile from '@/assets/imgs/profile.jpg';
 import { useAuthStore } from '@/store/auth.js';
 import { Menu } from 'lucide-vue-next';
-import { computed } from 'vue';
+import { computed, watch } from 'vue';
 import { useRoute } from 'vue-router';
 
 const props = defineProps({
-  title: {
-    type: String,
-    default: null
-  },
-  subtitle: {
-    type: String,
-    default: null
-  }
+  title: { type: String, default: null },
+  subtitle: { type: String, default: null }
 });
 
 const route = useRoute();
 const auth = useAuthStore();
 
+// WATCHER to see when user data loads
+watch(
+  () => auth.user,
+  (val) => {
+    // console.log('User loaded:', val); // for debugging
+  },
+  { immediate: true }
+);
+
 const displayTitle = computed(() => {
   if (props.title) return props.title;
-  if (route.meta?.title) return route.meta.title;
 
+  // scan all matched routes for title
+  const metaTitle = route.matched.find(r => r.meta?.title)?.meta.title;
+  if (metaTitle) return metaTitle;
+
+  // fallback to user name
   const userName = auth.user?.name || auth.user?.full_name || 'User';
   return `Welcome, ${userName}`;
 });
 
 const displaySubtitle = computed(() => {
   if (props.subtitle) return props.subtitle;
-  return route.meta?.subtitle || null;
+
+  // scan all matched routes for subtitle
+  const metaSubtitle = route.matched.find(r => r.meta?.subtitle)?.meta.subtitle;
+  return metaSubtitle || '';
 });
 
-const userEmail = computed(() => {
-  return auth.user?.email || 'user@example.com';
-});
-
-const userProfileImage = computed(() => {
-  return auth.user?.profile_image || auth.user?.avatar || defaultProfile;
-});
+const userEmail = computed(() => auth.user?.email || 'user@example.com');
+const userProfileImage = computed(() => auth.user?.profile_image || auth.user?.avatar || defaultProfile);
 
 defineEmits(['toggle']);
 </script>

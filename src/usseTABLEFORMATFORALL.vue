@@ -1,222 +1,216 @@
 <script setup>
-import { getAllStaff } from "@/apis/management/staff"; // Use the Staff API
-import { debounce } from 'lodash-es';
-import { NDataTable, NDatePicker, NInput, NInputNumber, NPagination, NSelect, useMessage } from 'naive-ui';
-import { h, onMounted, ref, watch } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
-import { useRoute, useRouter } from 'vue-router';
+/**
+ * Component: DivisionAppraisalTable.vue
+ * Description: Refined registry with pill buttons, tinted backgrounds, and high-visibility typography.
+ */
+import {
+    Calendar,
+    ChevronLeft,
+    ChevronRight,
+    Eye,
+    Inbox,
+    PlayCircle,
+    RefreshCcw,
+    Search,
+    X
+} from 'lucide-vue-next';
+import { computed, ref } from 'vue';
 
-const auth = useAuthStore();
+// State
+const loading = ref(false);
+const searchKeyword = ref('');
+const selectedStatus = ref('');
+const selectedDate = ref('');
+const dateInputRef = ref(null);
 
-const router = useRouter()
-const route = useRoute()
-const message = useMessage()
+// Pagination
+const currentPage = ref(1);
+const itemsPerPage = ref(5);
 
-// Data State
-const staffData = ref([])
-const loading = ref(false)
-const totalRecords = ref(0)
-const jumpToPageValue = ref(1)
-
-// Filters State
-const currentPage = ref(1)
-const pageSize = ref(10)
-const searchKeyword = ref('')
-const selectedRole = ref(null)
-const selectedStatus = ref(null)
-const dateRange = ref(null)
-const departmentId = auth.departmentId;
-
-// Options
-const roleOptions = [
-    { label: 'Exam Officer', value: 'exam_officer' },
-    { label: 'Level Adviser', value: 'level_adviser' },
-    { label: 'Dept Secretary', value: 'secretary' }
-]
+// Mock Data
+const staffAppraisals = ref([
+    { id: 1, name: 'Prof. John A. Doe', position: 'Senior Admin Officer', period: '2025 Mid-Year', last_updated: '2025-10-02', progress: '100%', status: 'Ongoing' },
+    { id: 2, name: 'Dr. Sarah Jenkins', position: 'Principal Registrar', period: '2025 Mid-Year', last_updated: '2025-10-05', progress: '85%', status: 'Ongoing' },
+    { id: 3, name: 'Mr. Samuel Okoro', position: 'Assistant Secretary', period: '2025 Mid-Year', last_updated: '2025-10-01', progress: '0%', status: 'Pending' },
+    { id: 4, name: 'Engr. Victor Musa', position: 'Chief Technical Officer', period: '2025 Mid-Year', last_updated: '2025-09-28', progress: '100%', status: 'Closed' },
+    { id: 5, name: 'Mrs. Abigail Kole', position: 'Heads of Unit', period: '2025 Mid-Year', last_updated: '2025-10-10', progress: '40%', status: 'Ongoing' },
+    { id: 6, name: 'Dr. Benson Ihe', position: 'Lecturer I', period: '2025 Mid-Year', last_updated: '2025-10-11', progress: '100%', status: 'Closed' },
+]);
 
 const statusOptions = [
-    { label: 'Full Time', value: 'full_time' },
-    { label: 'Contract', value: 'contract' },
-    { label: 'Part Time', value: 'part_time' }
-]
+    { label: 'Pending', value: 'pending' },
+    { label: 'Ongoing', value: 'ongoing' },
+    { label: 'Closed', value: 'closed' }
+];
 
-// Table Columns
-const columns = [
-    { title: 'Staff ID', key: 'staff_id', render: (row) => h('span', { class: 'font-black text-[#003366]' }, row.staff_id) },
-    { title: 'Name', key: 'full_name', render: (row) => h('span', { class: 'font-bold' }, row.full_name) },
-    { title: 'Cadre', key: 'cadre' },
-    { title: 'Rank', key: 'rank' },
-    { title: 'Role', key: 'role' },
-    {
-        title: 'Employment Type',
-        key: 'employment_type',
-        render: (row) => h('span', { class: 'text-xs uppercase font-bold text-gray-400' }, row.employment_type?.replace('_', ' '))
-    },
-    {
-        title: 'Employment Date',
-        key: 'employment_date',
-        render: (row) => h('div', { class: 'flex items-center gap-2' }, [
-            h('span', row.employment_date || 'N/A')
-        ])
-    }
-]
+// Logic
+const filteredData = computed(() => {
+    return staffAppraisals.value.filter(item => {
+        const matchesSearch = item.name?.toLowerCase().includes(searchKeyword.value.toLowerCase()) ||
+                             item.position?.toLowerCase().includes(searchKeyword.value.toLowerCase());
+        const matchesStatus = !selectedStatus.value || item.status?.toLowerCase() === selectedStatus.value.toLowerCase();
+        let matchesDate = !selectedDate.value || item.last_updated === selectedDate.value;
+        return matchesSearch && matchesStatus && matchesDate;
+    });
+});
 
-const fetchRecords = async () => {
-    loading.value = true
-    try {
-        const params = {
-            page: currentPage.value,
-            page_size: pageSize.value,
-            search: searchKeyword.value || undefined,
-            role: selectedRole.value || undefined,
-            employment_type: selectedStatus.value || undefined,
-            dept_code: departmentId
-        }
+const totalPages = computed(() => Math.ceil(filteredData.value.length / itemsPerPage.value));
+const paginatedData = computed(() => {
+    const start = (currentPage.value - 1) * itemsPerPage.value;
+    return filteredData.value.slice(start, start + itemsPerPage.value);
+});
 
-        if (dateRange.value) {
-            params.date_from = new Date(dateRange.value[0]).toISOString().split('T')[0]
-            params.date_to = new Date(dateRange.value[1]).toISOString().split('T')[0]
-        }
+const nextPage = () => { if (currentPage.value < totalPages.value) currentPage.value++; };
+const prevPage = () => { if (currentPage.value > 1) currentPage.value--; };
 
-        const res = await getAllStaff(params)
-        staffData.value = res.results || res.data?.results || []
-        totalRecords.value = res.count || res.data?.count || 0
-    } catch (err) {
-        message.error("Failed to load department records")
-    } finally {
-        loading.value = false
-    }
-}
+const openDatePicker = () => {
+    if (dateInputRef.value) dateInputRef.value.showPicker ? dateInputRef.value.showPicker() : dateInputRef.value.focus();
+};
 
-// Interactivity
-const handleJumpToPage = () => {
-    if (jumpToPageValue.value >= 1 && jumpToPageValue.value <= Math.ceil(totalRecords.value / pageSize.value)) {
-        currentPage.value = jumpToPageValue.value
-    }
-}
-
-const handleRowClick = (row) => {
-    router.push(`/staffs/${row.id}`) // Navigates to staff detailed page
-}
-
-const debouncedSearch = debounce(fetchRecords, 500)
-
-watch([currentPage, pageSize, selectedRole, selectedStatus, dateRange], fetchRecords)
-watch(searchKeyword, () => {
-    currentPage.value = 1
-    debouncedSearch()
-})
-
-onMounted(fetchRecords)
+const refreshRegistry = () => {
+    loading.value = true;
+    setTimeout(() => { loading.value = false; }, 800);
+};
 </script>
 
 <template>
-    <div class="bg-white rounded-3xl shadow-sm border border-gray-100 mt-5 overflow-hidden">
-        <div class="p-6 md:p-8 border-b border-gray-50">
-            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+    <div class="py-10 px-4 lg:px-10 w-full mx-auto">
+        <div class="bg-white border border-gray-300 shadow-md rounded-sm overflow-hidden">
+
+            <div class="p-5 md:p-8 border-b border-gray-200 flex flex-col xl:flex-row xl:items-center justify-between gap-6">
                 <div>
-                    <h4 class="text-2xl font-black text-[#003366] tracking-tighter uppercase italic leading-none">
-                        Department Records
-                    </h4>
-                    <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-2">
-                        Personnel Management System
+                    <h2 class="text-orbit-bg font-bold text-2xl md:text-3xl uppercase tracking-tighter italic">
+                        Unit Staff Appraisal
+                    </h2>
+                    <p class="text-[11px] font-bold text-gray-400 uppercase tracking-[0.2em] mt-1">
+                        Internal Staff Evaluation & Registry Access
                     </p>
                 </div>
-                <button class="bg-[#003366] text-white px-6 py-3 rounded-xl flex items-center justify-center gap-2 text-xs font-black uppercase tracking-widest hover:bg-[#002244] transition-all">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
-                    Export Records
-                </button>
+
+                <div class="flex flex-wrap items-center gap-4">
+                    <div class="relative flex-grow md:flex-grow-0">
+                        <Search class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" :size="18" :stroke-width="2.5" />
+                        <input v-model="searchKeyword" type="text" placeholder="SEARCH STAFF..."
+                            class="bg-gray-50 border-2 border-gray-200 pl-12 pr-4 py-3 text-sm font-bold uppercase outline-none focus:border-orbit-blue w-full md:w-64" />
+                    </div>
+
+                    <div @click="openDatePicker" class="relative flex items-center flex-grow md:flex-grow-0 cursor-pointer group">
+                        <Calendar class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" :size="18" :stroke-width="2.5" />
+                        <input ref="dateInputRef" v-model="selectedDate" type="date"
+                            class="bg-white border-2 border-gray-200 pl-12 pr-10 py-3 text-sm font-bold uppercase outline-none focus:border-orbit-blue w-full md:min-w-[200px] cursor-pointer" />
+                        <button v-if="selectedDate" @click.stop="selectedDate = ''" class="absolute right-3 text-gray-400 hover:text-red-600 p-1 cursor-pointer">
+                            <X :size="16" :stroke-width="2.5" />
+                        </button>
+                    </div>
+
+                    <select v-model="selectedStatus" class="bg-white border-2 border-gray-200 px-4 py-3 text-sm font-bold uppercase outline-none focus:border-orbit-blue cursor-pointer min-w-[150px]">
+                        <option value="">All Status</option>
+                        <option v-for="opt in statusOptions" :key="opt.value" :value="opt.value">{{ opt.label }}</option>
+                    </select>
+
+                    <button @click="refreshRegistry" :disabled="loading"
+                        class="bg-orbit-bg text-white p-3 border-2 border-orbit-bg hover:bg-orbit-blue hover:border-orbit-blue transition-all cursor-pointer disabled:opacity-50">
+                        <RefreshCcw :class="{'animate-spin': loading}" :size="20" :stroke-width="2.5" />
+                    </button>
+                </div>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                <n-input v-model:value="searchKeyword" placeholder="SEARCH NAME / ID..." clearable class="orbit-input" />
-                <n-select v-model:value="selectedRole" :options="roleOptions" placeholder="SELECT ROLE" clearable />
-                <n-select v-model:value="selectedStatus" :options="statusOptions" placeholder="STATUS" clearable />
-                <n-date-picker v-model:value="dateRange" type="daterange" clearable placeholder="JOINED DATE RANGE" />
+            <div class="w-full overflow-x-auto custom-scrollbar">
+                <table class="w-full text-left border-collapse min-w-[1100px]">
+                    <thead class="bg-gray-50 border-b-2 border-gray-200 text-orbit-bg text-sm font-bold uppercase tracking-widest">
+                        <tr>
+                            <th class="py-6 px-8">Staff Personnel</th>
+                            <th class="py-6 px-6 text-center">Position</th>
+                            <th class="py-6 px-6 text-center">Period</th>
+                            <th class="py-6 px-6 text-center">Completion</th>
+                            <th class="py-6 px-6 text-center">Last Updated</th>
+                            <th class="py-6 px-6 text-center">Status</th>
+                            <th class="py-6 px-8 text-right">Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody class="text-gray-700 font-medium">
+                        <template v-if="!loading && paginatedData.length > 0">
+                            <tr v-for="row in paginatedData" :key="row.id" class="border-b border-gray-100 hover:bg-gray-50/50 transition-colors">
+                                <td class="py-6 px-8 font-bold text-orbit-bg uppercase italic text-base">{{ row.name }}</td>
+                                <td class="py-6 px-6 text-center text-xs uppercase text-gray-500 font-bold">{{ row.position }}</td>
+                                <td class="py-6 px-6 text-center text-xs font-bold uppercase">
+                                    <div class="flex items-center justify-center gap-2">
+                                        <Calendar :size="14" class="text-gray-400" /> {{ row.period }}
+                                    </div>
+                                </td>
+                                <td class="py-6 px-6 text-center text-orbit-blue font-bold text-sm italic">{{ row.progress }}</td>
+                                <td class="py-6 px-6 text-center text-[11px] font-bold text-gray-400">{{ row.last_updated }}</td>
+
+                                <td class="py-6 px-6 text-center">
+                                    <button :class="{
+                                        'bg-orbit-red/10 text-orbit-red': row.status.toLowerCase() === 'pending',
+                                        'bg-orbit-blue/10 text-orbit-blue': row.status.toLowerCase() === 'ongoing',
+                                        'bg-orbit-bg/10 text-orbit-bg': row.status.toLowerCase() === 'closed'
+                                    }" class="w-32 py-3 rounded-full text-[10px] font-bold uppercase tracking-widest cursor-default">
+                                        {{ row.status }}
+                                    </button>
+                                </td>
+
+                                <td class="py-6 px-8 text-right">
+                                    <button @click.stop="$emit('openModal', row)"
+                                        class="w-32 py-3 rounded-full text-[11px] font-bold uppercase tracking-widest transition-all cursor-pointer inline-flex items-center justify-center gap-2"
+                                        :class="row.status.toLowerCase() === 'pending'
+                                            ? 'bg-green-600/10 text-green-600 hover:bg-green-600 hover:text-white'
+                                            : 'bg-orbit-blue/10 text-orbit-blue hover:bg-orbit-blue hover:text-white'">
+                                        <component :is="row.status.toLowerCase() === 'pending' ? PlayCircle : Eye" :size="14" />
+                                        {{ row.status.toLowerCase() === 'pending' ? 'Start' : 'Review' }}
+                                    </button>
+                                </td>
+                            </tr>
+                        </template>
+
+                        <tr v-else>
+                            <td colspan="7" class="py-32 text-center">
+                                <div class="flex flex-col items-center opacity-40">
+                                    <Inbox :size="48" class="mb-4" />
+                                    <p class="font-bold uppercase text-xs italic">No Records Found</p>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-        </div>
 
-        <div class="w-full overflow-x-auto overflow-y-hidden scroll-container">
-            <n-data-table
-                remote
-                ref="table"
-                :loading="loading"
-                :columns="columns"
-                :data="staffData"
-                :bordered="false"
-                :single-line="false"
-                :scroll-x="1000"
-                :row-props="(row) => ({
-                    style: 'cursor: pointer;',
-                    onClick: () => handleRowClick(row)
-                })"
-                class="custom-records-table"
-            />
-        </div>
-
-        <div class="p-6 md:p-8 border-t border-gray-50 flex flex-col lg:flex-row justify-between items-center gap-6">
-            <n-pagination
-                v-model:page="currentPage"
-                :item-count="totalRecords"
-                :page-size="pageSize"
-                show-size-picker
-                :page-sizes="[10, 20, 50]"
-            />
-
-            <div class="flex items-center gap-3 bg-gray-100 p-1.5 pl-4 rounded-xl border border-gray-200">
-                <span class="text-[10px] font-black text-[#003366] uppercase tracking-tighter">Jump to Page</span>
-                <n-input-number v-model:value="jumpToPageValue" :min="1" size="small" class="w-20" :show-button="false" />
-                <button @click="handleJumpToPage" class="bg-[#003366] text-white px-4 py-1.5 rounded-lg text-[10px] font-black hover:opacity-90 transition-all uppercase">
-                    Go
-                </button>
+            <div class="p-6 bg-gray-50 border-t border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <span class="text-[10px] font-bold uppercase text-gray-500 italic">Showing {{ paginatedData.length }} of {{ filteredData.length }} Entries</span>
+                <div class="flex items-center space-x-4">
+                    <button @click="prevPage" :disabled="currentPage === 1" class="p-2 border-2 rounded-sm cursor-pointer disabled:opacity-20 transition-colors hover:bg-orbit-bg hover:text-white">
+                        <ChevronLeft :size="18" :stroke-width="3" />
+                    </button>
+                    <span class="text-xs font-bold uppercase italic">Page {{ currentPage }} of {{ totalPages || 1 }}</span>
+                    <button @click="nextPage" :disabled="currentPage === totalPages || totalPages === 0" class="p-2 border-2 rounded-sm cursor-pointer disabled:opacity-20 transition-colors hover:bg-orbit-bg hover:text-white">
+                        <ChevronRight :size="18" :stroke-width="3" />
+                    </button>
+                </div>
             </div>
         </div>
     </div>
 </template>
 
 <style scoped>
-/* 1. Make the Header Bold and Highly Visible */
-:deep(.n-data-table-thead th) {
-    background-color: #f8fafc !important; /* Slight tint to distinguish header */
-    font-size: 12px !important;
-    font-weight: 900 !important; /* Maximum weight */
-    text-transform: uppercase !important;
-    letter-spacing: 0.05em !important;
-    color: #001a33 !important; /* Deep dark blue for visibility */
-    padding: 20px 16px !important;
-    border-bottom: 2px solid #e2e8f0 !important;
-}
+.text-orbit-bg { color: #1a1a1a; }
+.text-orbit-blue { color: #2388ff; }
+.text-orbit-red { color: #ff3b3b; }
+.bg-orbit-bg { background-color: #1a1a1a; }
+.bg-orbit-blue { background-color: #2388ff; }
+.bg-orbit-red { background-color: #ff3b3b; }
 
-/* 2. Style the Table Rows */
-:deep(.n-data-table-td) {
-    padding: 20px 16px !important;
-    border-bottom: 1px solid #f1f5f9 !important;
-    color: #334155;
-    font-size: 13px;
-    white-space: nowrap; /* Prevents text wrapping to keep rows clean */
+/* Table Scrollbar styling */
+.custom-scrollbar::-webkit-scrollbar {
+    height: 8px;
+    background: #f8fafc;
 }
-
-/* 3. Row Hover Effect */
-:deep(.n-data-table-tr:hover td) {
-    background-color: #f0f7ff !important;
-}
-
-/* 4. Custom Scrollbar for Mobile UX */
-.scroll-container::-webkit-scrollbar {
-    height: 6px;
-}
-.scroll-container::-webkit-scrollbar-track {
-    background: #f1f5f9;
-}
-.scroll-container::-webkit-scrollbar-thumb {
-    background: #00336644;
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
     border-radius: 10px;
 }
-
-/* Pagination Spacing */
-:deep(.n-pagination-prefix) {
-    font-weight: 800;
-    text-transform: uppercase;
-    font-size: 10px;
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #2388ff;
 }
 </style>

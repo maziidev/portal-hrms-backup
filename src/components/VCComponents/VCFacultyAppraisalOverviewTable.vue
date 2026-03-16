@@ -40,7 +40,7 @@ const columns = [
     {
         title: 'Faculty / Division',
         key: 'faculty_name',
-        render: (row) => h('span', { class: 'font-black text-[#003366]' }, row.faculty_name || 'N/A')
+        render: (row) => h('span', { class: 'font-black text-orbit-bg' }, row.faculty_name || 'N/A')
     },
     { title: 'Departments', key: 'total_departments', align: 'center', render: (row) => row.total_departments || '—' },
     { title: 'Total Staff', key: 'total_staff', align: 'center' },
@@ -81,7 +81,7 @@ const columns = [
 const fetchRecords = async () => {
     loading.value = true
     try {
-        // --- FIXED: PAGE AND PAGE_SIZE REMOVED FROM API PARAMS ---
+
         const rawParams = {
             search: searchKeyword.value || null,
             faculty: selectedFaculty.value || null,
@@ -104,7 +104,7 @@ const fetchRecords = async () => {
         totalRecords.value = responseData.by_faculty?.length || 0
     } catch (err) {
         console.error("API Error:", err);
-        message.error("Failed to load records. Check if the backend requires a Period ID.");
+        message.error("Failed to load records");
     } finally {
         loading.value = false
     }
@@ -140,9 +140,11 @@ const handleJumpToPage = () => {
 }
 
 const handleRowClick = (row) => {
-    // Navigates to appraisal-department/:id using the faculty_id from the row
     if (row.faculty_id) {
-        router.push(`/appraisals-department-record/${row.faculty_id}`)
+        router.push({
+    name: 'AppraisalsDepartmentRecord',
+    params: { id: row.faculty_id }
+})
     } else {
         message.error("Invalid Faculty ID")
     }
@@ -164,7 +166,7 @@ onMounted(fetchRecords)
         <div class="p-6 md:p-8 border-b border-gray-50">
             <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
                 <div>
-                    <h4 class="text-2xl font-black text-[#003366] tracking-tighter uppercase italic leading-none">
+                    <h4 class="text-2xl font-black text-orbit-bg tracking-tighter uppercase italic leading-none">
                         Faculty Appraisal Overview
                     </h4>
                     <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-2">
@@ -173,7 +175,7 @@ onMounted(fetchRecords)
                 </div>
                 <button
                     @click="handleExport"
-                    class="bg-[#003366] text-white px-6 py-3 rounded-xl flex items-center justify-center gap-2 text-xs font-black uppercase tracking-widest hover:bg-[#002244] transition-all shadow-lg shadow-blue-900/10"
+                    class="bg-orbit-blue text-white px-6 py-3 rounded-xl flex items-center justify-center gap-2 text-xs font-black uppercase tracking-widest hover:bg-[#002244] transition-all shadow-lg shadow-blue-900/10"
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
                     Export Overview
@@ -215,9 +217,9 @@ onMounted(fetchRecords)
             />
 
             <div class="flex items-center gap-3 bg-gray-100 p-1.5 pl-4 rounded-xl border border-gray-200">
-                <span class="text-[10px] font-black text-[#003366] uppercase tracking-tighter">Jump to Page</span>
+                <span class="text-[10px] font-black text-orbit-bg uppercase tracking-tighter">Jump to Page</span>
                 <n-input-number v-model:value="jumpToPageValue" :min="1" size="small" class="w-20" :show-button="false" />
-                <button @click="handleJumpToPage" class="bg-[#003366] text-white px-4 py-1.5 rounded-lg text-[10px] font-black hover:opacity-90 transition-all uppercase">
+                <button @click="handleJumpToPage" class="bg-orbit-blue text-white px-4 py-1.5 rounded-lg text-[10px] font-black hover:opacity-90 transition-all uppercase">
                     Go
                 </button>
             </div>

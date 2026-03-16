@@ -49,7 +49,7 @@ export const vcRoutes = {
 
         // promotions
         { path: 'promotions', name: 'VCPromotions', component: Promotions, title: "Promotions", subtitle: "View and manage all promotions in your institutioni" },
-        { path: 'promotions-department-records/:id', name: 'PromotionDepartmentRecords', component: PromotionDepartmentRecords, title: "Departmental Promotions", subtitle: "Manage and view all departmental promotion" },
+        { path: 'promotions/:id', name: 'PromotionDepartmentRecords', component: PromotionDepartmentRecords, title: "Departmental Promotions", subtitle: "Manage and view all departmental promotion" },
 
         // researches
         { path: 'research-and-publications', name: 'VCResearchAndPublication', component: ResearchAndPublications, title: "Researches and Publications", subtitle: "Manage all staff publications and researches" },
